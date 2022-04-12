@@ -13,7 +13,8 @@
 #include <rtdevice.h>
 #include <board.h>
 
-#include "libraries/examples/thread_sample.h"
+//#include "libraries/examples/thread_sample.h"
+#include "Task1_obstacles_control.h"
 
 /* defined the LED1 pin: PG13 */
 #define LED1_PIN    GET_PIN(G, 13)
@@ -32,7 +33,7 @@ int main(void)
         rt_thread_mdelay(500);
     }*/
 
-    thread_sample();
+    thread_creation();
 
     return RT_EOK;
 }
