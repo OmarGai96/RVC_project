@@ -10,7 +10,6 @@
 
 #include <rtthread.h>
 #include "event_sample.h"
-#include "tasks.h"
 
 #define THREAD_PRIORITY      9
 #define THREAD_TIMESLICE     5
