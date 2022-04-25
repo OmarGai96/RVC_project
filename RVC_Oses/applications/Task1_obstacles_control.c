@@ -20,7 +20,6 @@
 #define STOP_ENGINE 0
 
 #define THREAD_PRIORITY         1
-#define THREAD_STACK_SIZE       512
 #define THREAD_TIMESLICE        5
 
 #define EVENT_FLAG1 (1 << 3)
@@ -56,6 +55,7 @@ static void thread2_entry(void *parameter)
 {
     FILE* f1, *f2;
     int val1, val2;
+    int ret1, ret2;
 
     f1=fopen("/simulation/proximity_sensor", "r");
     if(f1==NULL){
@@ -73,17 +73,17 @@ static void thread2_entry(void *parameter)
 
     while (1)
     {
+        ret1=fscanf(f1, "%d", &val1);
+        ret2=fscanf(f2, "%d", &val2);
           /* signal to thread1 in case of one of the obstacles found */
-        fscanf(f1, "%d", &val1);
-        fscanf(f2, "%d", &val2);
 
-        if(f1 == EOF || f2 == EOF){
+        if(ret1 == EOF || ret2 == EOF){
             break;
         }
 
         if(val1 || val2){
-            //TODO: interrupt to thread1 and engine(file)
-
+            //TODO: interrupt to thread1(enigine)
+            //rt_err_t rt_mb_send (rt_mailbox_t mb, rt_uint32_t value);//mail to movements_control and brushes_speed
         }
 
         rt_thread_mdelay(500);
@@ -102,21 +102,20 @@ int thread_creation(void)
     /* Create thread 1, Name is obstacles_control_software，Entry is thread1_entry */
     rt_thread_init(&thread1, "obstacles_control_software",
                             thread1_entry, RT_NULL,
-                            thread1_stack, THREAD_STACK_SIZE,
+                            thread1_stack, sizeof(thread1_stack),
                             THREAD_PRIORITY, THREAD_TIMESLICE);
 
-        rt_thread_startup(&thread1);
-
+    rt_thread_startup(&thread1);
 
 
 
     /* Create thread 2, Name is obstacles_control_hardware，Entry is thread1_entry */
-        rt_thread_init(&thread2, "obstacles_control_hardware",
+    rt_thread_init(&thread2, "obstacles_control_hardware",
                                     thread2_entry, RT_NULL,
-                                    thread2_stack, THREAD_STACK_SIZE,
+                                    thread2_stack, sizeof(thread2_stack),
                                     THREAD_PRIORITY, THREAD_TIMESLICE);
 
-                rt_thread_startup(&thread2);
+    rt_thread_startup(&thread2);
 
     return 0;
 }
