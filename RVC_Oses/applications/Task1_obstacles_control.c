@@ -25,6 +25,7 @@
 #define EVENT_FLAG1 (1 << 3)
 #define EVENT_FLAG2 (1 << 4)
 
+static rt_thread_t tid1 = RT_NULL;
 
 /* Mailbox control block */
 static struct rt_mailbox mb;
@@ -46,7 +47,7 @@ void thread1_signal_handler(int sig)
               exit -1;
            }
 
-    fprinf(engine, "%d", STOP_ENGINE);
+    fprintf(engine, "%d", STOP_ENGINE);
 
     return;
 }
@@ -124,10 +125,10 @@ int thread_creation(void)
 
     /* Initialize a mailbox */
        result = rt_mb_init(&mb,
-                           "mail_box",                      /* Name is mbt */
-                           &mb_pool[0],                /* The memory pool used by the mailbox is mb_pool */
-                           sizeof(mb_pool) / 4,        /* The number of messages in the mailbox because a message occupies 4 bytes */
-                           RT_IPC_FLAG_FIFO);          /* Thread waiting in FIFO approach */
+                           "mail_box",
+                           &mb_pool[0],
+                           sizeof(mb_pool) / 4,
+                           RT_IPC_FLAG_FIFO);
        if (result != RT_EOK)
        {
            rt_kprintf("init mailbox failed.\n");

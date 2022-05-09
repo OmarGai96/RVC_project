@@ -21,6 +21,11 @@
 #define MEDIUM 2
 #define HIGH 3
 
+/* Mailbox control block */
+static struct rt_mailbox mb;
+/* Memory pool for mails storage */
+static char mb_pool[128];
+
 static char mb_str2[] = "COME_BACK_HOME";
 static char mb_str3[] = "TURN_ON_BRUSHES";
 
@@ -117,6 +122,9 @@ static struct rt_thread thread;
 
 int thread_brushes(void)
 {
+
+        rt_err_t result;
+
         rt_thread_init(&thread,
                            "brushes_speed",
                            thread_entry,
@@ -126,6 +134,20 @@ int thread_brushes(void)
                            THREAD_PRIORITY, THREAD_TIMESLICE);
 
             rt_thread_startup(&thread);
+
+
+        /* Initialize a mailbox */
+        result = rt_mb_init(&mb,
+                            "mail_box",
+                            &mb_pool[0],
+                            sizeof(mb_pool) / 4,
+                            RT_IPC_FLAG_FIFO);
+        if (result != RT_EOK){
+             rt_kprintf("init mailbox failed.\n");
+             return -1;
+        }
+
+
 
             return 0;
 }
