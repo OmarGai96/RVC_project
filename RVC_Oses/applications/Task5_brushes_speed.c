@@ -15,15 +15,22 @@
 
 #define THREAD_PRIORITY         10
 #define THREAD_TIMESLICE        5
+
+#define STOP_BRUSHES 0
 #define LOW 1
 #define MEDIUM 2
 #define HIGH 3
+
+static char mb_str2[] = "COME_BACK_HOME";
+static char mb_str3[] = "TURN_ON_BRUSHES";
 
 static void thread_entry(void *parameter)
 {
 
     FILE* brushes_speed;
     FILE* brushes_power;
+
+    char *str;
 
     int speed, power;
     int ret1;
@@ -39,9 +46,32 @@ static void thread_entry(void *parameter)
                                 exit -1;
                 }
    while(1){
-       //TODO:
-       //reads from mail box in case the robot is coming back. In this case stop the brashes
-       //rt_err_t rt_mb_recv (rt_mailbox_t mb, rt_uint32_t* value, rt_int32_t timeout);
+
+       //Reads from mail box in case the robot is coming back. In this case stop the brushes
+           if (rt_mb_recv(&mb, (rt_uint32_t *)&str, RT_WAITING_NO) == RT_EOK){
+
+                   if (str == mb_str2){
+                       fprintf(brushes_power, "%d", STOP_BRUSHES);
+                   }
+
+                   rt_thread_mdelay(100);
+
+                   /* Executing the mailbox object detachment */
+                   rt_mb_detach(&mb);
+               }
+        //If the robot is starting on, turn on the brushes
+           if (rt_mb_recv(&mb, (rt_uint32_t *)&str, RT_WAITING_NO) == RT_EOK){
+
+                              if (str == mb_str3){
+                                  fprintf(brushes_power, "%d", MEDIUM);
+                              }
+
+                              rt_thread_mdelay(100);
+
+                              /* Executing the mailbox object detachment */
+                              rt_mb_detach(&mb);
+                          }
+
        ret1=fscanf(brushes_speed, "%d", &speed);
        if(ret1== EOF)
            break;
