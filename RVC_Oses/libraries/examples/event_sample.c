@@ -21,6 +21,13 @@
 /* Event control block */
 static struct rt_event event;
 
+void updateResources2(void){
+    garbageBagStatus++;
+    if(garbageBagStatus%2==0)
+        batteryStatus--;
+    return;
+}
+
 ALIGN(RT_ALIGN_SIZE)
 static char thread1_stack[1024];
 static struct rt_thread thread1;
@@ -54,7 +61,7 @@ static void thread1_entry(void *param)
         if(batteryStatus == DISCHARGE){
             return;
         }else{
-            updateResources();
+            updateResources2();
         }
     }
 }
@@ -79,8 +86,7 @@ static void thread2_entry(void *param)
     }
 }
 
-int event_sample(void)
-{
+int event_sample(void){
     rt_err_t result;
 
     /* Initialize event object */
@@ -107,10 +113,4 @@ int event_sample(void)
     return 0;
 }
 
-void updateResources(void){
-    garbageBagStatus++;
-    if(garbageBagStatus%2==0)
-        batteryStatus--;
-    return;
-}
 
