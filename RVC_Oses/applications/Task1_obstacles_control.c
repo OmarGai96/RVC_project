@@ -46,7 +46,7 @@ void thread1_signal_handler(int sig)
               printf("some ERROR OCCURED with engine FILE");
               exit -1;
            }
-
+    //consequence of this interrupt is the stop of the engine
     fprintf(engine, "%d", STOP_ENGINE);
 
     return;
@@ -94,9 +94,9 @@ static void thread1_entry(void *parameter)
         }
 
         if(val1 || val2){
-            //send the signal to thread1_signal_handler
+            //send the signal to thread1_signal_handler: stop the engine immediately
             rt_thread_kill(tid1, SIGUSR1);
-            //mail to movements_control and brushes_speed
+            //mail to movements_control and brushes_speed: less priority for other tasks alert
             rt_mb_send(&mb, (rt_uint32_t)&mb_str1);
         }
 
@@ -131,7 +131,7 @@ int thread_creation(void)
                            RT_IPC_FLAG_FIFO);
        if (result != RT_EOK)
        {
-           rt_kprintf("init mailbox failed.\n");
+           rt_kprintf("initialization mailbox failed.\n");
            return -1;
        }
 

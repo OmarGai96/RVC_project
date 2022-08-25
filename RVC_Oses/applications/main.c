@@ -33,7 +33,7 @@ int main(void)
         rt_thread_mdelay(500);
     }*/
 
-    thread_creation();
-
+    //thread_creation();
+    event_sample();
     return RT_EOK;
 }
