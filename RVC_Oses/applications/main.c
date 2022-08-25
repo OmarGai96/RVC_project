@@ -35,5 +35,14 @@ int main(void)
 
     //thread_creation();
     event_sample();
+    //thread_creation(); //to call task1
+    initSystem();  //defined inside task3_check_resources.h
+    thread_check_resources();  //to call task3
+    thread_acoustic_signals(); //to call task4
+
+
+
     return RT_EOK;
 }
+
+
