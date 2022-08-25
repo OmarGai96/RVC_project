@@ -15,6 +15,10 @@
 
 //#include "libraries/examples/thread_sample.h"
 #include "Task1_obstacles_control.h"
+#include "Task3_check_resources.h"
+#include "Task4_acoustic_signals.h"
+#include "Task5_brushes_speed.h"
+
 
 /* defined the LED1 pin: PG13 */
 #define LED1_PIN    GET_PIN(G, 13)
