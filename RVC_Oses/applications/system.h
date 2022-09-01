@@ -5,10 +5,10 @@
  *
  * Change Logs:
  * Date           Author       Notes
- * 2022-05-19     Omar       the first version
+ * 2022-09-01     Omar       the first version
  */
-#ifndef APPLICATIONS_TASK3_CHECK_RESOURCES_H
-#define APPLICATIONS_TASK3_CHECK_RESOURCES_H
+#ifndef APPLICATIONS_SYSTEM_H_
+#define APPLICATIONS_SYSTEM_H_
 
 /* BATTERY STATUS THRESHOLDS*/
 #define CHARGE 10
@@ -20,14 +20,12 @@
 #define EMPTY 0
 #define FULL 10
 
-/* EVENT MASKS DEFINITION*/
-#define EVENT_FLAG1 (1 << 1)
-#define EVENT_FLAG2 (1 << 2)
-
 /*SYSTEM RESOURCES DECLARATION*/
 uint32_t batteryStatus;
 uint32_t garbageBagStatus;
 
-int thread_check_resources(void);
+void initSystem(void);
+void updateResources(void);
 
-#endif
+
+#endif /* APPLICATIONS_SYSTEM_H_ */

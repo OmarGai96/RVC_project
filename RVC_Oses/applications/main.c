@@ -13,39 +13,35 @@
 #include <rtdevice.h>
 #include <board.h>
 
-//#include "libraries/examples/thread_sample.h"
-#include "Task1_obstacles_control.h"
-#include "Task3_check_resources.h"
-#include "Task4_acoustic_signals.h"
-#include "Task5_brushes_speed.h"
+#include "Task2_3_synch.h"
+#include "system.h"
 
-
-/* defined the LED1 pin: PG13 */
-#define LED1_PIN    GET_PIN(G, 13)
+/* Event control block */
+struct rt_event event;
 
 int main(void)
 {
 
-    /* set LED1 pin mode to output */
-    /*rt_pin_mode(LED1_PIN, PIN_MODE_OUTPUT);
+    rt_err_t result;
 
-    while (count++)
-    {
-        rt_pin_write(LED1_PIN, PIN_HIGH);
-        rt_thread_mdelay(500);
-        rt_pin_write(LED1_PIN, PIN_LOW);
-        rt_thread_mdelay(500);
-    }*/
+    /* Initialize event object */
+    result = rt_event_init(&event, "event", RT_IPC_FLAG_FIFO);
+    if (result != RT_EOK){
+        printf("init event failed.\n");
+        return -1;
+    }
 
-    //thread_creation();
-    event_sample();
-    //thread_creation(); //to call task1
-    initSystem();  //defined inside task3_check_resources.h
-    thread_check_resources();  //to call task3
-    thread_acoustic_signals(); //to call task4
+    //SYSTEM INITIALIZATION
+    initSystem();
 
+    //THREAD CREATIONS
+    thread3_check_resources();  //create Task3  //update resource is there
+                                    //TODO: create a task that simulate the main functionalities
+    thread4_acoustic_signals(); //create Task4
 
-
+    //THREAD STARTUPS
+    startThreads();
+    //from here, task3 and 4 run
     return RT_EOK;
 }
 
