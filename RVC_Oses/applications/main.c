@@ -13,7 +13,7 @@
 #include <rtdevice.h>
 #include <board.h>
 
-#include "Task2_3_synch.h"
+#include "Tasks.h"
 #include "system.h"
 
 /* Event control block */

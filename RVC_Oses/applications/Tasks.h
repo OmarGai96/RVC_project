@@ -5,10 +5,10 @@
  *
  * Change Logs:
  * Date           Author       Notes
- * 2022-09-01     Omar       the first version
+ * 2022-09-03     Omar       the first version
  */
-#ifndef APPLICATIONS_TASK2_3_SYNCH_H_
-#define APPLICATIONS_TASK2_3_SYNCH_H_
+#ifndef APPLICATIONS_TASKS_H_
+#define APPLICATIONS_TASKS_H_
 
 #include "system.h"
 
@@ -16,9 +16,13 @@
 #define EVENT_FLAG1 (1 << 1)
 #define EVENT_FLAG2 (1 << 2)
 
+int thread1_obstacles_control(void); //Task1
+int thread2_movements_control(void); //Task2
 int thread3_check_resources(void);   //Task3
 int thread4_acoustic_signals(void);  //Task4
+int thread5_brushes_speed(void);     //Task5
 
 void startThreads(void);
 
-#endif /* APPLICATIONS_TASK2_3_SYNCH_H_ */
+
+#endif /* APPLICATIONS_TASKS_H_ */

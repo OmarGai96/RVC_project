@@ -20,6 +20,14 @@
 #define EMPTY 0
 #define FULL 10
 
+/* MOVEMENTS SIGNALS*/
+#define STOP_ENGINE 0
+
+#define STOP_BRUSHES 0
+#define LOW 1
+#define MEDIUM 2
+#define HIGH 3
+
 /*SYSTEM RESOURCES DECLARATION*/
 uint32_t batteryStatus;
 uint32_t garbageBagStatus;
