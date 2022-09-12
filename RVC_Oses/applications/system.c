@@ -7,6 +7,7 @@
  * Date           Author       Notes
  * 2022-09-01     Omar       the first version
  */
+
 #include <rtthread.h>
 #include "system.h"
 
