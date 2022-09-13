@@ -13,6 +13,8 @@ int main(void)
 
     // This function initializes global flags used by the application
     initSystem();
+    // initialize the timer management system
+    rt_system_timer_init();
 
     //THREAD STARTUPS
     movement_threads_start();
