@@ -2,22 +2,74 @@
 #include <rtthread.h>
 #include <rtdevice.h>
 #include <board.h>
-#include <tasks.h>
 
 #include "system.h"
 #include "tasks.h"
+#include "structures.h"
 
 
 int main(void)
 {
 
+    rt_err_t result;
+
     // This function initializes global flags used by the application
     initSystem();
+
     // initialize the timer management system
     rt_system_timer_init();
 
-    //THREAD STARTUPS
-    movement_threads_start();
+
+// ***************************************** STRUCTURES *********************************************************
+
+
+    // initializing EVENT that activates obstacle_control task periodically
+    result = rt_event_init(&event_obstacle, "event_obstacle", RT_IPC_FLAG_FIFO);
+    if (result != RT_EOK)
+    {
+        rt_kprintf("Initialization of obstacle control task activation event failed.\n");
+        return -1;
+    }
+
+    // initializing the TIMER for obstacle_control
+    rt_timer_init(&timer_obstacle_control, "timer_obstacle_control",
+                    timeout_obstacle_control,
+                    RT_NULL,
+                    500,    // to achieve a period of 500ms we need to put 50
+                    RT_TIMER_FLAG_PERIODIC);
+
+
+// ****************************************** THREADS ***********************************************************
+
+
+    // initializing obstacle_control thread
+    rt_thread_init(&obstacle_control,
+                   "obstacle_control",
+                   obstacle_control_entry,
+                   RT_NULL,
+                   &obstacle_control_stack[0],
+                   sizeof(obstacle_control_stack),
+                   OBSTACLE_CONTROL_PRIORITY, THREAD_TIMESLICE);
+
+    // initializing movement_control thread
+    rt_thread_init(&movement_control,
+                   "movement_control",
+                   movement_control_entry,
+                   RT_NULL,
+                   &movement_control_stack[0],
+                   sizeof(movement_control_stack),
+                   MOVEMENT_CONTROL_PRIORITY, THREAD_TIMESLICE);
+
+
+// *************************************** STARTING *************************************************************
+
+
+    // starting the timers
+    rt_timer_start (&timer_obstacle_control);
+    // starting the threads
+    rt_thread_startup(&obstacle_control);
+    rt_thread_startup(&movement_control);
+
 
     return RT_EOK;
 

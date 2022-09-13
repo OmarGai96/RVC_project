@@ -1,25 +1,33 @@
-/*
- * Copyright (c) 2006-2021, RT-Thread Development Team
- *
- * SPDX-License-Identifier: Apache-2.0
- *
- * Change Logs:
- * Date           Author       Notes
- * 2022-09-03     Omar       the first version
- */
-
 
 #ifndef APPLICATIONS_TASKS_H_
 #define APPLICATIONS_TASKS_H_
 
 #include "system.h"
 
-/* EVENT MASKS DEFINITION*/
-#define EVENT_FLAG1 (1 << 1)
-#define EVENT_FLAG2 (1 << 2)
+// ************************************** DEFINITIONS **********************************************************
 
-// functions
-int movement_threads_start(void);
+
+#define OBSTACLE_CONTROL_PRIORITY      2
+#define MOVEMENT_CONTROL_PRIORITY      1
+#define THREAD_TIMESLICE               5
+
+
+// ************************************ STRUCTURES *************************************************************
+
+
+ALIGN(RT_ALIGN_SIZE)
+char obstacle_control_stack[1024];
+struct rt_thread obstacle_control;
+
+ALIGN(RT_ALIGN_SIZE)
+char movement_control_stack[1024];
+struct rt_thread movement_control;
+
+
+// ************************************ FUNCTIONS **************************************************************
+
+void obstacle_control_entry(void *param);
+void movement_control_entry(void *param);
 
 
 #endif /* APPLICATIONS_TASKS_H_ */
