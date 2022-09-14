@@ -7,6 +7,5 @@
 /* Timeout function for the timer that activates obstacle control periodically */
 void timeout_obstacle_control(void* parameter)
 {
-    rt_kprintf("periodic timer is timeout\n");
-    rt_event_send(&event_obstacle, EVENT_FLAG1);
+    rt_event_send(&event_tasks_activation, EVENT_OBSTACLE_CONTROL_ACTIVATION);
 }

@@ -15,7 +15,7 @@
 #define THREAD_TIMESLICE     5
 
 /* EVENT MASKS DEFINITION*/
-#define EVENT_FLAG1 (1 << 1)
+#define EVENT_OBSTACLE_CONTROL_ACTIVATION (1 << 1)
 #define EVENT_FLAG2 (1 << 2)
 
 /* Event control block */
@@ -47,7 +47,7 @@ static void thread1_entry(void *param)
         }
         else if(batteryStatus <= DISCHARGE_THRESHOLD){
             printf("Battery low\n");
-            rt_event_send(&event, EVENT_FLAG1);
+            rt_event_send(&event, EVENT_OBSTACLE_CONTROL_ACTIVATION);
             rt_thread_mdelay(200);
         }
 
@@ -76,7 +76,7 @@ static void thread2_entry(void *param)
 {
     rt_uint32_t e;
     while(1){
-        if (rt_event_recv(&event,(EVENT_FLAG1 | EVENT_FLAG2),RT_EVENT_FLAG_OR | RT_EVENT_FLAG_CLEAR,RT_WAITING_FOREVER,&e) == RT_EOK){
+        if (rt_event_recv(&event,(EVENT_OBSTACLE_CONTROL_ACTIVATION | EVENT_FLAG2),RT_EVENT_FLAG_OR | RT_EVENT_FLAG_CLEAR,RT_WAITING_FOREVER,&e) == RT_EOK){
             if (e == 0x2){ //if EVENT 1 is set
                 printf("\t\tLOW BATTERY SOUND\n");
             }else if (e == 0x4){//if EVENT 2 is set
