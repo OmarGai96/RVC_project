@@ -12,6 +12,8 @@
 #define MOVEMENT_CONTROL_PRIORITY      3
 #define THREAD_TIMESLICE               5
 
+#define SENSOR_PIN_NUMBER              35
+
 
 // ************************************ STRUCTURES *************************************************************
 

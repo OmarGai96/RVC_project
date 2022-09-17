@@ -38,12 +38,19 @@ int main(void)
         return -1;
     }
 
+
     // initializing the TIMER for obstacle_control
     rt_timer_init(&timer_obstacle_control_activation, "timer_obstacle_control_activation",
                     timeout_obstacle_control,
                     RT_NULL,
-                    500,
+                    300,
                     RT_TIMER_FLAG_PERIODIC);
+    // initializing the TIMER for map_management
+    rt_timer_init(&timer_map_management_activation, "timer_map_management_activation",
+                  timeout_map_management,
+                  RT_NULL,
+                  300,
+                  RT_TIMER_FLAG_PERIODIC);
 
 
 // ****************************************** THREADS ***********************************************************
