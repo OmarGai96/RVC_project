@@ -11,9 +11,8 @@ void timeout_obstacle_control(void* parameter)
 }
 
 
-// TODO: not sure if using the same event object is good
 /* Timeout function for the timer that activates map management periodically */
-void timeout_map_management(void* parameter)
+void timeout_movement_control(void* parameter)
 {
-    rt_event_send(&event_tasks_activation, EVENT_MAP_MANAGEMENT_ACTIVATION);
+    rt_event_send(&event_tasks_activation, EVENT_MOVEMENT_CONTROL_ACTIVATION);
 }

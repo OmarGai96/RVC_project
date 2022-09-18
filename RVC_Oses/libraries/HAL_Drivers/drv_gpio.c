@@ -370,7 +370,7 @@ static int mock_pin_read(rt_device_t dev, rt_base_t pin)
 
     static int start = 0;
     start++;
-    if (start%15 == 0)
+    if (start%100 == 0)
         return 1;
     return 0;
 }
