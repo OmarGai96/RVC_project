@@ -2,14 +2,13 @@
 #include <rtthread.h>
 #include <rtdevice.h>
 #include <board.h>
+#include <stdio.h>
 
 #include "system.h"
 #include "tasks.h"
 #include "structures.h"
 
-
-int main(void)
-{
+int main(void){
 
     rt_err_t result;
 
@@ -45,6 +44,13 @@ int main(void)
                     500,
                     RT_TIMER_FLAG_PERIODIC);
 
+    // Initializing event object for resources
+        result = rt_event_init(&event_resources, "event_resources", RT_IPC_FLAG_FIFO);
+        if (result != RT_EOK){
+            printf("Initialization of resources event failed.\n");
+            return -1;
+        }
+
 
 // ****************************************** THREADS ***********************************************************
 
@@ -76,6 +82,25 @@ int main(void)
                    sizeof(movement_control_stack),
                    MOVEMENT_CONTROL_PRIORITY, THREAD_TIMESLICE);
 
+    // initializing check_resources thread
+    rt_thread_init(&check_resources,
+                   "check_resources",
+                   check_resources_entry,
+                   RT_NULL,
+                   &check_resources_stack[0],
+                   sizeof(check_resources_stack),
+                   CHECK_RESOURCES_PRIORITY, THREAD_TIMESLICE);
+
+    // initializing acoustic_signal thread
+    rt_thread_init(&acoustic_signals,
+                   "acoustic_signal",
+                   acoustic_signals_entry,
+                   RT_NULL,
+                   &acoustic_signals_stack[0],
+                   sizeof(acoustic_signals_stack),
+                   ACOUSTIC_SIGNALS_PRIORITY, THREAD_TIMESLICE);
+
+
 
 // *************************************** STARTING *************************************************************
 
@@ -86,10 +111,8 @@ int main(void)
     rt_thread_startup(&obstacle_control);
     rt_thread_startup(&movement_stop);
     rt_thread_startup(&movement_control);
+    rt_thread_startup(&check_resources);
+    rt_thread_startup(&acoustic_signals);
 
-
-    return RT_EOK;
-
+    return 0;
 }
-
-

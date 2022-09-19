@@ -9,6 +9,8 @@
 #define EVENT_OBSTACLE_CONTROL_ACTIVATION (1 << 1)
 #define EVENT_OBSTACLE_FOUND1 (1 << 1)
 #define EVENT_OBSTACLE_FOUND2 (1 << 2)
+#define EVENT_FLAG1 (1 << 1)
+#define EVENT_FLAG2 (1 << 2)
 
 
 // ************************************ STRUCTURES *************************************************************
@@ -21,7 +23,8 @@ struct rt_timer timer_obstacle_control_activation;
 struct rt_event event_tasks_activation;
 /* EVENT used to notify that there's an obstacle */
 struct rt_event event_obstacle;
-
+/* EVENT used to notify that there's an obstacle */
+struct rt_event event_resources;
 
 
 // ************************************ FUNCTIONS **************************************************************
