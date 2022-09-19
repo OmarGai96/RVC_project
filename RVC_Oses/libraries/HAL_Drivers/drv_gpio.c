@@ -362,6 +362,18 @@ static int stm32_pin_read(rt_device_t dev, rt_base_t pin)
 
     return value;
 }
+static int mock_pin_read(rt_device_t dev, rt_base_t pin)
+{
+    /* I leave this part in case we need the pin number to indentify the operation
+    const struct pin_index *index;
+    index = get_pin(pin); */
+
+    static int start = 0;
+    start++;
+    if (start%100 == 0)
+        return 1;
+    return 0;
+}
 
 static void stm32_pin_mode(rt_device_t dev, rt_base_t pin, rt_base_t mode)
 {
@@ -642,7 +654,8 @@ const static struct rt_pin_ops _stm32_pin_ops =
 {
     stm32_pin_mode,
     stm32_pin_write,
-    stm32_pin_read,
+    // stm32_pin_read,
+    mock_pin_read,
     stm32_pin_attach_irq,
     stm32_pin_dettach_irq,
     stm32_pin_irq_enable,

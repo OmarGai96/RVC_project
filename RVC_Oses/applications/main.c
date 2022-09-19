@@ -37,12 +37,19 @@ int main(void){
         return -1;
     }
 
+
     // initializing the TIMER for obstacle_control
     rt_timer_init(&timer_obstacle_control_activation, "timer_obstacle_control_activation",
                     timeout_obstacle_control,
                     RT_NULL,
-                    500,
+                    50, // every 500ms control for an obstacle
                     RT_TIMER_FLAG_PERIODIC);
+    // initializing the TIMER for movement_control
+    rt_timer_init(&timer_movement_control_activation, "timer_movement_control_activation",
+                  timeout_movement_control,
+                  RT_NULL,
+                  500,
+                  RT_TIMER_FLAG_PERIODIC);
 
     // Initializing event object for resources
         result = rt_event_init(&event_resources, "event_resources", RT_IPC_FLAG_FIFO);
@@ -107,6 +114,7 @@ int main(void){
 
     // starting the timers
     rt_timer_start (&timer_obstacle_control_activation);
+    rt_timer_start (&timer_movement_control_activation);
     // starting the threads
     rt_thread_startup(&obstacle_control);
     rt_thread_startup(&movement_stop);

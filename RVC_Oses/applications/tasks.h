@@ -7,12 +7,25 @@
 // ************************************** DEFINITIONS **********************************************************
 
 
+<<<<<<< HEAD
 #define OBSTACLE_CONTROL_PRIORITY      2
 #define MOVEMENT_STOP_PRIORITY         1
 #define MOVEMENT_CONTROL_PRIORITY      3
 #define CHECK_RESOURCES_PRIORITY       2
 #define ACOUSTIC_SIGNALS_PRIORITY      5
 #define THREAD_TIMESLICE               5
+=======
+#define OBSTACLE_CONTROL_PRIORITY       2
+#define MOVEMENT_STOP_PRIORITY          1
+#define MOVEMENT_CONTROL_PRIORITY       3
+#define THREAD_TIMESLICE                5
+
+#define PROXIMITY_SENSOR_PIN_NUMBER     35
+
+#define MAP_SIDE                        10
+
+enum directions {UP, DOWN, LEFT, RIGHT};
+>>>>>>> d0cd2fb1f3f2124b1fb92593f52c838c7353f3f8
 
 
 
