@@ -6,6 +6,11 @@
 #include "structures.h"
 
 
+static int map[MAP_SIDE][MAP_SIDE];
+static int position[2];
+enum directions direction;
+
+
 // EXTRA FUNCTIONS *********************************************************************************************
 
 
@@ -13,31 +18,68 @@
    bound of the room or if we have found an obstacle*/
 int find_new_position(int *position, int map[MAP_SIDE][MAP_SIDE], enum directions *direction)
 {
-    if (*direction!=DOWN && position[0]>0 && map[ position[0]-1 ][ position[1] ]==0)
+    if (*direction!=DOWN && position[0]>0 && map[ position[0]-1 ][ position[1] ]!=1)
     {
         position[0]--;
         *direction = UP;
         return 0;
     }
-    if (*direction!=UP && position[0]<MAP_SIDE-1 && map[ position[0]+1 ][ position[1] ]==0)
+    if (*direction!=UP && position[0]<MAP_SIDE-1 && map[ position[0]+1 ][ position[1] ]!=1)
     {
         position[0]++;
         *direction = DOWN;
         return 0;
     }
-   if (*direction!=RIGHT && position[1]>0 && map[ position[0] ][ position[1]-1 ]==0)
+   if (*direction!=RIGHT && position[1]>0 && map[ position[0] ][ position[1]-1 ]!=1)
    {
        position[1]--;
        *direction = LEFT;
        return 0;
    }
-    if (*direction!=LEFT && position[1]<MAP_SIDE-1 && map[ position[0] ][ position[1]+1 ]==0)
+    if (*direction!=LEFT && position[1]<MAP_SIDE-1 && map[ position[0] ][ position[1]+1 ]!=1)
     {
        position[1]++;
        *direction = RIGHT;
        return 0;
     }
     return 1;
+}
+
+
+void print_map() {
+    int i,j;
+    rt_kprintf("\n");
+    for (i=0;i<MAP_SIDE;i++) {
+        for(j=0;j<MAP_SIDE;j++)
+            rt_kprintf("%d ", map[i][j]);
+        rt_kprintf("\n");
+    }
+    rt_kprintf("\n\n");
+}
+
+
+/* Signal handler for map_management*/
+void movement_control_obstacle_handler(int sig)
+{
+    // mark obstacle on the map
+    map[ position[0] ][ position[1] ] = 1;
+    // revert position to precious tile
+    switch (direction)
+    {
+    case UP:
+        position[0]++;
+        break;
+    case DOWN:
+        position[0]--;
+        break;
+    case LEFT:
+        position[1]++;
+        break;
+    case RIGHT:
+        position[1]--;
+        break;
+    }
+    print_map();
 }
 
 
@@ -64,8 +106,8 @@ void obstacle_control_entry(void *param)
             obstacle =  rt_pin_read(PROXIMITY_SENSOR_PIN_NUMBER);
             if (obstacle == 1)
             {
-                rt_event_send(&event_obstacle, EVENT_OBSTACLE_FOUND2);
-                rt_event_send(&event_obstacle, EVENT_OBSTACLE_FOUND1);
+                rt_thread_kill(&movement_control, SIGUSR1);
+                rt_event_send(&event_obstacle, EVENT_OBSTACLE_FOUND);
             }
         }
     }
@@ -78,7 +120,7 @@ void movement_stop_entry(void *param)
     // infinite loop
     while (1) {
         // waits for the aperiodic event that signals an obstacle have been found
-        if (rt_event_recv(&event_obstacle, EVENT_OBSTACLE_FOUND1,
+        if (rt_event_recv(&event_obstacle, EVENT_OBSTACLE_FOUND,
                           RT_EVENT_FLAG_AND | RT_EVENT_FLAG_CLEAR,
                           RT_WAITING_FOREVER, RT_NULL) == RT_EOK)
         {
@@ -89,13 +131,12 @@ void movement_stop_entry(void *param)
 }
 
 
+// TODO: if stuck at the next obstacle found the map changes and start again, implement action
+// TODO: gets stuck easily
 /* Entry for the task movement control */
 void movement_control_entry(void *param)
 {
     // data structures used
-    static int map[MAP_SIDE][MAP_SIDE];
-    static int position[2];
-    enum directions direction;
     int i,j, stuck;
 
     // initialization of data structures
@@ -105,6 +146,10 @@ void movement_control_entry(void *param)
     for (i=0;i<MAP_SIDE;i++)
         for (j=0;j<MAP_SIDE;j++)
             map[i][j] = 0;
+
+    // installing the signal
+    rt_signal_install(SIGUSR1, movement_control_obstacle_handler);
+    rt_signal_unmask(SIGUSR1);
 
     // infinite loop
     while (1)
@@ -121,24 +166,22 @@ void movement_control_entry(void *param)
             switch (direction)
             {
             case UP:
-                if (position[0]>0 && map[ position[0]-1 ][ position[1] ]==0) position[0]--;
+                if (position[0]>0 && map[ position[0]-1 ][ position[1] ]!=1) position[0]--;
                 else stuck = find_new_position(position, map, &direction);
                 break;
             case DOWN:
-                if (position[0]<MAP_SIDE-1 && map[ position[0]+1 ][ position[1] ]==0) position[0]++;
+                if (position[0]<MAP_SIDE-1 && map[ position[0]+1 ][ position[1] ]!=1) position[0]++;
                 else stuck = find_new_position(position, map, &direction);
                 break;
             case LEFT:
-                if (position[1]>0 && map[ position[0] ][ position[1]-1 ]==0) position[1]--;
+                if (position[1]>0 && map[ position[0] ][ position[1]-1 ]!=1) position[1]--;
                 else stuck = find_new_position(position, map, &direction);
                 break;
             case RIGHT:
-                if (position[1]<MAP_SIDE-1 && map[ position[0] ][ position[1]+1 ]==0) position[1]++;
+                if (position[1]<MAP_SIDE-1 && map[ position[0] ][ position[1]+1 ]!=1) position[1]++;
                 else stuck = find_new_position(position, map, &direction);
                 break;
             }
-            // TODO: implement what to do here, we could check if it's stuck because it's between obstacle
-            //       or between cleaned tiles
             if (stuck == 1) rt_kprintf("The robot is stuck!!");
             rt_kprintf("Robot in position %d,%d\n", position[0], position[1]);
         }

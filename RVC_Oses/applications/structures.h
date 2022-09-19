@@ -9,8 +9,7 @@
 #define EVENT_OBSTACLE_CONTROL_ACTIVATION   (1 << 1)
 #define EVENT_MOVEMENT_CONTROL_ACTIVATION   (1 << 2)
 
-#define EVENT_OBSTACLE_FOUND1 (1 << 1)
-#define EVENT_OBSTACLE_FOUND2 (1 << 2)
+#define EVENT_OBSTACLE_FOUND (1 << 1)
 
 
 // ************************************ STRUCTURES *************************************************************

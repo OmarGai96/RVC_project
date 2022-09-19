@@ -49,7 +49,7 @@ int main(void)
     rt_timer_init(&timer_movement_control_activation, "timer_movement_control_activation",
                   timeout_movement_control,
                   RT_NULL,
-                  1000,
+                  500,
                   RT_TIMER_FLAG_PERIODIC);
 
 

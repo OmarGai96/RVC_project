@@ -14,7 +14,7 @@
 
 #define PROXIMITY_SENSOR_PIN_NUMBER     35
 
-#define MAP_SIDE                        4
+#define MAP_SIDE                        10
 
 enum directions {UP, DOWN, LEFT, RIGHT};
 
