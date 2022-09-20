@@ -8,6 +8,8 @@
 #include "tasks.h"
 #include "structures.h"
 
+//#define BENCHMARKING
+
 int main(void){
 
     rt_err_t result;
@@ -47,6 +49,12 @@ int main(void){
     // initializing the TIMER for movement_control
     rt_timer_init(&timer_movement_control_activation, "timer_movement_control_activation",
                   timeout_movement_control,
+                  RT_NULL,
+                  500,
+                  RT_TIMER_FLAG_PERIODIC);
+    // initializing the TIMER for movement_control
+    rt_timer_init(&timer_check_resources_activation, "timer_check_resources_activation",
+                  timeout_check_resources,
                   RT_NULL,
                   500,
                   RT_TIMER_FLAG_PERIODIC);
@@ -115,6 +123,8 @@ int main(void){
     // starting the timers
     rt_timer_start (&timer_obstacle_control_activation);
     rt_timer_start (&timer_movement_control_activation);
+    rt_timer_start (&timer_check_resources_activation);
+
     // starting the threads
     rt_thread_startup(&obstacle_control);
     rt_thread_startup(&movement_stop);

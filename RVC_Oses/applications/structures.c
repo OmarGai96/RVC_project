@@ -16,3 +16,11 @@ void timeout_movement_control(void* parameter)
 {
     rt_event_send(&event_tasks_activation, EVENT_MOVEMENT_CONTROL_ACTIVATION);
 }
+
+/* Timeout function for the timer that activates check resources periodically */
+void timeout_check_resources(void* parameter)
+{
+    rt_event_send(&event_tasks_activation, EVENT_CHECK_RESOURCES_ACTIVATION);
+}
+
+

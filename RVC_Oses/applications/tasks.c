@@ -103,6 +103,9 @@ void obstacle_control_entry(void *param)
                           RT_EVENT_FLAG_AND | RT_EVENT_FLAG_CLEAR,
                           RT_WAITING_FOREVER, RT_NULL) == RT_EOK)
         {
+#ifdef BENCHMARKING
+        printf("Started at time %d tick\n", rt_tick_get());
+#endif
             // check if there's an obstacle, if yes activates movements threads
             obstacle =  rt_pin_read(PROXIMITY_SENSOR_PIN_NUMBER);
             if (obstacle == 1)
@@ -110,6 +113,9 @@ void obstacle_control_entry(void *param)
                 rt_thread_kill(&movement_control, SIGUSR1);
                 rt_event_send(&event_obstacle, EVENT_OBSTACLE_FOUND);
             }
+#ifdef BENCHMARKING
+        printf("Stop at time %d tick\n", rt_tick_get());
+#endif
         }
     }
 }
@@ -125,8 +131,14 @@ void movement_stop_entry(void *param)
                           RT_EVENT_FLAG_AND | RT_EVENT_FLAG_CLEAR,
                           RT_WAITING_FOREVER, RT_NULL) == RT_EOK)
         {
+#ifdef BENCHMARKING
+        printf("Started at time %d tick\n", rt_tick_get());
+#endif
             // TODO: decide how to implement this in hw and modify correspondent driver
             rt_kprintf("Engine stopped!\n");
+#ifdef BENCHMARKING
+        printf("Stop at time %d tick\n", rt_tick_get());
+#endif
         }
     }
 }
@@ -160,6 +172,9 @@ void movement_control_entry(void *param)
                           RT_EVENT_FLAG_AND | RT_EVENT_FLAG_CLEAR,
                           RT_WAITING_FOREVER, RT_NULL) == RT_EOK)
         {
+#ifdef BENCHMARKING
+        printf("Started at time %d tick\n", rt_tick_get());
+#endif
             // if the previous tile is not an obstacle signal it as cleaned
             if (map[ position[0] ][ position[1] ] == 0)
                 map[ position[0] ][ position[1] ] = 2;
@@ -185,6 +200,9 @@ void movement_control_entry(void *param)
             }
             if (stuck == 1) rt_kprintf("The robot is stuck!!");
             rt_kprintf("Robot in position %d,%d\n", position[0], position[1]);
+#ifdef BENCHMARKING
+        printf("Stop at time %d tick\n", rt_tick_get());
+#endif
         }
     }
 }
@@ -193,9 +211,11 @@ void movement_control_entry(void *param)
 /* Entry for the CHECK RESOURCES*/
 void check_resources_entry(void *param){
     while(1){
-        printf("\nTask3 CHECK resources\n\tBattery status %d\n", batteryStatus);
-        printf("Started at time %d tick\n", rt_tick_get());
 
+        printf("\nTask3 CHECK resources\n\tBattery status %d\n", batteryStatus);
+#ifdef BENCHMARKING
+        printf("Started at time %d tick\n", rt_tick_get());
+#endif
         if(batteryStatus <= CHARGE && batteryStatus > HALFCHARGE){
             printf("Battery is charged\n");
             //TODO: stampare su LCD
@@ -212,18 +232,22 @@ void check_resources_entry(void *param){
 
         if(garbageBagStatus == FULL){
             printf("Garbage bag is FULL\n");
-            //rt_event_send(&event_resources, EVENT_FLAG2);
-            //rt_thread_mdelay(200);
+            rt_event_send(&event_resources, EVENT_FLAG2);
         }
 
-        //USEFUL ONLY FOR DEBUG/////////
         if(batteryStatus == DISCHARGE){
+             //TODO:send mail to T2
+#ifdef BENCHMARKING
+        printf("Stop at time %d tick\n", rt_tick_get());
+#endif
                     return;
         }else{
                 updateResources();
+#ifdef BENCHMARKING
+        printf("Stop at time %d tick\n", rt_tick_get());
+#endif
         }
-        ////////////////////////////////
-        rt_thread_mdelay(200);
+
     }
 }
 
@@ -233,12 +257,23 @@ void acoustic_signals_entry(void *param){
 
     rt_uint32_t e;  //to read event
     while(1){
+#ifdef BENCHMARKING
+        printf("Started at time %d tick\n", rt_tick_get());
+#endif
         if (rt_event_recv(&event_resources,(EVENT_FLAG1 | EVENT_FLAG2),RT_EVENT_FLAG_OR | RT_EVENT_FLAG_CLEAR,RT_WAITING_FOREVER,&e) == RT_EOK){
-            if (e == 0x2){ //if EVENT 1 is set
+            if (e == 0x2){
+
+                // EVENT_FLAG_1 is set
                 printf("\t\tLOW BATTERY SOUND\n");
-            }else if (e == 0x4){//if EVENT 2 is set
+
+            }else if (e == 0x4){
+
+                // EVENT_FLAG_2 is set
                 printf("\t\tGARBAGE BAG FULL SOUND\n");
             }
+#ifdef BENCHMARKING
+        printf("Stop at time %d tick\n", rt_tick_get());
+#endif
         }
     }
 
