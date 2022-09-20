@@ -10,6 +10,13 @@
 
 //#define BENCHMARKING
 
+
+static void hook_of_scheduler(struct rt_thread* from, struct rt_thread* to)
+{
+    rt_kprintf("from: %s -->  to: %s at %d ms\n", from->name , to->name, rt_tick_get()*10);
+}
+
+
 int main(void){
 
     rt_err_t result;
@@ -19,6 +26,9 @@ int main(void){
 
     // initialize the timer management system
     rt_system_timer_init();
+
+    // set the scheduler hook
+    // rt_scheduler_sethook(hook_of_scheduler);
 
 
 // ***************************************** STRUCTURES *********************************************************
@@ -52,7 +62,7 @@ int main(void){
                   RT_NULL,
                   500,
                   RT_TIMER_FLAG_PERIODIC);
-    // initializing the TIMER for movement_control
+    // initializing the TIMER for check resources
     rt_timer_init(&timer_check_resources_activation, "timer_check_resources_activation",
                   timeout_check_resources,
                   RT_NULL,
