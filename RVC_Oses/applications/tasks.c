@@ -17,30 +17,30 @@ enum directions direction;
 
 /* This function search for a new position where the robot can go, it is used in case we reached a
    bound of the room or if we have found an obstacle*/
-int find_new_position(int *position, int map[MAP_SIDE][MAP_SIDE], enum directions *direction)
+int find_new_position()
 {
-    if (*direction!=DOWN && position[0]>0 && map[ position[0]-1 ][ position[1] ]!=1)
+    if (direction!=DOWN && position[0]>0 && map[ position[0]-1 ][ position[1] ]!=1)
     {
         position[0]--;
-        *direction = UP;
+        direction = UP;
         return 0;
     }
-    if (*direction!=UP && position[0]<MAP_SIDE-1 && map[ position[0]+1 ][ position[1] ]!=1)
+    if (direction!=UP && position[0]<MAP_SIDE-1 && map[ position[0]+1 ][ position[1] ]!=1)
     {
         position[0]++;
-        *direction = DOWN;
+        direction = DOWN;
         return 0;
     }
-   if (*direction!=RIGHT && position[1]>0 && map[ position[0] ][ position[1]-1 ]!=1)
+   if (direction!=RIGHT && position[1]>0 && map[ position[0] ][ position[1]-1 ]!=1)
    {
        position[1]--;
-       *direction = LEFT;
+       direction = LEFT;
        return 0;
    }
-    if (*direction!=LEFT && position[1]<MAP_SIDE-1 && map[ position[0] ][ position[1]+1 ]!=1)
+    if (direction!=LEFT && position[1]<MAP_SIDE-1 && map[ position[0] ][ position[1]+1 ]!=1)
     {
        position[1]++;
-       *direction = RIGHT;
+       direction = RIGHT;
        return 0;
     }
     return 1;
@@ -168,19 +168,19 @@ void movement_control_entry(void *param)
             {
             case UP:
                 if (position[0]>0 && map[ position[0]-1 ][ position[1] ]!=1) position[0]--;
-                else stuck = find_new_position(position, map, &direction);
+                else stuck = find_new_position();
                 break;
             case DOWN:
                 if (position[0]<MAP_SIDE-1 && map[ position[0]+1 ][ position[1] ]!=1) position[0]++;
-                else stuck = find_new_position(position, map, &direction);
+                else stuck = find_new_position();
                 break;
             case LEFT:
                 if (position[1]>0 && map[ position[0] ][ position[1]-1 ]!=1) position[1]--;
-                else stuck = find_new_position(position, map, &direction);
+                else stuck = find_new_position();
                 break;
             case RIGHT:
                 if (position[1]<MAP_SIDE-1 && map[ position[0] ][ position[1]+1 ]!=1) position[1]++;
-                else stuck = find_new_position(position, map, &direction);
+                else stuck = find_new_position();
                 break;
             }
             if (stuck == 1) rt_kprintf("The robot is stuck!!");
