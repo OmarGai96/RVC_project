@@ -34,6 +34,11 @@ struct rt_event event_obstacle;
 /* EVENT used to notify that there's an obstacle */
 struct rt_event event_resources;
 
+/* Mailbox control block */
+struct rt_mailbox mb2_3;
+/* Memory pool for mails storage */
+char mb_pool[128];
+
 // ************************************ FUNCTIONS **************************************************************
 
 

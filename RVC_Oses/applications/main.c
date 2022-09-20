@@ -77,6 +77,19 @@ int main(void){
         }
 
 
+    // Initializing a mailbox for communication between T3 and T2
+        result = rt_mb_init(&mb2_3,
+                            "mb_res",
+                            &mb_pool[0],
+                            sizeof(mb_pool) / 4,
+                            RT_IPC_FLAG_FIFO);
+        if (result != RT_EOK)
+        {
+            rt_kprintf("init mailbox failed.\n");
+            return -1;
+        }
+
+
 // ****************************************** THREADS ***********************************************************
 
 

@@ -11,6 +11,10 @@ static int map[MAP_SIDE][MAP_SIDE];
 static int position[2];
 enum directions direction;
 
+static char mb_str1[] = "Garbage bag full";
+static char mb_str2[] = "Battery discharge";
+static char mb_str3[] = "Battery totally discharged";
+
 
 // EXTRA FUNCTIONS *********************************************************************************************
 
@@ -151,6 +155,7 @@ void movement_control_entry(void *param)
 {
     // data structures used
     int i,j, stuck;
+    char *str;          //to read mail contents
 
     // initialization of data structures
     position[0] = 0;
@@ -172,9 +177,17 @@ void movement_control_entry(void *param)
                           RT_EVENT_FLAG_AND | RT_EVENT_FLAG_CLEAR,
                           RT_WAITING_FOREVER, RT_NULL) == RT_EOK)
         {
+
 #ifdef BENCHMARKING
         printf("Started at time %d tick\n", rt_tick_get());
 #endif
+
+            //mailbox receive
+            if (rt_mb_recv(&mb2_3, (rt_uint32_t *)&str, 0) == RT_EOK){
+                    rt_kprintf("get a mail from mailbox, the content: %s\n", str);
+                    //TODO: go back home, independently by the mail received
+            }
+
             // if the previous tile is not an obstacle signal it as cleaned
             if (map[ position[0] ][ position[1] ] == 0)
                 map[ position[0] ][ position[1] ] = 2;
@@ -226,17 +239,18 @@ void check_resources_entry(void *param){
         }
         else if(batteryStatus <= DISCHARGE_THRESHOLD){
             printf("Battery low\n");
-            //rt_event_send(&event_resources, EVENT_FLAG1);
-            //rt_thread_mdelay(200);
+            rt_event_send(&event_resources, EVENT_FLAG1);   //notify task 4
+            rt_mb_send(&mb2_3, (rt_uint32_t)&mb_str2);      //notify task 2
         }
 
         if(garbageBagStatus == FULL){
             printf("Garbage bag is FULL\n");
-            rt_event_send(&event_resources, EVENT_FLAG2);
+            rt_event_send(&event_resources, EVENT_FLAG2);   //notify task 4
+            rt_mb_send(&mb2_3, (rt_uint32_t)&mb_str1);      //notify task 2
         }
 
         if(batteryStatus == DISCHARGE){
-             //TODO:send mail to T2
+            rt_mb_send(&mb2_3, (rt_uint32_t)&mb_str3);      //notify task 2 BATTERY is completely LOW
 #ifdef BENCHMARKING
         printf("Stop at time %d tick\n", rt_tick_get());
 #endif
