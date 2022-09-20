@@ -1,10 +1,10 @@
 
 #include <rtthread.h>
 #include <rtdevice.h>
+#include <stdio.h>
 
 #include "tasks.h"
 #include "structures.h"
-#include <stdio.h>
 
 
 static int map[MAP_SIDE][MAP_SIDE];
