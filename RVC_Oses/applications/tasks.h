@@ -18,7 +18,7 @@
 
 #define MAP_SIDE                        10
 
-enum directions {UP, DOWN, LEFT, RIGHT};
+enum directions {UP, DOWN, LEFT, RIGHT, RETURN};
 
 
 // ************************************ STRUCTURES *************************************************************
