@@ -66,7 +66,7 @@ int main(void){
     rt_timer_init(&timer_check_resources_activation, "timer_check_resources_activation",
                   timeout_check_resources,
                   RT_NULL,
-                  500,
+                  5000,
                   RT_TIMER_FLAG_PERIODIC);
 
     // Initializing event object for resources

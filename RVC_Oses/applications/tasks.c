@@ -68,7 +68,7 @@ void movement_control_obstacle_handler(int sig)
 {
     // mark obstacle on the map
     map[ position[0] ][ position[1] ] = 1;
-    // revert position to precious tile
+    // revert position to previous tile
     switch (direction)
     {
     case UP:
@@ -211,7 +211,9 @@ void movement_control_entry(void *param)
                 else stuck = find_new_position();
                 break;
             }
-            if (stuck == 1) rt_kprintf("The robot is stuck!!");
+            if (stuck == 1) {
+                rt_kprintf("The robot is stuck!!");
+            }
             rt_kprintf("Robot in position %d,%d\n", position[0], position[1]);
 #ifdef BENCHMARKING
         printf("Stop at time %d tick\n", rt_tick_get());
