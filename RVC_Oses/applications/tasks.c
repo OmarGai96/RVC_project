@@ -184,8 +184,8 @@ void movement_control_entry(void *param)
 
             //mailbox receive
             if (rt_mb_recv(&mb2_3, (rt_uint32_t *)&str, 0) == RT_EOK){
-                    rt_kprintf("get a mail from mailbox, the content: %s\n", str);
-                    //TODO: go back home, independently by the mail received
+                rt_kprintf("get a mail from mailbox, the content: %s\n", str);
+                //TODO: go back home, independently by the mail received
             }
 
             // if the previous tile is not an obstacle signal it as cleaned
@@ -213,6 +213,7 @@ void movement_control_entry(void *param)
             }
             if (stuck == 1) {
                 rt_kprintf("The robot is stuck!!");
+                rt_signal_mask(SIGUSR1);
             }
             rt_kprintf("Robot in position %d,%d\n", position[0], position[1]);
 #ifdef BENCHMARKING
