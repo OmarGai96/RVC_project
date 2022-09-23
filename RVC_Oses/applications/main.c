@@ -90,6 +90,18 @@ int main(void){
         }
 
 
+    // Initializing a mailbox for communication between T5 and T2
+        result = rt_mb_init(&mb2_5,
+                            "mb_brushes",
+                            &mb_pool2_5[0],
+                            sizeof(mb_pool2_5) / 4,
+                            RT_IPC_FLAG_FIFO);
+        if (result != RT_EOK){
+             rt_kprintf("init mailbox failed.\n");
+             return -1;
+        }
+
+
 // ****************************************** THREADS ***********************************************************
 
 
@@ -138,6 +150,16 @@ int main(void){
                    sizeof(acoustic_signals_stack),
                    ACOUSTIC_SIGNALS_PRIORITY, THREAD_TIMESLICE);
 
+    // initializing brushes speed thread
+    rt_thread_init(&brushes_speed,
+                   "brushes_speed",
+                   brushes_speed_entry,
+                   RT_NULL,
+                   &brushes_speed_stack[0],
+                   sizeof(brushes_speed_stack),
+                   BRUSHES_SPEED_PRIORITY, THREAD_TIMESLICE);
+
+
 
 
 // *************************************** STARTING *************************************************************
@@ -154,6 +176,7 @@ int main(void){
     rt_thread_startup(&movement_control);
     rt_thread_startup(&check_resources);
     rt_thread_startup(&acoustic_signals);
+    rt_thread_startup(&brushes_speed);
 
     return 0;
 }

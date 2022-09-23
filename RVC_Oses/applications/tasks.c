@@ -14,6 +14,8 @@ enum directions direction;
 static char mb_str1[] = "Garbage bag full";
 static char mb_str2[] = "Battery discharge";
 static char mb_str3[] = "Battery totally discharged";
+static char mb_str4[] = "Come back home";
+static char mb_str5[] = "Turn on brushes";
 
 
 // EXTRA FUNCTIONS *********************************************************************************************
@@ -306,6 +308,84 @@ void acoustic_signals_entry(void *param){
         }
     }
 
+}
+
+
+/* Entry for the BRUSHES SPEED */
+void brushes_speed_entry(void *param)
+{
+    /* 0 0 MEDIUM
+     * 0 1 HIGH
+     * 1 0 LOW
+     * 1 1 STOP
+     */
+    int brushes_speed[2], brushes_power[2];
+    char *str;
+
+    while(1){
+
+        rt_pin_mode(BRUSHES_SPEED_PIN_NUMBER, PIN_MODE_INPUT);
+        rt_pin_mode(BRUSHES_POWER_PIN_NUMBER, PIN_MODE_OUTPUT);
+
+        //If the robot is starting on, turn on the brushes
+        if (rt_mb_recv(&mb2_5, (rt_uint32_t *)&str, RT_WAITING_NO) == RT_EOK){
+
+            if (!strcmp(str,mb_str5)){
+                rt_pin_write(BRUSHES_POWER_PIN_NUMBER, MEDIUM);
+                brushes_power[0]=0;
+                brushes_power[1]=0;
+            }
+
+            /* Executing the mailbox object detachment */
+            rt_mb_detach(&mb2_5);
+        }
+
+        //Reads from mail box in case the robot is coming back. In this case stop the brushes
+        if (rt_mb_recv(&mb2_5, (rt_uint32_t *)&str, RT_WAITING_NO) == RT_EOK){
+
+            if (!strcmp(str,mb_str4)){
+                rt_pin_write(BRUSHES_POWER_PIN_NUMBER, STOP_BRUSHES);
+                brushes_power[0]=1;
+                brushes_power[1]=1;
+            }
+
+            /* Executing the mailbox object detachment */
+            rt_mb_detach(&mb2_5);
+        }
+
+        brushes_speed[0] =  rt_pin_read(BRUSHES_SPEED_PIN_NUMBER);
+        brushes_speed[1] =  rt_pin_read(BRUSHES_SPEED_PIN_NUMBER);
+
+        rt_pin_mode(BRUSHES_POWER_PIN_NUMBER, PIN_MODE_INPUT);
+        brushes_power[0] =  rt_pin_read(BRUSHES_POWER_PIN_NUMBER);
+        brushes_speed[1] =  rt_pin_read(BRUSHES_POWER_PIN_NUMBER);
+
+        rt_pin_mode(BRUSHES_POWER_PIN_NUMBER, PIN_MODE_OUTPUT);
+
+        if(brushes_speed[0] == 1 && brushes_speed[1] == 0){
+            if(brushes_power[0] == 1 && brushes_power[1] == 0){
+                brushes_power[0]=0;
+                brushes_power[1]=0;
+                rt_pin_write(BRUSHES_POWER_PIN_NUMBER, MEDIUM);
+            }else if(brushes_power[0] == 0 && brushes_power[1] == 0){
+                brushes_power[0]=0;
+                brushes_power[1]=1;
+                rt_pin_write(BRUSHES_POWER_PIN_NUMBER, HIGH);
+            }
+        }else if(brushes_speed[0] == 0 && brushes_speed[1] == 1){
+            if(brushes_power[0] == 0 && brushes_power[1] == 1){
+                brushes_power[0]=0;
+                brushes_power[1]=0;
+                rt_pin_write(BRUSHES_POWER_PIN_NUMBER, MEDIUM);
+            }else if(brushes_power[0] == 0 && brushes_power[1] == 0){
+                brushes_power[0]=1;
+                brushes_power[1]=0;
+                rt_pin_write(BRUSHES_POWER_PIN_NUMBER, LOW);
+            }
+        }
+
+
+    }
 }
 
 

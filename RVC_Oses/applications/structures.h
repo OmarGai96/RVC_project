@@ -39,6 +39,11 @@ struct rt_mailbox mb2_3;
 /* Memory pool for mails storage */
 char mb_pool[128];
 
+/* Mailbox control block T2 T5*/
+struct rt_mailbox mb2_5;
+/* Memory pool for mails storage T2 T5*/
+char mb_pool2_5[128];
+
 // ************************************ FUNCTIONS **************************************************************
 
 

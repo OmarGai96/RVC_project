@@ -4,6 +4,7 @@
 
 #include "system.h"
 
+
 // ************************************** DEFINITIONS **********************************************************
 
 
@@ -12,9 +13,12 @@
 #define MOVEMENT_CONTROL_PRIORITY      3
 #define CHECK_RESOURCES_PRIORITY       4
 #define ACOUSTIC_SIGNALS_PRIORITY      5
+#define BRUSHES_SPEED_PRIORITY         5
 #define THREAD_TIMESLICE               5
 
 #define PROXIMITY_SENSOR_PIN_NUMBER     35
+#define BRUSHES_SPEED_PIN_NUMBER        36
+#define BRUSHES_POWER_PIN_NUMBER        37
 
 #define MAP_SIDE                        10
 
@@ -44,6 +48,10 @@ ALIGN(RT_ALIGN_SIZE)
 char acoustic_signals_stack[1024];
 struct rt_thread acoustic_signals;
 
+ALIGN(RT_ALIGN_SIZE)
+static char brushes_speed_stack[1024];
+static struct rt_thread brushes_speed;
+
 
 // ************************************ FUNCTIONS **************************************************************
 
@@ -52,6 +60,7 @@ void movement_stop_entry(void *param);
 void movement_control_entry(void *param);
 void check_resources_entry(void *param);
 void acoustic_signals_entry(void *param);
+void brushes_speed_entry(void *param);
 
 
 #endif /* APPLICATIONS_TASKS_H_ */
