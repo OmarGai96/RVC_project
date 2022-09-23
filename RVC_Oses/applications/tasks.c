@@ -118,6 +118,7 @@ void obstacle_control_entry(void *param)
             {
                 rt_thread_kill(&movement_control, SIGUSR1);
                 rt_event_send(&event_obstacle, EVENT_OBSTACLE_FOUND);
+
             }
 #ifdef BENCHMARKING
         printf("Stop at time %d tick\n", rt_tick_get());
@@ -141,6 +142,9 @@ void movement_stop_entry(void *param)
         printf("Started at time %d tick\n", rt_tick_get());
 #endif
             // TODO: decide how to implement this in hw and modify correspondent driver
+            //WE CAN USE JUST A SPECIFIC PIN SET TO ZERO, and using a global variable to remember it, if necessary.
+            //Otherwise modify or create a driver that remember the last status of the engine
+
             rt_kprintf("Engine stopped!\n");
 #ifdef BENCHMARKING
         printf("Stop at time %d tick\n", rt_tick_get());
@@ -323,68 +327,71 @@ void brushes_speed_entry(void *param)
     char *str;
 
     while(1){
+        if (rt_event_recv(&event_tasks_activation, EVENT_BRUSHES_SPEED_ACTIVATION,
+                          RT_EVENT_FLAG_AND | RT_EVENT_FLAG_CLEAR,
+                          RT_WAITING_FOREVER, RT_NULL) == RT_EOK){
+            rt_pin_mode(BRUSHES_SPEED_PIN_NUMBER, PIN_MODE_INPUT);
+            rt_pin_mode(BRUSHES_POWER_PIN_NUMBER, PIN_MODE_OUTPUT);
 
-        rt_pin_mode(BRUSHES_SPEED_PIN_NUMBER, PIN_MODE_INPUT);
-        rt_pin_mode(BRUSHES_POWER_PIN_NUMBER, PIN_MODE_OUTPUT);
+            //If the robot is starting on, turn on the brushes
+            if (rt_mb_recv(&mb2_5, (rt_uint32_t *)&str, RT_WAITING_NO) == RT_EOK){
+                // TODO:WHO SENDS AT TURN ON OF THE ROBOT?
 
-        //If the robot is starting on, turn on the brushes
-        if (rt_mb_recv(&mb2_5, (rt_uint32_t *)&str, RT_WAITING_NO) == RT_EOK){
+                if (!rt_strcmp(str,mb_str5)){
+                    rt_pin_write(BRUSHES_POWER_PIN_NUMBER, MEDIUM);
+                    brushes_power[0]=0;
+                    brushes_power[1]=0;
+                }
 
-            if (!strcmp(str,mb_str5)){
-                rt_pin_write(BRUSHES_POWER_PIN_NUMBER, MEDIUM);
-                brushes_power[0]=0;
-                brushes_power[1]=0;
+                /* Executing the mailbox object detachment */
+                rt_mb_detach(&mb2_5);
             }
 
-            /* Executing the mailbox object detachment */
-            rt_mb_detach(&mb2_5);
+            //Reads from mail box in case the robot is coming back. In this case stop the brushes
+            if (rt_mb_recv(&mb2_5, (rt_uint32_t *)&str, RT_WAITING_NO) == RT_EOK){
+                //TODO: WHO SAYS TO COME BACK?
+
+                if (!rt_strcmp(str,mb_str4)){
+                    rt_pin_write(BRUSHES_POWER_PIN_NUMBER, STOP_BRUSHES);
+                    brushes_power[0]=1;
+                    brushes_power[1]=1;
+                }
+
+                /* Executing the mailbox object detachment */
+                rt_mb_detach(&mb2_5);
+            }
+
+            brushes_speed[0] =  rt_pin_read(BRUSHES_SPEED_PIN_NUMBER);
+            brushes_speed[1] =  rt_pin_read(BRUSHES_SPEED_PIN_NUMBER);
+
+            rt_pin_mode(BRUSHES_POWER_PIN_NUMBER, PIN_MODE_INPUT);
+            brushes_power[0] =  rt_pin_read(BRUSHES_POWER_PIN_NUMBER);
+            brushes_speed[1] =  rt_pin_read(BRUSHES_POWER_PIN_NUMBER);
+
+            rt_pin_mode(BRUSHES_POWER_PIN_NUMBER, PIN_MODE_OUTPUT);
+
+            if(brushes_speed[0] == 1 && brushes_speed[1] == 0){
+                if(brushes_power[0] == 1 && brushes_power[1] == 0){
+                    brushes_power[0]=0;
+                    brushes_power[1]=0;
+                    rt_pin_write(BRUSHES_POWER_PIN_NUMBER, MEDIUM);
+                }else if(brushes_power[0] == 0 && brushes_power[1] == 0){
+                    brushes_power[0]=0;
+                    brushes_power[1]=1;
+                    rt_pin_write(BRUSHES_POWER_PIN_NUMBER, HIGH);
+                }
+            }else if(brushes_speed[0] == 0 && brushes_speed[1] == 1){
+                if(brushes_power[0] == 0 && brushes_power[1] == 1){
+                    brushes_power[0]=0;
+                    brushes_power[1]=0;
+                    rt_pin_write(BRUSHES_POWER_PIN_NUMBER, MEDIUM);
+                }else if(brushes_power[0] == 0 && brushes_power[1] == 0){
+                    brushes_power[0]=1;
+                    brushes_power[1]=0;
+                    rt_pin_write(BRUSHES_POWER_PIN_NUMBER, LOW);
+                }
+            }
         }
-
-        //Reads from mail box in case the robot is coming back. In this case stop the brushes
-        if (rt_mb_recv(&mb2_5, (rt_uint32_t *)&str, RT_WAITING_NO) == RT_EOK){
-
-            if (!strcmp(str,mb_str4)){
-                rt_pin_write(BRUSHES_POWER_PIN_NUMBER, STOP_BRUSHES);
-                brushes_power[0]=1;
-                brushes_power[1]=1;
-            }
-
-            /* Executing the mailbox object detachment */
-            rt_mb_detach(&mb2_5);
-        }
-
-        brushes_speed[0] =  rt_pin_read(BRUSHES_SPEED_PIN_NUMBER);
-        brushes_speed[1] =  rt_pin_read(BRUSHES_SPEED_PIN_NUMBER);
-
-        rt_pin_mode(BRUSHES_POWER_PIN_NUMBER, PIN_MODE_INPUT);
-        brushes_power[0] =  rt_pin_read(BRUSHES_POWER_PIN_NUMBER);
-        brushes_speed[1] =  rt_pin_read(BRUSHES_POWER_PIN_NUMBER);
-
-        rt_pin_mode(BRUSHES_POWER_PIN_NUMBER, PIN_MODE_OUTPUT);
-
-        if(brushes_speed[0] == 1 && brushes_speed[1] == 0){
-            if(brushes_power[0] == 1 && brushes_power[1] == 0){
-                brushes_power[0]=0;
-                brushes_power[1]=0;
-                rt_pin_write(BRUSHES_POWER_PIN_NUMBER, MEDIUM);
-            }else if(brushes_power[0] == 0 && brushes_power[1] == 0){
-                brushes_power[0]=0;
-                brushes_power[1]=1;
-                rt_pin_write(BRUSHES_POWER_PIN_NUMBER, HIGH);
-            }
-        }else if(brushes_speed[0] == 0 && brushes_speed[1] == 1){
-            if(brushes_power[0] == 0 && brushes_power[1] == 1){
-                brushes_power[0]=0;
-                brushes_power[1]=0;
-                rt_pin_write(BRUSHES_POWER_PIN_NUMBER, MEDIUM);
-            }else if(brushes_power[0] == 0 && brushes_power[1] == 0){
-                brushes_power[0]=1;
-                brushes_power[1]=0;
-                rt_pin_write(BRUSHES_POWER_PIN_NUMBER, LOW);
-            }
-        }
-
-
     }
 }
 

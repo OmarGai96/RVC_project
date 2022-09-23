@@ -14,6 +14,7 @@
 #define CHECK_RESOURCES_PRIORITY       4
 #define ACOUSTIC_SIGNALS_PRIORITY      5
 #define BRUSHES_SPEED_PRIORITY         5
+
 #define THREAD_TIMESLICE               5
 
 #define PROXIMITY_SENSOR_PIN_NUMBER     35

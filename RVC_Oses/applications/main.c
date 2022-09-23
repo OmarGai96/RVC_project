@@ -49,6 +49,13 @@ int main(void){
         return -1;
     }
 
+    // Initializing EVENT object for resources
+    result = rt_event_init(&event_resources, "event_resources", RT_IPC_FLAG_FIFO);
+    if (result != RT_EOK){
+        printf("Initialization of resources event failed.\n");
+        return -1;
+    }
+
 
     // initializing the TIMER for obstacle_control
     rt_timer_init(&timer_obstacle_control_activation, "timer_obstacle_control_activation",
@@ -69,12 +76,12 @@ int main(void){
                   5000,
                   RT_TIMER_FLAG_PERIODIC);
 
-    // Initializing event object for resources
-        result = rt_event_init(&event_resources, "event_resources", RT_IPC_FLAG_FIFO);
-        if (result != RT_EOK){
-            printf("Initialization of resources event failed.\n");
-            return -1;
-        }
+    // initializing the TIMER for brushes_speed
+    rt_timer_init(&timer_brushes_speed_activation, "timer_brushes_speed_activation",
+                  timeout_brushes_speed,
+                  RT_NULL,
+                  250,
+                  RT_TIMER_FLAG_PERIODIC);
 
 
     // Initializing a mailbox for communication between T3 and T2
@@ -169,6 +176,7 @@ int main(void){
     rt_timer_start (&timer_obstacle_control_activation);
     rt_timer_start (&timer_movement_control_activation);
     rt_timer_start (&timer_check_resources_activation);
+    rt_timer_start (&timer_brushes_speed_activation);
 
     // starting the threads
     rt_thread_startup(&obstacle_control);
