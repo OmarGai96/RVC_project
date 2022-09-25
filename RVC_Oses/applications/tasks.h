@@ -12,12 +12,13 @@
 #define MOVEMENT_STOP_PRIORITY         1
 #define MOVEMENT_CONTROL_PRIORITY      3
 #define CHECK_RESOURCES_PRIORITY       4
-#define ACOUSTIC_SIGNALS_PRIORITY      5
+#define ACOUSTIC_SIGNALS_PRIORITY      6
 #define BRUSHES_SPEED_PRIORITY         5
 
 #define THREAD_TIMESLICE               5
 
 #define PROXIMITY_SENSOR_PIN_NUMBER     35
+#define ACUSTIC_SIGNAL_PIN_NUMBER       40
 #define BRUSHES_SPEED_PIN_NUMBER        36
 #define BRUSHES_POWER_PIN_NUMBER        37
 
@@ -50,8 +51,8 @@ char acoustic_signals_stack[1024];
 struct rt_thread acoustic_signals;
 
 ALIGN(RT_ALIGN_SIZE)
-static char brushes_speed_stack[1024];
-static struct rt_thread brushes_speed;
+char brushes_speed_stack[1024];
+struct rt_thread brushes_speed;
 
 
 // ************************************ FUNCTIONS **************************************************************

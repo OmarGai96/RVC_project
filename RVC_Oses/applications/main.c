@@ -76,6 +76,13 @@ int main(void){
                   5000,
                   RT_TIMER_FLAG_PERIODIC);
 
+    // initializing the TIMER for acoustic signals
+    rt_timer_init(&timer_acoustic_signals_activation, "timer_acoustic_signals_activation",
+                  timeout_acoustic_signals,
+                  RT_NULL,
+                  500,
+                  RT_TIMER_FLAG_PERIODIC);
+
     // initializing the TIMER for brushes_speed
     rt_timer_init(&timer_brushes_speed_activation, "timer_brushes_speed_activation",
                   timeout_brushes_speed,
@@ -148,9 +155,9 @@ int main(void){
                    sizeof(check_resources_stack),
                    CHECK_RESOURCES_PRIORITY, THREAD_TIMESLICE);
 
-    // initializing acoustic_signal thread
+    // initializing acoustic_signals thread
     rt_thread_init(&acoustic_signals,
-                   "acoustic_signal",
+                   "acoustic_signals",
                    acoustic_signals_entry,
                    RT_NULL,
                    &acoustic_signals_stack[0],
@@ -176,6 +183,7 @@ int main(void){
     rt_timer_start (&timer_obstacle_control_activation);
     rt_timer_start (&timer_movement_control_activation);
     rt_timer_start (&timer_check_resources_activation);
+    rt_timer_start (&timer_acoustic_signals_activation);
     rt_timer_start (&timer_brushes_speed_activation);
 
     // starting the threads

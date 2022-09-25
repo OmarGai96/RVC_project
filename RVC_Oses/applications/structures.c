@@ -23,6 +23,12 @@ void timeout_check_resources(void* parameter)
     rt_event_send(&event_tasks_activation, EVENT_CHECK_RESOURCES_ACTIVATION);
 }
 
+/* Timeout function for the timer that activates acoustic signals periodically */
+void timeout_acoustic_signals(void* parameter)
+{
+    rt_event_send(&event_tasks_activation, EVENT_ACOUSTIC_SIGNALS_ACTIVATION);
+}
+
 /* Timeout function for the timer that activates brushes speed periodically */
 void timeout_brushes_speed(void* parameter)
 {
