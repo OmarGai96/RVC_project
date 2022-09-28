@@ -15,7 +15,7 @@ void initSystem(void)
 
 void updateResources(void){
     garbageBagStatus++;
-    if(garbageBagStatus%2==0)
+    if(garbageBagStatus%10==0)
         batteryStatus--;
     return;
 }
