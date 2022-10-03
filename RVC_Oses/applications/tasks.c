@@ -86,7 +86,7 @@ void movement_control_obstacle_handler(int sig)
         position[1]--;
         break;
     }
-#ifdef DEBUG_1
+#ifdef DEBUG_2
     print_map();
 #endif
 }
@@ -225,20 +225,20 @@ void movement_control_entry(void *param)
             }
             // if the function couldn't find where to go the robot is stuck, we end the thread
             if (stuck == 1) {
-#ifdef DEBUG_1
+#ifdef DEBUG_2
                 rt_kprintf("\tThe robot is stuck!!");
 #endif
                 break;
             }
             // if the robot is back at starting statin after receiving command to return we end the thread
             if (direction==RETURN && position[0]==0 && position[1]==0) {
-#ifdef DEBUG_1
+#ifdef DEBUG_2
                 rt_kprintf("\tThe robot is back at charging station!\n");
 #endif
                 break;
             }
-#ifdef DEBUG_1
-            rt_kprintf("\tRobot in position %d,%d\n", position[0], position[1]);
+#ifdef DEBUG_2
+            rt_kprintf("\n\tRobot in position %d,%d\n", position[0], position[1]);
 #endif
 #ifdef BENCHMARKING
         printf("\t\tStop at time %d tick\n", rt_tick_get());
@@ -259,8 +259,11 @@ void check_resources_entry(void *param){
 #ifdef BENCHMARKING
         printf("\nTask3:\t Started at time %d tick, %d ms\n", rt_tick_get(), rt_tick_get_millisecond());
 #endif
-#ifdef DEBUG_1
-        printf("\tBattery status %d\n", batteryStatus);
+#ifdef DEBUG_2
+        if(batteryStatus%5==0){
+            printf("\n\tBattery status %d %% \n", batteryStatus);
+        }
+
 #endif
         if(batteryStatus <= CHARGE && batteryStatus > HALFCHARGE){
 #ifdef DEBUG_1
@@ -275,21 +278,20 @@ void check_resources_entry(void *param){
         else if(batteryStatus <= DISCHARGE_THRESHOLD){
             rt_event_send(&event_resources, EVENT_FLAG1);   //notify task 4
             rt_mb_send(&mb2_3, (rt_uint32_t)&mb_str2);      //notify task 2
-#ifdef DEBUG_1
-            printf("Battery LOW: \tMail sent %sn", mb_str2);
+#ifdef DEBUG_2
+            printf("\tBattery LOW\n\t\tMail sent %s\n", mb_str2);
 #endif
         }
 
         if(garbageBagStatus == FULL){
-
             rt_event_send(&event_resources, EVENT_FLAG2);   //notify task 4
             rt_mb_send(&mb2_3, (rt_uint32_t)&mb_str1);      //notify task 2
-#ifdef DEBUG_1
-            printf("Garbage bag FULL:\tMail sent %s\n", mb_str1);
+#ifdef DEBUG_2
+            printf("\tGarbage bag FULL\n\t\tMail sent %s\n", mb_str1);
 #endif
         }
 
-        if(batteryStatus == DISCHARGE){
+        if(batteryStatus == DISCHARGE+1){
             rt_mb_send(&mb2_3, (rt_uint32_t)&mb_str3);      //notify task 2 BATTERY is completely LOW
 #ifdef BENCHMARKING
         printf("\t\tStop at time %d tick\n", rt_tick_get());
@@ -321,14 +323,14 @@ void acoustic_signals_entry(void *param){
             if (e == 0x2){
 
                 // EVENT_FLAG_1 is set
-#ifdef DEBUG_1
-                printf("\t\tLOW BATTERY SOUND\n");
+#ifdef DEBUG_2
+                printf("\t\tLOW BATTERY ALARM\n");
 #endif
             }else if (e == 0x4){
 
                 // EVENT_FLAG_2 is set
-#ifdef DEBUG_1
-                printf("\t\tGARBAGE BAG FULL SOUND\n");
+#ifdef DEBUG_2
+                printf("\t\tGARBAGE BAG FULL ALARM\n");
 #endif
             }
 

@@ -1,0 +1,19 @@
+
+        Battery status 10 %
+        Battery LOW
+                Mail sent Battery discharge
+
+        Battery status 10 %
+        Battery LOW
+                Mail sent Battery discharge
+                LOW BATTERY ALARM
+        Battery LOW
+                Mail sent Battery discharge
+        Battery LOW
+                Mail sent Battery discharge
+                LOW BATTERY ALARM
+        Battery LOW
+                Mail sent Battery discharge
+        Battery LOW
+                Mail sent Battery discharge
+                LOW BATTERY ALARM

@@ -1,0 +1,24 @@
+ 	Robot in position 3,0
+
+        Robot in position 4,0
+
+        Robot in position 5,0
+
+2 2 2 2 2 2 2 2 2 2
+2 0 0 0 0 0 0 0 0 2
+2 0 0 0 0 0 0 0 0 2
+2 0 0 0 0 0 0 0 0 2
+2 0 0 0 0 0 0 0 0 2
+1 0 0 0 0 0 0 0 0 2
+2 0 0 0 0 0 0 0 0 2
+2 0 0 0 0 0 0 0 0 2
+2 0 0 0 0 0 0 0 0 2
+2 2 2 2 2 2 2 2 2 2
+
+
+
+        Robot in position 4,1
+
+        Battery status 70 %
+
+        Robot in position 4,2
