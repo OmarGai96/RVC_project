@@ -36,27 +36,21 @@ int main(void){
     result = rt_event_init(&event_tasks_activation, "event_tasks_activation", RT_IPC_FLAG_FIFO);
     if (result != RT_EOK)
     {
-#ifdef DEBUG
         rt_kprintf("Initialization of tasks activation event failed.\n");
-#endif
         return -1;
     }
     // initializing EVENT that notifies there's an obstacle
     result = rt_event_init(&event_obstacle, "event_obstacle", RT_IPC_FLAG_FIFO);
     if (result != RT_EOK)
     {
-#ifdef DEBUG
         rt_kprintf("Initialization of obstacle notification event failed.\n");
-#endif
         return -1;
     }
 
     // Initializing EVENT object for resources
     result = rt_event_init(&event_resources, "event_resources", RT_IPC_FLAG_FIFO);
     if (result != RT_EOK){
-#ifdef DEBUG
         printf("Initialization of resources event failed.\n");
-#endif
         return -1;
     }
 
@@ -103,9 +97,7 @@ int main(void){
                             RT_IPC_FLAG_FIFO);
         if (result != RT_EOK)
         {
-#ifdef DEBUG
             rt_kprintf("init mailbox failed.\n");
-#endif
             return -1;
         }
 
@@ -117,9 +109,7 @@ int main(void){
                             sizeof(mb_pool2_5) / 4,
                             RT_IPC_FLAG_FIFO);
         if (result != RT_EOK){
-#ifdef DEBUG
              rt_kprintf("init mailbox failed.\n");
-#endif
              return -1;
         }
 
