@@ -1,0 +1,119 @@
+
+TASK 1	-> every 200 ms (20 ticks)
+TASK 2	-> every 500 ms (50 ticks)
+TASK 3	-> every 250 ms (25 ticks)
+TASK 4	-> every 500 ms (50 ticks)
+TASK 5	-> every 250 ms (25 ticks)
+
+
+ \ | /
+- RT -     Thread Operating System
+ / | \     4.1.0 build Oct  3 2022 12:21:02
+ 2006 - 2021 Copyright by rt-thread team
+msh />
+Task1:   Started at time 34 tick, 340 ms
+                Stop at time 37 tick
+		DURATION: 30 ms
+
+Task3:   Started at time 39 tick, 390 ms
+                Stop at time 41 tick
+		DURATION: 20 ms
+
+Task5:   Started at time 42 tick, 420 ms
+                Stop at time 43 tick
+		DURATION: 10 ms
+
+Task1:   Started at time 53 tick, 530 ms -> period: 190 ms (set 200ms)
+                Stop at time 53 tick
+		DURATION: 0 ms
+
+Task2:   Started at time 64 tick, 640 ms
+                Stop at time 66 tick
+		DURATION: 20 ms
+
+Task3:   Started at time 66 tick, 660 ms -> period: 270 ms (set 250ms)
+                Stop at time 67 tick
+		DURATION: 10 ms
+
+Task5:   Started at time 68 tick, 680 ms -> period: 260 ms (set 250ms)
+                Stop at time 69 tick
+		DURATION: 10 ms
+
+Task4:   Started at time 70 tick, 700 ms -> period: 700 ms (set 500ms)
+						(200ms delay, due to
+						event blocking)
+
+Task1:   Started at time 73 tick, 730 ms
+                Stop at time 73 tick
+
+Task3:   Started at time 89 tick, 890 ms
+
+                Stop at time 91 tick
+
+Task5:   Started at time 91 tick, 910 ms
+                Stop at time 92 tick
+
+Task1:   Started at time 93 tick, 930 ms
+                Stop at time 93 tick
+
+Task1:   Started at time 113 tick, 1130 ms
+                Stop at time 113 tick
+
+Task2:   Started at time 114 tick, 1140 ms -> period: 500 ms
+                Stop at time 115 tick
+
+Task3:   Started at time 117 tick, 1170 ms
+                Stop at time 119 tick
+
+Task5:   Started at time 121 tick, 1210 ms
+                Stop at time 122 tick
+
+Task1:   Started at time 133 tick, 1330 ms
+                Stop at time 134 tick
+
+Task3:   Started at time 139 tick, 1390 ms
+                Stop at time 141 tick
+
+Task5:   Started at time 144 tick, 1440 ms
+                Stop at time 145 tick
+
+Task1:   Started at time 153 tick, 1530 ms
+                Stop at time 153 tick
+
+Task2:   Started at time 164 tick, 1640 ms
+                Stop at time 164 tick
+
+Task3:   Started at time 165 tick, 1650 ms
+                Stop at time 167 tick
+
+Task5:   Started at time 168 tick, 1680 ms
+                Stop at time 169 tick
+
+Task1:   Started at time 173 tick, 1730 ms
+                Stop at time 174 tick
+
+Task3:   Started at time 189 tick, 1890 ms
+                Stop at time 190 tick
+
+Task5:   Started at time 192 tick, 1920 ms
+
+Task1:   Started at time 194 tick, 1940 ms
+                Stop at time 195 tick
+                Stop at time 197 tick
+
+Task1:   Started at time 213 tick, 2130 ms
+                Stop at time 216 tick
+
+Task2:   Started at time 219 tick, 2190 ms
+                Stop at time 224 tick
+
+Task3:   Started at time 225 tick, 2250 ms
+
+                Stop at time 227 tick
+
+Task5:   Started at time 228 tick, 2280 ms
+                Stop at time 231 tick
+
+Task1:   Started at time 233 tick, 2330 ms
+
+C:\Users\Omar\Desktop\PoliTo\RT-Thread\myNewRepo\RVC_project\RVC_Oses>
