@@ -4,9 +4,9 @@
 
 #include "system.h"
 
-//#define BENCHMARKING   //uncomment to print timing informations
+#define BENCHMARKING   //uncomment to print timing informations
 //#define DEBUG_1  //uncomment to print detailed informations
-#define DEBUG_2
+//#define DEBUG_2
 
 // ************************************** DEFINITIONS **********************************************************
 

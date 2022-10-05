@@ -1,0 +1,184 @@
+
+C:\Users\Omar\Desktop\PoliTo\RT-Thread\myNewRepo\RVC_project\RVC_Oses>C:/RT-ThreadStudio/repo/Extract/Debugger_Support_Packages
+/RealThread/QEMU/4.2.0.4/qemu-system-arm.exe -M stm32f429-st-disco -sd sd.bin -nographic -S -s --kernel Debug/rtthread.elf -ser
+ial stdio -monitor null -show-cursor
+WARNING: Image format was not specified for 'sd.bin' and probing guessed raw.
+         Automatically detecting the format is dangerous for raw images, write operations on block 0 will be restricted.
+         Specify the 'raw' format explicitly to remove the restrictions.
+←[0m[D/drv.sdram] sdram init success, mapped at 0xD0000000, size is 8388608 bytes, data width is 16←[0m
+
+ \ | /
+- RT -     Thread Operating System
+ / | \     4.1.0 build Oct  5 2022 11:18:39
+ 2006 - 2021 Copyright by rt-thread team
+msh />
+Task1:   Started at time 33 tick, 200 ms	
+                Stop at time 36 tick
+
+Task3:   Started at time 38 tick, 250 ms
+                Stop at time 40 tick
+
+Task5:   Started at time 40 tick, 270 ms
+                Stop at time 41 tick
+
+Task1:   Started at time 53 tick, 400 ms
+                Stop at time 53 tick
+
+Task2:   Started at time 63 tick, 500 ms
+                Stop at time 64 tick
+
+Task3:   Started at time 65 tick, 520 ms
+                Stop at time 65 tick
+
+Task5:   Started at time 66 tick, 530 ms
+                Stop at time 66 tick
+
+Task4:   Started at time 67 tick, 540 ms
+
+Task1:   Started at time 73 tick, 600 ms
+                Stop at time 73 tick
+
+Task3:   Started at time 88 tick, 750 ms
+                Stop at time 89 tick
+
+Task5:   Started at time 90 tick, 770 ms
+                Stop at time 91 tick
+
+Task1:   Started at time 93 tick, 800 ms
+                Stop at time 93 tick
+
+Task1:   Started at time 113 tick, 1000 ms
+                Stop at time 114 tick
+
+Task2:   Started at time 116 tick, 1030 ms
+                Stop at time 116 tick
+
+Task3:   Started at time 118 tick, 1050 ms
+                Stop at time 118 tick
+
+Task5:   Started at time 119 tick, 1060 ms
+                Stop at time 120 tick
+
+Task1:   Started at time 133 tick, 1200 ms
+                Stop at time 134 tick
+
+Task3:   Started at time 138 tick, 1250 ms
+                Stop at time 139 tick
+
+Task5:   Started at time 140 tick, 1270 ms
+                Stop at time 140 tick
+
+Task1:   Started at time 153 tick, 1400 ms
+                Stop at time 154 tick
+
+Task2:   Started at time 163 tick, 1500 ms
+                Stop at time 163 tick
+
+Task3:   Started at time 164 tick, 1510 ms
+                Stop at time 164 tick
+
+Task5:   Started at time 165 tick, 1520 ms
+                Stop at time 166 tick
+
+Task1:   Started at time 173 tick, 1600 ms
+                Stop at time 174 tick
+
+Task3:   Started at time 188 tick, 1750 ms
+                Stop at time 189 tick
+
+Task5:   Started at time 190 tick, 1770 ms
+                Stop at time 191 tick
+
+Task1:   Started at time 193 tick, 1800 ms
+                Stop at time 193 tick
+
+Task1:   Started at time 213 tick, 2000 ms
+                Stop at time 214 tick
+
+Task2:   Started at time 215 tick, 2020 ms
+                Stop at time 215 tick
+
+Task3:   Started at time 217 tick, 2040 ms
+                Stop at time 217 tick
+
+Task5:   Started at time 218 tick, 2050 ms
+                Stop at time 219 tick
+
+Task1:   Started at time 233 tick, 2200 ms
+                Stop at time 234 tick
+
+Task3:   Started at time 238 tick, 2250 ms
+                Stop at time 238 tick
+
+Task5:   Started at time 240 tick, 2270 ms
+                Stop at time 240 tick
+
+Task1:   Started at time 253 tick, 2400 ms
+                Stop at time 253 tick
+
+Task2:   Started at time 263 tick, 2500 ms
+                Stop at time 263 tick
+
+Task3:   Started at time 264 tick, 2510 ms
+                Stop at time 265 tick
+
+Task5:   Started at time 265 tick, 2520 ms
+                Stop at time 266 tick
+
+Task1:   Started at time 273 tick, 2600 ms
+                Stop at time 273 tick
+
+Task3:   Started at time 288 tick, 2750 ms
+                Stop at time 288 tick
+
+Task5:   Started at time 289 tick, 2760 ms
+                Stop at time 290 tick
+
+Task1:   Started at time 293 tick, 2800 ms
+                Stop at time 294 tick
+
+Task1:   Started at time 313 tick, 3000 ms
+                Stop at time 313 tick
+
+Task2:   Started at time 314 tick, 3010 ms
+                Stop at time 314 tick
+
+Task3:   Started at time 316 tick, 3030 ms
+                Stop at time 316 tick
+
+Task5:   Started at time 317 tick, 3040 ms
+                Stop at time 318 tick
+
+Task1:   Started at time 333 tick, 3200 ms
+                Stop at time 333 tick
+
+Task3:   Started at time 338 tick, 3250 ms
+                Stop at time 339 tick
+
+Task5:   Started at time 340 tick, 3270 ms
+                Stop at time 341 tick
+
+Task1:   Started at time 353 tick, 3400 ms
+                Stop at time 354 tick
+
+Task2:   Started at time 363 tick, 3500 ms
+                Stop at time 363 tick
+
+Task3:   Started at time 365 tick, 3520 ms
+                Stop at time 365 tick
+
+Task5:   Started at time 366 tick, 3530 ms
+                Stop at time 367 tick
+
+Task1:   Started at time 373 tick, 3600 ms
+                Stop at time 373 tick
+
+Task3:   Started at time 388 tick, 3750 ms
+                Stop at time 388 tick
+
+Task5:   Started at time 390 tick, 3770 ms
+                Stop at time 391 tick
+
+Task1:   Started at time 393 tick, 3800 ms
+                Stop at time 393 tick
+

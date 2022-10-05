@@ -23,7 +23,7 @@ Task5:   Started at time 42 tick, 420 ms
                 Stop at time 43 tick
 		DURATION: 10 ms
 
-Task1:   Started at time 53 tick, 530 ms -> period: 190 ms (set 200ms)
+Task1:   Started at time 53 tick, 530 ms -> period: 190 ms (set 200ms) -> 1 tick before
                 Stop at time 53 tick
 		DURATION: 0 ms
 
@@ -31,17 +31,17 @@ Task2:   Started at time 64 tick, 640 ms
                 Stop at time 66 tick
 		DURATION: 20 ms
 
-Task3:   Started at time 66 tick, 660 ms -> period: 270 ms (set 250ms)
+Task3:   Started at time 66 tick, 660 ms -> period: 270 ms (set 250ms) -> 2 ticks later
                 Stop at time 67 tick
 		DURATION: 10 ms
 
-Task5:   Started at time 68 tick, 680 ms -> period: 260 ms (set 250ms)
+Task5:   Started at time 68 tick, 680 ms -> period: 260 ms (set 250ms) -> 1 tick later
                 Stop at time 69 tick
 		DURATION: 10 ms
 
-Task4:   Started at time 70 tick, 700 ms -> period: 700 ms (set 500ms)
+Task4:   Started at time 70 tick, 700 ms -> period: 700 ms (set 500ms) -> 20 ticks later
 						(200ms delay, due to
-						event blocking)
+						event blocking)  -> togliere TIMER associato
 
 Task1:   Started at time 73 tick, 730 ms
                 Stop at time 73 tick
@@ -59,7 +59,7 @@ Task1:   Started at time 93 tick, 930 ms
 Task1:   Started at time 113 tick, 1130 ms
                 Stop at time 113 tick
 
-Task2:   Started at time 114 tick, 1140 ms -> period: 500 ms
+Task2:   Started at time 114 tick, 1140 ms -> period: 500 ms (set 500 ms)
                 Stop at time 115 tick
 
 Task3:   Started at time 117 tick, 1170 ms

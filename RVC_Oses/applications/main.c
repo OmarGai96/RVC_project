@@ -8,6 +8,7 @@
 #include "tasks.h"
 #include "structures.h"
 
+int startingTime =0;
 
 static void hook_of_scheduler(struct rt_thread* from, struct rt_thread* to)
 {
@@ -23,7 +24,7 @@ int main(void){
     initSystem();
 
     // initialize the timer management system
-    rt_system_timer_init();
+    //rt_system_timer_init();
 
     // set the scheduler hook
     // rt_scheduler_sethook(hook_of_scheduler);
@@ -186,13 +187,8 @@ int main(void){
 
 // *************************************** STARTING *************************************************************
 
-
-    // starting the timers
-    rt_timer_start (&timer_obstacle_control_activation);
-    rt_timer_start (&timer_movement_control_activation);
-    rt_timer_start (&timer_check_resources_activation);
-    rt_timer_start (&timer_acoustic_signals_activation);
-    rt_timer_start (&timer_brushes_speed_activation);
+    // initialize the timer management system
+    rt_system_timer_init();
 
     // starting the threads
     rt_thread_startup(&obstacle_control);
@@ -201,6 +197,15 @@ int main(void){
     rt_thread_startup(&check_resources);
     rt_thread_startup(&acoustic_signals);
     rt_thread_startup(&brushes_speed);
+
+    startingTime = rt_tick_get_millisecond();  //set the current starting time before launching our timers
+
+    // starting the timers
+    rt_timer_start (&timer_obstacle_control_activation);
+    rt_timer_start (&timer_movement_control_activation);
+    rt_timer_start (&timer_check_resources_activation);
+    rt_timer_start (&timer_acoustic_signals_activation);
+    rt_timer_start (&timer_brushes_speed_activation);
 
     return 0;
 }
