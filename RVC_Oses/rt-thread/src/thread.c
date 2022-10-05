@@ -951,3 +951,19 @@ rt_thread_t rt_thread_find(char *name)
 RTM_EXPORT(rt_thread_find);
 
 /**@}*/
+
+rt_uint8_t rt_thread_get_status(rt_thread_t thread)
+{
+    rt_kprintf("Thread %s status is: ", thread->name);
+    switch(thread->stat){
+        case RT_THREAD_READY: rt_kprintf("READY\n");
+            break;
+        case RT_THREAD_SUSPEND: rt_kprintf("SUSPEND\n");
+            break;
+        case RT_THREAD_RUNNING: rt_kprintf("RUNNING\n");
+            break;
+        default: break;
+    }
+    return thread->stat;
+}
+RTM_EXPORT(rt_thread_get_status);
