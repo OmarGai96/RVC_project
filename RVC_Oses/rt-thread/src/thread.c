@@ -32,6 +32,7 @@
 #include <rthw.h>
 #include <rtthread.h>
 #include <stddef.h>
+#include <string.h>
 
 #ifdef RT_USING_HOOK
 static void (*rt_thread_suspend_hook)(rt_thread_t thread);
@@ -952,9 +953,14 @@ RTM_EXPORT(rt_thread_find);
 
 /**@}*/
 
+char* rt_thread_get_name(rt_thread_t thread){
+    return thread->name;
+}
+RTM_EXPORT(rt_thread_get_name);
+
 rt_uint8_t rt_thread_get_status(rt_thread_t thread)
 {
-    rt_kprintf("Thread %s status is: ", thread->name);
+    rt_kprintf("Thread %s status is: ", rt_thread_get_name(thread));
     switch(thread->stat){
         case RT_THREAD_READY: rt_kprintf("READY\n");
             break;
@@ -967,3 +973,5 @@ rt_uint8_t rt_thread_get_status(rt_thread_t thread)
     return thread->stat;
 }
 RTM_EXPORT(rt_thread_get_status);
+
+

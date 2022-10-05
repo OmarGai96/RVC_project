@@ -1,0 +1,638 @@
+
+C:\Users\Omar\Desktop\PoliTo\RT-Thread\myNewRepo\RVC_project\RVC_Oses>C:/RT-ThreadStudio/repo/Extract/Debugger_Support_Packages
+/RealThread/QEMU/4.2.0.4/qemu-system-arm.exe -M stm32f429-st-disco -sd sd.bin -nographic -S -s --kernel Debug/rtthread.elf -ser
+ial stdio -monitor null -show-cursor
+WARNING: Image format was not specified for 'sd.bin' and probing guessed raw.
+         Automatically detecting the format is dangerous for raw images, write operations on block 0 will be restricted.
+         Specify the 'raw' format explicitly to remove the restrictions.
+←[0m[D/drv.sdram] sdram init success, mapped at 0xD0000000, size is 8388608 bytes, data width is 16←[0m
+
+ \ | /
+- RT -     Thread Operating System
+ / | \     4.1.0 build Oct  5 2022 16:06:14
+ 2006 - 2021 Copyright by rt-thread team
+
+From thread main to thread: tidle0
+Thread main status is: SUSPEND
+Thread tidle0 status is: RUNNING
+Remaining 320 ms for tidle0
+
+From thread tidle0 to thread: main
+Thread tidle0 status is: READY
+Thread main status is: RUNNING
+Remaining 110 ms for main
+
+From thread main to thread: tidle0
+Thread main status is: SUSPEND
+Thread tidle0 status is: RUNNING
+Remaining 310 ms for tidle0
+
+From thread tidle0 to thread: main
+Thread tidle0 status is: READY
+Thread main status is: RUNNING
+Remaining 100 ms for main
+
+From thread main to thread: Task1
+Thread main status is: READY
+Thread Task1 status is: RUNNING
+Remaining 50 ms for Task1
+
+From thread Task1 to thread: main
+Thread Task1 status is: SUSPEND
+Thread main status is: RUNNING
+Remaining 50 ms for main
+
+From thread main to thread: movementü
+Thread main status is: READY
+Thread movementü status is: RUNNING
+Remaining 50 ms for movementü
+
+From thread movementü to thread: main
+Thread movementü status is: SUSPEND
+Thread main status is: RUNNING
+Remaining 40 ms for main
+
+From thread main to thread: Task2
+Thread main status is: READY
+Thread Task2 status is: RUNNING
+Remaining 50 ms for Task2
+
+From thread Task2 to thread: main
+Thread Task2 status is: SUSPEND
+Thread main status is: RUNNING
+Remaining 30 ms for main
+
+From thread main to thread: Task3
+Thread main status is: READY
+Thread Task3 status is: RUNNING
+Remaining 50 ms for Task3
+
+From thread Task3 to thread: main
+Thread Task3 status is: SUSPEND
+Thread main status is: RUNNING
+Remaining 20 ms for main
+
+From thread main to thread: Task4
+Thread main status is: READY
+Thread Task4 status is: RUNNING
+Remaining 50 ms for Task4
+
+From thread Task4 to thread: main
+Thread Task4 status is: SUSPEND
+Thread main status is: RUNNING
+Remaining 200 ms for main
+
+From thread main to thread: Task5
+Thread main status is: READY
+Thread Task5 status is: RUNNING
+Remaining 50 ms for Task5
+
+From thread Task5 to thread: main
+Thread Task5 status is: SUSPEND
+Thread main status is: RUNNING
+Remaining 190 ms for main
+
+From thread main to thread: tshell
+Thread main status is: Thread tshell status is: RUNNING
+Remaining 100 ms for tshell
+msh />
+From thread tshell to thread: tidle0
+Thread tshell status is: SUSPEND
+Thread tidle0 status is: RUNNING
+Remaining 290 ms for tidle0
+
+From thread tidle0 to thread: Task1
+Thread tidle0 status is: READY
+Thread Task1 status is: RUNNING
+Remaining 30 ms for Task1
+
+Task1:   Started at time 54 tick, 210 ms
+                Stop at time 56 tick
+
+From thread Task1 to thread: tidle0
+Thread Task1 status is: SUSPEND
+Thread tidle0 status is: RUNNING
+Remaining 110 ms for tidle0
+
+From thread tidle0 to thread: Task3
+Thread tidle0 status is: READY
+Thread Task3 status is: RUNNING
+Remaining 40 ms for Task3
+
+Task3:   Started at time 59 tick, 260 ms
+                Stop at time 60 tick
+
+From thread Task3 to thread: Task5
+Thread Task3 status is: SUSPEND
+Thread Task5 status is: RUNNING
+Remaining 40 ms for Task5
+
+Task5:   Started at time 62 tick, 290 ms
+                Stop at time 63 tick
+
+From thread Task5 to thread: tidle0
+Thread Task5 status is: SUSPEND
+Thread tidle0 status is: RUNNING
+Remaining 90 ms for tidle0
+
+From thread tidle0 to thread: Task1
+Thread tidle0 status is: READY
+Thread Task1 status is: RUNNING
+Remaining 50 ms for Task1
+
+Task1:   Started at time 74 tick, 410 ms
+                Stop at time 74 tick
+
+From thread Task1 to thread: tidle0
+Thread Task1 status is: SUSPEND
+Thread tidle0 status is: RUNNING
+Remaining 310 ms for tidle0
+
+From thread tidle0 to thread: Task2
+Thread tidle0 status is: READY
+Thread Task2 status is: RUNNING
+Remaining 40 ms for Task2
+
+Task2:   Started at time 84 tick, 510 ms
+                Stop at time 85 tick
+
+From thread Task2 to thread: Task3
+Thread Task2 status is: SUSPEND
+Thread Task3 status is: RUNNING
+Remaining 10 ms for Task3
+
+Task3:   Started at time 86 tick, 530 ms
+                Stop at time 86 tick
+
+From thread Task3 to thread: Task5
+Thread Task3 status is: SUSPEND
+Thread Task5 status is: RUNNING
+Remaining 20 ms for Task5
+
+Task5:   Started at time 88 tick, 550 ms
+                Stop at time 89 tick
+
+From thread Task5 to thread: Task4
+Thread Task5 status is: SUSPEND
+Thread Task4 status is: RUNNING
+Remaining 40 ms for Task4
+
+Task4:   Started at time 90 tick, 570 ms
+
+From thread Task4 to thread: tidle0
+Thread Task4 status is: SUSPEND
+Thread tidle0 status is: RUNNING
+Remaining 220 ms for tidle0
+
+From thread tidle0 to thread: Task1
+Thread tidle0 status is: READY
+Thread Task1 status is: RUNNING
+Remaining 40 ms for Task1
+
+Task1:   Started at time 94 tick, 610 ms
+                Stop at time 94 tick
+
+From thread Task1 to thread: tidle0
+Thread Task1 status is: SUSPEND
+Thread tidle0 status is: RUNNING
+Remaining 200 ms for tidle0
+
+From thread tidle0 to thread: Task3
+Thread tidle0 status is: READY
+Thread Task3 status is: RUNNING
+Remaining 40 ms for Task3
+
+Task3:   Started at time 109 tick, 760 ms
+                Stop at time 109 tick
+
+From thread Task3 to thread: Task5
+Thread Task3 status is: SUSPEND
+Thread Task5 status is: RUNNING
+Remaining 50 ms for Task5
+
+Task5:   Started at time 111 tick, 780 ms
+                Stop at time 112 tick
+
+From thread Task5 to thread: tidle0
+Thread Task5 status is: SUSPEND
+Thread tidle0 status is: RUNNING
+Remaining 70 ms for tidle0
+
+From thread tidle0 to thread: Task1
+Thread tidle0 status is: READY
+Thread Task1 status is: RUNNING
+Remaining 20 ms for Task1
+
+Task1:   Started at time 114 tick, 810 ms
+                Stop at time 114 tick
+
+From thread Task1 to thread: tidle0
+Thread Task1 status is: SUSPEND
+Thread tidle0 status is: RUNNING
+Remaining 60 ms for tidle0
+
+From thread tidle0 to thread: Task2
+Thread tidle0 status is: READY
+Thread Task2 status is: RUNNING
+Remaining 20 ms for Task2
+
+From thread Task2 to thread: Task1
+Thread Task2 status is: READY
+Thread Task1 status is: RUNNING
+Remaining 50 ms for Task1
+
+Task1:   Started at time 134 tick, 1010 ms
+                Stop at time 134 tick
+
+From thread Task1 to thread: Task2
+Thread Task1 status is: SUSPEND
+Thread Task2 status is: RUNNING
+Remaining 20 ms for Task2
+
+Task2:   Started at time 136 tick, 1030 ms
+                Stop at time 136 tick
+
+From thread Task2 to thread: Task3
+Thread Task2 status is: SUSPEND
+Thread Task3 status is: RUNNING
+Remaining 20 ms for Task3
+
+Task3:   Started at time 138 tick, 1050 ms
+                Stop at time 139 tick
+
+From thread Task3 to thread: Task5
+Thread Task3 status is: SUSPEND
+Thread Task5 status is: RUNNING
+Remaining 30 ms for Task5
+
+Task5:   Started at time 140 tick, 1070 ms
+                Stop at time 141 tick
+
+From thread Task5 to thread: tidle0
+Thread Task5 status is: SUSPEND
+Thread tidle0 status is: RUNNING
+Remaining 200 ms for tidle0
+
+From thread tidle0 to thread: Task1
+Thread tidle0 status is: READY
+Thread Task1 status is: RUNNING
+Remaining 30 ms for Task1
+
+Task1:   Started at time 154 tick, 1210 ms
+                Stop at time 154 tick
+
+From thread Task1 to thread: tidle0
+Thread Task1 status is: SUSPEND
+Thread tidle0 status is: RUNNING
+Remaining 80 ms for tidle0
+
+From thread tidle0 to thread: Task3
+Thread tidle0 status is: READY
+Thread Task3 status is: RUNNING
+Remaining 50 ms for Task3
+
+Task3:   Started at time 159 tick, 1260 ms
+                Stop at time 159 tick
+
+From thread Task3 to thread: Task5
+Thread Task3 status is: SUSPEND
+Thread Task5 status is: RUNNING
+Remaining 10 ms for Task5
+
+Task5:   Started at time 163 tick, 1300 ms
+                Stop at time 164 tick
+
+From thread Task5 to thread: tidle0
+Thread Task5 status is: SUSPEND
+Thread tidle0 status is: RUNNING
+Remaining 40 ms for tidle0
+
+From thread tidle0 to thread: Task1
+Thread tidle0 status is: READY
+Thread Task1 status is: RUNNING
+Remaining 20 ms for Task1
+
+Task1:   Started at time 173 tick, 1400 ms
+                Stop at time 173 tick
+
+From thread Task1 to thread: tidle0
+Thread Task1 status is: SUSPEND
+Thread tidle0 status is: RUNNING
+Remaining 270 ms for tidle0
+
+From thread tidle0 to thread: Task2
+Thread tidle0 status is: READY
+Thread Task2 status is: RUNNING
+Remaining 50 ms for Task2
+
+Task2:   Started at time 184 tick, 1510 ms
+                Stop at time 184 tick
+
+From thread Task2 to thread: Task3
+Thread Task2 status is: SUSPEND
+Thread Task3 status is: RUNNING
+Remaining 20 ms for Task3
+
+Task3:   Started at time 186 tick, 1530 ms
+                Stop at time 186 tick
+
+From thread Task3 to thread: Task5
+Thread Task3 status is: SUSPEND
+Thread Task5 status is: RUNNING
+Remaining 30 ms for Task5
+
+Task5:   Started at time 187 tick, 1540 ms
+                Stop at time 187 tick
+
+From thread Task5 to thread: tidle0
+Thread Task5 status is: SUSPEND
+Thread tidle0 status is: RUNNING
+Remaining 170 ms for tidle0
+
+From thread tidle0 to thread: Task1
+Thread tidle0 status is: READY
+Thread Task1 status is: RUNNING
+Remaining 20 ms for Task1
+
+Task1:   Started at time 194 tick, 1610 ms
+                Stop at time 194 tick
+
+From thread Task1 to thread: tidle0
+Thread Task1 status is: SUSPEND
+Thread tidle0 status is: RUNNING
+Remaining 110 ms for tidle0
+
+From thread tidle0 to thread: Task3
+Thread tidle0 status is: READY
+Thread Task3 status is: RUNNING
+Remaining 10 ms for Task3
+
+Task3:   Started at time 209 tick, 1760 ms
+                Stop at time 209 tick
+
+From thread Task3 to thread: Task5
+Thread Task3 status is: SUSPEND
+Thread Task5 status is: RUNNING
+Remaining 20 ms for Task5
+
+Task5:   Started at time 210 tick, 1770 ms
+                Stop at time 211 tick
+
+From thread Task5 to thread: tidle0
+Thread Task5 status is: SUSPEND
+Thread tidle0 status is: RUNNING
+Remaining 290 ms for tidle0
+
+From thread tidle0 to thread: Task1
+Thread tidle0 status is: READY
+Thread Task1 status is: RUNNING
+Remaining 10 ms for Task1
+
+Task1:   Started at time 214 tick, 1810 ms
+                Stop at time 214 tick
+
+From thread Task1 to thread: tidle0
+Thread Task1 status is: SUSPEND
+Thread tidle0 status is: RUNNING
+Remaining 270 ms for tidle0
+
+From thread tidle0 to thread: Task2
+Thread tidle0 status is: READY
+Thread Task2 status is: RUNNING
+Remaining 30 ms for Task2
+
+From thread Task2 to thread: Task1
+Thread Task2 status is: READY
+Thread Task1 status is: RUNNING
+Remaining 40 ms for Task1
+
+Task1:   Started at time 234 tick, 2010 ms
+                Stop at time 234 tick
+
+From thread Task1 to thread: Task2
+Thread Task1 status is: SUSPEND
+Thread Task2 status is: RUNNING
+Remaining 30 ms for Task2
+
+Task2:   Started at time 237 tick, 2040 ms
+                Stop at time 237 tick
+
+From thread Task2 to thread: Task3
+Thread Task2 status is: SUSPEND
+Thread Task3 status is: RUNNING
+Remaining 50 ms for Task3
+
+Task3:   Started at time 239 tick, 2060 ms
+                Stop at time 239 tick
+
+From thread Task3 to thread: Task5
+Thread Task3 status is: SUSPEND
+Thread Task5 status is: RUNNING
+Remaining 50 ms for Task5
+
+Task5:   Started at time 243 tick, 2100 ms
+                Stop at time 244 tick
+
+From thread Task5 to thread: tidle0
+Thread Task5 status is: SUSPEND
+Thread tidle0 status is: RUNNING
+Remaining 90 ms for tidle0
+
+From thread tidle0 to thread: Task1
+Thread tidle0 status is: READY
+Thread Task1 status is: RUNNING
+Remaining 10 ms for Task1
+
+Task1:   Started at time 254 tick, 2210 ms
+                Stop at time 254 tick
+
+From thread Task1 to thread: tidle0
+Thread Task1 status is: SUSPEND
+Thread tidle0 status is: RUNNING
+Remaining 320 ms for tidle0
+
+From thread tidle0 to thread: Task3
+Thread tidle0 status is: READY
+Thread Task3 status is: RUNNING
+Remaining 10 ms for Task3
+
+Task3:   Started at time 259 tick, 2260 ms
+                Stop at time 259 tick
+
+From thread Task3 to thread: Task5
+Thread Task3 status is: SUSPEND
+Thread Task5 status is: RUNNING
+Remaining 30 ms for Task5
+
+Task5:   Started at time 260 tick, 2270 ms
+                Stop at time 260 tick
+
+From thread Task5 to thread: tidle0
+Thread Task5 status is: SUSPEND
+Thread tidle0 status is: RUNNING
+Remaining 290 ms for tidle0
+
+From thread tidle0 to thread: Task1
+Thread tidle0 status is: READY
+Thread Task1 status is: RUNNING
+Remaining 40 ms for Task1
+
+Task1:   Started at time 274 tick, 2410 ms
+                Stop at time 274 tick
+
+From thread Task1 to thread: tidle0
+Thread Task1 status is: SUSPEND
+Thread tidle0 status is: RUNNING
+Remaining 160 ms for tidle0
+
+From thread tidle0 to thread: Task2
+Thread tidle0 status is: READY
+Thread Task2 status is: RUNNING
+Remaining 10 ms for Task2
+
+Task2:   Started at time 284 tick, 2510 ms
+                Stop at time 284 tick
+
+From thread Task2 to thread: Task3
+Thread Task2 status is: SUSPEND
+Thread Task3 status is: RUNNING
+Remaining 40 ms for Task3
+
+Task3:   Started at time 285 tick, 2520 ms
+                Stop at time 286 tick
+
+From thread Task3 to thread: Task5
+Thread Task3 status is: SUSPEND
+Thread Task5 status is: RUNNING
+Remaining 30 ms for Task5
+
+Task5:   Started at time 287 tick, 2540 ms
+                Stop at time 287 tick
+
+From thread Task5 to thread: tidle0
+Thread Task5 status is: SUSPEND
+Thread tidle0 status is: RUNNING
+Remaining 80 ms for tidle0
+
+From thread tidle0 to thread: Task1
+Thread tidle0 status is: READY
+Thread Task1 status is: RUNNING
+Remaining 20 ms for Task1
+
+Task1:   Started at time 294 tick, 2610 ms
+                Stop at time 294 tick
+
+From thread Task1 to thread: tidle0
+Thread Task1 status is: SUSPEND
+Thread tidle0 status is: RUNNING
+Remaining 20 ms for tidle0
+
+From thread tidle0 to thread: Task3
+Thread tidle0 status is: READY
+Thread Task3 status is: RUNNING
+Remaining 20 ms for Task3
+
+Task3:   Started at time 309 tick, 2760 ms
+                Stop at time 309 tick
+
+From thread Task3 to thread: Task5
+Thread Task3 status is: SUSPEND
+Thread Task5 status is: RUNNING
+Remaining 20 ms for Task5
+
+Task5:   Started at time 310 tick, 2770 ms
+                Stop at time 311 tick
+
+From thread Task5 to thread: tidle0
+Thread Task5 status is: SUSPEND
+Thread tidle0 status is: RUNNING
+Remaining 210 ms for tidle0
+
+From thread tidle0 to thread: Task1
+Thread tidle0 status is: READY
+Thread Task1 status is: RUNNING
+Remaining 50 ms for Task1
+
+Task1:   Started at time 314 tick, 2810 ms
+                Stop at time 314 tick
+
+From thread Task1 to thread: tidle0
+Thread Task1 status is: SUSPEND
+Thread tidle0 status is: RUNNING
+Remaining 190 ms for tidle0
+
+From thread tidle0 to thread: Task2
+Thread tidle0 status is: READY
+Thread Task2 status is: RUNNING
+Remaining 50 ms for Task2
+
+From thread Task2 to thread: Task1
+Thread Task2 status is: READY
+Thread Task1 status is: RUNNING
+Remaining 30 ms for Task1
+
+Task1:   Started at time 334 tick, 3010 ms
+                Stop at time 334 tick
+
+From thread Task1 to thread: Task2
+Thread Task1 status is: SUSPEND
+Thread Task2 status is: RUNNING
+Remaining 50 ms for Task2
+
+Task2:   Started at time 336 tick, 3030 ms
+                Stop at time 336 tick
+
+From thread Task2 to thread: Task3
+Thread Task2 status is: SUSPEND
+Thread Task3 status is: RUNNING
+Remaining 10 ms for Task3
+
+Task3:   Started at time 340 tick, 3070 ms
+                Stop at time 340 tick
+
+From thread Task3 to thread: Task5
+Thread Task3 status is: SUSPEND
+Thread Task5 status is: RUNNING
+Remaining 50 ms for Task5
+
+Task5:   Started at time 341 tick, 3080 ms
+                Stop at time 342 tick
+
+From thread Task5 to thread: tidle0
+Thread Task5 status is: SUSPEND
+Thread tidle0 status is: RUNNING
+Remaining 10 ms for tidle0
+
+From thread tidle0 to thread: Task1
+Thread tidle0 status is: READY
+Thread Task1 status is: RUNNING
+Remaining 10 ms for Task1
+
+Task1:   Started at time 354 tick, 3210 ms
+                Stop at time 356 tick
+
+From thread Task1 to thread: tidle0
+Thread Task1 status is: SUSPEND
+Thread tidle0 status is: RUNNING
+Remaining 220 ms for tidle0
+
+From thread tidle0 to thread: Task3
+Thread tidle0 status is: READY
+Thread Task3 status is: RUNNING
+Remaining 40 ms for Task3
+
+Task3:   Started at time 359 tick, 3260 ms
+                Stop at time 359 tick
+
+From thread Task3 to thread: Task5
+Thread Task3 status is: SUSPEND
+Thread Task5 status is: RUNNING
+Remaining 30 ms for Task5
+
+Task5:   Started at time 360 tick, 3270 ms
+                Stop at time 361 tick
+
+From thread Task5 to thread: tidle0
+Thread Task5 status is: SUSPEND
+Thread tidle0 status is: RUNNING
+R
