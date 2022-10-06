@@ -30,6 +30,17 @@
 enum directions {UP, DOWN, LEFT, RIGHT, RETURN};
 
 
+#define PERIOD_TASK1    200
+
+#define PERIOD_TASK2    500
+
+#define PERIOD_TASK3    250
+
+#define PERIOD_TASK4    500
+
+#define PERIOD_TASK5    250
+
+
 // ************************************ STRUCTURES *************************************************************
 
 

@@ -485,7 +485,7 @@ void rt_schedule(void)
             //printf("Remaining %d ms for %s\n",(to_thread->remaining_tick)*10,  rt_thread_get_name(to_thread));
             rt_uint8_t major, minor;
             cpu_usage_get(&major, &minor);
-            rt_kprintf("cpu usage: %u.%u%% \n", major, minor);
+            rt_kprintf("Global cpu usage: %u.%u%% \n", major, minor);
 #endif
 
 #ifdef RT_USING_OVERFLOW_CHECK

@@ -67,33 +67,33 @@ int main(void){
     rt_timer_init(&timer_obstacle_control_activation, "timer_obstacle_control_activation",
                     timeout_obstacle_control,
                     RT_NULL,
-                    200, // every 200ms control for an obstacle
+                    PERIOD_TASK1, // every 200ms control for an obstacle
                     RT_TIMER_FLAG_PERIODIC);
     // initializing the TIMER for movement_control
     rt_timer_init(&timer_movement_control_activation, "timer_movement_control_activation",
                   timeout_movement_control,
                   RT_NULL,
-                  500, //every 500 ms
+                  PERIOD_TASK2, //every 500 ms
                   RT_TIMER_FLAG_PERIODIC);
     // initializing the TIMER for check resources
     rt_timer_init(&timer_check_resources_activation, "timer_check_resources_activation",
                   timeout_check_resources,
                   RT_NULL,
-                  250, //every 250 ms
+                  PERIOD_TASK3, //every 250 ms
                   RT_TIMER_FLAG_PERIODIC);
 
     // initializing the TIMER for acoustic signals
     rt_timer_init(&timer_acoustic_signals_activation, "timer_acoustic_signals_activation",
                   timeout_acoustic_signals,
                   RT_NULL,
-                  500, // every 500 ms
+                  PERIOD_TASK4, // every 500 ms
                   RT_TIMER_FLAG_PERIODIC);
 
     // initializing the TIMER for brushes_speed
     rt_timer_init(&timer_brushes_speed_activation, "timer_brushes_speed_activation",
                   timeout_brushes_speed,
                   RT_NULL,
-                  250,   //every 250 ms
+                  PERIOD_TASK5,   //every 250 ms
                   RT_TIMER_FLAG_PERIODIC);
 
 
