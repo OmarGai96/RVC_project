@@ -370,8 +370,14 @@ static int mock_pin_read(rt_device_t dev, rt_base_t pin)
 
     static int start = 0;
     static int offset = 0;
+    int delay = 0;
+    int max_delay = 10000;
+
+    // artificialy adding a delay
+    while (delay<max_delay) delay++;
+
     start++;
-    if (start>100 && start%70==offset) {
+    if (start%70==offset) {
         start = 0;
         offset+=7;
         if (offset>50) offset = offset%10;

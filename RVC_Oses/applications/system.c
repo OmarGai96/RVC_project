@@ -11,11 +11,3 @@ void initSystem(void)
     batteryStatus = CHARGE;
     garbageBagStatus = EMPTY;
 }
-
-
-void updateResources(void){
-    garbageBagStatus++;
-    if(garbageBagStatus%10==0)
-        batteryStatus--;
-    return;
-}

@@ -32,7 +32,7 @@ Thread tidle0 status is: READY
 Thread main status is: RUNNING
 Remaining 100 ms for main
 
-From thread main to thread: Task1
+From thread main to thread: Task1   --> starts Task1 startup
 Thread main status is: READY
 Thread Task1 status is: RUNNING
 Remaining 50 ms for Task1
@@ -82,7 +82,7 @@ Thread Task4 status is: SUSPEND
 Thread main status is: RUNNING
 Remaining 200 ms for main
 
-From thread main to thread: Task5
+From thread main to thread: Task5  --> startup Task5
 Thread main status is: READY
 Thread Task5 status is: RUNNING
 Remaining 50 ms for Task5

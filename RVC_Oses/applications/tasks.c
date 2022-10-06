@@ -153,7 +153,7 @@ void movement_stop_entry(void *param)
             //WE CAN USE JUST A SPECIFIC PIN SET TO ZERO, and using a global variable to remember it, if necessary.
             //Otherwise modify or create a driver that remember the last status of the engine
 
-#ifdef DEBUG_1
+#ifdef DEBUG_2
             rt_kprintf("\tEngine stopped!\n");
 #endif
 
@@ -162,8 +162,6 @@ void movement_stop_entry(void *param)
 }
 
 
-// TODO: if stuck at the next obstacle found the map changes and start again, implement action
-// TODO: gets stuck easily
 /* Entry for the task movement control */
 void movement_control_entry(void *param)
 {
@@ -201,14 +199,16 @@ void movement_control_entry(void *param)
 
 #ifdef DEBUG_1
                 rt_kprintf("\tget a mail from mailbox, the content: %s\n", str);
-                // direction = RETURN;
 #endif
-
+                direction = RETURN;
+                rt_signal_mask(SIGUSR1);
             }
 
             // if the previous tile is not an obstacle signal it as cleaned
-            if (map[ position[0] ][ position[1] ] == 0)
+            if (map[ position[0] ][ position[1] ] == 0) {
                 map[ position[0] ][ position[1] ] = 2;
+                garbageBagStatus++;
+            }
             // decide where to go next
             switch (direction)
             {
@@ -244,7 +244,7 @@ void movement_control_entry(void *param)
 
                 break;
             }
-            // if the robot is back at starting statin after receiving command to return we end the thread
+            // if the robot is back at starting station after receiving command to return we end the thread
             if (direction==RETURN && position[0]==0 && position[1]==0) {
 
 #ifdef DEBUG_2
@@ -269,8 +269,13 @@ void movement_control_entry(void *param)
 
 /* Entry for the CHECK RESOURCES*/
 void check_resources_entry(void *param){
+
+    // used for debug
+    uint32_t previousBatteryStatus = CHARGE;
+
     while(1){
 
+        // waiting the periodic activation
         if (rt_event_recv(&event_tasks_activation, EVENT_CHECK_RESOURCES_ACTIVATION,
                                   RT_EVENT_FLAG_AND | RT_EVENT_FLAG_CLEAR,
                                   RT_WAITING_FOREVER, RT_NULL) == RT_EOK){
@@ -278,39 +283,23 @@ void check_resources_entry(void *param){
 #ifdef BENCHMARKING
         printf("\nTask3:\t Started at time %d tick, %d ms\n", rt_tick_get(), rt_tick_get_millisecond()-startingTime);
 #endif
+
 #ifdef DEBUG_2
-        if(batteryStatus%5==0){
+        if(batteryStatus!=previousBatteryStatus && batteryStatus%5==0){
+            previousBatteryStatus = batteryStatus;
             printf("\n\tBattery status %d %% \n", batteryStatus);
         }
 
 #endif
         /**Check BATTERY status**/
-        if(batteryStatus <= DISCHARGE+1){
-              rt_mb_send(&mb2_3, (rt_uint32_t)&mb_str3);      //notify task 2 BATTERY is completely LOW
-
-#ifdef BENCHMARKING
-              printf("\t\tStop at time %d tick\n", rt_tick_get());
-#endif
-
-        }else if(batteryStatus <= DISCHARGE_THRESHOLD){
+        if(batteryStatus <= DISCHARGE+1) {
+            rt_mb_send(&mb2_3, (rt_uint32_t)&mb_str3);      //notify task 2 BATTERY is completely LOW
+        }else if(batteryStatus <= DISCHARGE_THRESHOLD) {
             rt_event_send(&event_resources, EVENT_FLAG1);   //notify task 4
             rt_mb_send(&mb2_3, (rt_uint32_t)&mb_str2);      //notify task 2
 
 #ifdef DEBUG_2
             printf("\tBattery LOW\n\t\tMail sent %s\n", mb_str2);
-#endif
-
-        }else if(batteryStatus <= CHARGE && batteryStatus > HALFCHARGE){
-
-#ifdef DEBUG_1
-            printf("\tBattery is charged\n");
-#endif
-
-        }
-        else if(batteryStatus <= HALFCHARGE && batteryStatus > DISCHARGE_THRESHOLD ){
-
-#ifdef DEBUG_1
-            printf("\tBattery is half charged\n");
 #endif
 
         }
@@ -326,7 +315,8 @@ void check_resources_entry(void *param){
 #endif
 
         }
-        updateResources();
+
+        batteryStatus--;
 
 #ifdef BENCHMARKING
         printf("\t\tStop at time %d tick\n", rt_tick_get());
