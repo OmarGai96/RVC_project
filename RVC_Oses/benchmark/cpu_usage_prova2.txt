@@ -1,0 +1,276 @@
+
+C:\Users\Omar\Desktop\PoliTo\RT-Thread\myNewRepo\RVC_project\RVC_Oses>C:/RT-ThreadStudio/repo/Extract/Debugger_Support_Packages
+/RealThread/QEMU/4.2.0.4/qemu-system-arm.exe -M stm32f429-st-disco -sd sd.bin -nographic -S -s --kernel Debug/rtthread.elf -ser
+ial stdio -monitor null -show-cursor
+WARNING: Image format was not specified for 'sd.bin' and probing guessed raw.
+         Automatically detecting the format is dangerous for raw images, write operations on block 0 will be restricted.
+         Specify the 'raw' format explicitly to remove the restrictions.
+←[0m[D/drv.sdram] sdram init success, mapped at 0xD0000000, size is 8388608 bytes, data width is 16←[0m
+
+ \ | /
+- RT -     Thread Operating System
+ / | \     4.1.0 build Oct  6 2022 11:26:08
+ 2006 - 2021 Copyright by rt-thread team
+                STARTUP OF main
+                STARTUP OF tidle0
+
+From thread main to thread: tidle0
+Thread main status is: SUSPEND
+Thread tidle0 status is: RUNNING
+cpu usage: 0.0%
+
+From thread tidle0 to thread: main
+Thread tidle0 status is: READY
+Thread main status is: RUNNING
+cpu usage: 0.0%
+
+From thread main to thread: tidle0
+Thread main status is: SUSPEND
+Thread tidle0 status is: RUNNING
+cpu usage: 0.0%
+
+From thread tidle0 to thread: main
+Thread tidle0 status is: READY
+Thread main status is: RUNNING
+cpu usage: 0.0%
+                STARTUP OF tshell
+
+From thread main to thread: Task1
+Thread main status is: READY
+Thread Task1 status is: RUNNING
+cpu usage: 0.0%
+
+From thread Task1 to thread: main
+Thread Task1 status is: SUSPEND
+Thread main status is: RUNNING
+cpu usage: 0.0%
+                STARTUP OF Task1
+
+From thread main to thread: TaskS
+Thread main status is: READY
+Thread TaskS status is: RUNNING
+cpu usage: 0.0%
+
+From thread TaskS to thread: main
+Thread TaskS status is: SUSPEND
+Thread main status is: RUNNING
+cpu usage: 0.0%
+                STARTUP OF TaskS
+
+From thread main to thread: Task2
+Thread main status is: READY
+Thread Task2 status is: RUNNING
+cpu usage: 0.0%
+
+From thread Task2 to thread: main
+Thread Task2 status is: SUSPEND
+Thread main status is: RUNNING
+cpu usage: 0.0%
+                STARTUP OF Task2
+
+From thread main to thread: Task3
+Thread main status is: READY
+Thread Task3 status is: RUNNING
+cpu usage: 0.0%
+
+From thread Task3 to thread: main
+Thread Task3 status is: SUSPEND
+Thread main status is: RUNNING
+cpu usage: 0.0%
+                STARTUP OF Task3
+
+From thread main to thread: Task4
+Thread main status is: READY
+Thread Task4 status is: RUNNING
+cpu usage: 0.0%
+
+From thread Task4 to thread: main
+Thread Task4 status is: SUSPEND
+Thread main status is: RUNNING
+cpu usage: 0.0%
+                STARTUP OF Task4
+
+From thread main to thread: Task5
+Thread main status is: READY
+Thread Task5 status is: RUNNING
+cpu usage: 0.0%
+
+From thread Task5 to thread: main
+Thread Task5 status is: SUSPEND
+Thread main status is: RUNNING
+cpu usage: 0.0%
+                STARTUP OF Task5
+
+From thread main to thread: tshell
+Thread main status is: Thread tshell status is: RUNNING
+cpu usage: 0.0%
+msh />
+From thread tshell to thread: tidle0
+Thread tshell status is: SUSPEND
+Thread tidle0 status is: RUNNING
+cpu usage: 0.0%
+
+From thread tidle0 to thread: Task1
+Thread tidle0 status is: READY
+Thread Task1 status is: RUNNING
+cpu usage: 26.12%
+
+From thread Task1 to thread: tidle0
+Thread Task1 status is: SUSPEND
+Thread tidle0 status is: RUNNING
+cpu usage: 26.12%
+
+From thread tidle0 to thread: Task3
+Thread tidle0 status is: READY
+Thread Task3 status is: RUNNING
+cpu usage: 38.30%
+
+From thread Task3 to thread: Task5
+Thread Task3 status is: SUSPEND
+Thread Task5 status is: RUNNING
+cpu usage: 38.30%
+
+From thread Task5 to thread: tidle0
+Thread Task5 status is: SUSPEND
+Thread tidle0 status is: RUNNING
+cpu usage: 38.30%
+
+From thread tidle0 to thread: Task1
+Thread tidle0 status is: READY
+Thread Task1 status is: RUNNING
+cpu usage: 13.52%
+
+From thread Task1 to thread: tidle0
+Thread Task1 status is: SUSPEND
+Thread tidle0 status is: RUNNING
+cpu usage: 13.52%
+
+From thread tidle0 to thread: Task2
+Thread tidle0 status is: READY
+Thread Task2 status is: RUNNING
+cpu usage: 63.31%
+
+        Robot in position 1,0
+
+From thread Task2 to thread: Task3
+Thread Task2 status is: SUSPEND
+Thread Task3 status is: RUNNING
+cpu usage: 63.31%
+
+From thread Task3 to thread: Task5
+Thread Task3 status is: SUSPEND
+Thread Task5 status is: RUNNING
+cpu usage: 63.31%
+
+From thread Task5 to thread: Task4
+Thread Task5 status is: SUSPEND
+Thread Task4 status is: RUNNING
+cpu usage: 63.31%
+
+From thread Task4 to thread: tidle0
+Thread Task4 status is: SUSPEND
+Thread tidle0 status is: RUNNING
+cpu usage: 63.31%
+
+From thread tidle0 to thread: Task1
+Thread tidle0 status is: READY
+Thread Task1 status is: RUNNING
+cpu usage: 23.86%
+
+From thread Task1 to thread: tidle0
+Thread Task1 status is: SUSPEND
+Thread tidle0 status is: RUNNING
+cpu usage: 23.86%
+
+From thread tidle0 to thread: Task3
+Thread tidle0 status is: READY
+Thread Task3 status is: RUNNING
+cpu usage: 72.22%
+
+From thread Task3 to thread: Task5
+Thread Task3 status is: SUSPEND
+Thread Task5 status is: RUNNING
+cpu usage: 72.22%
+
+From thread Task5 to thread: tidle0
+Thread Task5 status is: SUSPEND
+Thread tidle0 status is: RUNNING
+cpu usage: 72.22%
+
+From thread tidle0 to thread: Task1
+Thread tidle0 status is: READY
+Thread Task1 status is: RUNNING
+cpu usage: 78.25%
+
+From thread Task1 to thread: tidle0
+Thread Task1 status is: SUSPEND
+Thread tidle0 status is: RUNNING
+cpu usage: 78.25%
+
+From thread tidle0 to thread: Task2
+Thread tidle0 status is: READY
+Thread Task2 status is: RUNNING
+cpu usage: 59.98%
+
+From thread Task2 to thread: Task1
+Thread Task2 status is: READY
+Thread Task1 status is: RUNNING
+cpu usage: 59.98%
+
+From thread Task1 to thread: Task2
+Thread Task1 status is: SUSPEND
+Thread Task2 status is: RUNNING
+cpu usage: 59.98%
+
+        Robot in position 2,0
+
+From thread Task2 to thread: Task3
+Thread Task2 status is: SUSPEND
+Thread Task3 status is: RUNNING
+cpu usage: 59.98%
+
+From thread Task3 to thread: Task5
+Thread Task3 status is: SUSPEND
+Thread Task5 status is: RUNNING
+cpu usage: 59.98%
+
+From thread Task5 to thread: tidle0
+Thread Task5 status is: SUSPEND
+Thread tidle0 status is: RUNNING
+cpu usage: 59.98%
+
+From thread tidle0 to thread: Task1
+Thread tidle0 status is: READY
+Thread Task1 status is: RUNNING
+cpu usage: 82.2%
+
+From thread Task1 to thread: tidle0
+Thread Task1 status is: SUSPEND
+Thread tidle0 status is: RUNNING
+cpu usage: 82.2%
+
+From thread tidle0 to thread: Task3
+Thread tidle0 status is: READY
+Thread Task3 status is: RUNNING
+cpu usage: 82.42%
+
+From thread Task3 to thread: Task5
+Thread Task3 status is: SUSPEND
+Thread Task5 status is: RUNNING
+cpu usage: 82.42%
+
+From thread Task5 to thread: tidle0
+Thread Task5 status is: SUSPEND
+Thread tidle0 status is: RUNNING
+cpu usage: 82.42%
+
+From thread tidle0 to thread: Task1
+Thread tidle0 status is: READY
+Thread Task1 status is: RUNNING
+cpu usage: 70.22%
+
+From thread Task1 to thread: tidle0
+Thread Task1 status is: SUSPEND
+Thread tidle0 status is: RUNNING
+cpu usage: 70.22%
+

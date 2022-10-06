@@ -7,6 +7,7 @@
 #include "system.h"
 #include "tasks.h"
 #include "structures.h"
+#include "cpu_usage.h"
 
 int startingTime =0;
 
@@ -130,7 +131,7 @@ int main(void){
 
     // initializing obstacle_control thread
     rt_thread_init(&obstacle_control,
-                   "obstacle_control",
+                   "Task1",
                    obstacle_control_entry,
                    RT_NULL,
                    &obstacle_control_stack[0],
@@ -139,7 +140,7 @@ int main(void){
 
     // initializing movement_stop thread
     rt_thread_init(&movement_stop,
-                   "movement_stop",
+                   "TaskS",
                    movement_stop_entry,
                    RT_NULL,
                    &movement_stop_stack[0],
@@ -148,7 +149,7 @@ int main(void){
 
     // initializing movement_control thread
     rt_thread_init(&movement_control,
-                   "movement_control",
+                   "Task2",
                    movement_control_entry,
                    RT_NULL,
                    &movement_control_stack[0],
@@ -157,7 +158,7 @@ int main(void){
 
     // initializing check_resources thread
     rt_thread_init(&check_resources,
-                   "check_resources",
+                   "Task3",
                    check_resources_entry,
                    RT_NULL,
                    &check_resources_stack[0],
@@ -166,7 +167,7 @@ int main(void){
 
     // initializing acoustic_signals thread
     rt_thread_init(&acoustic_signals,
-                   "acoustic_signals",
+                   "Task4",
                    acoustic_signals_entry,
                    RT_NULL,
                    &acoustic_signals_stack[0],
@@ -175,7 +176,7 @@ int main(void){
 
     // initializing brushes speed thread
     rt_thread_init(&brushes_speed,
-                   "brushes_speed",
+                   "Task5",
                    brushes_speed_entry,
                    RT_NULL,
                    &brushes_speed_stack[0],
@@ -207,5 +208,8 @@ int main(void){
     rt_timer_start (&timer_acoustic_signals_activation);
     rt_timer_start (&timer_brushes_speed_activation);
 
+
+
     return 0;
 }
+

@@ -33,6 +33,10 @@
 #include <rtthread.h>
 #include <stddef.h>
 #include <string.h>
+#include "cpu_usage.h"
+
+#define DEBUG_SCH
+char* rt_thread_get_name(rt_thread_t thread);
 
 #ifdef RT_USING_HOOK
 static void (*rt_thread_suspend_hook)(rt_thread_t thread);
@@ -329,6 +333,7 @@ rt_err_t rt_thread_startup(rt_thread_t thread)
     RT_ASSERT((thread->stat & RT_THREAD_STAT_MASK) == RT_THREAD_INIT);
     RT_ASSERT(rt_object_get_type((rt_object_t)thread) == RT_Object_Class_Thread);
 
+
     /* set current priority to initialize priority */
     thread->current_priority = thread->init_priority;
 
@@ -352,6 +357,10 @@ rt_err_t rt_thread_startup(rt_thread_t thread)
         /* do a scheduling */
         rt_schedule();
     }
+
+#ifdef DEBUG_SCH
+    rt_kprintf("\t\tSTARTUP OF %s\n", rt_thread_get_name(thread));
+#endif
 
     return RT_EOK;
 }

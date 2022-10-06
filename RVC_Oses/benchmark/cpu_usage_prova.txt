@@ -1,0 +1,257 @@
+
+C:\Users\Omar\Desktop\PoliTo\RT-Thread\myNewRepo\RVC_project\RVC_Oses>C:/RT-ThreadStudio/repo/Extract/Debugger_Support_Packages
+/RealThread/QEMU/4.2.0.4/qemu-system-arm.exe -M stm32f429-st-disco -sd sd.bin -nographic -S -s --kernel Debug/rtthread.elf -ser
+ial stdio -monitor null -show-cursor
+WARNING: Image format was not specified for 'sd.bin' and probing guessed raw.
+         Automatically detecting the format is dangerous for raw images, write operations on block 0 will be restricted.
+         Specify the 'raw' format explicitly to remove the restrictions.
+←[0m[D/drv.sdram] sdram init success, mapped at 0xD0000000, size is 8388608 bytes, data width is 16←[0m
+
+ \ | /
+- RT -     Thread Operating System
+ / | \     4.1.0 build Oct  6 2022 10:57:49
+ 2006 - 2021 Copyright by rt-thread team
+
+From thread main to thread: tidle0
+Thread main status is: SUSPEND
+Thread tidle0 status is: RUNNING
+
+From thread tidle0 to thread: main
+Thread tidle0 status is: READY
+Thread main status is: RUNNING
+
+From thread main to thread: tidle0
+Thread main status is: SUSPEND
+Thread tidle0 status is: RUNNING
+
+From thread tidle0 to thread: main
+Thread tidle0 status is: READY
+Thread main status is: RUNNING
+
+From thread main to thread: obstacleü
+Thread main status is: READY
+Thread obstacleü status is: RUNNING
+
+From thread obstacleü to thread: main
+Thread obstacleü status is: SUSPEND
+Thread main status is: RUNNING
+
+From thread main to thread: movementü
+Thread main status is: READY
+Thread movementü status is: RUNNING
+
+From thread movementü to thread: main
+Thread movementü status is: SUSPEND
+Thread main status is: RUNNING
+
+From thread main to thread: movementü
+Thread main status is: READY
+Thread movementü status is: RUNNING
+
+From thread movementü to thread: main
+Thread movementü status is: SUSPEND
+Thread main status is: RUNNING
+
+From thread main to thread: check_reü
+Thread main status is: READY
+Thread check_reü status is: RUNNING
+
+From thread check_reü to thread: main
+Thread check_reü status is: SUSPEND
+Thread main status is: RUNNING
+
+From thread main to thread: acousticü
+Thread main status is: READY
+Thread acousticü status is: RUNNING
+
+From thread acousticü to thread: main
+Thread acousticü status is: SUSPEND
+Thread main status is: RUNNING
+
+From thread main to thread: brushes_ü
+Thread main status is: READY
+Thread brushes_ü status is: RUNNING
+
+From thread brushes_ü to thread: main
+Thread brushes_ü status is: SUSPEND
+Thread main status is: RUNNING
+cpu usage: 0.0%
+
+From thread main to thread: tshell
+Thread main status is: SUSPEND
+Thread tshell status is: RUNNING
+msh />
+From thread tshell to thread: tidle0
+Thread tshell status is: SUSPEND
+Thread tidle0 status is: RUNNING
+
+From thread tidle0 to thread: main
+Thread tidle0 status is: READY
+Thread main status is: RUNNING
+cpu usage: 0.0%
+
+From thread main to thread: tidle0
+Thread main status is: SUSPEND
+Thread tidle0 status is: RUNNING
+
+From thread tidle0 to thread: main
+Thread tidle0 status is: READY
+Thread main status is: RUNNING
+cpu usage: 18.31%
+
+From thread main to thread: tidle0
+Thread main status is: SUSPEND
+Thread tidle0 status is: RUNNING
+
+From thread tidle0 to thread: main
+Thread tidle0 status is: READY
+Thread main status is: RUNNING
+cpu usage: 6.96%
+
+From thread main to thread: tidle0
+Thread main status is: SUSPEND
+Thread tidle0 status is: RUNNING
+
+From thread tidle0 to thread: main
+Thread tidle0 status is: READY
+Thread main status is: RUNNING
+cpu usage: 0.0%
+
+From thread main to thread: tidle0
+Thread main status is: SUSPEND
+Thread tidle0 status is: RUNNING
+
+From thread tidle0 to thread: main
+Thread tidle0 status is: READY
+Thread main status is: RUNNING
+cpu usage: 2.26%
+
+From thread main to thread: tidle0
+Thread main status is: SUSPEND
+Thread tidle0 status is: RUNNING
+
+From thread tidle0 to thread: main
+Thread tidle0 status is: READY
+Thread main status is: RUNNING
+cpu usage: 0.0%
+
+From thread main to thread: tidle0
+Thread main status is: SUSPEND
+Thread tidle0 status is: RUNNING
+
+From thread tidle0 to thread: main
+Thread tidle0 status is: READY
+Thread main status is: RUNNING
+cpu usage: 15.20%
+
+From thread main to thread: tidle0
+Thread main status is: SUSPEND
+Thread tidle0 status is: RUNNING
+
+From thread tidle0 to thread: main
+Thread tidle0 status is: READY
+Thread main status is: RUNNING
+cpu usage: 21.24%
+
+From thread main to thread: tidle0
+Thread main status is: SUSPEND
+Thread tidle0 status is: RUNNING
+
+From thread tidle0 to thread: main
+Thread tidle0 status is: READY
+Thread main status is: RUNNING
+cpu usage: 0.7%
+
+From thread main to thread: tidle0
+Thread main status is: SUSPEND
+Thread tidle0 status is: RUNNING
+
+From thread tidle0 to thread: main
+Thread tidle0 status is: READY
+Thread main status is: RUNNING
+cpu usage: 3.20%
+
+From thread main to thread: tidle0
+Thread main status is: SUSPEND
+Thread tidle0 status is: RUNNING
+
+From thread tidle0 to thread: main
+Thread tidle0 status is: READY
+Thread main status is: RUNNING
+cpu usage: 13.77%
+
+From thread main to thread: tidle0
+Thread main status is: SUSPEND
+Thread tidle0 status is: RUNNING
+
+From thread tidle0 to thread: main
+Thread tidle0 status is: READY
+Thread main status is: RUNNING
+cpu usage: 38.14%
+
+From thread main to thread: tidle0
+Thread main status is: SUSPEND
+Thread tidle0 status is: RUNNING
+
+From thread tidle0 to thread: main
+Thread tidle0 status is: READY
+Thread main status is: RUNNING
+cpu usage: 69.8%
+
+From thread main to thread: tidle0
+Thread main status is: SUSPEND
+Thread tidle0 status is: RUNNING
+
+From thread tidle0 to thread: main
+Thread tidle0 status is: READY
+Thread main status is: RUNNING
+cpu usage: 69.11%
+
+From thread main to thread: tidle0
+Thread main status is: SUSPEND
+Thread tidle0 status is: RUNNING
+
+From thread tidle0 to thread: main
+Thread tidle0 status is: READY
+Thread main status is: RUNNING
+cpu usage: 72.54%
+
+From thread main to thread: tidle0
+Thread main status is: SUSPEND
+Thread tidle0 status is: RUNNING
+
+From thread tidle0 to thread: main
+Thread tidle0 status is: READY
+Thread main status is: RUNNING
+cpu usage: 77.43%
+
+From thread main to thread: tidle0
+Thread main status is: SUSPEND
+Thread tidle0 status is: RUNNING
+
+From thread tidle0 to thread: main
+Thread tidle0 status is: READY
+Thread main status is: RUNNING
+cpu usage: 76.32%
+
+From thread main to thread: tidle0
+Thread main status is: SUSPEND
+Thread tidle0 status is: RUNNING
+
+From thread tidle0 to thread: obstacleü
+Thread tidle0 status is: READY
+Thread obstacleü status is: RUNNING
+
+From thread obstacleü to thread: tidle0
+Thread obstacleü status is: SUSPEND
+Thread tidle0 status is: RUNNING
+
+From thread tidle0 to thread: main
+Thread tidle0 status is: READY
+Thread main status is: RUNNING
+cpu usage: 81.98%
+
+From thread main to thread: tidle0
+Thread main status is: SUSPEND
+Thread tidle0 status is: RUNNING
+

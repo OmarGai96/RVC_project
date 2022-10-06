@@ -291,6 +291,7 @@ static void rt_thread_idle_entry(void *parameter)
             if (idle_hook != RT_NULL)
             {
                 idle_hook();
+
             }
         }
 #endif /* RT_USING_IDLE_HOOK */

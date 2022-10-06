@@ -19,6 +19,7 @@
 
 #include <rthw.h>
 #include <rtthread.h>
+#include "cpu_usage.h"
 
 #ifdef RT_USING_USER_MAIN
 #ifndef RT_MAIN_THREAD_STACK_SIZE
@@ -258,6 +259,9 @@ int rtthread_startup(void)
 
     /* timer thread initialization */
     rt_system_timer_thread_init();
+
+    /* cpu usage initialization*/
+    cpu_usage_init();
 
     /* idle thread initialization */
     rt_thread_idle_init();
