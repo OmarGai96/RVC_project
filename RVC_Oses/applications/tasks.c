@@ -395,6 +395,7 @@ void brushes_speed_entry(void *param)
                 rt_mb_detach(&mb2_5);
             }
 
+
             //Reads from mail box in case the robot is coming back. In this case stop the brushes
             if (rt_mb_recv(&mb2_5, (rt_uint32_t *)&str, RT_WAITING_NO) == RT_EOK){
                 //TODO: WHO SAYS TO COME BACK?

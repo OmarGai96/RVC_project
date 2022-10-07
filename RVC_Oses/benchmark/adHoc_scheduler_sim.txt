@@ -1,0 +1,105 @@
+
+From thread tidle0 to thread: Task3
+Thread tidle0 status is: READY
+Thread Task3 status is: RUNNING
+Global cpu usage: 21.64%
+
+        Battery status 10 %
+        Battery LOW
+                Mail sent Battery discharge
+STOP SIMULATION
+
+From thread Task3 to thread: Task5
+Thread Task3 status is: SUSPEND
+Thread Task5 status is: RUNNING
+Global cpu usage: 21.64%
+
+Removing Task3
+
+From thread Task5 to thread: Task4
+Thread Task5 status is: SUSPEND
+Thread Task4 status is: RUNNING
+Global cpu usage: 21.64%
+
+Removing Task4
+
+From thread Task4 to thread: tidle0
+Thread Task4 status is: SUSPEND
+Thread tidle0 status is: RUNNING
+Global cpu usage: 21.64%
+
+Removing Task5
+
+From thread tidle0 to thread: Task1
+Thread tidle0 status is: SUSPEND
+Thread Task1 status is: RUNNING
+Global cpu usage: 38.68%
+
+From thread Task1 to thread: TaskS
+Thread Task1 status is: SUSPEND
+Thread TaskS status is: RUNNING
+Global cpu usage: 38.68%
+        Engine stopped!
+        Engine stopped!
+        Engine stopped!
+        Engine stopped!
+        Engine stopped!
+        Engine stopped!
+        Engine stopped!
+        Engine stopped!
+        Engine stopped!
+        Engine stopped!
+        Engine stopped!
+        Engine stopped!
+        Engine stopped!
+        Engine stopped!
+        Engine stopped!
+        Engine stopped!
+        Engine stopped!
+        Engine stopped!
+        Engine stopped!
+        Engine stopped!
+        Engine stopped!
+        Engine stopped!
+        Engine stopped!
+        Engine stopped!
+        Engine stopped!
+        Engine stopped!
+        Engine stopped!
+        Engine stopped!
+        Engine stopped!
+        Engine stopped!
+        Engine stopped!
+        Engine stopped!
+        Engine stopped!
+        Engine stopped!
+        Engine stopped!
+        Engine stopped!
+        Engine stopped!
+        Engine stopped!
+        Engine stopped!
+        Engine stopped!
+        Engine stopped!
+        Engine stopped!
+        Engine stopped!
+        Engine stopped!
+        Engine stopped!
+        Engine stopped!
+        Engine stopped!
+        Engine stopped!
+        Engine stopped!
+        Engine stopped!
+        Engine stopped!
+        Engine stopped!
+        Engine stopped!
+
+From thread TaskS to thread: Task1
+Thread TaskS status is:
+Thread Task1 status is: RUNNING
+Global cpu usage: 38.68%
+
+From thread Task1 to thread: TaskS
+Thread Task1 status is: SUSPEND
+Thread TaskS status is:
+Global cpu usage: 38.68%
+lobal cpu usage:        Engine stopped!

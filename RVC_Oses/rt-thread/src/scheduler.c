@@ -32,6 +32,7 @@
 
 #include <rtthread.h>
 #include <rthw.h>
+#include "applications/system.h"
 
 #define DEBUG_SCH
 
@@ -52,6 +53,45 @@ rt_uint8_t rt_current_priority;
 #ifdef RT_USING_HOOK
 static void (*rt_scheduler_hook)(struct rt_thread *from, struct rt_thread *to);
 static void (*rt_scheduler_switch_hook)(struct rt_thread *tid);
+
+static batteryLowFlag;
+
+/**
+ * @Author Omar Gai
+ * @brief check if the thread  is defined by our group and remove it
+ * @param thread
+ * @return 1 if ok, 0 otherwise
+ */
+static int removeThread(char remThreadName[5]){
+
+    rt_thread_t thread = RT_NULL;
+    thread = rt_thread_find(remThreadName);  //retrieve the proper thread
+    rt_base_t lock;
+
+    if(thread != RT_NULL){
+
+        rt_kprintf("\nRemoving %s\n",rt_thread_get_name(thread));
+
+        rt_thread_delay(2000);  //delay of 20 sec
+
+        rt_thread_detach(thread);
+
+         return 1;
+    }else{
+        return 0;
+    }
+
+}
+
+static int isRunning(struct rt_thread *thread){
+    if ((thread->stat & RT_THREAD_STAT_MASK) == RT_THREAD_RUNNING){
+        return 1;
+    }else{
+        return 0;
+    }
+}
+
+
 
 /**
  * @addtogroup Hook
@@ -191,6 +231,10 @@ static struct rt_thread* _scheduler_get_highest_priority_thread(rt_ubase_t *high
  */
 void rt_system_scheduler_init(void)
 {
+
+    batteryLowFlag = 0;
+    batteryStatus = CHARGE;
+
 #ifdef RT_USING_SMP
     int cpu;
 #endif /* RT_USING_SMP */
@@ -425,21 +469,32 @@ void rt_schedule(void)
     level = rt_hw_interrupt_disable();
 
     /* check the scheduler is enabled or not */
-    if (rt_scheduler_lock_nest == 0)
-    {
+    if (rt_scheduler_lock_nest == 0){
         rt_ubase_t highest_ready_priority;
 
-        if (rt_thread_ready_priority_group != 0)
-        {
+        if(batteryStatus == (DISCHARGE_THRESHOLD-1) && batteryLowFlag==0){
+            batteryLowFlag = 1;
+            rt_kprintf("STOP SIMULATION\n");
+            rt_thread_delay(1000);
+
+            if(removeThread("Task3")==0)
+                rt_kprintf("\nError removing thread\n");
+            if(removeThread("Task4")==0)
+                rt_kprintf("\nError removing thread\n");
+            if(removeThread("Task5")==0)
+                rt_kprintf("\nError removing thread\n");
+        }
+
+        if (rt_thread_ready_priority_group != 0){
             /* need_insert_from_thread: need to insert from_thread to ready queue */
             int need_insert_from_thread = 0;
 
             to_thread = _scheduler_get_highest_priority_thread(&highest_ready_priority);
+            //assign to thread the highest priority thread and to highest_ready_priority the highest priority value
 
-            if ((rt_current_thread->stat & RT_THREAD_STAT_MASK) == RT_THREAD_RUNNING)
-            {
-                if (rt_current_thread->current_priority < highest_ready_priority)
-                {
+            //if ((rt_current_thread->stat & RT_THREAD_STAT_MASK) == RT_THREAD_RUNNING){
+            if(isRunning(rt_current_thread)){
+                if (rt_current_thread->current_priority < highest_ready_priority){
                     to_thread = rt_current_thread;
                 }
                 else if (rt_current_thread->current_priority == highest_ready_priority && (rt_current_thread->stat & RT_THREAD_STAT_YIELD_MASK) == 0)
@@ -453,17 +508,16 @@ void rt_schedule(void)
                 rt_current_thread->stat &= ~RT_THREAD_STAT_YIELD_MASK;
             }
 
-            if (to_thread != rt_current_thread)
-            {
+            if (to_thread != rt_current_thread){
                 /* if the destination thread is not the same as current thread */
                 rt_current_priority = (rt_uint8_t)highest_ready_priority;
+
                 from_thread         = rt_current_thread;
                 rt_current_thread   = to_thread;
 
                 RT_OBJECT_HOOK_CALL(rt_scheduler_hook, (from_thread, to_thread));
 
-                if (need_insert_from_thread)
-                {
+                if (need_insert_from_thread){
                     rt_schedule_insert_thread(from_thread);
                 }
 
@@ -532,9 +586,8 @@ void rt_schedule(void)
                     rt_hw_context_switch_interrupt((rt_ubase_t)&from_thread->sp,
                             (rt_ubase_t)&to_thread->sp);
                 }
-            }
-            else
-            {
+            }else{
+                /* if the destination thread is the same as current thread */
                 rt_schedule_remove_thread(rt_current_thread);
                 rt_current_thread->stat = RT_THREAD_RUNNING | (rt_current_thread->stat & ~RT_THREAD_STAT_MASK);
             }
@@ -1003,3 +1056,5 @@ rt_uint16_t rt_critical_level(void)
 RTM_EXPORT(rt_critical_level);
 
 /**@}*/
+
+

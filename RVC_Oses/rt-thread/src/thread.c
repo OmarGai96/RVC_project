@@ -977,10 +977,18 @@ rt_uint8_t rt_thread_get_status(rt_thread_t thread)
             break;
         case RT_THREAD_RUNNING: rt_kprintf("RUNNING\n");
             break;
-        default: break;
+        case RT_THREAD_CLOSE: rt_kprintf("CLOSE\n");
+        default:
+            rt_kprintf("\n");
+            break;
     }
     return thread->stat;
 }
 RTM_EXPORT(rt_thread_get_status);
 
+
+void thread_cleanup_execute(rt_thread_t thread){
+    _thread_cleanup_execute(thread);
+}
+RTM_EXPORT(thread_cleanup_execute);
 
