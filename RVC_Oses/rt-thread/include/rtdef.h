@@ -923,7 +923,8 @@ enum rt_device_class_type
     RT_Device_Class_Touch,                              /**< Touch device */
     RT_Device_Class_PHY,                                /**< PHY device */
     RT_Device_Class_Security,                           /**< Security device */
-    RT_Device_Class_Unknown                             /**< unknown device */
+    RT_Device_Class_Unknown,                            /**< unknown device */
+    RT_Device_Class_Mock                                /**< Fake device for simulation */
 };
 
 /**

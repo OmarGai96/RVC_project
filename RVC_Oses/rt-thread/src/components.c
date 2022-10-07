@@ -20,6 +20,7 @@
 #include <rthw.h>
 #include <rtthread.h>
 #include "cpu_usage.h"
+#include <drivers/mock_devices.h>
 
 #ifdef RT_USING_USER_MAIN
 #ifndef RT_MAIN_THREAD_STACK_SIZE
@@ -239,6 +240,9 @@ int rtthread_startup(void)
      * NOTE: please initialize heap inside board initialization.
      */
     rt_hw_board_init();
+
+    /* initialization of fake devie */
+    rt_mock_devices_init();
 
     /* show RT-Thread version */
     rt_show_version();

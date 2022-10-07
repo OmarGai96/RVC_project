@@ -24,7 +24,7 @@ extern startingTime;
 
 
 /* This function search for a new position where the robot can go, it is used in case we reached a
-   bound of the room or if we have found an obstacle*/
+   bound of the room or if we have found an obstacle */
 int find_new_position()
 {
     if (direction!=DOWN && position[0]>0 && map[ position[0]-1 ][ position[1] ]!=1)
@@ -67,7 +67,7 @@ void print_map() {
 }
 
 
-/* Signal handler for map_management*/
+/* Signal handler for map_management, if an obstacle is found go back to previous tile*/
 void movement_control_obstacle_handler(int sig)
 {
     // mark obstacle on the map
