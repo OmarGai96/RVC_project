@@ -332,30 +332,22 @@ void acoustic_signals_entry(void *param){
 
     rt_uint32_t e;  //to read event
     while(1){
-        if (rt_event_recv(&event_tasks_activation, EVENT_ACOUSTIC_SIGNALS_ACTIVATION,
-                                  RT_EVENT_FLAG_AND | RT_EVENT_FLAG_CLEAR,
-                                  RT_WAITING_FOREVER, RT_NULL) == RT_EOK){
+        if (rt_event_recv(&event_resources,(EVENT_FLAG1 | EVENT_FLAG2),RT_EVENT_FLAG_OR | RT_EVENT_FLAG_CLEAR,RT_WAITING_FOREVER,&e) == RT_EOK){
 #ifdef BENCHMARKING
         printf("\nTask4:\t Started at time %d tick, %d ms\n", rt_tick_get(), rt_tick_get_millisecond()-startingTime);
 #endif
-        if (rt_event_recv(&event_resources,(EVENT_FLAG1 | EVENT_FLAG2),RT_EVENT_FLAG_OR | RT_EVENT_FLAG_CLEAR,RT_WAITING_FOREVER,&e) == RT_EOK){
             if (e == 0x2){
-
-                // EVENT_FLAG_1 is set
+             // EVENT_FLAG_1 is set
 #ifdef DEBUG_2
                 printf("\t\tLOW BATTERY ALARM\n");
 #endif
 
             }else if (e == 0x4){
-
                 // EVENT_FLAG_2 is set
 #ifdef DEBUG_2
                 printf("\t\tGARBAGE BAG FULL ALARM\n");
 #endif
-
             }
-
-         }
 
 #ifdef BENCHMARKING
         printf("\t\tStop at time %d tick\n", rt_tick_get());
@@ -363,7 +355,6 @@ void acoustic_signals_entry(void *param){
 
         }
     }
-
 }
 
 

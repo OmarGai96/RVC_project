@@ -82,13 +82,6 @@ int main(void){
                   PERIOD_TASK3, //every 250 ms
                   RT_TIMER_FLAG_PERIODIC);
 
-    // initializing the TIMER for acoustic signals
-    rt_timer_init(&timer_acoustic_signals_activation, "timer_acoustic_signals_activation",
-                  timeout_acoustic_signals,
-                  RT_NULL,
-                  PERIOD_TASK4, // every 500 ms
-                  RT_TIMER_FLAG_PERIODIC);
-
     // initializing the TIMER for brushes_speed
     rt_timer_init(&timer_brushes_speed_activation, "timer_brushes_speed_activation",
                   timeout_brushes_speed,
@@ -205,7 +198,6 @@ int main(void){
     rt_timer_start (&timer_obstacle_control_activation);
     rt_timer_start (&timer_movement_control_activation);
     rt_timer_start (&timer_check_resources_activation);
-    rt_timer_start (&timer_acoustic_signals_activation);
     rt_timer_start (&timer_brushes_speed_activation);
 
 
