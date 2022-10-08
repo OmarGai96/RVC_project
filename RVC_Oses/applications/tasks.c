@@ -104,6 +104,8 @@ void movement_control_obstacle_handler(int sig)
 /* Entry for the task obstacle control */
 void obstacle_control_entry(void *param)
 {
+    int tick_start, tick_end, time_start, time_end;
+
     int obstacle;
     rt_pin_mode(PROXIMITY_SENSOR_PIN_NUMBER, PIN_MODE_INPUT);
 
@@ -117,7 +119,9 @@ void obstacle_control_entry(void *param)
         {
 
 #ifdef BENCHMARKING
-        printf("\nTask1:\t Started at time %d tick, %d ms\n", rt_tick_get(), rt_tick_get_millisecond()-startingTime);
+        tick_start= rt_tick_get();
+        time_start= rt_tick_get_millisecond()-startingTime;
+        printf("\n\t\tTASK_1:\t Started at time %d ticks (%d ms)\n", tick_start, time_start);
 #endif
 
             // check if there's an obstacle, if yes activates movements threads
@@ -130,9 +134,11 @@ void obstacle_control_entry(void *param)
             }
 
 #ifdef BENCHMARKING
-        printf("\t\tStop at time %d tick\n", rt_tick_get());
+        tick_end= rt_tick_get();
+        time_end= rt_tick_get_millisecond()-startingTime;
+        printf("\t\tStop at time %d ticks (%d ms)\n", tick_end, time_end);
+        printf("\t\tTOTAL EXECUTION TIME: %d ticks (%d ms)\n\t\t\tWCET WHEN AN OBSTACLE IS FOUND\n", tick_end-tick_start, time_end-time_start);
 #endif
-
         }
     }
 }
@@ -165,6 +171,8 @@ void movement_stop_entry(void *param)
 /* Entry for the task movement control */
 void movement_control_entry(void *param)
 {
+    int tick_start, tick_end, time_start, time_end;
+
     // data structures used
     int i,j, stuck;
     char *str;          //to read mail contents
@@ -191,7 +199,9 @@ void movement_control_entry(void *param)
         {
 
 #ifdef BENCHMARKING
-       printf("\nTask2:\t Started at time %d tick, %d ms\n", rt_tick_get(), rt_tick_get_millisecond()-startingTime);
+       tick_start= rt_tick_get();
+       time_start= rt_tick_get_millisecond()-startingTime;
+       printf("\n\t\tTASK_2:\t Started at time %d ticks (%d ms)\n", tick_start, time_start);
 #endif
 
             //mailbox receive
@@ -255,13 +265,16 @@ void movement_control_entry(void *param)
             }
 
 #ifdef DEBUG_2
-            rt_kprintf("\n\tRobot in position %d,%d\n", position[0], position[1]);
+            rt_kprintf("\t\t---------Robot in position [%d,%d]\n", position[0], position[1]);
 #endif
 
 #ifdef BENCHMARKING
-        printf("\t\tStop at time %d tick\n", rt_tick_get());
+        tick_end= rt_tick_get();
+        time_end= rt_tick_get_millisecond()-startingTime;
+        printf("\t\tStop at time %d ticks (%d ms)\n", tick_end, time_end);
+        printf("\t\tTOTAL EXECUTION TIME: %d ticks (%d ms)\n", tick_end-tick_start, time_end-time_start);
 #endif
-
+        //WCET THE MAXIMUM AMONG THE DIFFERENT EXECUTIONS
         }
     }
 }
@@ -269,6 +282,8 @@ void movement_control_entry(void *param)
 
 /* Entry for the CHECK RESOURCES*/
 void check_resources_entry(void *param){
+
+    int tick_start, tick_end, time_start, time_end;
 
     // used for debug
     uint32_t previousBatteryStatus = CHARGE;
@@ -281,7 +296,9 @@ void check_resources_entry(void *param){
                                   RT_WAITING_FOREVER, RT_NULL) == RT_EOK){
 
 #ifdef BENCHMARKING
-        printf("\nTask3:\t Started at time %d tick, %d ms\n", rt_tick_get(), rt_tick_get_millisecond()-startingTime);
+        tick_start= rt_tick_get();
+        time_start= rt_tick_get_millisecond()-startingTime;
+        printf("\n\t\tTASK_3:\t Started at time %d ticks (%d ms)\n", tick_start, time_start);
 #endif
 
 #ifdef DEBUG_2
@@ -319,7 +336,10 @@ void check_resources_entry(void *param){
         batteryStatus--;
 
 #ifdef BENCHMARKING
-        printf("\t\tStop at time %d tick\n", rt_tick_get());
+        tick_end= rt_tick_get();
+        time_end= rt_tick_get_millisecond()-startingTime;
+        printf("\t\tStop at time %d ticks (%d ms)\n", tick_end, time_end);
+        printf("\t\tTOTAL EXECUTION TIME: %d ticks (%d ms)\n", tick_end-tick_start, time_end-time_start);
 #endif
 
       }
@@ -330,13 +350,17 @@ void check_resources_entry(void *param){
 /* Entry for the ACOUSTIC SIGNAL */
 void acoustic_signals_entry(void *param){
 
+    int tick_start, tick_end, time_start, time_end;
+
     rt_uint32_t e;  //to read event
     while(1){
         if (rt_event_recv(&event_tasks_activation, EVENT_ACOUSTIC_SIGNALS_ACTIVATION,
                                   RT_EVENT_FLAG_AND | RT_EVENT_FLAG_CLEAR,
                                   RT_WAITING_FOREVER, RT_NULL) == RT_EOK){
 #ifdef BENCHMARKING
-        printf("\nTask4:\t Started at time %d tick, %d ms\n", rt_tick_get(), rt_tick_get_millisecond()-startingTime);
+        tick_start= rt_tick_get();
+        time_start= rt_tick_get_millisecond()-startingTime;
+        printf("\n\t\tTASK_4:\t Started at time %d ticks (%d ms)\n", tick_start, time_start);
 #endif
         if (rt_event_recv(&event_resources,(EVENT_FLAG1 | EVENT_FLAG2),RT_EVENT_FLAG_OR | RT_EVENT_FLAG_CLEAR,RT_WAITING_FOREVER,&e) == RT_EOK){
             if (e == 0x2){
@@ -358,7 +382,10 @@ void acoustic_signals_entry(void *param){
          }
 
 #ifdef BENCHMARKING
-        printf("\t\tStop at time %d tick\n", rt_tick_get());
+        tick_end= rt_tick_get();
+        time_end= rt_tick_get_millisecond()-startingTime;
+        printf("\t\tStop at time %d ticks (%d ms)\n", tick_end, time_end);
+        printf("\t\tTOTAL EXECUTION TIME: %d ticks (%d ms)\n", tick_end-tick_start, time_end-time_start);
 #endif
 
         }
@@ -370,6 +397,8 @@ void acoustic_signals_entry(void *param){
 /* Entry for the BRUSHES SPEED */
 void brushes_speed_entry(void *param)
 {
+    int tick_start, tick_end, time_start, time_end;
+
     /* 0 0 MEDIUM
      * 0 1 HIGH
      * 1 0 LOW
@@ -384,7 +413,9 @@ void brushes_speed_entry(void *param)
                           RT_WAITING_FOREVER, RT_NULL) == RT_EOK){
 
 #ifdef BENCHMARKING
-        printf("\nTask5:\t Started at time %d tick, %d ms\n", rt_tick_get(), rt_tick_get_millisecond()-startingTime);
+        tick_start= rt_tick_get();
+        time_start= rt_tick_get_millisecond()-startingTime;
+        printf("\n\t\tTASK_5:\t Started at time %d ticks (%d ms)\n", tick_start, time_start);
 #endif
 
             rt_pin_mode(BRUSHES_SPEED_PIN_NUMBER, PIN_MODE_INPUT);
@@ -450,7 +481,10 @@ void brushes_speed_entry(void *param)
             }
 
 #ifdef BENCHMARKING
-        printf("\t\tStop at time %d tick\n", rt_tick_get());
+            tick_end= rt_tick_get();
+            time_end= rt_tick_get_millisecond()-startingTime;
+            printf("\t\tStop at time %d ticks (%d ms)\n", tick_end, time_end);
+            printf("\t\tTOTAL EXECUTION TIME: %d ticks (%d ms)\n", tick_end-tick_start, time_end-time_start);
 #endif
 
         }
