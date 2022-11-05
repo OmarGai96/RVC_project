@@ -479,13 +479,15 @@ void rt_schedule(void)
                          RT_NAME_MAX, to_thread->name, to_thread->sp,
                          RT_NAME_MAX, from_thread->name, from_thread->sp));
 #ifdef DEBUG_SCH
-            rt_kprintf("\nFrom thread %s to thread: %s\n", rt_thread_get_name(from_thread) ,rt_thread_get_name(to_thread));
-            rt_thread_get_status(from_thread);
-            rt_thread_get_status(to_thread);
-            //printf("Remaining %d ms for %s\n",(to_thread->remaining_tick)*10,  rt_thread_get_name(to_thread));
-            rt_uint8_t major, minor;
-            cpu_usage_get(&major, &minor);
-            rt_kprintf("Global cpu usage: %u.%u%% \n", major, minor);
+            if (strcmp(to_thread->name, "tidle0")){
+                rt_kprintf("\nFrom thread %s to thread: %s (Priority: %d)\n", rt_thread_get_name(from_thread) ,rt_thread_get_name(to_thread), to_thread->init_priority);
+                //rt_thread_get_status(from_thread);
+                //rt_thread_get_status(to_thread);
+                //printf("Remaining %d ms for %s\n",(to_thread->remaining_tick)*10,  rt_thread_get_name(to_thread));
+                rt_uint8_t major, minor;
+                cpu_usage_get(&major, &minor);
+                rt_kprintf("Global cpu usage: %u.%u%% \n", major, minor);
+            }
 #endif
 
 #ifdef RT_USING_OVERFLOW_CHECK

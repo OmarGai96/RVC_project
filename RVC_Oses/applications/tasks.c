@@ -6,6 +6,12 @@
 #include "tasks.h"
 #include "structures.h"
 
+#define TICK_DELAY_T1 8
+#define TICK_DELAY_T2 8
+#define TICK_DELAY_T3 5
+#define TICK_DELAY_T4 3
+#define TICK_DELAY_T5 5
+
 
 static int map[MAP_SIDE][MAP_SIDE];
 static int position[2];
@@ -120,8 +126,8 @@ void obstacle_control_entry(void *param)
 
 #ifdef BENCHMARKING
         tick_start= rt_tick_get();
-        time_start= rt_tick_get_millisecond()-startingTime;
-        printf("\n\t\tTASK_1:\t Started at time %d ticks (%d ms)\n", tick_start, time_start);
+        time_start=tick_start*10-startingTime;
+        printf("\n\t\tTASK_1:\t Started at time %d ms\n", time_start);
 #endif
 
             // check if there's an obstacle, if yes activates movements threads
@@ -133,11 +139,13 @@ void obstacle_control_entry(void *param)
 
             }
 
+            rt_thread_delay(TICK_DELAY_T1);
+
 #ifdef BENCHMARKING
         tick_end= rt_tick_get();
         time_end= rt_tick_get_millisecond()-startingTime;
-        printf("\t\tStop at time %d ticks (%d ms)\n", tick_end, time_end);
-        printf("\t\tTOTAL EXECUTION TIME: %d ticks (%d ms)\n\t\t\tWCET WHEN AN OBSTACLE IS FOUND\n", tick_end-tick_start, time_end-time_start);
+        printf("\t\tStop at time %d ms\tDeadline was: %d ms\n", time_end, (PERIOD_TASK1)*10+time_start);
+        printf("\t\tTOTAL EXECUTION TIME: %d ticks (%d ms)\n", tick_end-tick_start, time_end-time_start);
 #endif
         }
     }
@@ -200,8 +208,8 @@ void movement_control_entry(void *param)
 
 #ifdef BENCHMARKING
        tick_start= rt_tick_get();
-       time_start= rt_tick_get_millisecond()-startingTime;
-       printf("\n\t\tTASK_2:\t Started at time %d ticks (%d ms)\n", tick_start, time_start);
+       time_start=tick_start*10-startingTime;
+       printf("\n\t\tTASK_2:\t Started at time %d ms\n", time_start);
 #endif
 
             //mailbox receive
@@ -268,10 +276,12 @@ void movement_control_entry(void *param)
             rt_kprintf("\t\t---------Robot in position [%d,%d]\n", position[0], position[1]);
 #endif
 
+            rt_thread_delay(TICK_DELAY_T2);
+
 #ifdef BENCHMARKING
         tick_end= rt_tick_get();
         time_end= rt_tick_get_millisecond()-startingTime;
-        printf("\t\tStop at time %d ticks (%d ms)\n", tick_end, time_end);
+        printf("\t\tStop at time %d ms\tDeadline was: %d ms\n", time_end, (PERIOD_TASK2)*10+time_start);
         printf("\t\tTOTAL EXECUTION TIME: %d ticks (%d ms)\n", tick_end-tick_start, time_end-time_start);
 #endif
         //WCET THE MAXIMUM AMONG THE DIFFERENT EXECUTIONS
@@ -297,8 +307,8 @@ void check_resources_entry(void *param){
 
 #ifdef BENCHMARKING
         tick_start= rt_tick_get();
-        time_start= rt_tick_get_millisecond()-startingTime;
-        printf("\n\t\tTASK_3:\t Started at time %d ticks (%d ms)\n", tick_start, time_start);
+        time_start=tick_start*10-startingTime;
+        printf("\n\t\tTASK_3:\t Started at time %d ms\n", time_start);
 #endif
 
 #ifdef DEBUG_2
@@ -335,10 +345,13 @@ void check_resources_entry(void *param){
 
         batteryStatus--;
 
+
+        rt_thread_delay(TICK_DELAY_T3);
+
 #ifdef BENCHMARKING
         tick_end= rt_tick_get();
         time_end= rt_tick_get_millisecond()-startingTime;
-        printf("\t\tStop at time %d ticks (%d ms)\n", tick_end, time_end);
+        printf("\t\tStop at time %d ms\tDeadline was: %d ms\n", time_end, (PERIOD_TASK3)*10+time_start);
         printf("\t\tTOTAL EXECUTION TIME: %d ticks (%d ms)\n", tick_end-tick_start, time_end-time_start);
 #endif
 
@@ -359,8 +372,8 @@ void acoustic_signals_entry(void *param){
                                   RT_WAITING_FOREVER, RT_NULL) == RT_EOK){
 #ifdef BENCHMARKING
         tick_start= rt_tick_get();
-        time_start= rt_tick_get_millisecond()-startingTime;
-        printf("\n\t\tTASK_4:\t Started at time %d ticks (%d ms)\n", tick_start, time_start);
+        time_start=tick_start*10-startingTime;
+        printf("\n\t\tTASK_4:\t Started at time %d ms\n", time_start);
 #endif
         if (rt_event_recv(&event_resources,(EVENT_FLAG1 | EVENT_FLAG2),RT_EVENT_FLAG_OR | RT_EVENT_FLAG_CLEAR,RT_WAITING_FOREVER,&e) == RT_EOK){
             if (e == 0x2){
@@ -380,11 +393,12 @@ void acoustic_signals_entry(void *param){
             }
 
          }
+        rt_thread_delay(TICK_DELAY_T4);
 
 #ifdef BENCHMARKING
         tick_end= rt_tick_get();
         time_end= rt_tick_get_millisecond()-startingTime;
-        printf("\t\tStop at time %d ticks (%d ms)\n", tick_end, time_end);
+        printf("\t\tStop at time %d ms\tDeadline was: %d ms\n", time_end, (PERIOD_TASK4)*10+time_start);
         printf("\t\tTOTAL EXECUTION TIME: %d ticks (%d ms)\n", tick_end-tick_start, time_end-time_start);
 #endif
 
@@ -414,8 +428,8 @@ void brushes_speed_entry(void *param)
 
 #ifdef BENCHMARKING
         tick_start= rt_tick_get();
-        time_start= rt_tick_get_millisecond()-startingTime;
-        printf("\n\t\tTASK_5:\t Started at time %d ticks (%d ms)\n", tick_start, time_start);
+        time_start=tick_start*10-startingTime;
+        printf("\n\t\tTASK_5:\t Started at time %d ms\n", time_start);
 #endif
 
             rt_pin_mode(BRUSHES_SPEED_PIN_NUMBER, PIN_MODE_INPUT);
@@ -480,10 +494,12 @@ void brushes_speed_entry(void *param)
                 }
             }
 
+            rt_thread_delay(TICK_DELAY_T5);
+
 #ifdef BENCHMARKING
             tick_end= rt_tick_get();
             time_end= rt_tick_get_millisecond()-startingTime;
-            printf("\t\tStop at time %d ticks (%d ms)\n", tick_end, time_end);
+            printf("\t\tStop at time %d ms\tDeadline was: %d ms\n", time_end, (PERIOD_TASK5)*10+time_start);
             printf("\t\tTOTAL EXECUTION TIME: %d ticks (%d ms)\n", tick_end-tick_start, time_end-time_start);
 #endif
 
