@@ -36,12 +36,30 @@
 #include "cpu_usage.h"
 
 #define DEBUG_SCH
+
 char* rt_thread_get_name(rt_thread_t thread);
 
 #ifdef RT_USING_HOOK
 static void (*rt_thread_suspend_hook)(rt_thread_t thread);
 static void (*rt_thread_resume_hook) (rt_thread_t thread);
 static void (*rt_thread_inited_hook) (rt_thread_t thread);
+
+extern rt_thread_t thread_list[10];
+extern int currentThread;
+
+/**
+ * @author Omar Gai
+ * @param thread_period
+ * @return
+ */
+static rt_uint8_t computePriority(rt_uint16_t thread_period){
+    if (thread_period < RT_THREAD_PRIORITY_MAX){
+        return thread_period;
+    }else{
+        return 1000/thread_period;
+    }
+
+}
 
 /**
  * @brief   This function sets a hook function when the system suspend a thread.
@@ -147,7 +165,7 @@ static rt_err_t _thread_init(struct rt_thread *thread,
                              void             *parameter,
                              void             *stack_start,
                              rt_uint32_t       stack_size,
-                             rt_uint8_t        priority,
+                             rt_uint16_t        priority,
                              rt_uint32_t       tick)
 {
     /* init thread list */
@@ -173,7 +191,14 @@ static rt_err_t _thread_init(struct rt_thread *thread,
 #endif /* ARCH_CPU_STACK_GROWS_UPWARD */
 
     /* priority init */
+
+#ifdef BACKGROUND_SCHEDULING
+    priority    = computePriority(priority);
+    rt_kprintf("\nPriority computed: %d, name: %s\n", priority,name);
+#endif
+
     RT_ASSERT(priority < RT_THREAD_PRIORITY_MAX);
+
     thread->init_priority    = priority;
     thread->current_priority = priority;
 
@@ -234,6 +259,10 @@ static rt_err_t _thread_init(struct rt_thread *thread,
     thread->duration_tick = 0;
 #endif
 
+    /*add thread to thread_list*/
+    thread_list[currentThread] = &(thread);
+    currentThread++;
+
     RT_OBJECT_HOOK_CALL(rt_thread_inited_hook, (thread));
 
     return RT_EOK;
@@ -261,7 +290,7 @@ static rt_err_t _thread_init(struct rt_thread *thread,
  *
  * @param   stack_size is the size of thread stack.
  *
- * @param   priority is the priority of thread.
+ * @param   period is the period of thread.
  *
  * @param   tick is the time slice if there are same priority thread.
  *
@@ -274,7 +303,7 @@ rt_err_t rt_thread_init(struct rt_thread *thread,
                         void             *parameter,
                         void             *stack_start,
                         rt_uint32_t       stack_size,
-                        rt_uint8_t        priority,
+                        rt_uint16_t        priority,
                         rt_uint32_t       tick)
 {
     /* thread check */
@@ -344,6 +373,7 @@ rt_err_t rt_thread_startup(rt_thread_t thread)
     thread->high_mask   = 1L << (thread->current_priority & 0x07);  /* 3bit */
 #else
     thread->number_mask = 1L << thread->current_priority;
+
 #endif /* RT_THREAD_PRIORITY_MAX > 32 */
 
     RT_DEBUG_LOG(RT_DEBUG_THREAD, ("startup a thread:%s with priority:%d\n",
@@ -359,7 +389,7 @@ rt_err_t rt_thread_startup(rt_thread_t thread)
     }
 
 #ifdef DEBUG_SCH
-    rt_kprintf("\t\tSTARTUP OF %s\n", rt_thread_get_name(thread));
+    rt_kprintf("\t\tSTARTUP OF %s, with priority: %d\n", rt_thread_get_name(thread),thread->init_priority);
 #endif
 
     return RT_EOK;
@@ -961,6 +991,13 @@ rt_thread_t rt_thread_find(char *name)
 RTM_EXPORT(rt_thread_find);
 
 /**@}*/
+
+//////////////////////////////////////////////////7
+
+/**@Author Omar Gai
+ *
+ *
+ */
 
 char* rt_thread_get_name(rt_thread_t thread){
     return thread->name;

@@ -6,6 +6,7 @@
 #include "tasks.h"
 #include "structures.h"
 
+//#define BENCHMARK_TIME
 
 static int map[MAP_SIDE][MAP_SIDE];
 static int position[2];
@@ -89,7 +90,7 @@ void movement_control_obstacle_handler(int sig)
         break;
     }
 
-#ifdef DEBUG_2
+#ifdef DEB_DISPLAY
     print_map();
 #endif
 
@@ -104,20 +105,21 @@ void movement_control_obstacle_handler(int sig)
 /* Entry for the task obstacle control */
 void obstacle_control_entry(void *param)
 {
+
+    int time_start,time_end;
+
     int obstacle;
     rt_pin_mode(PROXIMITY_SENSOR_PIN_NUMBER, PIN_MODE_INPUT);
 
     // infinite loop
-    while (1)
-    {
+    while (1){
         // waits for the periodic activation from the timer
         if (rt_event_recv(&event_tasks_activation, EVENT_OBSTACLE_CONTROL_ACTIVATION,
                           RT_EVENT_FLAG_AND | RT_EVENT_FLAG_CLEAR,
-                          RT_WAITING_FOREVER, RT_NULL) == RT_EOK)
-        {
-
-#ifdef BENCHMARKING
-        printf("\nTask1:\t Started at time %d tick, %d ms\n", rt_tick_get(), rt_tick_get_millisecond()-startingTime);
+                          RT_WAITING_FOREVER, RT_NULL) == RT_EOK){
+#ifdef BENCHMARK_TIME
+        time_start=rt_tick_get_millisecond()-startingTime;
+        printf("\n\t\tTASK_1:\t Started at time %d ms\n", time_start);
 #endif
 
             // check if there's an obstacle, if yes activates movements threads
@@ -129,11 +131,16 @@ void obstacle_control_entry(void *param)
 
             }
 
-#ifdef BENCHMARKING
-        printf("\t\tStop at time %d tick\n", rt_tick_get());
-#endif
 
+#ifdef BENCHMARK_TIME
+        time_end= rt_tick_get_millisecond()-startingTime;
+        printf("\t\tStop at time %d ms\tDeadline was: %d ms\n", time_end, (PERIOD_TASK1)*10+time_start);
+        printf("\t\tTOTAL EXECUTION TIME: %d ms\n", time_end-time_start);
+#endif
         }
+
+
+
     }
 }
 
@@ -146,14 +153,13 @@ void movement_stop_entry(void *param)
         // waits for the aperiodic event that signals an obstacle have been found
         if (rt_event_recv(&event_obstacle, EVENT_OBSTACLE_FOUND,
                           RT_EVENT_FLAG_AND | RT_EVENT_FLAG_CLEAR,
-                          RT_WAITING_FOREVER, RT_NULL) == RT_EOK)
-        {
+                          RT_WAITING_FOREVER, RT_NULL) == RT_EOK){
 
             // TODO: decide how to implement this in hw and modify correspondent driver
             //WE CAN USE JUST A SPECIFIC PIN SET TO ZERO, and using a global variable to remember it, if necessary.
             //Otherwise modify or create a driver that remember the last status of the engine
 
-#ifdef DEBUG_2
+#ifdef DEB_DISPLAY
             rt_kprintf("\tEngine stopped!\n");
 #endif
 
@@ -168,6 +174,7 @@ void movement_control_entry(void *param)
     // data structures used
     int i,j, stuck;
     char *str;          //to read mail contents
+    int time_start,time_end;
 
     // initialization of data structures
     position[0] = 0;
@@ -187,17 +194,15 @@ void movement_control_entry(void *param)
         // waits for the aperiodic event that signals an obstacle have been found
         if (rt_event_recv(&event_tasks_activation, EVENT_MOVEMENT_CONTROL_ACTIVATION,
                           RT_EVENT_FLAG_AND | RT_EVENT_FLAG_CLEAR,
-                          RT_WAITING_FOREVER, RT_NULL) == RT_EOK)
-        {
-
-#ifdef BENCHMARKING
-       printf("\nTask2:\t Started at time %d tick, %d ms\n", rt_tick_get(), rt_tick_get_millisecond()-startingTime);
+                          RT_WAITING_FOREVER, RT_NULL) == RT_EOK){
+#ifdef BENCHMARK_TIME
+        time_start=rt_tick_get_millisecond()-startingTime;
+        printf("\n\t\tTASK_2:\t Started at time %d ms\n", time_start);
 #endif
-
             //mailbox receive
             if (rt_mb_recv(&mb2_3, (rt_uint32_t *)&str, 0) == RT_EOK){
 
-#ifdef DEBUG_1
+#ifdef DEB_INTERNAL
                 rt_kprintf("\tget a mail from mailbox, the content: %s\n", str);
 #endif
                 direction = RETURN;
@@ -238,7 +243,7 @@ void movement_control_entry(void *param)
             // if the function couldn't find where to go the robot is stuck, we end the thread
             if (stuck == 1) {
 
-#ifdef DEBUG_2
+#ifdef DEB_DISPLAY
                 rt_kprintf("\tThe robot is stuck!!");
 #endif
 
@@ -247,19 +252,21 @@ void movement_control_entry(void *param)
             // if the robot is back at starting station after receiving command to return we end the thread
             if (direction==RETURN && position[0]==0 && position[1]==0) {
 
-#ifdef DEBUG_2
+#ifdef DEB_DISPLAY
                 rt_kprintf("\tThe robot is back at charging station!\n");
 #endif
 
                 break;
             }
 
-#ifdef DEBUG_2
+#ifdef DEB_DISPLAY
             rt_kprintf("\n\tRobot in position %d,%d\n", position[0], position[1]);
 #endif
 
-#ifdef BENCHMARKING
-        printf("\t\tStop at time %d tick\n", rt_tick_get());
+#ifdef BENCHMARK_TIME
+        time_end= rt_tick_get_millisecond()-startingTime;
+        printf("\t\tStop at time %d ms\tDeadline was: %d ms\n", time_end, (PERIOD_TASK2)*10+time_start);
+        printf("\t\tTOTAL EXECUTION TIME: %d ms\n", time_end-time_start);
 #endif
 
         }
@@ -272,6 +279,7 @@ void check_resources_entry(void *param){
 
     // used for debug
     uint32_t previousBatteryStatus = CHARGE;
+    int time_start,time_end;
 
     while(1){
 
@@ -280,11 +288,11 @@ void check_resources_entry(void *param){
                                   RT_EVENT_FLAG_AND | RT_EVENT_FLAG_CLEAR,
                                   RT_WAITING_FOREVER, RT_NULL) == RT_EOK){
 
-#ifdef BENCHMARKING
-        printf("\nTask3:\t Started at time %d tick, %d ms\n", rt_tick_get(), rt_tick_get_millisecond()-startingTime);
+#ifdef BENCHMARK_TIME
+        time_start=rt_tick_get_millisecond()-startingTime;
+        printf("\n\t\tTASK_3:\t Started at time %d ms\n", time_start);
 #endif
-
-#ifdef DEBUG_2
+#ifdef DEB_DISPLAY
         if(batteryStatus!=previousBatteryStatus && batteryStatus%5==0){
             previousBatteryStatus = batteryStatus;
             printf("\n\tBattery status %d %% \n", batteryStatus);
@@ -298,7 +306,7 @@ void check_resources_entry(void *param){
             rt_event_send(&event_resources, EVENT_FLAG1);   //notify task 4
             rt_mb_send(&mb2_3, (rt_uint32_t)&mb_str2);      //notify task 2
 
-#ifdef DEBUG_2
+#ifdef DEB_DISPLAY
             printf("\tBattery LOW\n\t\tMail sent %s\n", mb_str2);
 #endif
 
@@ -310,7 +318,7 @@ void check_resources_entry(void *param){
             rt_event_send(&event_resources, EVENT_FLAG2);   //notify task 4
             rt_mb_send(&mb2_3, (rt_uint32_t)&mb_str1);      //notify task 2
 
-#ifdef DEBUG_2
+#ifdef DEB_DISPLAY
             printf("\tGarbage bag FULL\n\t\tMail sent %s\n", mb_str1);
 #endif
 
@@ -318,8 +326,10 @@ void check_resources_entry(void *param){
 
         batteryStatus--;
 
-#ifdef BENCHMARKING
-        printf("\t\tStop at time %d tick\n", rt_tick_get());
+#ifdef BENCHMARK_TIME
+        time_end= rt_tick_get_millisecond()-startingTime;
+        printf("\t\tStop at time %d ms\tDeadline was: %d ms\n", time_end, (PERIOD_TASK3)*10+time_start);
+        printf("\t\tTOTAL EXECUTION TIME: %d ms\n", time_end-time_start);
 #endif
 
       }
@@ -330,27 +340,35 @@ void check_resources_entry(void *param){
 /* Entry for the ACOUSTIC SIGNAL */
 void acoustic_signals_entry(void *param){
 
+    int time_start,time_end;
+
     rt_uint32_t e;  //to read event
     while(1){
         if (rt_event_recv(&event_resources,(EVENT_FLAG1 | EVENT_FLAG2),RT_EVENT_FLAG_OR | RT_EVENT_FLAG_CLEAR,RT_WAITING_FOREVER,&e) == RT_EOK){
-#ifdef BENCHMARKING
-        printf("\nTask4:\t Started at time %d tick, %d ms\n", rt_tick_get(), rt_tick_get_millisecond()-startingTime);
-#endif
+            startingTime = rt_tick_get_millisecond()-startingTime;
             if (e == 0x2){
              // EVENT_FLAG_1 is set
-#ifdef DEBUG_2
+
+#ifdef BENCHMARK_TIME
+        time_start=rt_tick_get_millisecond()-startingTime;
+        printf("\n\t\tTASK_4:\t Started at time %d ms\n", time_start);
+#endif
+
+#ifdef DEB_DISPLAY
                 printf("\t\tLOW BATTERY ALARM\n");
 #endif
 
             }else if (e == 0x4){
                 // EVENT_FLAG_2 is set
-#ifdef DEBUG_2
+#ifdef DEB_DISPLAY
                 printf("\t\tGARBAGE BAG FULL ALARM\n");
 #endif
             }
 
-#ifdef BENCHMARKING
-        printf("\t\tStop at time %d tick\n", rt_tick_get());
+#ifdef BENCHMARK_TIME
+        time_end= rt_tick_get_millisecond()-startingTime;
+        printf("\t\tStop at time %d ms\tDeadline was: %d ms\n", time_end, (PERIOD_TASK4)*10+time_start);
+        printf("\t\tTOTAL EXECUTION TIME: %d ms\n", time_end-time_start);
 #endif
 
         }
@@ -368,14 +386,16 @@ void brushes_speed_entry(void *param)
      */
     int brushes_speed[2], brushes_power[2];
     char *str;
+    int time_start,time_end;
 
     while(1){
         if (rt_event_recv(&event_tasks_activation, EVENT_BRUSHES_SPEED_ACTIVATION,
                           RT_EVENT_FLAG_AND | RT_EVENT_FLAG_CLEAR,
                           RT_WAITING_FOREVER, RT_NULL) == RT_EOK){
 
-#ifdef BENCHMARKING
-        printf("\nTask5:\t Started at time %d tick, %d ms\n", rt_tick_get(), rt_tick_get_millisecond()-startingTime);
+#ifdef BENCHMARK_TIME
+        time_start=rt_tick_get_millisecond()-startingTime;
+        printf("\n\t\tTASK_4:\t Started at time %d ms\n", time_start);
 #endif
 
             rt_pin_mode(BRUSHES_SPEED_PIN_NUMBER, PIN_MODE_INPUT);
@@ -441,12 +461,18 @@ void brushes_speed_entry(void *param)
                 }
             }
 
-#ifdef BENCHMARKING
-        printf("\t\tStop at time %d tick\n", rt_tick_get());
+#ifdef BENCHMARK_TIME
+        time_end= rt_tick_get_millisecond()-startingTime;
+        printf("\t\tStop at time %d ms\tDeadline was: %d ms\n", time_end, (PERIOD_TASK5)*10+time_start);
+        printf("\t\tTOTAL EXECUTION TIME: %d ms\n", time_end-time_start);
 #endif
 
         }
     }
 }
 
+int compute_priority_RM(int period){
+    int priority = 100/period;
+    return 10-priority;
+}
 

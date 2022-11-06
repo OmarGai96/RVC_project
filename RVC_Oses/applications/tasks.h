@@ -11,12 +11,24 @@
 // ************************************** DEFINITIONS **********************************************************
 
 
+
+
+#ifdef BACKGROUND_SCHEDULING
+#define OBSTACLE_CONTROL_PERIOD        200
+#define MOVEMENT_STOP_PERIOD           100  //lowest period
+#define MOVEMENT_CONTROL_PERIOD        250
+#define CHECK_RESOURCES_PERIOD         300
+#define ACOUSTIC_SIGNALS_PERIOD        0
+#define BRUSHES_SPEED_PERIOD           300
+
+#else
 #define OBSTACLE_CONTROL_PRIORITY      2
 #define MOVEMENT_STOP_PRIORITY         1
 #define MOVEMENT_CONTROL_PRIORITY      3
 #define CHECK_RESOURCES_PRIORITY       4
 #define ACOUSTIC_SIGNALS_PRIORITY      6
 #define BRUSHES_SPEED_PRIORITY         5
+#endif
 
 #define THREAD_TIMESLICE               5
 
@@ -30,12 +42,17 @@
 enum directions {UP, DOWN, LEFT, RIGHT, RETURN};
 
 
-#define PERIOD_TASK1    20
-#define PERIOD_TASK2    50
-#define PERIOD_TASK3    25
-//#define PERIOD_TASK4    50
-#define PERIOD_TASK5    25
+#define PERIOD_TASK1    20 //200 ms
+#define PERIOD_TASK2    50 //500 ms
+#define PERIOD_TASK3    25 //250 ms
+#define PERIOD_TASK4    50 //500 ms
+#define PERIOD_TASK5    25 //250 ms
 
+#define TICK_DELAY_T1 4 //40 ms
+#define TICK_DELAY_T2 5 //50 ms
+#define TICK_DELAY_T3 4 //40 ms
+#define TICK_DELAY_T4 2 //20 ms
+#define TICK_DELAY_T5 2 //20 ms
 
 // ************************************ STRUCTURES *************************************************************
 

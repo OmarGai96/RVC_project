@@ -54,34 +54,9 @@ rt_uint8_t rt_current_priority;
 static void (*rt_scheduler_hook)(struct rt_thread *from, struct rt_thread *to);
 static void (*rt_scheduler_switch_hook)(struct rt_thread *tid);
 
-static batteryLowFlag;
+rt_thread_t thread_list[10];
+int currentThread;
 
-/**
- * @Author Omar Gai
- * @brief check if the thread  is defined by our group and remove it
- * @param thread
- * @return 1 if ok, 0 otherwise
- */
-static int removeThread(char remThreadName[5]){
-
-    rt_thread_t thread = RT_NULL;
-    thread = rt_thread_find(remThreadName);  //retrieve the proper thread
-    rt_base_t lock;
-
-    if(thread != RT_NULL){
-
-        rt_kprintf("\nRemoving %s\n",rt_thread_get_name(thread));
-
-        rt_thread_delay(2000);  //delay of 20 sec
-
-        rt_thread_detach(thread);
-
-         return 1;
-    }else{
-        return 0;
-    }
-
-}
 
 static int isRunning(struct rt_thread *thread){
     if ((thread->stat & RT_THREAD_STAT_MASK) == RT_THREAD_RUNNING){
@@ -90,8 +65,6 @@ static int isRunning(struct rt_thread *thread){
         return 0;
     }
 }
-
-
 
 /**
  * @addtogroup Hook
@@ -206,6 +179,11 @@ static struct rt_thread* _scheduler_get_highest_priority_thread(rt_ubase_t *high
     register struct rt_thread *highest_priority_thread;
     register rt_ubase_t highest_ready_priority;
 
+#ifdef BACKGROUND_SCHEDULING
+
+#endif
+
+
 #if RT_THREAD_PRIORITY_MAX > 32
     register rt_ubase_t number;
 
@@ -232,8 +210,7 @@ static struct rt_thread* _scheduler_get_highest_priority_thread(rt_ubase_t *high
 void rt_system_scheduler_init(void)
 {
 
-    batteryLowFlag = 0;
-    batteryStatus = CHARGE;
+    currentThread = 0;
 
 #ifdef RT_USING_SMP
     int cpu;
@@ -464,6 +441,7 @@ void rt_schedule(void)
     rt_base_t level;
     struct rt_thread *to_thread;
     struct rt_thread *from_thread;
+    int actualTime;
 
     /* disable interrupt */
     level = rt_hw_interrupt_disable();
@@ -471,19 +449,6 @@ void rt_schedule(void)
     /* check the scheduler is enabled or not */
     if (rt_scheduler_lock_nest == 0){
         rt_ubase_t highest_ready_priority;
-
-        if(batteryStatus == (DISCHARGE_THRESHOLD-1) && batteryLowFlag==0){
-            batteryLowFlag = 1;
-            rt_kprintf("STOP SIMULATION\n");
-            rt_thread_delay(1000);
-
-            if(removeThread("Task3")==0)
-                rt_kprintf("\nError removing thread\n");
-            if(removeThread("Task4")==0)
-                rt_kprintf("\nError removing thread\n");
-            if(removeThread("Task5")==0)
-                rt_kprintf("\nError removing thread\n");
-        }
 
         if (rt_thread_ready_priority_group != 0){
             /* need_insert_from_thread: need to insert from_thread to ready queue */
@@ -533,10 +498,12 @@ void rt_schedule(void)
                          RT_NAME_MAX, to_thread->name, to_thread->sp,
                          RT_NAME_MAX, from_thread->name, from_thread->sp));
 #ifdef DEBUG_SCH
-            rt_kprintf("\nFrom thread %s to thread: %s\n", rt_thread_get_name(from_thread) ,rt_thread_get_name(to_thread));
-            rt_thread_get_status(from_thread);
-            rt_thread_get_status(to_thread);
-            //printf("Remaining %d ms for %s\n",(to_thread->remaining_tick)*10,  rt_thread_get_name(to_thread));
+
+            if(strcmp(to_thread->name,"tidle0")){
+                rt_kprintf("\nFrom thread %s to thread: %s\n", rt_thread_get_name(from_thread) ,rt_thread_get_name(to_thread));
+                //rt_thread_get_status(from_thread);
+                //rt_thread_get_status(to_thread);
+            }
             rt_uint8_t major, minor;
             cpu_usage_get(&major, &minor);
             rt_kprintf("Global cpu usage: %u.%u%% \n", major, minor);

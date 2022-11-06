@@ -12,8 +12,11 @@
 
 #include <rtconfig.h>
 
+#define BENCHMARK_TIME
+
 /* Using this macro to control all kernel debug features. */
 #ifdef RT_DEBUG
+
 
 /* Turn on some of these (set to non-zero) to debug kernel */
 #ifndef RT_DEBUG_MEM
