@@ -34,8 +34,6 @@
 #include <rthw.h>
 #include "applications/system.h"
 
-#define DEBUG_SCH
-
 rt_list_t rt_thread_priority_table[RT_THREAD_PRIORITY_MAX];
 rt_uint32_t rt_thread_ready_priority_group;
 #if RT_THREAD_PRIORITY_MAX > 32
@@ -54,9 +52,9 @@ rt_uint8_t rt_current_priority;
 static void (*rt_scheduler_hook)(struct rt_thread *from, struct rt_thread *to);
 static void (*rt_scheduler_switch_hook)(struct rt_thread *tid);
 
-rt_thread_t thread_list[10];
-int currentThread;
 
+int currentThread;
+extern int startingTime;
 
 static int isRunning(struct rt_thread *thread){
     if ((thread->stat & RT_THREAD_STAT_MASK) == RT_THREAD_RUNNING){
@@ -497,17 +495,7 @@ void rt_schedule(void)
                          rt_interrupt_nest, highest_ready_priority,
                          RT_NAME_MAX, to_thread->name, to_thread->sp,
                          RT_NAME_MAX, from_thread->name, from_thread->sp));
-#ifdef DEBUG_SCH
 
-            if(strcmp(to_thread->name,"tidle0")){
-                rt_kprintf("\nFrom thread %s to thread: %s\n", rt_thread_get_name(from_thread) ,rt_thread_get_name(to_thread));
-                //rt_thread_get_status(from_thread);
-                //rt_thread_get_status(to_thread);
-            }
-            rt_uint8_t major, minor;
-            cpu_usage_get(&major, &minor);
-            rt_kprintf("Global cpu usage: %u.%u%% \n", major, minor);
-#endif
 
 #ifdef RT_USING_OVERFLOW_CHECK
                 _rt_scheduler_stack_check(to_thread);
@@ -519,8 +507,21 @@ void rt_schedule(void)
 
                     RT_OBJECT_HOOK_CALL(rt_scheduler_switch_hook, (from_thread));
 
+                    //CONTEXT SWITCH
                     rt_hw_context_switch((rt_ubase_t)&from_thread->sp,
                             (rt_ubase_t)&to_thread->sp);
+#ifdef DEBUG_SCH
+
+                    if(from_thread->end_flag != 1){
+                        rt_kprintf("\nPREEMPTION of %s OCCURRED\n", rt_thread_get_name(from_thread));
+                    }
+                    rt_kprintf("\nFrom thread %s to thread: %s \tTime: %d ms\n", rt_thread_get_name(from_thread) ,rt_thread_get_name(to_thread),rt_tick_get_millisecond()-startingTime);
+
+                    rt_uint8_t major, minor;
+                    cpu_usage_get(&major, &minor);
+                    rt_kprintf("Global cpu usage: %u.%u%% \n", major, minor);
+#endif
+
 
                     /* enable interrupt */
                     rt_hw_interrupt_enable(level);

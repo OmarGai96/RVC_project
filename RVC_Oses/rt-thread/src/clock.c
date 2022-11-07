@@ -80,6 +80,11 @@ void rt_tick_increase(void)
     thread = rt_thread_self();
 
     -- thread->remaining_tick;
+
+    if(thread->tick_count >0){
+        -- thread->tick_count;  //Added by Omar
+    }
+
     if (thread->remaining_tick == 0)
     {
         /* change to initialized tick */

@@ -1,0 +1,169 @@
+
+                TASK_1:  Started at time 5560 ms
+                Stop at time 5560 ms    Deadline was: 5760 ms
+                TOTAL EXECUTION TIME: 0 ms
+
+From thread Task1 to thread: Task5
+Global cpu usage: 48.74%
+        TOTAL EXECUTION TIME: 0 ms
+Global cpu usage: 48.74%
+
+From thread tidle0 to thread: Task3
+Global cpu usage: 23.66%
+
+From thread Task3 to thread: Task1
+Global cpu usage: 23.66%
+
+                TASK_1:  Started at time 5760 ms
+                Stop at time 5770 ms    Deadline was: 5960 ms
+                TOTAL EXECUTION TIME: 10 ms
+
+From thread Task1 to thread: Task3
+Global cpu usage: 23.66%
+
+                TASK_3:  Started at time 5790 ms
+                Stop at time 5790 ms    Deadline was: 6040 ms
+                TOTAL EXECUTION TIME: 0 ms
+
+From thread Task3 to thread: Task5
+Global cpu usage: 23.66%
+
+                TASK_4:  Started at time 5810 ms
+                Stop at time 5810 ms    Deadline was: 6060 ms
+                TOTAL EXECUTION TIME: 0 ms
+Global cpu usage: 23.66%
+
+From thread tidle0 to thread: Task1
+Global cpu usage: 22.57%
+
+                TASK_1:  Started at time 5960 ms
+                Stop at time 5960 ms    Deadline was: 6160 ms
+                TOTAL EXECUTION TIME: 0 ms
+Global cpu usage: 22.57%
+
+From thread tidle0 to thread: Task3
+Global cpu usage: 22.57%
+
+                TASK_3:  Started at time 6010 ms
+                Stop at time 6010 ms    Deadline was: 6260 ms
+                TOTAL EXECUTION TIME: 0 ms
+
+From thread Task3 to thread: Task5
+Global cpu usage: 22.57%
+
+                TASK_4:  Started at time 6030 ms
+                Stop at time 6040 ms    Deadline was: 6280 ms
+                TOTAL EXECUTION TIME: 10 ms
+Global cpu usage: 22.57%
+
+From thread tidle0 to thread: Task1
+Global cpu usage: 66.54%
+
+                TASK_1:  Started at time 6160 ms
+                Stop at time 6160 ms    Deadline was: 6360 ms
+                TOTAL EXECUTION TIME: 0 ms
+Global cpu usage: 66.54%
+
+From thread tidle0 to thread: Task3
+Global cpu usage: 30.40%
+
+                TASK_3:  Started at time 6260 ms
+                Stop at time 6260 ms    Deadline was: 6510 ms
+                TOTAL EXECUTION TIME: 0 ms
+
+From thread Task3 to thread: Task5
+Global cpu usage: 30.40%
+
+                TASK_4:  Started at time 6280 ms
+                Stop at time 6280 ms    Deadline was: 6530 ms
+                TOTAL EXECUTION TIME: 0 ms
+Global cpu usage: 30.40%
+
+From thread tidle0 to thread: Task1
+Global cpu usage: 40.54%
+
+                TASK_1:  Started at time 6360 ms
+                Stop at time 6370 ms    Deadline was: 6560 ms
+                TOTAL EXECUTION TIME: 10 ms
+Global cpu usage: 40.54%
+
+From thread tidle0 to thread: Task3
+Global cpu usage: 42.83%
+
+                TASK_3:  Started at time 6510 ms
+                Stop at time 6510 ms    Deadline was: 6760 ms
+                TOTAL EXECUTION TIME: 0 ms
+
+From thread Task3 to thread: Task5
+Global cpu usage: 42.83%
+
+                TASK_4:  Started at time 6540 ms
+
+From thread Task5 to thread: Task1
+Global cpu usage: 42.83%
+
+                TASK_1:  Started at time 6560 ms
+                Stop at time 6570 ms    Deadline was: 6760 ms
+                TOTAL EXECUTION TIME: 10 ms
+
+From thread Task1 to thread: Task5
+Global cpu usage: 42.83%
+                Stop at time 6590 ms    Deadline was: 6790 ms
+                TOTAL EXECUTION TIME: 50 ms
+Global cpu usage: 42.83%
+
+From thread tidle0 to thread: Task3
+Global cpu usage: 20.63%
+
+From thread Task3 to thread: Task1
+Global cpu usage: 20.63%
+
+                TASK_1:  Started at time 6760 ms
+                Stop at time 6770 ms    Deadline was: 6960 ms
+                TOTAL EXECUTION TIME: 10 ms
+
+From thread Task1 to thread: Task3
+Global cpu usage: 20.63%
+
+                TASK_3:  Started at time 6780 ms
+                Stop at time 6780 ms    Deadline was: 7030 ms
+                TOTAL EXECUTION TIME: 0 ms
+
+From thread Task3 to thread: Task5
+Global cpu usage: 20.63%
+
+                TASK_4:  Started at time 6800 ms
+                Stop at time 6810 ms    Deadline was: 7050 ms
+                TOTAL EXECUTION TIME: 10 ms
+Global cpu usage: 20.63%
+
+From thread tidle0 to thread: Task1
+Global cpu usage: 8.48%
+
+                TASK_1:  Started at time 6960 ms
+                Stop at time 6960 ms    Deadline was: 7160 ms
+                TOTAL EXECUTION TIME: 0 ms
+Global cpu usage: 8.48%
+
+From thread tidle0 to thread: Task3
+Global cpu usage: 8.48%
+
+                TASK_3:  Started at time 7010 ms
+                Stop at time 7010 ms    Deadline was: 7260 ms
+                TOTAL EXECUTION TIME: 0 ms
+
+From thread Task3 to thread: Task5
+Global cpu usage: 8.48%
+
+                TASK_4:  Started at time 7030 ms
+                Stop at time 7030 ms    Deadline was: 7280 ms
+                TOTAL EXECUTION TIME: 0 ms
+Global cpu usage: 8.48%
+
+From thread tidle0 to thread: Task1
+Global cpu usage: 37.90%
+
+                TASK_1:  Started at time 7160 ms
+                Stop at time 7170 ms    Deadline was: 7360 ms
+                TOTAL EXECUTION TIME: 10 ms
+Global cpu usage: 37.90%

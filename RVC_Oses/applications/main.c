@@ -129,11 +129,7 @@ int main(void){
                    RT_NULL,
                    &obstacle_control_stack[0],
                    sizeof(obstacle_control_stack),
-#ifdef BACKGROUND_SCHEDULING
-                   OBSTACLE_CONTROL_PERIOD,
-#else
                    OBSTACLE_CONTROL_PRIORITY,
-#endif
                    THREAD_TIMESLICE);
 
     // initializing movement_stop thread
@@ -143,11 +139,7 @@ int main(void){
                    RT_NULL,
                    &movement_stop_stack[0],
                    sizeof(movement_stop_stack),
-#ifdef BACKGROUND_SCHEDULING
-                   MOVEMENT_STOP_PERIOD,
-#else
                    MOVEMENT_STOP_PRIORITY,
-#endif
                    THREAD_TIMESLICE);
 
     // initializing movement_control thread
@@ -157,11 +149,7 @@ int main(void){
                    RT_NULL,
                    &movement_control_stack[0],
                    sizeof(movement_control_stack),
-#ifdef BACKGROUND_SCHEDULING
-                   MOVEMENT_CONTROL_PERIOD,
-#else
                    MOVEMENT_CONTROL_PRIORITY,
-#endif
                    THREAD_TIMESLICE);
 
     // initializing check_resources thread
@@ -171,11 +159,8 @@ int main(void){
                    RT_NULL,
                    &check_resources_stack[0],
                    sizeof(check_resources_stack),
-#ifdef BACKGROUND_SCHEDULING
-                   CHECK_RESOURCES_PERIOD,
-#else
+
                    CHECK_RESOURCES_PRIORITY,
-#endif
                    THREAD_TIMESLICE);
 
     // initializing acoustic_signals thread
@@ -185,11 +170,7 @@ int main(void){
                    RT_NULL,
                    &acoustic_signals_stack[0],
                    sizeof(acoustic_signals_stack),
-#ifdef BACKGROUND_SCHEDULING
-                   ACOUSTIC_SIGNALS_PERIOD,
-#else
                    ACOUSTIC_SIGNALS_PRIORITY,
-#endif
                    THREAD_TIMESLICE);
 
     // initializing brushes speed thread
@@ -199,14 +180,8 @@ int main(void){
                    RT_NULL,
                    &brushes_speed_stack[0],
                    sizeof(brushes_speed_stack),
-#ifdef BACKGROUND_SCHEDULING
-                   BRUSHES_SPEED_PERIOD,
-#else
                    BRUSHES_SPEED_PRIORITY,
-#endif
                    THREAD_TIMESLICE);
-
-
 
 
 // *************************************** STARTING *************************************************************
@@ -216,11 +191,13 @@ int main(void){
 
     // starting the threads
     rt_thread_startup(&obstacle_control);
+
     rt_thread_startup(&movement_stop);
     rt_thread_startup(&movement_control);
     rt_thread_startup(&check_resources);
     rt_thread_startup(&acoustic_signals);
     rt_thread_startup(&brushes_speed);
+
 
     startingTime = rt_tick_get_millisecond();  //set the current starting time before launching our timers
 

@@ -38,28 +38,17 @@
 #define DEBUG_SCH
 
 char* rt_thread_get_name(rt_thread_t thread);
+void set_end_flag(rt_thread_t thread);
+void reset_end_flag(rt_thread_t thread);
+void set_tick_count(rt_thread_t thread, rt_uint16_t cnt);
+rt_uint16_t get_tick_count(rt_thread_t thread);
 
 #ifdef RT_USING_HOOK
 static void (*rt_thread_suspend_hook)(rt_thread_t thread);
 static void (*rt_thread_resume_hook) (rt_thread_t thread);
 static void (*rt_thread_inited_hook) (rt_thread_t thread);
 
-extern rt_thread_t thread_list[10];
-extern int currentThread;
 
-/**
- * @author Omar Gai
- * @param thread_period
- * @return
- */
-static rt_uint8_t computePriority(rt_uint16_t thread_period){
-    if (thread_period < RT_THREAD_PRIORITY_MAX){
-        return thread_period;
-    }else{
-        return 1000/thread_period;
-    }
-
-}
 
 /**
  * @brief   This function sets a hook function when the system suspend a thread.
@@ -192,10 +181,6 @@ static rt_err_t _thread_init(struct rt_thread *thread,
 
     /* priority init */
 
-#ifdef BACKGROUND_SCHEDULING
-    priority    = computePriority(priority);
-    rt_kprintf("\nPriority computed: %d, name: %s\n", priority,name);
-#endif
 
     RT_ASSERT(priority < RT_THREAD_PRIORITY_MAX);
 
@@ -259,9 +244,8 @@ static rt_err_t _thread_init(struct rt_thread *thread,
     thread->duration_tick = 0;
 #endif
 
-    /*add thread to thread_list*/
-    thread_list[currentThread] = &(thread);
-    currentThread++;
+    thread->end_flag = 0;   //Added by Omar
+    thread->tick_count = 0; //Added by Omar
 
     RT_OBJECT_HOOK_CALL(rt_thread_inited_hook, (thread));
 
@@ -1029,3 +1013,22 @@ void thread_cleanup_execute(rt_thread_t thread){
 }
 RTM_EXPORT(thread_cleanup_execute);
 
+void set_end_flag(rt_thread_t thread){
+    thread->end_flag = 1;
+}
+RTM_EXPORT(set_end_flag);
+
+void reset_end_flag(rt_thread_t thread){
+    thread->end_flag = 0;
+}
+RTM_EXPORT(reset_end_flag);
+
+void set_tick_count(rt_thread_t thread, rt_uint16_t cnt){
+    thread->tick_count = cnt;
+}
+RTM_EXPORT(set_tick_count);
+
+rt_uint16_t get_tick_count(rt_thread_t thread){
+    return thread->tick_count;
+}
+RTM_EXPORT(get_tick_count);
