@@ -104,8 +104,9 @@ void movement_control_obstacle_handler(int sig)
 /* Entry for the task obstacle control */
 void obstacle_control_entry(void *param)
 {
-    int obstacle;
-    rt_pin_mode(PROXIMITY_SENSOR_PIN_NUMBER, PIN_MODE_INPUT);
+    char obstacle;
+    proximity_sensor = rt_device_find("proximity_sensor");
+    rt_device_init(proximity_sensor);
 
     // infinite loop
     while (1)
@@ -121,8 +122,8 @@ void obstacle_control_entry(void *param)
 #endif
 
             // check if there's an obstacle, if yes activates movements threads
-            obstacle =  rt_pin_read(PROXIMITY_SENSOR_PIN_NUMBER);
-            if (obstacle == 1)
+            rt_device_read(proximity_sensor, 0, &obstacle, 1);
+            if (obstacle == 'y')
             {
                 rt_thread_kill(&movement_control, SIGUSR1);
                 rt_event_send(&event_obstacle, EVENT_OBSTACLE_FOUND);

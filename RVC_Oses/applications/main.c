@@ -7,7 +7,7 @@
 #include "system.h"
 #include "tasks.h"
 #include "structures.h"
-#include "cpu_usage.h"
+//#include "cpu_usage.h"
 
 int startingTime =0;
 
@@ -18,6 +18,13 @@ static void hook_of_scheduler(struct rt_thread* from, struct rt_thread* to)
 
 
 int main(void){
+    /* DRIVER EXAMPLE
+    rt_device_t proximity_sensor;
+    char *buffer;
+
+    proximity_sensor = rt_device_find("proximity_sensor");
+    rt_device_init(proximity_sensor);
+    rt_device_read(proximity_sensor, 0, buffer, 100); */
 
     rt_err_t result;
 
@@ -207,7 +214,6 @@ int main(void){
     rt_timer_start (&timer_check_resources_activation);
     rt_timer_start (&timer_acoustic_signals_activation);
     rt_timer_start (&timer_brushes_speed_activation);
-
 
 
     return 0;

@@ -69,6 +69,12 @@ char brushes_speed_stack[1024];
 struct rt_thread brushes_speed;
 
 
+// *********************************** DEVICES **************************************************************
+
+
+rt_device_t proximity_sensor;
+
+
 // ************************************ FUNCTIONS **************************************************************
 
 void obstacle_control_entry(void *param);

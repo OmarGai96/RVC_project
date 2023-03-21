@@ -478,7 +478,7 @@ void rt_schedule(void)
                          rt_interrupt_nest, highest_ready_priority,
                          RT_NAME_MAX, to_thread->name, to_thread->sp,
                          RT_NAME_MAX, from_thread->name, from_thread->sp));
-#ifdef DEBUG_SCH
+#ifndef DEBUG_SCH
             rt_kprintf("\nFrom thread %s to thread: %s\n", rt_thread_get_name(from_thread) ,rt_thread_get_name(to_thread));
             rt_thread_get_status(from_thread);
             rt_thread_get_status(to_thread);

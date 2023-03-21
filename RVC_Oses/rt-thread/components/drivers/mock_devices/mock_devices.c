@@ -6,16 +6,24 @@
  * - garbage_bag: we will read garbage_bag status
  */
 
-
-#include <drivers/mock_devices.h>
-
 /* DRIVERS for proximity_sensor */
 static int proximity_sensor_init(rt_device_t dev) {
     dev->ref_count++;
     return RT_EOK;
 }
+
 static int proximity_sensor_read(rt_device_t dev, rt_off_t pos, void* buffer, rt_size_t size) {
-    /* insert function */
+    static int i=0;
+    char *buf;
+
+    buf = (char*)buffer;
+
+    if (++i == 50) {
+        i=0;
+        *buf = 'y';
+    } else {
+        *buf = 'n';
+    }
     return RT_EOK;
 }
 const static struct rt_device_ops proximity_sensor_ops =
