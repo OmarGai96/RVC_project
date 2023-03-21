@@ -33,8 +33,6 @@
 #include <rtthread.h>
 #include <rthw.h>
 
-#define DEBUG_SCH
-
 rt_list_t rt_thread_priority_table[RT_THREAD_PRIORITY_MAX];
 rt_uint32_t rt_thread_ready_priority_group;
 #if RT_THREAD_PRIORITY_MAX > 32
@@ -478,15 +476,6 @@ void rt_schedule(void)
                          rt_interrupt_nest, highest_ready_priority,
                          RT_NAME_MAX, to_thread->name, to_thread->sp,
                          RT_NAME_MAX, from_thread->name, from_thread->sp));
-#ifndef DEBUG_SCH
-            rt_kprintf("\nFrom thread %s to thread: %s\n", rt_thread_get_name(from_thread) ,rt_thread_get_name(to_thread));
-            rt_thread_get_status(from_thread);
-            rt_thread_get_status(to_thread);
-            //printf("Remaining %d ms for %s\n",(to_thread->remaining_tick)*10,  rt_thread_get_name(to_thread));
-            rt_uint8_t major, minor;
-            cpu_usage_get(&major, &minor);
-            rt_kprintf("Global cpu usage: %u.%u%% \n", major, minor);
-#endif
 
 #ifdef RT_USING_OVERFLOW_CHECK
                 _rt_scheduler_stack_check(to_thread);
