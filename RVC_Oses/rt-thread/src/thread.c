@@ -1027,6 +1027,13 @@ void set_tick_count(rt_thread_t thread, rt_uint16_t cnt){
 RTM_EXPORT(set_tick_count);
 
 rt_uint16_t get_tick_count(rt_thread_t thread){
+#ifdef DEB_INTERNAL
+    if(thread->tick_count == 0){
+        printf("\tEnd of %s\n", thread->name);
+    }else{
+        printf("\n\t\tTicks %d for thread %s\n", thread->tick_count, thread->name);
+    }
+#endif
     return thread->tick_count;
 }
 RTM_EXPORT(get_tick_count);

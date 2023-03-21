@@ -495,12 +495,13 @@ void rt_schedule(void)
                          rt_interrupt_nest, highest_ready_priority,
                          RT_NAME_MAX, to_thread->name, to_thread->sp,
                          RT_NAME_MAX, from_thread->name, from_thread->sp));
-
+/*
 #ifdef DEBUG_SCH
                 rt_uint8_t major, minor;
                 cpu_usage_get(&major, &minor);
                 rt_kprintf("Global cpu usage: %u.%u%% \n", major, minor);
 #endif
+*/
 
 #ifdef RT_USING_OVERFLOW_CHECK
                 _rt_scheduler_stack_check(to_thread);
