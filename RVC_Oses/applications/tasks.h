@@ -4,9 +4,10 @@
 
 #include "system.h"
 
-//#define BENCHMARKING   //uncomment to print timing informations
-//#define DEBUG_1  //uncomment to print detailed informations
-#define DEBUG_2
+
+//************************************** DEBUG SECTION *********************************************************
+
+/*see rtconfig.h file, user define section*/
 
 // ************************************** DEFINITIONS **********************************************************
 

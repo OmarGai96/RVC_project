@@ -6,8 +6,6 @@
 #include "tasks.h"
 #include "structures.h"
 
-//#define BENCHMARK_TIME
-
 static int map[MAP_SIDE][MAP_SIDE];
 static int position[2];
 enum directions direction;
@@ -304,13 +302,14 @@ void check_resources_entry(void *param){
 #ifdef BENCHMARK_TIME
         printf("\n\t\tTASK_3:\t Started at time %d ms\n", time_start);
 #endif
-#ifdef DEB_DISPLAY
+
         if(batteryStatus!=previousBatteryStatus && batteryStatus%5==0){
             previousBatteryStatus = batteryStatus;
+#ifdef DEB_DISPLAY
             printf("\n\tBattery status %d %% \n", batteryStatus);
+#endif
         }
 
-#endif
         /**Check BATTERY status**/
         if(batteryStatus <= DISCHARGE+1) {
             rt_mb_send(&mb2_3, (rt_uint32_t)&mb_str3);      //notify task 2 BATTERY is completely LOW
@@ -319,7 +318,10 @@ void check_resources_entry(void *param){
             rt_mb_send(&mb2_3, (rt_uint32_t)&mb_str2);      //notify task 2
 
 #ifdef DEB_DISPLAY
-            printf("\tBattery LOW\n\t\tMail sent %s\n", mb_str2);
+            printf("\t\tBATTERY LOW\n\n");
+#endif
+#ifdef DEB_INTERNAL
+            printf("\t\tMail sent %s\t\t because battery LOW\n", mb_str2);
 #endif
 
         }
@@ -331,7 +333,10 @@ void check_resources_entry(void *param){
             rt_mb_send(&mb2_3, (rt_uint32_t)&mb_str1);      //notify task 2
 
 #ifdef DEB_DISPLAY
-            printf("\tGarbage bag FULL\n\t\tMail sent %s\n", mb_str1);
+            printf("\tGarbage bag FULL\n\n");
+#endif
+#ifdef DEB_INTERNAL
+            printf("\t\tMail sent %s\t\t because Garbage bag is FULL\n", mb_str1);
 #endif
 
         }

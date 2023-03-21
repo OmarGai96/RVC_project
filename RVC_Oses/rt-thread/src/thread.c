@@ -35,8 +35,6 @@
 #include <string.h>
 #include "cpu_usage.h"
 
-#define DEBUG_SCH
-
 char* rt_thread_get_name(rt_thread_t thread);
 void set_end_flag(rt_thread_t thread);
 void reset_end_flag(rt_thread_t thread);
