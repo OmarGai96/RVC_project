@@ -32,6 +32,7 @@
 
 #include <rtthread.h>
 #include <rthw.h>
+#include "applications/system.h"
 
 rt_list_t rt_thread_priority_table[RT_THREAD_PRIORITY_MAX];
 rt_uint32_t rt_thread_ready_priority_group;
@@ -50,6 +51,18 @@ rt_uint8_t rt_current_priority;
 #ifdef RT_USING_HOOK
 static void (*rt_scheduler_hook)(struct rt_thread *from, struct rt_thread *to);
 static void (*rt_scheduler_switch_hook)(struct rt_thread *tid);
+
+
+int currentThread;
+extern int startingTime;
+
+static int isRunning(struct rt_thread *thread){
+    if ((thread->stat & RT_THREAD_STAT_MASK) == RT_THREAD_RUNNING){
+        return 1;
+    }else{
+        return 0;
+    }
+}
 
 /**
  * @addtogroup Hook
@@ -164,6 +177,11 @@ static struct rt_thread* _scheduler_get_highest_priority_thread(rt_ubase_t *high
     register struct rt_thread *highest_priority_thread;
     register rt_ubase_t highest_ready_priority;
 
+#ifdef BACKGROUND_SCHEDULING
+
+#endif
+
+
 #if RT_THREAD_PRIORITY_MAX > 32
     register rt_ubase_t number;
 
@@ -189,6 +207,9 @@ static struct rt_thread* _scheduler_get_highest_priority_thread(rt_ubase_t *high
  */
 void rt_system_scheduler_init(void)
 {
+
+    currentThread = 0;
+
 #ifdef RT_USING_SMP
     int cpu;
 #endif /* RT_USING_SMP */
@@ -418,26 +439,25 @@ void rt_schedule(void)
     rt_base_t level;
     struct rt_thread *to_thread;
     struct rt_thread *from_thread;
+    int actualTime;
 
     /* disable interrupt */
     level = rt_hw_interrupt_disable();
 
     /* check the scheduler is enabled or not */
-    if (rt_scheduler_lock_nest == 0)
-    {
+    if (rt_scheduler_lock_nest == 0){
         rt_ubase_t highest_ready_priority;
 
-        if (rt_thread_ready_priority_group != 0)
-        {
+        if (rt_thread_ready_priority_group != 0){
             /* need_insert_from_thread: need to insert from_thread to ready queue */
             int need_insert_from_thread = 0;
 
             to_thread = _scheduler_get_highest_priority_thread(&highest_ready_priority);
+            //assign to thread the highest priority thread and to highest_ready_priority the highest priority value
 
-            if ((rt_current_thread->stat & RT_THREAD_STAT_MASK) == RT_THREAD_RUNNING)
-            {
-                if (rt_current_thread->current_priority < highest_ready_priority)
-                {
+            //if ((rt_current_thread->stat & RT_THREAD_STAT_MASK) == RT_THREAD_RUNNING){
+            if(isRunning(rt_current_thread)){
+                if (rt_current_thread->current_priority < highest_ready_priority){
                     to_thread = rt_current_thread;
                 }
                 else if (rt_current_thread->current_priority == highest_ready_priority && (rt_current_thread->stat & RT_THREAD_STAT_YIELD_MASK) == 0)
@@ -451,17 +471,16 @@ void rt_schedule(void)
                 rt_current_thread->stat &= ~RT_THREAD_STAT_YIELD_MASK;
             }
 
-            if (to_thread != rt_current_thread)
-            {
+            if (to_thread != rt_current_thread){
                 /* if the destination thread is not the same as current thread */
                 rt_current_priority = (rt_uint8_t)highest_ready_priority;
+
                 from_thread         = rt_current_thread;
                 rt_current_thread   = to_thread;
 
                 RT_OBJECT_HOOK_CALL(rt_scheduler_hook, (from_thread, to_thread));
 
-                if (need_insert_from_thread)
-                {
+                if (need_insert_from_thread){
                     rt_schedule_insert_thread(from_thread);
                 }
 
@@ -476,6 +495,13 @@ void rt_schedule(void)
                          rt_interrupt_nest, highest_ready_priority,
                          RT_NAME_MAX, to_thread->name, to_thread->sp,
                          RT_NAME_MAX, from_thread->name, from_thread->sp));
+/*
+#ifdef DEBUG_SCH
+                rt_uint8_t major, minor;
+                cpu_usage_get(&major, &minor);
+                rt_kprintf("Global cpu usage: %u.%u%% \n", major, minor);
+#endif
+*/
 
 #ifdef RT_USING_OVERFLOW_CHECK
                 _rt_scheduler_stack_check(to_thread);
@@ -487,6 +513,15 @@ void rt_schedule(void)
 
                     RT_OBJECT_HOOK_CALL(rt_scheduler_switch_hook, (from_thread));
 
+#ifdef DEBUG_SCH
+
+                    if(from_thread->end_flag != 1){
+                        rt_kprintf("\nPREEMPTION of %s OCCURRED\n", rt_thread_get_name(from_thread));
+                    }
+                    rt_kprintf("\nFrom thread %s to thread: %s \tTime: %d ms\n", rt_thread_get_name(from_thread) ,rt_thread_get_name(to_thread),rt_tick_get_millisecond()-startingTime);
+#endif
+
+                    //CONTEXT SWITCH
                     rt_hw_context_switch((rt_ubase_t)&from_thread->sp,
                             (rt_ubase_t)&to_thread->sp);
 
@@ -521,9 +556,8 @@ void rt_schedule(void)
                     rt_hw_context_switch_interrupt((rt_ubase_t)&from_thread->sp,
                             (rt_ubase_t)&to_thread->sp);
                 }
-            }
-            else
-            {
+            }else{
+                /* if the destination thread is the same as current thread */
                 rt_schedule_remove_thread(rt_current_thread);
                 rt_current_thread->stat = RT_THREAD_RUNNING | (rt_current_thread->stat & ~RT_THREAD_STAT_MASK);
             }
@@ -992,3 +1026,5 @@ rt_uint16_t rt_critical_level(void)
 RTM_EXPORT(rt_critical_level);
 
 /**@}*/
+
+

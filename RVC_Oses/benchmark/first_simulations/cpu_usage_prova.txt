@@ -28,7 +28,9 @@ From thread tidle0 to thread: main
 Thread tidle0 status is: READY
 Thread main status is: RUNNING
 
-From thread main to thread: obstacleü
+------------------------------------------------
+
+From thread main to thread: obstacleü  --> OBSTACLE CONTROL CREATED
 Thread main status is: READY
 Thread obstacleü status is: RUNNING
 
@@ -36,7 +38,7 @@ From thread obstacleü to thread: main
 Thread obstacleü status is: SUSPEND
 Thread main status is: RUNNING
 
-From thread main to thread: movementü
+From thread main to thread: movementü --> MOVEMENT CONTROL CREATED
 Thread main status is: READY
 Thread movementü status is: RUNNING
 
@@ -52,7 +54,7 @@ From thread movementü to thread: main
 Thread movementü status is: SUSPEND
 Thread main status is: RUNNING
 
-From thread main to thread: check_reü
+From thread main to thread: check_reü --> CHECK RESOURCES CREATED
 Thread main status is: READY
 Thread check_reü status is: RUNNING
 
@@ -60,7 +62,7 @@ From thread check_reü to thread: main
 Thread check_reü status is: SUSPEND
 Thread main status is: RUNNING
 
-From thread main to thread: acousticü
+From thread main to thread: acousticü ---> ACOUSTIC SIGNALS CREATED
 Thread main status is: READY
 Thread acousticü status is: RUNNING
 
@@ -68,7 +70,7 @@ From thread acousticü to thread: main
 Thread acousticü status is: SUSPEND
 Thread main status is: RUNNING
 
-From thread main to thread: brushes_ü
+From thread main to thread: brushes_ü --> BRUSHES SPEED CREATED
 Thread main status is: READY
 Thread brushes_ü status is: RUNNING
 
@@ -80,6 +82,7 @@ cpu usage: 0.0%
 From thread main to thread: tshell
 Thread main status is: SUSPEND
 Thread tshell status is: RUNNING
+---------------------------------------
 msh />
 From thread tshell to thread: tidle0
 Thread tshell status is: SUSPEND

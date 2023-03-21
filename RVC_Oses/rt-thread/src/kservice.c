@@ -22,6 +22,7 @@
 
 #include <rtthread.h>
 #include <rthw.h>
+#include <stdio.h>
 
 #ifdef RT_USING_MODULE
 #include <dlmodule.h>
@@ -1254,7 +1255,7 @@ RT_WEAK int rt_kprintf(const char *fmt, ...)
      * large excluding the terminating null byte. If the output string
      * would be larger than the rt_log_buf, we have to adjust the output
      * length. */
-    length = rt_vsnprintf(rt_log_buf, sizeof(rt_log_buf) - 1, fmt, args);
+    length = vsnprintf(rt_log_buf, sizeof(rt_log_buf) - 1, fmt, args);
     if (length > RT_CONSOLEBUF_SIZE - 1)
         length = RT_CONSOLEBUF_SIZE - 1;
 #ifdef RT_USING_DEVICE

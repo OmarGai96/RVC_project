@@ -25,6 +25,15 @@
 #define RT_DEBUG
 #define RT_DEBUG_COLOR
 
+/* user define */
+
+//#define BENCHMARK_TIME  //uncomment to print timing information
+#define DEB_DISPLAY     //uncomment to print SIMULATION info
+//#define DEB_INTERNAL   //uncomment to print INTERNAL STATUS information
+//#define DEBUG_SCH      //uncomment to print scheduler info
+
+/* end of user define */
+
 /* Inter-Thread communication */
 
 #define RT_USING_SEMAPHORE

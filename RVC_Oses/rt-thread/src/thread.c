@@ -35,13 +35,18 @@
 #include <string.h>
 #include "cpu_usage.h"
 
-#define DEBUG_SCH
 char* rt_thread_get_name(rt_thread_t thread);
+void set_end_flag(rt_thread_t thread);
+void reset_end_flag(rt_thread_t thread);
+void set_tick_count(rt_thread_t thread, rt_uint16_t cnt);
+rt_uint16_t get_tick_count(rt_thread_t thread);
 
 #ifdef RT_USING_HOOK
 static void (*rt_thread_suspend_hook)(rt_thread_t thread);
 static void (*rt_thread_resume_hook) (rt_thread_t thread);
 static void (*rt_thread_inited_hook) (rt_thread_t thread);
+
+
 
 /**
  * @brief   This function sets a hook function when the system suspend a thread.
@@ -147,7 +152,7 @@ static rt_err_t _thread_init(struct rt_thread *thread,
                              void             *parameter,
                              void             *stack_start,
                              rt_uint32_t       stack_size,
-                             rt_uint8_t        priority,
+                             rt_uint16_t        priority,
                              rt_uint32_t       tick)
 {
     /* init thread list */
@@ -173,7 +178,10 @@ static rt_err_t _thread_init(struct rt_thread *thread,
 #endif /* ARCH_CPU_STACK_GROWS_UPWARD */
 
     /* priority init */
+
+
     RT_ASSERT(priority < RT_THREAD_PRIORITY_MAX);
+
     thread->init_priority    = priority;
     thread->current_priority = priority;
 
@@ -234,6 +242,9 @@ static rt_err_t _thread_init(struct rt_thread *thread,
     thread->duration_tick = 0;
 #endif
 
+    thread->end_flag = 0;   //Added by Omar
+    thread->tick_count = 0; //Added by Omar
+
     RT_OBJECT_HOOK_CALL(rt_thread_inited_hook, (thread));
 
     return RT_EOK;
@@ -261,7 +272,7 @@ static rt_err_t _thread_init(struct rt_thread *thread,
  *
  * @param   stack_size is the size of thread stack.
  *
- * @param   priority is the priority of thread.
+ * @param   period is the period of thread.
  *
  * @param   tick is the time slice if there are same priority thread.
  *
@@ -274,7 +285,7 @@ rt_err_t rt_thread_init(struct rt_thread *thread,
                         void             *parameter,
                         void             *stack_start,
                         rt_uint32_t       stack_size,
-                        rt_uint8_t        priority,
+                        rt_uint16_t        priority,
                         rt_uint32_t       tick)
 {
     /* thread check */
@@ -344,6 +355,7 @@ rt_err_t rt_thread_startup(rt_thread_t thread)
     thread->high_mask   = 1L << (thread->current_priority & 0x07);  /* 3bit */
 #else
     thread->number_mask = 1L << thread->current_priority;
+
 #endif /* RT_THREAD_PRIORITY_MAX > 32 */
 
     RT_DEBUG_LOG(RT_DEBUG_THREAD, ("startup a thread:%s with priority:%d\n",
@@ -359,7 +371,7 @@ rt_err_t rt_thread_startup(rt_thread_t thread)
     }
 
 #ifdef DEBUG_SCH
-    rt_kprintf("\t\tSTARTUP OF %s\n", rt_thread_get_name(thread));
+    rt_kprintf("\t\tSTARTUP OF %s, with priority: %d\n", rt_thread_get_name(thread),thread->init_priority);
 #endif
 
     return RT_EOK;
@@ -962,6 +974,13 @@ RTM_EXPORT(rt_thread_find);
 
 /**@}*/
 
+//////////////////////////////////////////////////7
+
+/**@Author Omar Gai
+ *
+ *
+ */
+
 char* rt_thread_get_name(rt_thread_t thread){
     return thread->name;
 }
@@ -977,10 +996,44 @@ rt_uint8_t rt_thread_get_status(rt_thread_t thread)
             break;
         case RT_THREAD_RUNNING: rt_kprintf("RUNNING\n");
             break;
-        default: break;
+        case RT_THREAD_CLOSE: rt_kprintf("CLOSE\n");
+        default:
+            rt_kprintf("\n");
+            break;
     }
     return thread->stat;
 }
 RTM_EXPORT(rt_thread_get_status);
 
 
+void thread_cleanup_execute(rt_thread_t thread){
+    _thread_cleanup_execute(thread);
+}
+RTM_EXPORT(thread_cleanup_execute);
+
+void set_end_flag(rt_thread_t thread){
+    thread->end_flag = 1;
+}
+RTM_EXPORT(set_end_flag);
+
+void reset_end_flag(rt_thread_t thread){
+    thread->end_flag = 0;
+}
+RTM_EXPORT(reset_end_flag);
+
+void set_tick_count(rt_thread_t thread, rt_uint16_t cnt){
+    thread->tick_count = cnt;
+}
+RTM_EXPORT(set_tick_count);
+
+rt_uint16_t get_tick_count(rt_thread_t thread){
+#ifdef DEB_INTERNAL
+    if(thread->tick_count == 0){
+        printf("\tEnd of %s\n", thread->name);
+    }else{
+        printf("\n\t\tTicks %d for thread %s\n", thread->tick_count, thread->name);
+    }
+#endif
+    return thread->tick_count;
+}
+RTM_EXPORT(get_tick_count);

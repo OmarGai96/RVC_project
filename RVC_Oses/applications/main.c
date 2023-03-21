@@ -89,13 +89,6 @@ int main(void){
                   PERIOD_TASK3, //every 250 ms
                   RT_TIMER_FLAG_PERIODIC);
 
-    // initializing the TIMER for acoustic signals
-    rt_timer_init(&timer_acoustic_signals_activation, "timer_acoustic_signals_activation",
-                  timeout_acoustic_signals,
-                  RT_NULL,
-                  PERIOD_TASK4, // every 500 ms
-                  RT_TIMER_FLAG_PERIODIC);
-
     // initializing the TIMER for brushes_speed
     rt_timer_init(&timer_brushes_speed_activation, "timer_brushes_speed_activation",
                   timeout_brushes_speed,
@@ -143,7 +136,8 @@ int main(void){
                    RT_NULL,
                    &obstacle_control_stack[0],
                    sizeof(obstacle_control_stack),
-                   OBSTACLE_CONTROL_PRIORITY, THREAD_TIMESLICE);
+                   OBSTACLE_CONTROL_PRIORITY,
+                   THREAD_TIMESLICE);
 
     // initializing movement_stop thread
     rt_thread_init(&movement_stop,
@@ -152,7 +146,8 @@ int main(void){
                    RT_NULL,
                    &movement_stop_stack[0],
                    sizeof(movement_stop_stack),
-                   MOVEMENT_STOP_PRIORITY, THREAD_TIMESLICE);
+                   MOVEMENT_STOP_PRIORITY,
+                   THREAD_TIMESLICE);
 
     // initializing movement_control thread
     rt_thread_init(&movement_control,
@@ -161,7 +156,8 @@ int main(void){
                    RT_NULL,
                    &movement_control_stack[0],
                    sizeof(movement_control_stack),
-                   MOVEMENT_CONTROL_PRIORITY, THREAD_TIMESLICE);
+                   MOVEMENT_CONTROL_PRIORITY,
+                   THREAD_TIMESLICE);
 
     // initializing check_resources thread
     rt_thread_init(&check_resources,
@@ -170,7 +166,9 @@ int main(void){
                    RT_NULL,
                    &check_resources_stack[0],
                    sizeof(check_resources_stack),
-                   CHECK_RESOURCES_PRIORITY, THREAD_TIMESLICE);
+
+                   CHECK_RESOURCES_PRIORITY,
+                   THREAD_TIMESLICE);
 
     // initializing acoustic_signals thread
     rt_thread_init(&acoustic_signals,
@@ -179,7 +177,8 @@ int main(void){
                    RT_NULL,
                    &acoustic_signals_stack[0],
                    sizeof(acoustic_signals_stack),
-                   ACOUSTIC_SIGNALS_PRIORITY, THREAD_TIMESLICE);
+                   ACOUSTIC_SIGNALS_PRIORITY,
+                   THREAD_TIMESLICE);
 
     // initializing brushes speed thread
     rt_thread_init(&brushes_speed,
@@ -188,9 +187,8 @@ int main(void){
                    RT_NULL,
                    &brushes_speed_stack[0],
                    sizeof(brushes_speed_stack),
-                   BRUSHES_SPEED_PRIORITY, THREAD_TIMESLICE);
-
-
+                   BRUSHES_SPEED_PRIORITY,
+                   THREAD_TIMESLICE);
 
 
 // *************************************** STARTING *************************************************************
@@ -200,11 +198,13 @@ int main(void){
 
     // starting the threads
     rt_thread_startup(&obstacle_control);
+
     rt_thread_startup(&movement_stop);
     rt_thread_startup(&movement_control);
     rt_thread_startup(&check_resources);
     rt_thread_startup(&acoustic_signals);
     rt_thread_startup(&brushes_speed);
+
 
     startingTime = rt_tick_get_millisecond();  //set the current starting time before launching our timers
 
@@ -212,7 +212,6 @@ int main(void){
     rt_timer_start (&timer_obstacle_control_activation);
     rt_timer_start (&timer_movement_control_activation);
     rt_timer_start (&timer_check_resources_activation);
-    rt_timer_start (&timer_acoustic_signals_activation);
     rt_timer_start (&timer_brushes_speed_activation);
 
 

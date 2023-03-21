@@ -18,7 +18,7 @@ static int proximity_sensor_read(rt_device_t dev, rt_off_t pos, void* buffer, rt
 
     buf = (char*)buffer;
 
-    if (++i == 50) {
+    if (++i == 20) {
         i=0;
         *buf = 'y';
     } else {
