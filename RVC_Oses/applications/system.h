@@ -14,7 +14,8 @@
 #define CHARGE 100
 #define HALFCHARGE 50
 #define DISCHARGE_THRESHOLD 10
-#define DISCHARGE 0
+#define DISCHARGE 2
+#define TOTALLY_DISCHARGE 0
 
 /* GARBAGE BAG STATUS*/
 #define EMPTY 0
@@ -32,6 +33,11 @@
 uint32_t batteryStatus;
 uint32_t garbageBagStatus;
 
+/** This function initializes the batteryStatus and garbageBagStatus (global) variables
+ * @param: none
+ * @return: none
+ *
+**/
 void initSystem(void);
 
 

@@ -4,10 +4,9 @@
 #include "system.h"
 #include "structures.h"
 
+/** initialize global variables **/
+void initSystem(void){
 
-void initSystem(void)
-{
-    /* initialize global variables */
     batteryStatus = CHARGE;
     garbageBagStatus = EMPTY;
 }
