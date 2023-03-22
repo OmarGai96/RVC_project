@@ -95,6 +95,62 @@ void movement_control_obstacle_handler(int sig)
 
 }
 
+/* Function to turn off the system (detach all the tasks)
+ * usecases: - battery is totally LOW
+ *           - robot is in re-charging station (after cleaning)
+ *
+ */
+void turnOffSystem(void){
+    if (rt_thread_detach(&obstacle_control) == RT_EOK){
+#ifdef DEB_INTERNAL
+        printf("\n\tTask1 detached correctly");
+#endif
+    }else{
+#ifdef DEB_INTERNAL
+        printf("\n\tTask1 detach error");
+#endif
+    }
+
+    if (rt_thread_detach(&movement_control) == RT_EOK){
+#ifdef DEB_INTERNAL
+        printf("\n\tTask2 detached correctly");
+#endif
+    }else{
+#ifdef DEB_INTERNAL
+        printf("\n\tTask2 detach error");
+#endif
+    }
+
+    if (rt_thread_detach(&check_resources) == RT_EOK){
+#ifdef DEB_INTERNAL
+        printf("\n\tTask3 detached correctly");
+#endif
+    }else{
+#ifdef DEB_INTERNAL
+        printf("\n\tTask3 detach error");
+#endif
+    }
+
+    if (rt_thread_detach(&acoustic_signals) == RT_EOK){
+#ifdef DEB_INTERNAL
+        printf("\n\tTask4 detached correctly");
+#endif
+    }else{
+#ifdef DEB_INTERNAL
+        printf("\n\tTask4 detach error");
+#endif
+    }
+
+    if (rt_thread_detach(&brushes_speed) == RT_EOK){
+#ifdef DEB_INTERNAL
+        printf("\n\tTask5 detached correctly");
+#endif
+    }else{
+#ifdef DEB_INTERNAL
+        printf("\n\tTask5 detach error");
+#endif
+    }
+}
 
 
 // THREADS ENTRIES *********************************************************************************************
@@ -315,34 +371,41 @@ void check_resources_entry(void *param){
         printf("\n\t\tTASK_3:\t Started at time %d ms\n", time_start);
 #endif
 
-        if(batteryStatus!=previousBatteryStatus && batteryStatus%5==0){
-            previousBatteryStatus = batteryStatus;
 #ifdef DEB_DISPLAY
+        /**display only if the status is a multiple of 5, useful to limit the number of prints**/
+        if(batteryStatus%5==0){
             printf("\n\tBattery status %d %% \n", batteryStatus);
-#endif
         }
+#endif
 
         /**Check BATTERY status**/
-        if(batteryStatus <= DISCHARGE+1) {
-            rt_mb_send(&mb2_3, (rt_uint32_t)&mb_str3);      //notify task 2 BATTERY is completely LOW
-        }else if(batteryStatus <= DISCHARGE_THRESHOLD) {
-            rt_event_send(&event_resources, EVENT_FLAG1);   //notify task 4
-            rt_mb_send(&mb2_3, (rt_uint32_t)&mb_str2);      //notify task 2
+        if(batteryStatus == TOTALLY_DISCHARGE){
+            //TODO: notify someone to TURN OFF the system
+#ifdef DEB_DISPLAY
+            printf("\t\tBATTERY TOTALLY LOW --> TURN OFF THE SYSTEM\n\n"); //ITA: la batteria è completamente scarica
+#endif
+        }else if(batteryStatus <= DISCHARGE) {
+            rt_mb_send(&mb2_3, (rt_uint32_t)&mb_str3);      //notify task 2 BATTERY is LOW
+#ifdef DEB_DISPLAY
+            printf("\t\tBATTERY is LOW\n\n"); //ITA: la batteria è scarica
+#endif
+        }else if(batteryStatus <= DISCHARGE_THRESHOLD && batteryStatus > DISCHARGE) {
+            rt_event_send(&event_resources, EVENT_FLAG1);   //notify task 4 with an event
+            rt_mb_send(&mb2_3, (rt_uint32_t)&mb_str2);      //notify task 2 with an email
 
 #ifdef DEB_DISPLAY
-            printf("\t\tBATTERY LOW\n\n");
+            printf("\t\tBATTERY is running LOW\n\n");  //ITA: la batteria si sta scaricando
 #endif
 #ifdef DEB_INTERNAL
             printf("\t\tMail sent %s\t\t because battery LOW\n", mb_str2);
 #endif
-
         }
 
         /**Check GARBAGE BAG status **/
 
         if(garbageBagStatus == FULL){
-            rt_event_send(&event_resources, EVENT_FLAG2);   //notify task 4
-            rt_mb_send(&mb2_3, (rt_uint32_t)&mb_str1);      //notify task 2
+            rt_event_send(&event_resources, EVENT_FLAG2);   //notify task 4 with an event
+            rt_mb_send(&mb2_3, (rt_uint32_t)&mb_str1);      //notify task 2 with an email
 
 #ifdef DEB_DISPLAY
             printf("\tGarbage bag FULL\n\n");
@@ -353,7 +416,7 @@ void check_resources_entry(void *param){
 
         }
 
-        batteryStatus--;
+        //batteryStatus--;
 
         while(get_tick_count(&check_resources)!=0){ }
 
@@ -411,7 +474,7 @@ void acoustic_signals_entry(void *param){
             set_end_flag(&acoustic_signals);
 
 #ifdef BENCHMARK_TIME
-        printf("\t\tTASK_4: Stop at time %d ms\tDeadline was: %d ms\n", time_end, (PERIOD_TASK4)*10+time_start);
+        printf("\t\tTASK_4: Stop at time %d ms\t APERIODIC task", time_end);
         printf("\t\tTASK_4: TOTAL EXECUTION TIME: %d (%d ms)\n", tick_end-tick_start,time_end-time_start);
 #endif
 
