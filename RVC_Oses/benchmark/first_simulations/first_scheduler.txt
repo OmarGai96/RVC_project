@@ -1,0 +1,230 @@
+
+C:\Users\Omar\Desktop\PoliTo\RT-Thread\myNewRepo\RVC_project\RVC_Oses>C:/RT-ThreadStudio/repo/Extract/Debugger_Support_Packages
+/RealThread/QEMU/4.2.0.4/qemu-system-arm.exe -M stm32f429-st-disco -sd sd.bin -nographic -S -s --kernel Debug/rtthread.elf -ser
+ial stdio -monitor null -show-cursor
+WARNING: Image format was not specified for 'sd.bin' and probing guessed raw.
+         Automatically detecting the format is dangerous for raw images, write operations on block 0 will be restricted.
+         Specify the 'raw' format explicitly to remove the restrictions.
+←[0m[D/drv.sdram] sdram init success, mapped at 0xD0000000, size is 8388608 bytes, data width is 16←[0m
+
+ \ | /
+- RT -     Thread Operating System
+ / | \     4.1.0 build Oct  5 2022 16:06:14
+ 2006 - 2021 Copyright by rt-thread team
+
+From thread main to thread: tidle0
+Thread main status is: SUSPEND
+Thread tidle0 status is: RUNNING
+
+From thread tidle0 to thread: main
+Thread tidle0 status is: READY
+Thread main status is: RUNNING
+
+From thread main to thread: tidle0
+Thread main status is: SUSPEND
+Thread tidle0 status is: RUNNING
+
+From thread tidle0 to thread: main
+Thread tidle0 status is: READY
+Thread main status is: RUNNING
+
+From thread main to thread: Task1
+Thread main status is: READY
+Thread Task1 status is: RUNNING
+
+From thread Task1 to thread: main
+Thread Task1 status is: SUSPEND
+Thread main status is: RUNNING
+
+From thread main to thread: movementü
+Thread main status is: READY
+Thread movementü status is: RUNNING
+
+From thread movementü to thread: main
+Thread movementü status is: SUSPEND
+Thread main status is: RUNNING
+
+From thread main to thread: Task2
+Thread main status is: READY
+Thread Task2 status is: RUNNING
+
+From thread Task2 to thread: main
+Thread Task2 status is: SUSPEND
+Thread main status is: RUNNING
+
+From thread main to thread: Task3
+Thread main status is: READY
+Thread Task3 status is: RUNNING
+
+From thread Task3 to thread: main
+Thread Task3 status is: SUSPEND
+Thread main status is: RUNNING
+
+From thread main to thread: Task4
+Thread main status is: READY
+Thread Task4 status is: RUNNING
+
+From thread Task4 to thread: main
+Thread Task4 status is: SUSPEND
+Thread main status is: RUNNING
+
+From thread main to thread: Task5
+Thread main status is: READY
+Thread Task5 status is: RUNNING
+
+From thread Task5 to thread: main
+Thread Task5 status is: SUSPEND
+Thread main status is: RUNNING
+
+From thread main to thread: tshell
+Thread main status is: Thread tshell status is: RUNNING
+msh />
+From thread tshell to thread: tidle0
+Thread tshell status is: SUSPEND
+Thread tidle0 status is: RUNNING
+
+From thread tidle0 to thread: Task1
+Thread tidle0 status is: READY
+Thread Task1 status is: RUNNING
+
+Task1:   Started at time 49 tick, 210 ms
+                Stop at time 51 tick
+
+From thread Task1 to thread: tidle0
+Thread Task1 status is: SUSPEND
+Thread tidle0 status is: RUNNING
+
+From thread tidle0 to thread: Task3
+Thread tidle0 status is: READY
+Thread Task3 status is: RUNNING
+
+Task3:   Started at time 54 tick, 260 ms
+                Stop at time 55 tick
+
+From thread Task3 to thread: Task5
+Thread Task3 status is: SUSPEND
+Thread Task5 status is: RUNNING
+
+Task5:   Started at time 56 tick, 280 ms
+                Stop at time 57 tick
+
+From thread Task5 to thread: tidle0
+Thread Task5 status is: SUSPEND
+Thread tidle0 status is: RUNNING
+
+From thread tidle0 to thread: Task1
+Thread tidle0 status is: READY
+Thread Task1 status is: RUNNING
+
+Task1:   Started at time 69 tick, 410 ms
+                Stop at time 69 tick
+
+From thread Task1 to thread: tidle0
+Thread Task1 status is: SUSPEND
+Thread tidle0 status is: RUNNING
+
+From thread tidle0 to thread: Task2
+Thread tidle0 status is: READY
+Thread Task2 status is: RUNNING
+
+Task2:   Started at time 79 tick, 510 ms
+                Stop at time 80 tick
+
+From thread Task2 to thread: Task3
+Thread Task2 status is: SUSPEND
+Thread Task3 status is: RUNNING
+
+Task3:   Started at time 81 tick, 530 ms
+                Stop at time 81 tick
+
+From thread Task3 to thread: Task5
+Thread Task3 status is: SUSPEND
+Thread Task5 status is: RUNNING
+
+Task5:   Started at time 82 tick, 540 ms
+                Stop at time 83 tick
+
+From thread Task5 to thread: Task4
+Thread Task5 status is: SUSPEND
+Thread Task4 status is: RUNNING
+
+Task4:   Started at time 84 tick, 560 ms
+
+From thread Task4 to thread: tidle0
+Thread Task4 status is: SUSPEND
+Thread tidle0 status is: RUNNING
+
+From thread tidle0 to thread: Task1
+Thread tidle0 status is: READY
+Thread Task1 status is: RUNNING
+
+Task1:   Started at time 89 tick, 610 ms
+                Stop at time 89 tick
+
+From thread Task1 to thread: tidle0
+Thread Task1 status is: SUSPEND
+Thread tidle0 status is: RUNNING
+
+From thread tidle0 to thread: Task3
+Thread tidle0 status is: READY
+Thread Task3 status is: RUNNING
+
+Task3:   Started at time 104 tick, 760 ms
+                Stop at time 104 tick
+
+From thread Task3 to thread: Task5
+Thread Task3 status is: SUSPEND
+Thread Task5 status is: RUNNING
+
+Task5:   Started at time 106 tick, 780 ms
+                Stop at time 107 tick
+
+From thread Task5 to thread: tidle0
+Thread Task5 status is: SUSPEND
+Thread tidle0 status is: RUNNING
+
+From thread tidle0 to thread: Task1
+Thread tidle0 status is: READY
+Thread Task1 status is: RUNNING
+
+Task1:   Started at time 109 tick, 810 ms
+                Stop at time 109 tick
+
+From thread Task1 to thread: tidle0
+Thread Task1 status is: SUSPEND
+Thread tidle0 status is: RUNNING
+
+From thread tidle0 to thread: Task2
+Thread tidle0 status is: READY
+Thread Task2 status is: RUNNING
+
+From thread Task2 to thread: Task1
+Thread Task2 status is: READY
+Thread Task1 status is: RUNNING
+
+Task1:   Started at time 129 tick, 1010 ms
+                Stop at time 129 tick
+
+From thread Task1 to thread: Task2
+Thread Task1 status is: SUSPEND
+Thread Task2 status is: RUNNING
+
+Task2:   Started at time 130 tick, 1020 ms
+                Stop at time 130 tick
+
+From thread Task2 to thread: Task3
+Thread Task2 status is: SUSPEND
+Thread Task3 status is: RUNNING
+
+Task3:   Started at time 132 tick, 1040 ms
+                Stop at time 133 tick
+
+From thread Task3 to thread: Task5
+Thread Task3 status is: SUSPEND
+Thread Task5 status is: RUNNING
+
+Task5:   Started at time 135 tick, 1070 ms
+                Stop at time 136 tick
+
+From thread Task5 to thread: tidle0
+T

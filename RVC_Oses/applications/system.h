@@ -18,7 +18,7 @@
 
 /* GARBAGE BAG STATUS*/
 #define EMPTY 0
-#define FULL 1000
+#define FULL 20
 
 /* MOVEMENTS SIGNALS*/
 #define STOP_ENGINE 0
@@ -33,7 +33,6 @@ uint32_t batteryStatus;
 uint32_t garbageBagStatus;
 
 void initSystem(void);
-void updateResources(void);
 
 
 #endif /* APPLICATIONS_SYSTEM_H_ */

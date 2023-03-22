@@ -1,0 +1,1276 @@
+
+C:\Users\Omar\Desktop\PoliTo\RT-Thread\myNewRepo\RVC_project\RVC_Oses>C:/RT-ThreadStudio/repo/Extract/Debugger_Support_Packages
+/RealThread/QEMU/4.2.0.4/qemu-system-arm.exe -M stm32f429-st-disco -sd sd.bin -nographic -S -s --kernel Debug/rtthread.elf -ser
+ial stdio -monitor null -show-cursor
+WARNING: Image format was not specified for 'sd.bin' and probing guessed raw.
+         Automatically detecting the format is dangerous for raw images, write operations on block 0 will be restricted.
+         Specify the 'raw' format explicitly to remove the restrictions.
+←[0m[D/drv.sdram] sdram init success, mapped at 0xD0000000, size is 8388608 bytes, data width is 16←[0m
+
+ \ | /
+- RT -     Thread Operating System
+ / | \     4.1.0 build Nov  8 2022 14:51:06
+ 2006 - 2021 Copyright by rt-thread team
+                STARTUP OF main, with priority: 10
+                STARTUP OF tidle0, with priority: 31
+Global cpu usage: 0.0%
+
+PREEMPTION of main OCCURRED
+
+From thread main to thread: tidle0      Time: 50 ms
+Global cpu usage: 0.0%
+
+PREEMPTION of tidle0 OCCURRED
+
+From thread tidle0 to thread: main      Time: 160 ms
+Global cpu usage: 0.0%
+
+PREEMPTION of main OCCURRED
+
+From thread main to thread: tidle0      Time: 170 ms
+Global cpu usage: 0.0%
+                STARTUP OF tshell, with priority: 20
+Global cpu usage: 0.0%
+
+PREEMPTION of main OCCURRED
+
+From thread main to thread: Task1       Time: 240 ms
+Global cpu usage: 0.0%
+
+PREEMPTION of Task1 OCCURRED
+
+From thread Task1 to thread: main       Time: 250 ms
+                STARTUP OF Task1, with priority: 2
+Global cpu usage: 0.0%
+
+PREEMPTION of main OCCURRED
+
+From thread main to thread: TaskS       Time: 270 ms
+Global cpu usage: 0.0%
+
+PREEMPTION of TaskS OCCURRED
+
+From thread TaskS to thread: main       Time: 280 ms
+                STARTUP OF TaskS, with priority: 1
+Global cpu usage: 0.0%
+
+PREEMPTION of main OCCURRED
+
+From thread main to thread: Task2       Time: 310 ms
+Global cpu usage: 0.0%
+
+PREEMPTION of Task2 OCCURRED
+
+From thread Task2 to thread: main       Time: 330 ms
+                STARTUP OF Task2, with priority: 3
+Global cpu usage: 0.0%
+
+PREEMPTION of main OCCURRED
+
+From thread main to thread: Task3       Time: 360 ms
+Global cpu usage: 0.0%
+
+PREEMPTION of Task3 OCCURRED
+
+From thread Task3 to thread: main       Time: 370 ms
+                STARTUP OF Task3, with priority: 4
+Global cpu usage: 0.0%
+
+PREEMPTION of main OCCURRED
+
+From thread main to thread: Task4       Time: 380 ms
+Global cpu usage: 0.0%
+
+PREEMPTION of Task4 OCCURRED
+
+From thread Task4 to thread: main       Time: 390 ms
+                STARTUP OF Task4, with priority: 6
+Global cpu usage: 0.0%
+
+PREEMPTION of main OCCURRED
+
+From thread main to thread: Task5       Time: 400 ms
+Global cpu usage: 0.0%
+
+PREEMPTION of Task5 OCCURRED
+
+From thread Task5 to thread: main       Time: 420 ms
+                STARTUP OF Task5, with priority: 5
+Global cpu usage: 0.0%
+
+PREEMPTION of main OCCURRED
+
+From thread main to thread: tshell      Time: 0 ms    -> FROM HERE STARTS OUR APPLICATION
+msh />Global cpu usage: 0.0%
+
+PREEMPTION of tshell OCCURRED
+
+From thread tshell to thread: tidle0    Time: 30 ms
+Global cpu usage: 2.23%
+
+                TASK_1:  Started at time 210 ms
+                TASK_1: Stop at time 250 ms     Deadline was: 410 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 2.23%
+
+From thread Task1 to thread: Task3      Time: 260 ms
+
+                TASK_3:  Started at time 270 ms
+                TASK_3: Stop at time 310 ms     Deadline was: 520 ms
+                TASK_3: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 2.23%
+
+From thread Task3 to thread: Task5      Time: 320 ms
+
+                TASK_5:  Started at time 330 ms
+Global cpu usage: 2.23%
+
+                TASK_1:  Started at time 410 ms
+                TASK_1: Stop at time 450 ms     Deadline was: 610 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 2.23%
+
+From thread Task1 to thread: Task5      Time: 460 ms
+Global cpu usage: 2.23%
+
+                TASK_2:  Started at time 510 ms
+                TASK_2: Stop at time 560 ms     Deadline was: 1010 ms
+                TASK_2: TOTAL EXECUTION TIME: 50 ms
+Global cpu usage: 2.23%
+
+                TASK_3:  Started at time 580 ms
+Global cpu usage: 2.23%
+
+                TASK_1:  Started at time 600 ms
+                TASK_1: Stop at time 640 ms     Deadline was: 800 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 2.23%
+
+From thread Task1 to thread: Task3      Time: 660 ms
+                TASK_3: Stop at time 680 ms     Deadline was: 830 ms
+                TASK_3: TOTAL EXECUTION TIME: 100 ms
+Global cpu usage: 2.23%
+
+From thread Task3 to thread: Task5      Time: 690 ms
+Global cpu usage: 2.23%
+
+                TASK_3:  Started at time 760 ms
+Global cpu usage: 2.23%
+
+                TASK_1:  Started at time 810 ms
+                TASK_1: Stop at time 850 ms     Deadline was: 1010 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 2.23%
+
+From thread Task1 to thread: Task3      Time: 860 ms
+                TASK_3: Stop at time 870 ms     Deadline was: 1010 ms
+                TASK_3: TOTAL EXECUTION TIME: 110 ms
+Global cpu usage: 2.23%
+
+From thread Task3 to thread: Task5      Time: 880 ms
+Global cpu usage: 2.23%
+Global cpu usage: 2.23%
+
+                TASK_1:  Started at time 1010 ms
+                TASK_1: Stop at time 1050 ms    Deadline was: 1210 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 2.23%
+
+From thread Task1 to thread: Task2      Time: 1060 ms
+
+                TASK_2:  Started at time 1070 ms
+                TASK_2: Stop at time 1120 ms    Deadline was: 1570 ms
+                TASK_2: TOTAL EXECUTION TIME: 50 ms
+Global cpu usage: 2.23%
+
+From thread Task2 to thread: Task3      Time: 1140 ms
+
+                TASK_3:  Started at time 1150 ms
+                TASK_3: Stop at time 1190 ms    Deadline was: 1400 ms
+        Global cpu usage: 2.23%
+
+                TASK_1:  Started at time 1200 ms
+                TASK_1: Stop at time 1240 ms    Deadline was: 1400 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 2.23%
+
+From thread Task1 to thread: Task3      Time: 1250 ms
+        TASK_1: TOTAL EXECUTION TIME: 40 ms
+
+                TASK_3:  Started at time 1260 ms
+                TASK_3: Stop at time 1300 ms    Deadline was: 1510 ms
+                TASK_3: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 2.23%
+
+From thread Task3 to thread: Task5      Time: 1310 ms
+Global cpu usage: 2.23%
+
+                TASK_1:  Started at time 1410 ms
+                TASK_1: Stop at time 1450 ms    Deadline was: 1610 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 2.23%
+
+From thread Task1 to thread: Task5      Time: 1470 ms
+Global cpu usage: 2.23%
+
+                TASK_2:  Started at time 1510 ms
+                TASK_2: Stop at time 1560 ms    Deadline was: 2010 ms
+                TASK_2: TOTAL EXECUTION TIME: 50 ms
+Global cpu usage: 2.23%
+
+From thread Task2 to thread: Task3      Time: 1570 ms
+
+                TASK_3:  Started at time 1590 ms
+Global cpu usage: 2.23%
+
+                TASK_1:  Started at time 1600 ms
+                TASK_1: Stop at time 1640 ms    Deadline was: 1800 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 2.23%
+
+From thread Task1 to thread: Task3      Time: 1650 ms
+                TASK_3: Stop at time 1680 ms    Deadline was: 1840 ms
+                TASK_3: TOTAL EXECUTION TIME: 90 ms
+Global cpu usage: 2.23%
+
+From thread Task3 to thread: Task5      Time: 1690 ms
+Global cpu usage: 2.23%
+
+                TASK_3:  Started at time 1760 ms
+Global cpu usage: 2.23%
+
+                TASK_1:  Started at time 1810 ms
+                TASK_1: Stop at time 1850 ms    Deadline was: 2010 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 2.23%
+
+From thread Task1 to thread: Task3      Time: 1860 ms
+                TASK_3: Stop at time 1870 ms    Deadline was: 2010 ms
+                TASK_3: TOTAL EXECUTION TIME: 110 ms
+Global cpu usage: 2.23%
+
+From thread Task3 to thread: Task5      Time: 1880 ms
+Global cpu usage: 2.23%
+Global cpu usage: 2.23%
+
+                TASK_1:  Started at time 2010 ms
+                TASK_1: Stop at time 2050 ms    Deadline was: 2210 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 2.23%
+
+From thread Task1 to thread: Task2      Time: 2070 ms
+
+                TASK_2:  Started at time 2080 ms
+                TASK_2: Stop at time 2130 ms    Deadline was: 2580 ms
+                TASK_2: TOTAL EXECUTION TIME: 50 ms
+Global cpu usage: 2.23%
+
+From thread Task2 to thread: Task3      Time: 2140 ms
+
+                TASK_3:  Started at time 2150 ms
+                TASK_3: Stop at Global cpu usage: 2.23%
+
+                TASK_1:  Started at time 2210 ms
+                TASK_1: Stop at time 2250 ms    Deadline was: 2410 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 2.23%
+
+From thread Task1 to thread: Task3      Time: 2260 ms
+ECUTION TIME: 40 ms
+e was: 2410 ms
+                TASK_3: TOTAL EXECUTION TIME: 40 ms
+
+                TASK_3:  Started at time 2270 ms
+                TASK_3: Stop at time 2310 ms    Deadline was: 2520 ms
+                TASK_3: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 2.23%
+
+From thread Task3 to thread: Task5      Time: 2330 ms
+Global cpu usage: 2.23%
+
+                TASK_1:  Started at time 2410 ms
+                TASK_1: Stop at time 2450 ms    Deadline was: 2610 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 2.23%
+
+From thread Task1 to thread: Task5      Time: 2460 ms
+Global cpu usage: 2.23%
+
+                TASK_2:  Started at time 2510 ms
+                TASK_2: Stop at time 2560 ms    Deadline was: 3010 ms
+                TASK_2: TOTAL EXECUTION TIME: 50 ms
+Global cpu usage: 2.23%
+
+From thread Task2 to thread: Task3      Time: 2570 ms
+
+                TASK_3:  Started at time 2580 ms
+Global cpu usage: 2.23%
+
+                TASK_1:  Started at time 2600 ms
+                TASK_1: Stop at time 2640 ms    Deadline was: 2800 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 2.23%
+
+From thread Task1 to thread: Task3      Time: 2650 ms
+                TASK_3: Stop at time 2670 ms    Deadline was: 2830 ms
+                TASK_3: TOTAL EXECUTION TIME: 90 ms
+Global cpu usage: 2.23%
+
+From thread Task3 to thread: Task5      Time: 2680 ms
+Global cpu usage: 2.23%
+
+                TASK_3:  Started at time 2760 ms
+Global cpu usage: 2.23%
+
+                TASK_1:  Started at time 2810 ms
+                TASK_1: Stop at time 2850 ms    Deadline was: 3010 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 2.23%
+
+From thread Task1 to thread: Task3      Time: 2860 ms
+                TASK_3: Stop at time 2870 ms    Deadline was: 3010 ms
+                TASK_3: TOTAL EXECUTION TIME: 110 ms
+Global cpu usage: 2.23%
+
+From thread Task3 to thread: Task5      Time: 2880 ms
+Global cpu usage: 2.23%
+Global cpu usage: 2.23%
+
+                TASK_1:  Started at time 3010 ms
+                TASK_1: Stop at time 3050 ms    Deadline was: 3210 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 2.23%
+
+From thread Task1 to thread: Task2      Time: 3080 ms
+
+                TASK_2:  Started at time 3100 ms
+                TASK_2: Stop at time 3150 ms    Deadline was: 3600 ms
+                TASK_2: TOTAL EXECUTION TIME: 50 ms
+Global cpu usage: 2.23%
+
+From thread Task2 to thread: Task3      Time: 3170 ms
+
+                TASK_3:  Started at time 3180 ms
+Global cpu usage: 2.23%
+
+                TASK_1:  Started at time 3210 ms
+                TASK_1: Stop at time 3250 ms    Deadline was: 3410 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 2.23%
+
+From thread Task1 to thread: Task3      Time: 3260 ms
+                TASK_3: Stop at time 3280 ms    Deadline was: 3430 ms
+                TASK_3: TOTAL EXECUTION TIME: 100 ms
+
+                TASK_3:  Started at time 3290 ms
+                TASK_3: Stop at time 3330 ms    Deadline was: 3540 ms
+                TASK_3: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 2.23%
+
+From thread Task3 to thread: Task5      Time: 3350 ms
+Global cpu usage: 2.23%
+
+                TASK_1:  Started at time 3410 ms
+                TASK_1: Stop at time 3450 ms    Deadline was: 3610 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 2.23%
+
+From thread Task1 to thread: Task5      Time: 3470 ms
+Global cpu usage: 2.23%
+
+                TASK_2:  Started at time 3510 ms
+                TASK_2: Stop at time 3560 ms    Deadline was: 4010 ms
+                TASK_2: TOTAL EXECUTION TIME: 50 ms
+Global cpu usage: 2.23%
+
+From thread Task2 to thread: Task3      Time: 3570 ms
+
+                TASK_3:  Started at time 3580 ms
+Global cpu usage: 2.23%
+
+                TASK_1:  Started at time 3600 ms
+                TASK_1: Stop at time 3640 ms    Deadline was: 3800 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 2.23%
+
+From thread Task1 to thread: Task3      Time: 3650 ms
+                TASK_3: Stop at time 3670 ms    Deadline was: 3830 ms
+                TASK_3: TOTAL EXECUTION TIME: 90 ms
+Global cpu usage: 2.23%
+
+From thread Task3 to thread: Task5      Time: 3690 ms
+Global cpu usage: 2.23%
+
+                TASK_3:  Started at time 3750 ms
+                TASK_3: Stop at time 3790 ms    Deadline was: 4000 ms
+        Global cpu usage: 2.23%
+
+                TASK_1:  Started at time 3810 ms
+                TASK_1: Stop at time 3850 ms    Deadline was: 4010 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 2.23%
+
+From thread Task1 to thread: Task3      Time: 3860 ms
+        TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 2.23%
+
+From thread Task3 to thread: Task5      Time: 3870 ms
+Global cpu usage: 2.23%
+Global cpu usage: 2.23%
+
+                TASK_1:  Started at time 4020 ms
+                TASK_1: Stop at time 4060 ms    Deadline was: 4220 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 2.23%
+
+From thread Task1 to thread: Task2      Time: 4070 ms
+
+                TASK_2:  Started at time 4090 ms
+                TASK_2: Stop at time 4140 ms    Deadline was: 4590 ms
+                TASK_2: TOTAL EXECUTION TIME: 50 ms
+Global cpu usage: 2.23%
+
+From thread Task2 to thread: Task3      Time: 4140 ms
+
+                TASK_3:  Started at time 4160 ms
+Global cpu usage: 2.23%
+
+                TASK_1:  Started at time 4200 ms
+                TASK_1: Stop at time 4240 ms    Deadline was: 4400 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 2.23%
+
+From thread Task1 to thread: Task3      Time: 4240 ms
+                TASK_3: Stop at time 4260 ms    Deadline was: 4410 ms
+                TASK_3: TOTAL EXECUTION TIME: 100 ms
+
+                TASK_3:  Started at time 4270 ms
+                TASK_3: Stop at time 4310 ms    Deadline was: 4520 ms
+                TASK_3: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 2.23%
+
+From thread Task3 to thread: Task5      Time: 4320 ms
+Global cpu usage: 2.23%
+
+                TASK_1:  Started at time 4410 ms
+                TASK_1: Stop at time 4450 ms    Deadline was: 4610 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 2.23%
+
+From thread Task1 to thread: Task5      Time: 4470 ms
+Global cpu usage: 0.0%
+
+                TASK_2:  Started at time 4530 ms
+                TASK_2: Stop at time 4580 ms    Deadline was: 5030 ms
+                TASK_2: TOTAL EXECUTION TIME: 50 ms
+Global cpu usage: 0.0%
+
+From thread Task2 to thread: Task3      Time: 4590 ms
+
+                TASK_3:  Started at time 4600 ms
+Global cpu usage: 0.0%
+
+                TASK_1:  Started at time 4620 ms
+                TASK_1: Stop at time 4670 ms    Deadline was: 4820 ms
+                TASK_1: TOTAL EXECUTION TIME: 50 ms
+Global cpu usage: 0.0%
+
+From thread Task1 to thread: Task3      Time: 4700 ms
+                TASK_3: Stop at time 4730 ms    Deadline was: 4850 ms
+                TASK_3: TOTAL EXECUTION TIME: 130 ms
+Global cpu usage: 0.0%
+
+From thread Task3 to thread: Task5      Time: 4740 ms
+Global cpu usage: 0.0%
+
+                TASK_3:  Started at time 4780 ms
+Global cpu usage: 0.0%
+
+                TASK_1:  Started at time 4810 ms
+                TASK_1: Stop at time 4850 ms    Deadline was: 5010 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 0.0%
+
+From thread Task1 to thread: Task3      Time: 4850 ms
+                TASK_3: Stop at time 4860 ms    Deadline was: 5030 ms
+                TASK_3: TOTAL EXECUTION TIME: 80 ms
+Global cpu usage: 0.0%
+
+From thread Task3 to thread: Task5      Time: 4870 ms
+Global cpu usage: 0.0%
+
+                TASK_1:  Started at time 5020 ms
+                TASK_1: Stop at time 5060 ms    Deadline was: 5220 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 0.0%
+
+From thread Task1 to thread: Task2      Time: 5070 ms
+
+                TASK_2:  Started at time 5080 ms
+                TASK_2: Stop at time 5130 ms    Deadline was: 5580 ms
+                TASK_2: TOTAL EXECUTION TIME: 50 ms
+Global cpu usage: 0.0%
+
+From thread Task2 to thread: Task3      Time: 5140 ms
+
+                TASK_3:  Started at time 5150 ms
+                TASK_3: Stop at time 5190 ms    Deadline was: 5400 ms
+                TASK_3: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 0.0%
+
+From thread Task3 to thread: Task5      Time: 5200 ms
+Global cpu usage: 0.0%
+
+                TASK_1:  Started at time 5210 ms
+                TASK_1: Stop at time 5250 ms    Deadline was: 5410 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 0.0%
+
+From thread Task1 to thread: Task5      Time: 5260 ms
+Global cpu usage: 0.0%
+
+                TASK_3:  Started at time 5270 ms
+                TASK_3: Stop at time 5310 ms    Deadline was: 5520 ms
+                TASK_3: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 0.0%
+
+From thread Task3 to thread: Task5      Time: 5320 ms
+Global cpu usage: 0.0%
+
+                TASK_1:  Started at time 5420 ms
+                TASK_1: Stop at time 5460 ms    Deadline was: 5620 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 0.0%
+
+From thread Task1 to thread: Task5      Time: 5470 ms
+Global cpu usage: 0.0%
+
+                TASK_2:  Started at time 5530 ms
+                TASK_2: Stop at time 5580 ms    Deadline was: 6030 ms
+                TASK_2: TOTAL EXECUTION TIME: 50 ms
+Global cpu usage: 0.0%
+
+From thread Task2 to thread: Task3      Time: 5590 ms
+
+                TASK_3:  Started at time 5600 ms
+Global cpu usage: 0.0%
+
+                TASK_1:  Started at time 5620 ms
+                TASK_1: Stop at time 5660 ms    Deadline was: 5820 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 0.0%
+
+From thread Task1 to thread: Task3      Time: 5670 ms
+                TASK_3: Stop at time 5700 ms    Deadline was: 5850 ms
+                TASK_3: TOTAL EXECUTION TIME: 100 ms
+Global cpu usage: 0.0%
+
+From thread Task3 to thread: Task5      Time: 5710 ms
+Global cpu usage: 0.0%
+
+                TASK_3:  Started at time 5780 ms
+Global cpu usage: 0.0%
+
+                TASK_1:  Started at time 5820 ms
+                TASK_1: Stop at time 5860 ms    Deadline was: 6020 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 0.0%
+
+From thread Task1 to thread: Task3      Time: 5870 ms
+                TASK_3: Stop at time 5880 ms    Deadline was: 6030 ms
+                TASK_3: TOTAL EXECUTION TIME: 100 ms
+Global cpu usage: 0.0%
+
+From thread Task3 to thread: Task5      Time: 5890 ms
+Global cpu usage: 0.0%
+
+                TASK_1:  Started at time 6020 ms
+                TASK_1: Stop at time 6060 ms    Deadline was: 6220 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 0.0%
+
+From thread Task1 to thread: Task2      Time: 6080 ms
+
+                TASK_2:  Started at time 6090 ms
+                TASK_2: Stop at time 6140 ms    Deadline was: 6590 ms
+                TASK_2: TOTAL EXECUTION TIME: 50 ms
+Global cpu usage: 0.0%
+
+From thread Task2 to thread: Task3      Time: 6160 ms
+
+                TASK_3:  Started at time 6170 ms
+Global cpu usage: 0.0%
+
+                TASK_1:  Started at time 6220 ms
+                TASK_1: Stop at time 6260 ms    Deadline was: 6420 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 0.0%
+
+From thread Task1 to thread: Task3      Time: 6270 ms
+                TASK_3: Stop at time 6280 ms    Deadline was: 6420 ms
+                TASK_3: TOTAL EXECUTION TIME: 110 ms
+
+                TASK_3:  Started at time 6290 ms
+                TASK_3: Stop at time 6330 ms    Deadline was: 6540 ms
+                TASK_3: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 0.0%
+
+From thread Task3 to thread: Task5      Time: 6340 ms
+Global cpu usage: 0.0%
+
+                TASK_1:  Started at time 6420 ms
+                TASK_1: Stop at time 6460 ms    Deadline was: 6620 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 0.0%
+
+From thread Task1 to thread: Task5      Time: 6470 ms
+Global cpu usage: 0.0%
+
+                TASK_2:  Started at time 6530 ms
+                TASK_2: Stop at time 6580 ms    Deadline was: 7030 ms
+                TASK_2: TOTAL EXECUTION TIME: 50 ms
+Global cpu usage: 0.0%
+
+From thread Task2 to thread: Task3      Time: 6600 ms
+Global cpu usage: 0.0%
+
+                TASK_1:  Started at time 6620 ms
+                TASK_1: Stop at time 6660 ms    Deadline was: 6820 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 0.0%
+
+From thread Task1 to thread: Task3      Time: 6680 ms
+
+                TASK_3:  Started at time 6690 ms
+                TASK_3: Stop at time 6730 ms    Deadline was: 6940 ms
+                TASK_3: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 0.0%
+Global cpu usage: 0.0%
+
+                TASK_3:  Started at time 6780 ms
+Global cpu usage: 0.0%
+
+                TASK_1:  Started at time 6820 ms
+                TASK_1: Stop at time 6860 ms    Deadline was: 7020 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 0.0%
+
+From thread Task1 to thread: Task3      Time: 6870 ms
+                TASK_3: Stop at time 6880 ms    Deadline was: 7030 ms
+                TASK_3: TOTAL EXECUTION TIME: 100 ms
+Global cpu usage: 0.0%
+
+From thread Task3 to thread: Task5      Time: 6890 ms
+Global cpu usage: 0.0%
+
+                TASK_1:  Started at time 7020 ms
+                TASK_1: Stop at time 7060 ms    Deadline was: 7220 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 0.0%
+
+From thread Task1 to thread: Task2      Time: 7070 ms
+
+                TASK_2:  Started at time 7080 ms
+                TASK_2: Stop at time 7130 ms    Deadline was: 7580 ms
+                TASK_2: TOTAL EXECUTION TIME: 50 ms
+Global cpu usage: 0.0%
+
+From thread Task2 to thread: Task3      Time: 7130 ms
+
+                TASK_3:  Started at time 7140 ms
+                TASK_3: Stop at time 7180 ms    Deadline was: 7390 ms
+                TASK_3: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 0.0%
+
+From thread Task3 to thread: Task5      Time: 7190 ms
+Global cpu usage: 0.0%
+
+                TASK_1:  Started at time 7220 ms
+                TASK_1: Stop at time 7260 ms    Deadline was: 7420 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 0.0%
+
+From thread Task1 to thread: Task3      Time: 7270 ms
+
+                TASK_3:  Started at time 7280 ms
+                TASK_3: Stop at time 7320 ms    Deadline was: 7530 ms
+                TASK_3: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 0.0%
+
+From thread Task3 to thread: Task5      Time: 7340 ms
+Global cpu usage: 0.0%
+
+                TASK_1:  Started at time 7420 ms
+                TASK_1: Stop at time 7460 ms    Deadline was: 7620 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 0.0%
+
+From thread Task1 to thread: Task5      Time: 7470 ms
+Global cpu usage: 0.0%
+
+                TASK_2:  Started at time 7530 ms
+                TASK_2: Stop at time 7580 ms    Deadline was: 8030 ms
+                TASK_2: TOTAL EXECUTION TIME: 50 ms
+Global cpu usage: 0.0%
+
+From thread Task2 to thread: Task3      Time: 7590 ms
+
+                TASKGlobal cpu usage: 0.0%
+
+                TASK_1:  Started at time 7620 ms
+                TASK_1: Stop at time 7660 ms    Deadline was: 7820 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 0.0%
+
+From thread Task1 to thread: Task3      Time: 7670 ms
+_1: TOTAL EXECUTION TIME: 40            TASK_3: Stop at time 7700 ms    Deadline was: 7850 ms
+                TASK_3: TOTAL EXECUTION TIME: 100 ms
+Global cpu usage: 0.0%
+
+From thread Task3 to thread: Task5      Time: 7720 ms
+Global cpu usage: 0.0%
+
+                TASK_3:  Started at time 7780 ms
+Global cpu usage: 0.0%
+
+                TASK_1:  Started at time 7820 ms
+                TASK_1: Stop at time 7860 ms    Deadline was: 8020 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 0.0%
+
+From thread Task1 to thread: Task3      Time: 7870 ms
+                TASK_3: Stop at time 7880 ms    Deadline was: 8030 ms
+                TASK_3: TOTAL EXECUTION TIME: 100 ms
+Global cpu usage: 0.0%
+
+From thread Task3 to thread: Task5      Time: 7900 ms
+Global cpu usage: 0.0%
+
+                TASK_1:  Started at time 8020 ms
+                TASK_1: Stop at time 8060 ms    Deadline was: 8220 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 0.0%
+
+From thread Task1 to thread: Task2      Time: 8070 ms
+
+                TASK_2:  Started at time 8080 ms
+                TASK_2: Stop at time 8130 ms    Deadline was: 8580 ms
+                TASK_2: TOTAL EXECUTION TIME: 50 ms
+Global cpu usage: 0.0%
+
+From thread Task2 to thread: Task3      Time: 8150 ms
+
+                TASK_3:  Started at time 8170 ms
+Global cpu usage: 0.0%
+
+                TASK_1:  Started at time 8220 ms
+                TASK_1: Stop at time 8260 ms    Deadline was: 8420 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 0.0%
+
+From thread Task1 to thread: Task3      Time: 8260 ms
+                TASK_3: Stop at time 8270 ms    Deadline was: 8420 ms
+                TASK_3: TOTAL EXECUTION TIME: 100 ms
+
+                TASK_3:  Started at time 8280 ms
+                TASK_3: Stop at time 8320 ms    Deadline was: 8530 ms
+                TASK_3: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 0.0%
+
+From thread Task3 to thread: Task5      Time: 8330 ms
+Global cpu usage: 0.0%
+
+                TASK_1:  Started at time 8420 ms
+                TASK_1: Stop at time 8460 ms    Deadline was: 8620 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 0.0%
+
+From thread Task1 to thread: Task5      Time: 8480 ms
+Global cpu usage: 0.0%
+
+                TASK_2:  Started at time 8530 ms
+                TASK_2: Stop at time 8580 ms    Deadline was: 9030 ms
+                TASK_2: TOTAL EXECUTION TIME: 50 ms
+Global cpu usage: 0.0%
+
+From thread Task2 to thread: Task3      Time: 8590 ms
+
+                TASK_3:  Started at time 8600 ms
+Global cpu usage: 0.0%
+
+                TASK_1:  Started at time 8610 ms
+                TASK_1: Stop at time 8650 ms    Deadline was: 8810 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 0.0%
+
+From thread Task1 to thread: Task3      Time: 8670 ms
+                TASK_3: Stop at time 8700 ms    Deadline was: 8850 ms
+                TASK_3: TOTAL EXECUTION TIME: 100 ms
+Global cpu usage: 0.0%
+
+From thread Task3 to thread: Task5      Time: 8710 ms
+Global cpu usage: 0.0%
+
+                TASK_3:  Started at time 8780 ms
+Global cpu usage: 0.0%
+
+                TASK_1:  Started at time 8820 ms
+                TASK_1: Stop at time 8860 ms    Deadline was: 9020 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 0.0%
+
+From thread Task1 to thread: Task3      Time: 8870 ms
+                TASK_3: Stop at time 8880 ms    Deadline was: 9030 ms
+                TASK_3: TOTAL EXECUTION TIME: 100 ms
+Global cpu usage: 0.0%
+
+From thread Task3 to thread: Task5      Time: 8890 ms
+Global cpu usage: 0.0%
+
+                TASK_1:  Started at time 9020 ms
+                TASK_1: Stop at time 9060 ms    Deadline was: 9220 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 0.0%
+
+From thread Task1 to thread: Task2      Time: 9070 ms
+
+                TASK_2:  Started at time 9080 ms
+                TASK_2: Stop at time 9130 ms    Deadline was: 9580 ms
+                TASK_2: TOTAL EXECUTION TIME: 50 ms
+Global cpu usage: 0.0%
+
+From thread Task2 to thread: Task3      Time: 9140 ms
+
+                TASK_3:  Started at time 9150 ms
+                TASK_3: Stop at time 9190 ms    Deadline was: 9400 ms
+                TASK_3: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 0.0%
+
+From thread Task3 to thread: Task5      Time: 9200 ms
+Global cpu usage: 0.0%
+
+                TASK_1:  Started at time 9220 ms
+                TASK_1: Stop at time 9260 ms    Deadline was: 9420 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 0.0%
+
+From thread Task1 to thread: Task3      Time: 9270 ms
+
+                TASK_3:  Started at time 9280 ms
+                TASK_3: Stop at time 9320 ms    Deadline was: 9530 ms
+                TASK_3: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 0.0%
+
+From thread Task3 to thread: Task5      Time: 9330 ms
+Global cpu usage: 0.0%
+
+                TASK_1:  Started at time 9410 ms
+                TASK_1: Stop at time 9450 ms    Deadline was: 9610 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 0.0%
+
+From thread Task1 to thread: Task5      Time: 9470 ms
+Global cpu usage: 0.0%
+
+                TASK_2:  Started at time 9530 ms
+                TASK_2: Stop at time 9580 ms    Deadline was: 10030 ms
+                TASK_2: TOTAL EXECUTION TIME: 50 ms
+Global cpu usage: 0.0%
+
+From thread Task2 to thread: Task3      Time: 9590 ms
+
+                TASK_3:  Started at time 9600 ms
+Global cpu usage: 0.0%
+
+                TASK_1:  Started at time 9610 ms
+                TASK_1: Stop at time 9650 ms    Deadline was: 9810 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 0.0%
+
+From thread Task1 to thread: Task3      Time: 9670 ms
+                TASK_3: Stop at time 9700 ms    Deadline was: 9850 ms
+                TASK_3: TOTAL EXECUTION TIME: 100 ms
+Global cpu usage: 0.0%
+
+From thread Task3 to thread: Task5      Time: 9710 ms
+Global cpu usage: 0.0%
+
+                TASK_3:  Started at time 9770 ms
+Global cpu usage: 0.0%
+
+                TASK_1:  Started at time 9820 ms
+                TASK_1: Stop at time 9860 ms    Deadline was: 10020 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 0.0%
+
+From thread Task1 to thread: Task3      Time: 9880 ms
+                TASK_3: Stop at time 9890 ms    Deadline was: 10020 ms
+                TASK_3: TOTAL EXECUTION TIME: 120 ms
+Global cpu usage: 0.0%
+
+From thread Task3 to thread: Task5      Time: 9900 ms
+Global cpu usage: 0.0%
+
+                TASK_1:  Started at time 10020 ms
+                TASK_1: Stop at time 10060 ms   Deadline was: 10220 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 0.0%
+
+From thread Task1 to thread: Task2      Time: 10070 ms
+
+                TASK_2:  Started at time 10080 ms
+                TASK_2: Stop at time 10130 ms   Deadline was: 10580 ms
+                TASK_2: TOTAL EXECUTION TIME: 50 ms
+Global cpu usage: 0.0%
+
+From thread Task2 to thread: Task3      Time: 10140 ms
+
+                TASK_3:  Started at time 10150 ms
+                TASK_3: Stop at time 10190 ms   Deadline was: 10400 ms
+        Global cpu usage: 0.0%
+
+                TASK_1:  Started at time 10210 ms
+                TASK_1: Stop at time 10250 ms   Deadline was: 10410 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 0.0%
+
+From thread Task1 to thread: Task3      Time: 10260 ms
+        TASK_1: TOTAL EXECUTION TIME: 40 ms
+
+                TASK_3:  Started at time 10270 ms
+                TASK_3: Stop at time 10310 ms   Deadline was: 10520 ms
+                TASK_3: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 0.0%
+
+From thread Task3 to thread: Task5      Time: 10320 ms
+Global cpu usage: 0.0%
+
+                TASK_1:  Started at time 10410 ms
+                TASK_1: Stop at time 10450 ms   Deadline was: 10610 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 0.0%
+
+From thread Task1 to thread: Task5      Time: 10470 ms
+Global cpu usage: 0.0%
+
+                TASK_2:  Started at time 10530 ms
+                TASK_2: Stop at time 10580 ms   Deadline was: 11030 ms
+                TASK_2: TOTAL EXECUTION TIME: 50 ms
+Global cpu usage: 0.0%
+
+From thread Task2 to thread: Task3      Time: 10590 ms
+
+                TASK_3:  Started at time 10600 ms
+Global cpu usage: 0.0%
+
+                TASK_1:  Started at time 10610 ms
+                TASK_1: Stop at time 10650 ms   Deadline was: 10810 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 0.0%
+
+From thread Task1 to thread: Task3      Time: 10670 ms
+                TASK_3: Stop at time 10700 ms   Deadline was: 10850 ms
+                TASK_3: TOTAL EXECUTION TIME: 100 ms
+Global cpu usage: 0.0%
+
+From thread Task3 to thread: Task5      Time: 10720 ms
+Global cpu usage: 0.0%
+
+                TASK_3:  Started at time 10780 ms
+Global cpu usage: 0.0%
+
+                TASK_1:  Started at time 10820 ms
+                TASK_1: Stop at time 10860 ms   Deadline was: 11020 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 0.0%
+
+From thread Task1 to thread: Task3      Time: 10870 ms
+                TASK_3: Stop at time 10880 ms   Deadline was: 11030 ms
+                TASK_3: TOTAL EXECUTION TIME: 100 ms
+Global cpu usage: 0.0%
+
+From thread Task3 to thread: Task5      Time: 10890 ms
+Global cpu usage: 0.0%
+
+                TASK_1:  Started at time 11020 ms
+                TASK_1: Stop at time 11060 ms   Deadline was: 11220 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 0.0%
+
+From thread Task1 to thread: Task2      Time: 11070 ms
+
+                TASK_2:  Started at time 11090 ms
+                TASK_2: Stop at time 11140 ms   Deadline was: 11590 ms
+                TASK_2: TOTAL EXECUTION TIME: 50 ms
+Global cpu usage: 0.0%
+
+From thread Task2 to thread: Task3      Time: 11150 ms
+
+                TASK_3:  Started at time 11170 ms
+Global cpu usage: 0.0%
+
+                TASK_1:  Started at time 11220 ms
+                TASK_1: Stop at time 11260 ms   Deadline was: 11420 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 0.0%
+
+From thread Task1 to thread: Task3      Time: 11270 ms
+                TASK_3: Stop at time 11280 ms   Deadline was: 11420 ms
+                TASK_3: TOTAL EXECUTION TIME: 110 ms
+
+                TASK_3:  Started at time 11290 ms
+                TASK_3: Stop at time 11330 ms   Deadline was: 11540 ms
+                TASK_3: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 0.0%
+
+From thread Task3 to thread: Task5      Time: 11350 ms
+Global cpu usage: 0.0%
+
+                TASK_1:  Started at time 11420 ms
+                TASK_1: Stop at time 11460 ms   Deadline was: 11620 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 0.0%
+
+From thread Task1 to thread: Task5      Time: 11480 ms
+Global cpu usage: 0.0%
+
+                TASK_2:  Started at time 11530 ms
+                TASK_2: Stop at time 11580 ms   Deadline was: 12030 ms
+                TASK_2: TOTAL EXECUTION TIME: 50 ms
+Global cpu usage: 0.0%
+
+From thread Task2 to thread: Task3      Time: 11600 ms
+Global cpu usage: 0.0%
+
+                TASK_1:  Started at time 11620 ms
+                TASK_1: Stop at time 11660 ms   Deadline was: 11820 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 0.0%
+
+From thread Task1 to thread: Task3      Time: 11670 ms
+
+                TASK_3:  Started at time 11680 ms
+                TASK_3: Stop at time 11720 ms   Deadline was: 11930 ms
+                TASK_3: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 0.0%
+
+From thread Task3 to thread: Task5      Time: 11730 ms
+Global cpu usage: 0.0%
+
+                TASK_3:  Started at time 11780 ms
+Global cpu usage: 0.0%
+
+                TASK_1:  Started at time 11820 ms
+                TASK_1: Stop at time 11860 ms   Deadline was: 12020 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 0.0%
+
+From thread Task1 to thread: Task3      Time: 11870 ms
+                TASK_3: Stop at time 11890 ms   Deadline was: 12030 ms
+                TASK_3: TOTAL EXECUTION TIME: 110 ms
+Global cpu usage: 0.0%
+
+From thread Task3 to thread: Task5      Time: 11900 ms
+Global cpu usage: 0.0%
+
+                TASK_1:  Started at time 12020 ms
+                TASK_1: Stop at time 12060 ms   Deadline was: 12220 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 0.0%
+
+From thread Task1 to thread: Task2      Time: 12080 ms
+
+                TASK_2:  Started at time 12090 ms
+                TASK_2: Stop at time 12140 ms   Deadline was: 12590 ms
+                TASK_2: TOTAL EXECUTION TIME: 50 ms
+Global cpu usage: 0.0%
+
+From thread Task2 to thread: Task3      Time: 12150 ms
+
+                TASK_3:  Started at time 12160 ms
+                TASK_3: Stop at time 12200 ms   Deadline was: 12410 ms
+        Global cpu usage: 0.0%
+
+                TASK_1:  Started at time 12220 ms
+                TASK_1: Stop at time 12260 ms   Deadline was: 12420 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 0.0%
+
+From thread Task1 to thread: Task3      Time: 12270 ms
+        TASK_1: TOTAL EXECUTION TIME: 40 ms
+
+                TASK_3:  Started at time 12280 ms
+                TASK_3: Stop at time 12320 ms   Deadline was: 12530 ms
+                TASK_3: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 0.0%
+
+From thread Task3 to thread: Task5      Time: 12330 ms
+Global cpu usage: 0.0%
+
+                TASK_1:  Started at time 12420 ms
+                TASK_1: Stop at time 12460 ms   Deadline was: 12620 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 0.0%
+
+From thread Task1 to thread: Task5      Time: 12470 ms
+Global cpu usage: 0.0%
+
+                TASK_2:  Started at time 12530 ms
+                TASK_2: Stop at time 12580 ms   Deadline was: 13030 ms
+                TASK_2: TOTAL EXECUTION TIME: 50 ms
+Global cpu usage: 0.0%
+
+From thread Task2 to thread: Task3      Time: 12590 ms
+
+                TASK_3:  Started at time 12600 ms
+Global cpu usage: 0.0%
+
+                TASK_1:  Started at time 12620 ms
+                TASK_1: Stop at time 12660 ms   Deadline was: 12820 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 0.0%
+
+From thread Task1 to thread: Task3      Time: 12660 ms
+                TASK_3: Stop at time 12690 ms   Deadline was: 12850 ms
+                TASK_3: TOTAL EXECUTION TIME: 90 ms
+Global cpu usage: 0.0%
+
+From thread Task3 to thread: Task5      Time: 12700 ms
+Global cpu usage: 0.0%
+
+                TASK_3:  Started at time 12780 ms
+Global cpu usage: 0.0%
+
+                TASK_1:  Started at time 12820 ms
+                TASK_1: Stop at time 12860 ms   Deadline was: 13020 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 0.0%
+
+From thread Task1 to thread: Task3      Time: 12870 ms
+                TASK_3: Stop at time 12880 ms   Deadline was: 13030 ms
+                TASK_3: TOTAL EXECUTION TIME: 100 ms
+Global cpu usage: 0.0%
+
+From thread Task3 to thread: Task5      Time: 12890 ms
+Global cpu usage: 0.0%
+
+                TASK_1:  Started at time 13010 ms
+                TASK_1: Stop at time 13050 ms   Deadline was: 13210 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 0.0%
+
+From thread Task1 to thread: Task2      Time: 13080 ms
+
+                TASK_2:  Started at time 13090 ms
+                TASK_2: Stop at time 13140 ms   Deadline was: 13590 ms
+                TASK_2: TOTAL EXECUTION TIME: 50 ms
+Global cpu usage: 0.0%
+
+From thread Task2 to thread: Task3      Time: 13150 ms
+
+                TASK_3:  Started at time 13170 ms
+Global cpu usage: 0.0%
+
+                TASK_1:  Started at time 13220 ms
+Global cpu usage: 0.0%
+
+PREEMPTION of Task1 OCCURRED
+
+From thread Task1 to thread: TaskS      Time: 13230 ms
+Global cpu usage: 0.0%
+
+PREEMPTION of TaskS OCCURRED
+
+From thread TaskS to thread: Task1      Time: 13250 ms
+                TASK_1: Stop at time 13280 ms   Deadline was: 13420 ms
+                TASK_1: TOTAL EXECUTION TIME: 60 ms
+Global cpu usage: 0.0%
+
+From thread Task1 to thread: Task3      Time: 13310 ms
+                TASK_3: Stop at time 13320 ms   Deadline was: 13420 ms
+                TASK_3: TOTAL EXECUTION TIME: 150 ms
+
+                TASK_3:  Started at time 13340 ms
+                TASK_3: Stop at time 13380 ms   Deadline was: 13590 ms
+                TASK_3: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 0.0%
+
+From thread Task3 to thread: Task5      Time: 13390 ms
+Global cpu usage: 0.0%
+
+                TASK_1:  Started at time 13420 ms
+                TASK_1: Stop at time 13460 ms   Deadline was: 13620 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 0.0%
+
+From thread Task1 to thread: Task5      Time: 13480 ms
+Global cpu usage: 0.0%
+
+                TASK_2:  Started at time 13540 ms
+                TASK_2: Stop at time 13590 ms   Deadline was: 14040 ms
+                TASK_2: TOTAL EXECUTION TIME: 50 ms
+Global cpu usage: 0.0%
+
+                TASK_1:  Started at time 13640 ms
+                TASK_1: Stop at time 13690 ms   Deadline was: 13840 ms
+                TASK_1: TOTAL EXECUTION TIME: 50 ms
+Global cpu usage: 0.0%
+
+From thread Task1 to thread: Task2      Time: 13720 ms
+Global cpu usage: 0.0%
+
+From thread Task2 to thread: Task3      Time: 13730 ms
+Global cpu usage: 0.0%
+
+                TASK_1:  Started at time 13830 ms
+                TASK_1: Stop at time 13890 ms   Deadline was: 14030 ms
+                TASK_1: TOTAL EXECUTION TIME: 60 ms
+Global cpu usage: 0.0%
+
+From thread Task1 to thread: Task3      Time: 13920 ms
+
+                TASK_3:  Started at time 13790 ms
+                TASK_3: Stop at time 13940 ms   Deadline was: 14040 ms
+                TASK_3: TOTAL EXECUTION TIME: 150 ms
+
+                TASK_3:  Started at time 13960 ms
+                TASK_3: Stop at time 14000 Global cpu usage: 0.0%
+
+                TASK_1:  Started at time 14050 ms
+                TASK_1: Stop at time 14090 ms   Deadline was: 14250 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 0.0%
+
+Global cpu usage: 0.0%
+                TASK_2:  Started at time
+                TASK_1:  Started at time 14230 ms
+                TASK_1: Stop at time 14270 ms   Deadline was: 14430 ms
+                TASK_1: TOTAL EXECUTION TIME: 40 ms
+Global cpu usage: 0.0%
+
+From thread Task1 to thread: Task2      Time: 14300 ms
+14160 ms
+                TASK_2: Stop at time 14320 ms   Deadline was: 14660 ms
+                TASK_2: TOTAL EXECUTION TIME: 160 ms
+Global cpu usage: 0.0%
+
+From thread Task2 to thread: Task3      Time: 14340 ms
+E: 160 ms
+e was: 14660 ms
+                TASK_3: TOTAL EXECUTION TIME: 40 ms
+
+                TASK_3:  Started at time 14370 ms
+Global cpu usage: 0.0%
+
+                TASK_1:  Started at time 14440 ms
+                TASK_1: Stop at time 14510 ms   Deadline was: 14640 ms
+                TASK_1: TOTAL EXECUTION TIME: 70 ms
+Global cpu usage: 0.0%
+
+From thread Task1 to thread: Task2      Time: 14560 ms
+Global cpu usage: 0.0%
+
+                TASK_1:  Started at time 14640 ms
+Global cpu usage: 0.0%
+
+

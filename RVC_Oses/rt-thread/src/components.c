@@ -19,6 +19,8 @@
 
 #include <rthw.h>
 #include <rtthread.h>
+#include "cpu_usage.h"
+#include <drivers/mock_devices.h>
 
 #ifdef RT_USING_USER_MAIN
 #ifndef RT_MAIN_THREAD_STACK_SIZE
@@ -209,7 +211,9 @@ void rt_application_init(void)
 
 #ifdef RT_USING_HEAP
     tid = rt_thread_create("main", main_thread_entry, RT_NULL,
-                           RT_MAIN_THREAD_STACK_SIZE, RT_MAIN_THREAD_PRIORITY, 20);
+                           RT_MAIN_THREAD_STACK_SIZE,
+                           RT_MAIN_THREAD_PRIORITY,
+                           20);
     RT_ASSERT(tid != RT_NULL);
 #else
     rt_err_t result;
@@ -239,6 +243,9 @@ int rtthread_startup(void)
      */
     rt_hw_board_init();
 
+    /* initialization of fake devie */
+    rt_mock_devices_init();
+
     /* show RT-Thread version */
     rt_show_version();
 
@@ -258,6 +265,9 @@ int rtthread_startup(void)
 
     /* timer thread initialization */
     rt_system_timer_thread_init();
+
+    /* cpu usage initialization*/
+    cpu_usage_init();
 
     /* idle thread initialization */
     rt_thread_idle_init();

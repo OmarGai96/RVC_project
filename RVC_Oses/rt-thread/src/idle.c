@@ -291,6 +291,7 @@ static void rt_thread_idle_entry(void *parameter)
             if (idle_hook != RT_NULL)
             {
                 idle_hook();
+
             }
         }
 #endif /* RT_USING_IDLE_HOOK */
@@ -335,7 +336,11 @@ void rt_thread_idle_init(void)
                 RT_NULL,
                 &rt_thread_stack[i][0],
                 sizeof(rt_thread_stack[i]),
+#ifdef BACKGROUND_SCHEDULING
+                1,
+#else
                 RT_THREAD_PRIORITY_MAX - 1,
+#endif
                 32);
 #ifdef RT_USING_SMP
         rt_thread_control(&idle[i], RT_THREAD_CTRL_BIND_CPU, (void*)i);

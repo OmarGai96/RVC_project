@@ -679,6 +679,8 @@ struct rt_thread
 #endif
 
     rt_ubase_t user_data;                             /**< private user data beyond this thread */
+    rt_uint8_t end_flag;                            //added by Omar
+    rt_uint16_t tick_count;
 };
 typedef struct rt_thread *rt_thread_t;
 
@@ -923,7 +925,8 @@ enum rt_device_class_type
     RT_Device_Class_Touch,                              /**< Touch device */
     RT_Device_Class_PHY,                                /**< PHY device */
     RT_Device_Class_Security,                           /**< Security device */
-    RT_Device_Class_Unknown                             /**< unknown device */
+    RT_Device_Class_Unknown,                            /**< unknown device */
+    RT_Device_Class_Mock                                /**< Fake device for simulation */
 };
 
 /**
