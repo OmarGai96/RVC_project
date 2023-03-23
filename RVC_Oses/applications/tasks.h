@@ -33,7 +33,11 @@
 
 #define THREAD_TIMESLICE               5
 
-#define PROXIMITY_SENSOR_PIN_NUMBER     35
+#define PROXIMITY_SENSOR                "proximity_sensor"
+#define ENGINE                          "engine"
+#define BATTERY                         "battery"
+#define GARBAGE_BAG                     "garbage_bag"
+
 #define ACUSTIC_SIGNAL_PIN_NUMBER       40
 #define BRUSHES_SPEED_PIN_NUMBER        36
 #define BRUSHES_POWER_PIN_NUMBER        37
@@ -87,10 +91,14 @@ struct rt_thread brushes_speed;
 
 
 rt_device_t proximity_sensor;
+rt_device_t engine;
+rt_device_t battery;
+rt_device_t garbage_bag;
 
 
 // ************************************ FUNCTIONS **************************************************************
 
+void mock_devices_init();
 void obstacle_control_entry(void *param);
 void movement_stop_entry(void *param);
 void movement_control_entry(void *param);

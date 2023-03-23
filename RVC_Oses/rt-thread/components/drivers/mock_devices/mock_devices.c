@@ -11,15 +11,15 @@ static int proximity_sensor_init(rt_device_t dev) {
     dev->ref_count++;
     return RT_EOK;
 }
-
 static int proximity_sensor_read(rt_device_t dev, rt_off_t pos, void* buffer, rt_size_t size) {
-    static int i=0;
+    int i;
     char *buf;
 
     buf = (char*)buffer;
+    srand( (unsigned int) rt_tick_get_millisecond());
+    i = rand();
 
-    if (++i == 20) {
-        i=0;
+    if (i%20 == 0) {
         *buf = 'y';
     } else {
         *buf = 'n';
@@ -43,8 +43,19 @@ static int engine_init(rt_device_t dev) {
     return RT_EOK;
 }
 static int engine_write(rt_device_t dev, rt_off_t pos, const void* buffer, rt_size_t size) {
-    /* insert function */
-    rt_kprintf("\n\nTEST\n\n");
+
+    char *msg;
+    static int stopped = 1;
+    msg = (char*)buffer;
+
+    if (strcmp(msg, "STOP") == 0) {
+        stopped = 1;
+        rt_kprintf("\n\tENGINE: stopped!\n");
+    } else if (strcmp(msg, "START") == 0) {
+        if(stopped==1)  rt_kprintf("\n\tENGINE: started!\n");
+        stopped = 0;
+    }
+
     return RT_EOK;
 }
 const static struct rt_device_ops engine_ops =
@@ -56,6 +67,59 @@ const static struct rt_device_ops engine_ops =
     engine_write,
     RT_NULL,
 };
+
+
+/* DRIVERS for battery */
+static int battery_value = 100;
+static int battery_init(rt_device_t dev) {
+    dev->ref_count++;
+    return RT_EOK;
+}
+static int battery_write(rt_device_t dev, rt_off_t pos, const void* buffer, rt_size_t size) {
+    battery_value--;
+    return RT_EOK;
+}
+static int battery_read(rt_device_t dev, rt_off_t pos, const void* buffer, rt_size_t size) {
+    int curr_battery = battery_value;
+    buffer = &curr_battery;
+    return RT_EOK;
+}
+const static struct rt_device_ops battery_ops =
+{
+    battery_init,
+    RT_NULL,
+    RT_NULL,
+    battery_read,
+    battery_write,
+    RT_NULL,
+};
+
+
+/* DRIVERS for battery */
+static int garbage_bag_value = 0;
+static int garbage_bag_init(rt_device_t dev) {
+    dev->ref_count++;
+    return RT_EOK;
+}
+static int garbage_bag_write(rt_device_t dev, rt_off_t pos, const void* buffer, rt_size_t size) {
+    garbage_bag_value--;
+    return RT_EOK;
+}
+static int garbage_bag_read(rt_device_t dev, rt_off_t pos, const void* buffer, rt_size_t size) {
+    int curr_garbage_bag = garbage_bag_value;
+    buffer = &curr_garbage_bag;
+    return RT_EOK;
+}
+const static struct rt_device_ops garbage_bag_ops =
+{
+    garbage_bag_init,
+    RT_NULL,
+    RT_NULL,
+    garbage_bag_read,
+    garbage_bag_write,
+    RT_NULL,
+};
+
 
 
 
@@ -71,5 +135,15 @@ void rt_mock_devices_init()
     engine = rt_device_create(RT_Device_Class_Mock, SIZE);
     engine->ops = &engine_ops;
     rt_device_register(engine, "engine", RT_DEVICE_FLAG_RDWR);
+
+    /* creating and registering engine */
+    battery = rt_device_create(RT_Device_Class_Mock, SIZE);
+    battery->ops = &battery_ops;
+    rt_device_register(battery, "battery", RT_DEVICE_FLAG_RDWR);
+
+    /* creating and registering engine */
+    garbage_bag = rt_device_create(RT_Device_Class_Mock, SIZE);
+    garbage_bag->ops = &garbage_bag_ops;
+    rt_device_register(garbage_bag, "garbage_bag", RT_DEVICE_FLAG_RDWR);
 
 }

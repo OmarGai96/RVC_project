@@ -23,6 +23,24 @@ extern startingTime;
 // EXTRA FUNCTIONS *********************************************************************************************
 
 
+/* Function that initialize the device such that they are globally accessible by tasks */
+void mock_devices_init() {
+
+    proximity_sensor = rt_device_find(PROXIMITY_SENSOR);
+    rt_device_init(proximity_sensor);
+
+    engine = rt_device_find(ENGINE);
+    rt_device_init(engine);
+
+    battery = rt_device_find(BATTERY);
+    rt_device_init(battery);
+
+    garbage_bag = rt_device_find(GARBAGE_BAG);
+    rt_device_init(garbage_bag);
+
+}
+
+
 /* This function search for a new position where the robot can go, it is used in case we reached a
    bound of the room or if we have found an obstacle */
 int find_new_position()
@@ -63,7 +81,7 @@ void print_map() {
             rt_kprintf("%d ", map[i][j]);
         rt_kprintf("\n");
     }
-    rt_kprintf("\n\n");
+    rt_kprintf("\n");
 }
 
 
@@ -163,8 +181,6 @@ void obstacle_control_entry(void *param)
 
     int tick_start, tick_end, time_start, time_end;
     char obstacle;
-    proximity_sensor = rt_device_find("proximity_sensor");
-    rt_device_init(proximity_sensor);
 
     // infinite loop
     while (1){
@@ -210,6 +226,9 @@ void obstacle_control_entry(void *param)
 /* Entry for the task movement stop. */
 void movement_stop_entry(void *param)
 {
+    int stop_size = 5;
+    char *stop = "STOP";
+
     // infinite loop
     while (1) {
         // waits for the aperiodic event that signals an obstacle have been found
@@ -217,13 +236,7 @@ void movement_stop_entry(void *param)
                           RT_EVENT_FLAG_AND | RT_EVENT_FLAG_CLEAR,
                           RT_WAITING_FOREVER, RT_NULL) == RT_EOK){
 
-            // TODO: decide how to implement this in hw and modify correspondent driver
-            //WE CAN USE JUST A SPECIFIC PIN SET TO ZERO, and using a global variable to remember it, if necessary.
-            //Otherwise modify or create a driver that remember the last status of the engine
-
-#ifdef DEB_DISPLAY
-            rt_kprintf("\tEngine stopped!\n");
-#endif
+            rt_device_write(engine, 0, stop, stop_size);
 
         }
     }
@@ -234,6 +247,8 @@ void movement_stop_entry(void *param)
 void movement_control_entry(void *param)
 {
     int tick_start, tick_end, time_start, time_end;
+    int start_size = 6;
+    char *start = "START";
 
     // data structures used
     int i,j, stuck;
@@ -327,6 +342,8 @@ void movement_control_entry(void *param)
                 break;
             }
 
+            rt_device_write(engine, 0, start, start_size);
+
 #ifdef DEB_DISPLAY
             rt_kprintf("\n\tRobot in position %d,%d\n", position[0], position[1]);
 #endif
@@ -374,7 +391,7 @@ void check_resources_entry(void *param){
 #ifdef DEB_DISPLAY
         /**display only if the status is a multiple of 5, useful to limit the number of prints**/
         if(batteryStatus%5==0){
-            printf("\n\tBattery status %d %% \n", batteryStatus);
+            //printf("\n\tBattery status %d %% \n", batteryStatus);
         }
 #endif
 
