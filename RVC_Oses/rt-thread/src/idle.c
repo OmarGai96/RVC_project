@@ -347,6 +347,7 @@ void rt_thread_idle_init(void)
 #endif /* RT_USING_SMP */
         /* startup */
         rt_thread_startup(&idle[i]);
+        set_end_flag(&idle[i]); //added by Omar, useful to not notify preemption of idle
     }
 
 #ifdef RT_USING_SMP

@@ -228,6 +228,7 @@ void rt_application_init(void)
 #endif /* RT_USING_HEAP */
 
     rt_thread_startup(tid);
+    set_end_flag(tid); //added by Omar, useful to not notify preemption of idle
 }
 
 /**

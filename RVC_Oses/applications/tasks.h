@@ -53,11 +53,11 @@ enum directions {UP, DOWN, LEFT, RIGHT, RETURN};
 #define PERIOD_TASK4    500 //500 ms
 #define PERIOD_TASK5    250 //250 ms
 
-#define TICK_DELAY_T1 4 //40 ms, is the duration of Task1 as ticks
-#define TICK_DELAY_T2 5 //50 ms, is the duration of Task2 as ticks
-#define TICK_DELAY_T3 4 //40 ms, is the duration of Task3 as ticks
-#define TICK_DELAY_T4 2 //20 ms, is the duration of Task4 as ticks
-#define TICK_DELAY_T5 2 //20 ms, is the duration of Task5 as ticks
+#define TICK_DELAY_T1 40 //400 ms, is the duration of Task1 as ticks
+#define TICK_DELAY_T2 50 //500 ms, is the duration of Task2 as ticks
+#define TICK_DELAY_T3 40 //400 ms, is the duration of Task3 as ticks
+#define TICK_DELAY_T4 20 //200 ms, is the duration of Task4 as ticks
+#define TICK_DELAY_T5 20 //200 ms, is the duration of Task5 as ticks
 
 // ************************************ STRUCTURES *************************************************************
 

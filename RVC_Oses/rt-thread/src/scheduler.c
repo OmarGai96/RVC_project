@@ -455,8 +455,10 @@ void rt_schedule(void)
             to_thread = _scheduler_get_highest_priority_thread(&highest_ready_priority);
             //assign to thread the highest priority thread and to highest_ready_priority the highest priority value
 
-            //if ((rt_current_thread->stat & RT_THREAD_STAT_MASK) == RT_THREAD_RUNNING){
-            if(isRunning(rt_current_thread)){
+
+            //CHECK priorities
+            if ((rt_current_thread->stat & RT_THREAD_STAT_MASK) == RT_THREAD_RUNNING){
+            //if(isRunning(rt_current_thread)){
                 if (rt_current_thread->current_priority < highest_ready_priority){
                     to_thread = rt_current_thread;
                 }
@@ -514,12 +516,12 @@ void rt_schedule(void)
                     RT_OBJECT_HOOK_CALL(rt_scheduler_switch_hook, (from_thread));
 
 #ifdef DEBUG_SCH
-
-                    if(from_thread->end_flag != 1){
-                        rt_kprintf("\nPREEMPTION of %s OCCURRED\n", rt_thread_get_name(from_thread));
+                    if(from_thread->end_flag == 0){
+                        rt_kprintf("\n\tPREEMPTION of %s OCCURRED\n", rt_thread_get_name(from_thread));
                     }
-                    rt_kprintf("\nFrom thread %s to thread: %s \tTime: %d ms\n", rt_thread_get_name(from_thread) ,rt_thread_get_name(to_thread),rt_tick_get_millisecond()-startingTime);
+                    rt_kprintf("\n\tFrom thread %s to thread: %s \tTime: %d ms\n", rt_thread_get_name(from_thread) ,rt_thread_get_name(to_thread),rt_tick_get_millisecond()-startingTime);
 #endif
+
 
                     //CONTEXT SWITCH
                     rt_hw_context_switch((rt_ubase_t)&from_thread->sp,
@@ -556,7 +558,8 @@ void rt_schedule(void)
                     rt_hw_context_switch_interrupt((rt_ubase_t)&from_thread->sp,
                             (rt_ubase_t)&to_thread->sp);
                 }
-            }else{
+
+            }else{  //rt_current_thread == to_thread
                 /* if the destination thread is the same as current thread */
                 rt_schedule_remove_thread(rt_current_thread);
                 rt_current_thread->stat = RT_THREAD_RUNNING | (rt_current_thread->stat & ~RT_THREAD_STAT_MASK);

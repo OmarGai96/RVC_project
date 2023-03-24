@@ -210,7 +210,7 @@ void obstacle_control_entry(void *param)
 
             tick_end = rt_tick_get();
             time_end= tick_end*10-startingTime;
-            set_end_flag(&obstacle_control);
+
 
 #ifdef BENCHMARK_TIME
 
@@ -218,7 +218,7 @@ void obstacle_control_entry(void *param)
         printf("\t\tTASK_1: TOTAL EXECUTION TIME: %d ticks (%d ms)\n", tick_end-tick_start,time_end-time_start);
 #endif
         }
-
+        set_end_flag(&obstacle_control);  //last instruction of current thread is pass
     }
 }
 
@@ -267,8 +267,7 @@ void movement_control_entry(void *param)
     rt_signal_unmask(SIGUSR1);
 
     // infinite loop
-    while (1)
-    {
+    while (1){
         // waits for the aperiodic event that signals an obstacle have been found
         if (rt_event_recv(&event_tasks_activation, EVENT_MOVEMENT_CONTROL_ACTIVATION,
                           RT_EVENT_FLAG_AND | RT_EVENT_FLAG_CLEAR,
@@ -352,7 +351,6 @@ void movement_control_entry(void *param)
 
             tick_end = rt_tick_get();
             time_end= tick_end*10-startingTime;
-            set_end_flag(&movement_control);
 
 #ifdef BENCHMARK_TIME
         printf("\t\tTASK_2: Stop at time %d ms\tDeadline was: %d ms\n", time_end, (PERIOD_TASK2)*10+time_start);
@@ -360,6 +358,7 @@ void movement_control_entry(void *param)
 #endif
         //WCET THE MAXIMUM AMONG THE DIFFERENT EXECUTIONS
         }
+        set_end_flag(&movement_control);
     }
 }
 
@@ -439,14 +438,13 @@ void check_resources_entry(void *param){
 
         tick_end = rt_tick_get();
         time_end= tick_end*10-startingTime;
-        set_end_flag(&check_resources);
 
 #ifdef BENCHMARK_TIME
         printf("\t\tTASK_3: Stop at time %d ms\tDeadline was: %d ms\n", time_end, (PERIOD_TASK3)*10+time_start);
         printf("\t\tTASK_3: TOTAL EXECUTION TIME: %d (%d ms)\n", tick_end-tick_start,time_end-time_start);
 #endif
-
       }
+      set_end_flag(&check_resources);
     }
 }
 
@@ -488,14 +486,13 @@ void acoustic_signals_entry(void *param){
 
             tick_end = rt_tick_get();
             time_end= tick_end*10-startingTime;
-            set_end_flag(&acoustic_signals);
 
 #ifdef BENCHMARK_TIME
         printf("\t\tTASK_4: Stop at time %d ms\t APERIODIC task", time_end);
         printf("\t\tTASK_4: TOTAL EXECUTION TIME: %d (%d ms)\n", tick_end-tick_start,time_end-time_start);
 #endif
-
         }
+        set_end_flag(&acoustic_signals);
     }
 }
 
@@ -592,15 +589,13 @@ void brushes_speed_entry(void *param)
 
             tick_end = rt_tick_get();
             time_end= tick_end*10-startingTime;
-            set_end_flag(&brushes_speed);
 
 #ifdef BENCHMARK_TIME
         printf("\t\tTASK_5: Stop at time %d ms\tDeadline was: %d ms\n", time_end, (PERIOD_TASK5)*10+time_start);
         printf("\t\tTASK_5: TOTAL EXECUTION TIME: %d (%d ms)\n", tick_end-tick_start,time_end-time_start);
 #endif
-
-
         }
+        set_end_flag(&brushes_speed);
     }
 }
 
