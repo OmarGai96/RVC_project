@@ -38,6 +38,7 @@
 #define ENGINE                          "engine"
 #define BATTERY                         "battery"
 #define GARBAGE_BAG                     "garbage_bag"
+#define SPEAKER                         "speaker"
 
 #define ACUSTIC_SIGNAL_PIN_NUMBER       40
 #define BRUSHES_SPEED_PIN_NUMBER        36
@@ -100,6 +101,7 @@ rt_device_t proximity_sensor;
 rt_device_t engine;
 rt_device_t battery;
 rt_device_t garbage_bag;
+rt_device_t speaker;
 
 
 // ************************************ FUNCTIONS **************************************************************
