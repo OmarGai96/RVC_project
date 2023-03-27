@@ -119,6 +119,11 @@ void movement_control_obstacle_handler(int sig)
  *
  */
 void turnOffSystem(void){
+
+#ifdef DEB_INTERNAL
+    printf("\t SIGNAL received: TURN OFF THE SYSTEM\n");
+#endif
+
     if (rt_thread_detach(&obstacle_control) == RT_EOK){
 #ifdef DEB_INTERNAL
         printf("\n\tTask1 detached correctly");
@@ -206,7 +211,7 @@ void obstacle_control_entry(void *param)
 
             }
 
-            while(get_tick_count(&obstacle_control)>0){ }
+            while(get_tick_count(&obstacle_control)!=0){ }
 
             tick_end = rt_tick_get();
             time_end= tick_end*10-startingTime;
@@ -278,6 +283,7 @@ void movement_control_entry(void *param)
             time_start=tick_start*10-startingTime;
             reset_end_flag(&movement_control);
 
+
 #ifdef BENCHMARK_TIME
             printf("\n\t\tTASK_2:\t Started at time %d ms\n", time_start);
 #endif
@@ -337,6 +343,7 @@ void movement_control_entry(void *param)
 #ifdef DEB_DISPLAY
                 rt_kprintf("\tThe robot is back at charging station!\n");
 #endif
+                rt_mb_send(&mb2_5, (rt_uint32_t)&mb_str4);      //notify task 5 with an email
 
                 break;
             }
@@ -383,6 +390,7 @@ void check_resources_entry(void *param){
             time_start=tick_start*10-startingTime;
             reset_end_flag(&check_resources);
 
+
 #ifdef BENCHMARK_TIME
         printf("\n\t\tTASK_3:\t Started at time %d ms\n", time_start);
 #endif
@@ -395,19 +403,23 @@ void check_resources_entry(void *param){
 #endif
 
         /**Check BATTERY status**/
-        if(batteryStatus == TOTALLY_DISCHARGE){
-            //TODO: notify someone to TURN OFF the system
+        if(batteryStatus <= TOTALLY_DISCHARGE){
 #ifdef DEB_DISPLAY
             printf("\t\tBATTERY TOTALLY LOW --> TURN OFF THE SYSTEM\n\n"); //ITA: la batteria è completamente scarica
 #endif
-        }else if(batteryStatus <= DISCHARGE) {
-            rt_mb_send(&mb2_3, (rt_uint32_t)&mb_str3);      //notify task 2 BATTERY is LOW
+#ifdef DEB_INTERNAL
+            printf("\t\tBATTERY TOTALLY LOW --> sending signal to TURN OFF THE SYSTEM \n\n"); //ITA: la batteria è completamente scarica
+#endif
+            rt_thread_kill(&Tsystem, SIGUSR2); //notify TSystem to TURN OFF the system
+
+        }else if(batteryStatus <= DISCHARGE && batteryStatus > TOTALLY_DISCHARGE) {
+            //rt_mb_send(&mb2_3, (rt_uint32_t)&mb_str3);      //notify task 2 BATTERY is LOW
 #ifdef DEB_DISPLAY
             printf("\t\tBATTERY is LOW\n\n"); //ITA: la batteria è scarica
 #endif
         }else if(batteryStatus <= DISCHARGE_THRESHOLD && batteryStatus > DISCHARGE) {
             rt_event_send(&event_resources, EVENT_FLAG1);   //notify task 4 with an event
-            rt_mb_send(&mb2_3, (rt_uint32_t)&mb_str2);      //notify task 2 with an email
+            //rt_mb_send(&mb2_3, (rt_uint32_t)&mb_str2);      //notify task 2 with an email
 
 #ifdef DEB_DISPLAY
             printf("\t\tBATTERY is running LOW\n\n");  //ITA: la batteria si sta scaricando
@@ -431,8 +443,6 @@ void check_resources_entry(void *param){
 #endif
 
         }
-
-        //batteryStatus--;
 
         while(get_tick_count(&check_resources)!=0){ }
 
@@ -488,7 +498,7 @@ void acoustic_signals_entry(void *param){
             time_end= tick_end*10-startingTime;
 
 #ifdef BENCHMARK_TIME
-        printf("\t\tTASK_4: Stop at time %d ms\t APERIODIC task", time_end);
+        printf("\t\tTASK_4: Stop at time %d ms\t APERIODIC task\n", time_end);
         printf("\t\tTASK_4: TOTAL EXECUTION TIME: %d (%d ms)\n", tick_end-tick_start,time_end-time_start);
 #endif
         }
@@ -507,7 +517,7 @@ void brushes_speed_entry(void *param)
      * 1 0 LOW
      * 1 1 STOP
      */
-    int brushes_speed[2], brushes_power[2];
+    int brushes_speed_v[2], brushes_power[2];
     char *str;
 
     while(1){
@@ -518,6 +528,7 @@ void brushes_speed_entry(void *param)
             set_tick_count(&brushes_speed, TICK_DELAY_T5);
             time_start=tick_start*10-startingTime;
             reset_end_flag(&brushes_speed);
+
 #ifdef BENCHMARK_TIME
             printf("\n\t\tTASK_5:\t Started at time %d ms\n", time_start);
 #endif
@@ -525,26 +536,28 @@ void brushes_speed_entry(void *param)
             rt_pin_mode(BRUSHES_SPEED_PIN_NUMBER, PIN_MODE_INPUT);
             rt_pin_mode(BRUSHES_POWER_PIN_NUMBER, PIN_MODE_OUTPUT);
 
+//            printf("\n----------------Task5--------------------\n");
+/*
             //If the robot is starting on, turn on the brushes
             if (rt_mb_recv(&mb2_5, (rt_uint32_t *)&str, RT_WAITING_NO) == RT_EOK){
-                // TODO:WHO SENDS AT TURN ON OF THE ROBOT?
+                // TODO:WHO SENDS AT TURN ON OF THE ROBOT? -> Tsystem
 
-                if (!rt_strcmp(str,mb_str5)){
+                if (rt_strcmp(str,mb_str5)==0){
                     rt_pin_write(BRUSHES_POWER_PIN_NUMBER, MEDIUM);
                     brushes_power[0]=0;
                     brushes_power[1]=0;
                 }
 
-                /* Executing the mailbox object detachment */
+                // Executing the mailbox object detachment
                 rt_mb_detach(&mb2_5);
             }
-
+*/
 
             //Reads from mail box in case the robot is coming back. In this case stop the brushes
             if (rt_mb_recv(&mb2_5, (rt_uint32_t *)&str, RT_WAITING_NO) == RT_EOK){
-                //TODO: WHO SAYS TO COME BACK?
+                //TODO: WHO SAYS TO COME BACK? -> t3
 
-                if (!rt_strcmp(str,mb_str4)){
+                if (rt_strcmp(str,mb_str4)==0){
                     rt_pin_write(BRUSHES_POWER_PIN_NUMBER, STOP_BRUSHES);
                     brushes_power[0]=1;
                     brushes_power[1]=1;
@@ -554,16 +567,16 @@ void brushes_speed_entry(void *param)
                 rt_mb_detach(&mb2_5);
             }
 
-            brushes_speed[0] =  rt_pin_read(BRUSHES_SPEED_PIN_NUMBER);
-            brushes_speed[1] =  rt_pin_read(BRUSHES_SPEED_PIN_NUMBER);
+            brushes_speed_v[0] =  rt_pin_read(BRUSHES_SPEED_PIN_NUMBER);
+            brushes_speed_v[1] =  rt_pin_read(BRUSHES_SPEED_PIN_NUMBER);
 
             rt_pin_mode(BRUSHES_POWER_PIN_NUMBER, PIN_MODE_INPUT);
             brushes_power[0] =  rt_pin_read(BRUSHES_POWER_PIN_NUMBER);
-            brushes_speed[1] =  rt_pin_read(BRUSHES_POWER_PIN_NUMBER);
+            brushes_speed_v[1] =  rt_pin_read(BRUSHES_POWER_PIN_NUMBER);
 
             rt_pin_mode(BRUSHES_POWER_PIN_NUMBER, PIN_MODE_OUTPUT);
 
-            if(brushes_speed[0] == 1 && brushes_speed[1] == 0){
+            if(brushes_speed_v[0] == 1 && brushes_speed_v[1] == 0){
                 if(brushes_power[0] == 1 && brushes_power[1] == 0){
                     brushes_power[0]=0;
                     brushes_power[1]=0;
@@ -573,7 +586,7 @@ void brushes_speed_entry(void *param)
                     brushes_power[1]=1;
                     rt_pin_write(BRUSHES_POWER_PIN_NUMBER, HIGH);
                 }
-            }else if(brushes_speed[0] == 0 && brushes_speed[1] == 1){
+            }else if(brushes_speed_v[0] == 0 && brushes_speed_v[1] == 1){
                 if(brushes_power[0] == 0 && brushes_power[1] == 1){
                     brushes_power[0]=0;
                     brushes_power[1]=0;
@@ -599,4 +612,23 @@ void brushes_speed_entry(void *param)
     }
 }
 
+void Tsystem_task_entry(void *param){
+    int ticks;
+
+    rt_signal_install(SIGUSR2, turnOffSystem);
+    rt_signal_unmask(SIGUSR2);
+
+    while(1){
+            ticks=rt_tick_get_millisecond()-startingTime;
+            if(ticks%350 == 0 && startingTime != 0){
+                batteryStatus--;
+#ifdef DEB_INTERNAL
+                printf("batteryStatus %d%%, decremented at time %d ms]\n", batteryStatus, ticks);
+#endif
+            }
+            //printf("Tsystem\n");
+
+
+    }
+}
 

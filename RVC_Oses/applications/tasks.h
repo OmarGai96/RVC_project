@@ -23,12 +23,13 @@
 #define BRUSHES_SPEED_PERIOD           300
 
 #else
-#define OBSTACLE_CONTROL_PRIORITY      2
+#define OBSTACLE_CONTROL_PRIORITY      2 //T1
 #define MOVEMENT_STOP_PRIORITY         1
-#define MOVEMENT_CONTROL_PRIORITY      3
-#define CHECK_RESOURCES_PRIORITY       4
-#define ACOUSTIC_SIGNALS_PRIORITY      6
-#define BRUSHES_SPEED_PRIORITY         5
+#define MOVEMENT_CONTROL_PRIORITY      3 //T2
+#define CHECK_RESOURCES_PRIORITY       4 //T3
+#define ACOUSTIC_SIGNALS_PRIORITY      6 //T4
+#define BRUSHES_SPEED_PRIORITY         5 //T5
+#define TSYSTEM_PRIORITY               10
 #endif
 
 #define THREAD_TIMESLICE               5
@@ -46,18 +47,19 @@
 
 enum directions {UP, DOWN, LEFT, RIGHT, RETURN};
 
+//*********************************** TIME DURATIONS **********************************************************
 
-#define PERIOD_TASK1    200 //200 ms
-#define PERIOD_TASK2    500 //500 ms
-#define PERIOD_TASK3    250 //250 ms
-#define PERIOD_TASK4    500 //500 ms
-#define PERIOD_TASK5    250 //250 ms
+#define PERIOD_TASK1    20 //200 ms, Task1 starts periodically
+#define PERIOD_TASK2    50 //500 ms, Task2 starts periodically
+#define PERIOD_TASK3    25 //250 ms, Task3 starts periodically
+//TASK 4 is aperiodic
+#define PERIOD_TASK5    25 //250 ms, Task5 starts periodically
 
-#define TICK_DELAY_T1 40 //400 ms, is the duration of Task1 as ticks
-#define TICK_DELAY_T2 50 //500 ms, is the duration of Task2 as ticks
-#define TICK_DELAY_T3 40 //400 ms, is the duration of Task3 as ticks
-#define TICK_DELAY_T4 20 //200 ms, is the duration of Task4 as ticks
-#define TICK_DELAY_T5 20 //200 ms, is the duration of Task5 as ticks
+#define TICK_DELAY_T1 4 //40 ms, is the duration of Task1 as ticks
+#define TICK_DELAY_T2 4 //40 ms, is the duration of Task2 as ticks
+#define TICK_DELAY_T3 2 //30 ms, is the duration of Task3 as ticks
+#define TICK_DELAY_T4 2 //20 ms, is the duration of Task4 as ticks
+#define TICK_DELAY_T5 2 //20 ms, is the duration of Task5 as ticks
 
 // ************************************ STRUCTURES *************************************************************
 
@@ -86,6 +88,10 @@ ALIGN(RT_ALIGN_SIZE)
 char brushes_speed_stack[1024];
 struct rt_thread brushes_speed;
 
+ALIGN(RT_ALIGN_SIZE)
+char Tsystem_stack[1024];
+struct rt_thread Tsystem;
+
 
 // *********************************** DEVICES **************************************************************
 
@@ -105,6 +111,7 @@ void movement_control_entry(void *param);
 void check_resources_entry(void *param);
 void acoustic_signals_entry(void *param);
 void brushes_speed_entry(void *param);
+void Tsystem_task_entry(void *param);
 
 
 #endif /* APPLICATIONS_TASKS_H_ */
