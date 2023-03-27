@@ -38,6 +38,9 @@ void mock_devices_init() {
     garbage_bag = rt_device_find(GARBAGE_BAG);
     rt_device_init(garbage_bag);
 
+    speaker = rt_device_find(SPEAKER);
+    rt_device_init(speaker);
+
 }
 
 
@@ -119,6 +122,7 @@ void movement_control_obstacle_handler(int sig)
  *
  */
 void turnOffSystem(void){
+
     if (rt_thread_detach(&obstacle_control) == RT_EOK){
 #ifdef DEB_INTERNAL
         printf("\n\tTask1 detached correctly");
@@ -126,6 +130,16 @@ void turnOffSystem(void){
     }else{
 #ifdef DEB_INTERNAL
         printf("\n\tTask1 detach error");
+#endif
+    }
+
+    if (rt_thread_detach(&movement_stop) == RT_EOK){
+#ifdef DEB_INTERNAL
+        printf("\n\tTaskS detached correctly");
+#endif
+    }else{
+#ifdef DEB_INTERNAL
+        printf("\n\tTaskS detach error");
 #endif
     }
 
@@ -188,6 +202,7 @@ void obstacle_control_entry(void *param)
         if (rt_event_recv(&event_tasks_activation, EVENT_OBSTACLE_CONTROL_ACTIVATION,
                           RT_EVENT_FLAG_AND | RT_EVENT_FLAG_CLEAR,
                           RT_WAITING_FOREVER, RT_NULL) == RT_EOK){
+
             tick_start=rt_tick_get();
             set_tick_count(&obstacle_control, TICK_DELAY_T1);  //set Task1 minimum duration
             time_start=tick_start*10-startingTime;
@@ -268,7 +283,7 @@ void movement_control_entry(void *param)
 
     // infinite loop
     while (1){
-        // waits for the aperiodic event that signals an obstacle have been found
+        // waits for the timer activation
         if (rt_event_recv(&event_tasks_activation, EVENT_MOVEMENT_CONTROL_ACTIVATION,
                           RT_EVENT_FLAG_AND | RT_EVENT_FLAG_CLEAR,
                           RT_WAITING_FOREVER, RT_NULL) == RT_EOK){
@@ -291,10 +306,13 @@ void movement_control_entry(void *param)
                 rt_signal_mask(SIGUSR1);
             }
 
+            // RESOURCES UPDATE: we put it here to simulate the depletion of
+            // decrease battery
+            rt_device_write(battery, 0, NULL, 0);
             // if the previous tile is not an obstacle signal it as cleaned
             if (map[ position[0] ][ position[1] ] == 0) {
                 map[ position[0] ][ position[1] ] = 2;
-                garbageBagStatus++;
+                rt_device_write(garbage_bag, 0, NULL, 0);
             }
             // decide where to go next
             switch (direction)
@@ -337,6 +355,7 @@ void movement_control_entry(void *param)
 #ifdef DEB_DISPLAY
                 rt_kprintf("\tThe robot is back at charging station!\n");
 #endif
+                turnOffSystem();
 
                 break;
             }
@@ -367,16 +386,16 @@ void movement_control_entry(void *param)
 void check_resources_entry(void *param){
 
     int tick_start, tick_end, time_start, time_end;
+    int battery_value;
+    int garbage_bag_value;
 
-    // used for debug
-    uint32_t previousBatteryStatus = CHARGE;
 
     while(1){
 
         // waiting the periodic activation
         if (rt_event_recv(&event_tasks_activation, EVENT_CHECK_RESOURCES_ACTIVATION,
                                   RT_EVENT_FLAG_AND | RT_EVENT_FLAG_CLEAR,
-                                  RT_WAITING_FOREVER, RT_NULL) == RT_EOK){
+                                  RT_WAITING_FOREVER, RT_NULL) == RT_EOK) {
 
             tick_start=rt_tick_get();
             set_tick_count(&check_resources, TICK_DELAY_T3);
@@ -387,27 +406,29 @@ void check_resources_entry(void *param){
         printf("\n\t\tTASK_3:\t Started at time %d ms\n", time_start);
 #endif
 
+            rt_device_read(battery, 0, &battery_value, sizeof(int));
+
 #ifdef DEB_DISPLAY
-        /**display only if the status is a multiple of 5, useful to limit the number of prints**/
-        if(batteryStatus%5==0){
-            //printf("\n\tBattery status %d %% \n", batteryStatus);
-        }
+            if(battery_value%10 == 0) printf("\n\tBATTERY: %d\%\n", battery_value); //ITA: la batteria è completamente scarica
 #endif
 
-        /**Check BATTERY status**/
-        if(batteryStatus == TOTALLY_DISCHARGE){
-            //TODO: notify someone to TURN OFF the system
+            /**Check BATTERY status**/
+            if(battery_value == TOTALLY_DISCHARGE){
+
 #ifdef DEB_DISPLAY
-            printf("\t\tBATTERY TOTALLY LOW --> TURN OFF THE SYSTEM\n\n"); //ITA: la batteria è completamente scarica
+                printf("\t\tBATTERY TOTALLY LOW --> TURN OFF THE SYSTEM\n\n"); //ITA: la batteria è completamente scarica
 #endif
-        }else if(batteryStatus <= DISCHARGE) {
-            rt_mb_send(&mb2_3, (rt_uint32_t)&mb_str3);      //notify task 2 BATTERY is LOW
+                turnOffSystem();
+
+            }else if(battery_value <= DISCHARGE) {
+                rt_mb_send(&mb2_3, (rt_uint32_t)&mb_str3);      //notify task 2 BATTERY is LOW
 #ifdef DEB_DISPLAY
-            printf("\t\tBATTERY is LOW\n\n"); //ITA: la batteria è scarica
+                printf("\t\tBATTERY is LOW\n\n"); //ITA: la batteria è scarica
 #endif
-        }else if(batteryStatus <= DISCHARGE_THRESHOLD && batteryStatus > DISCHARGE) {
-            rt_event_send(&event_resources, EVENT_FLAG1);   //notify task 4 with an event
-            rt_mb_send(&mb2_3, (rt_uint32_t)&mb_str2);      //notify task 2 with an email
+
+            }else if(battery_value <= DISCHARGE_THRESHOLD && battery_value > DISCHARGE) {
+                rt_event_send(&event_resources, EVENT_FLAG1);   //notify task 4 with an event
+                rt_mb_send(&mb2_3, (rt_uint32_t)&mb_str2);      //notify task 2 with an email
 
 #ifdef DEB_DISPLAY
             printf("\t\tBATTERY is running LOW\n\n");  //ITA: la batteria si sta scaricando
@@ -419,32 +440,31 @@ void check_resources_entry(void *param){
 
         /**Check GARBAGE BAG status **/
 
-        if(garbageBagStatus == FULL){
-            rt_event_send(&event_resources, EVENT_FLAG2);   //notify task 4 with an event
-            rt_mb_send(&mb2_3, (rt_uint32_t)&mb_str1);      //notify task 2 with an email
+            rt_device_read(garbage_bag, 0, &garbage_bag_value, sizeof(int));
+            if(garbage_bag_value == FULL){
+                rt_event_send(&event_resources, EVENT_FLAG2);   //notify task 4 with an event
+                rt_mb_send(&mb2_3, (rt_uint32_t)&mb_str1);      //notify task 2 with an email
 
 #ifdef DEB_DISPLAY
-            printf("\tGarbage bag FULL\n\n");
+                printf("\n\tGarbage bag FULL\n\n");
 #endif
 #ifdef DEB_INTERNAL
-            printf("\t\tMail sent %s\t\t because Garbage bag is FULL\n", mb_str1);
+                printf("\t\tMail sent %s\t\t because Garbage bag is FULL\n", mb_str1);
 #endif
 
-        }
+            }
 
-        //batteryStatus--;
+            while(get_tick_count(&check_resources)!=0){ }
 
-        while(get_tick_count(&check_resources)!=0){ }
-
-        tick_end = rt_tick_get();
-        time_end= tick_end*10-startingTime;
+            tick_end = rt_tick_get();
+            time_end= tick_end*10-startingTime;
 
 #ifdef BENCHMARK_TIME
-        printf("\t\tTASK_3: Stop at time %d ms\tDeadline was: %d ms\n", time_end, (PERIOD_TASK3)*10+time_start);
-        printf("\t\tTASK_3: TOTAL EXECUTION TIME: %d (%d ms)\n", tick_end-tick_start,time_end-time_start);
+            printf("\t\tTASK_3: Stop at time %d ms\tDeadline was: %d ms\n", time_end, (PERIOD_TASK3)*10+time_start);
+            printf("\t\tTASK_3: TOTAL EXECUTION TIME: %d (%d ms)\n", tick_end-tick_start,time_end-time_start);
 #endif
-      }
-      set_end_flag(&check_resources);
+        }
+        set_end_flag(&check_resources);
     }
 }
 
@@ -454,6 +474,9 @@ void acoustic_signals_entry(void *param){
 
     int tick_start, tick_end, time_start, time_end;
     rt_uint32_t e;  //to read event
+
+    char low_battery[100] = "LOW BATTERY ALARM";
+    char garbage_bag_full[100] = "GARBAGE BAG FULL";
 
     while(1){
         if (rt_event_recv(&event_resources,(EVENT_FLAG1 | EVENT_FLAG2),RT_EVENT_FLAG_OR | RT_EVENT_FLAG_CLEAR,RT_WAITING_FOREVER,&e) == RT_EOK){
@@ -470,16 +493,13 @@ void acoustic_signals_entry(void *param){
 #endif
             if (e == 0x2){
              // EVENT_FLAG_1 is set
-
-#ifdef DEB_DISPLAY
-                printf("\t\tLOW BATTERY ALARM\n");
-#endif
+                rt_device_write(speaker, 0, low_battery, 100);
+                rt_kprintf("ACUSTIC SI è ATTIVATO");
 
             }else if (e == 0x4){
                 // EVENT_FLAG_2 is set
-#ifdef DEB_DISPLAY
-                printf("\t\tGARBAGE BAG FULL ALARM\n");
-#endif
+                rt_device_write(speaker, 0, garbage_bag_full, 100);
+                rt_kprintf("ACUSTIC SI è ATTIVATO");
             }
 
             while(get_tick_count(&acoustic_signals)!=0){}

@@ -19,7 +19,7 @@
 
 /* GARBAGE BAG STATUS*/
 #define EMPTY 0
-#define FULL 20
+#define FULL 15
 
 /* MOVEMENTS SIGNALS*/
 #define STOP_ENGINE 0

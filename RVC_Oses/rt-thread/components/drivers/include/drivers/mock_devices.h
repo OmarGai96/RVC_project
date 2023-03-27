@@ -14,6 +14,7 @@ rt_device_t proximity_sensor;
 rt_device_t engine;
 rt_device_t battery;
 rt_device_t garbage_bag;
+rt_device_t speaker;
 
 
 void rt_mock_devices_init();
