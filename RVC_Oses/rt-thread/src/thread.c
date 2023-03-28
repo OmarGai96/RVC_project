@@ -1027,7 +1027,7 @@ void set_tick_count(rt_thread_t thread, rt_uint16_t cnt){
 RTM_EXPORT(set_tick_count);
 
 rt_uint16_t get_tick_count(rt_thread_t thread){
-#ifdef DEB_INTERNAL
+#ifdef DEBUG_SCH
     if(thread->tick_count == 0){
         printf("\tEnd of %s\n", thread->name);
     }else{
@@ -1037,3 +1037,19 @@ rt_uint16_t get_tick_count(rt_thread_t thread){
     return thread->tick_count;
 }
 RTM_EXPORT(get_tick_count);
+
+int set_task_started(rt_thread_t thread, rt_uint16_t duration){
+    int tick_start = rt_tick_get();
+    set_tick_count(thread, duration);
+    reset_end_flag(thread);
+    return tick_start;
+}
+RTM_EXPORT(set_task_started);
+
+int set_task_ended(rt_thread_t thread){
+    int tick_end = rt_tick_get();
+    set_end_flag(thread);
+    return tick_end;
+}
+RTM_EXPORT(set_task_ended);
+

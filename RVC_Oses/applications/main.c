@@ -194,7 +194,6 @@ int main(void){
 
     // starting the threads
     rt_thread_startup(&obstacle_control);
-
     rt_thread_startup(&movement_stop);
     rt_thread_startup(&movement_control);
     rt_thread_startup(&check_resources);

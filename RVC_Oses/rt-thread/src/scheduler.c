@@ -56,14 +56,6 @@ static void (*rt_scheduler_switch_hook)(struct rt_thread *tid);
 int currentThread;
 extern int startingTime;
 
-static int isRunning(struct rt_thread *thread){
-    if ((thread->stat & RT_THREAD_STAT_MASK) == RT_THREAD_RUNNING){
-        return 1;
-    }else{
-        return 0;
-    }
-}
-
 /**
  * @addtogroup Hook
  */
@@ -439,7 +431,6 @@ void rt_schedule(void)
     rt_base_t level;
     struct rt_thread *to_thread;
     struct rt_thread *from_thread;
-    int actualTime;
 
     /* disable interrupt */
     level = rt_hw_interrupt_disable();
@@ -458,7 +449,6 @@ void rt_schedule(void)
 
             //CHECK priorities
             if ((rt_current_thread->stat & RT_THREAD_STAT_MASK) == RT_THREAD_RUNNING){
-            //if(isRunning(rt_current_thread)){
                 if (rt_current_thread->current_priority < highest_ready_priority){
                     to_thread = rt_current_thread;
                 }
@@ -1029,5 +1019,3 @@ rt_uint16_t rt_critical_level(void)
 RTM_EXPORT(rt_critical_level);
 
 /**@}*/
-
-
