@@ -132,6 +132,8 @@ int main(void){
                    OBSTACLE_CONTROL_PRIORITY,
                    THREAD_TIMESLICE);
 
+    set_task_as_not_preemptable(&obstacle_control);
+
     // initializing movement_stop thread
     rt_thread_init(&movement_stop,
                    "TaskS",
@@ -200,15 +202,18 @@ int main(void){
     rt_thread_startup(&acoustic_signals);
     rt_thread_startup(&brushes_speed);
 
-
     startingTime = rt_tick_get_millisecond();  //set the current starting time before launching our timers
 
     // starting the timers
     rt_timer_start (&timer_obstacle_control_activation);
     rt_timer_start (&timer_movement_control_activation);
     rt_timer_start (&timer_check_resources_activation);
-    rt_timer_start (&timer_brushes_speed_activation);
 
+    //delay t5 of 150 ms
+    while(rt_tick_get_millisecond() < (startingTime+150));
+    //rt_hw_us_delay(150);
+
+    rt_timer_start (&timer_brushes_speed_activation);
 
     return 0;
 }

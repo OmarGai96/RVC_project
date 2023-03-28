@@ -242,8 +242,9 @@ static rt_err_t _thread_init(struct rt_thread *thread,
     thread->duration_tick = 0;
 #endif
 
-    thread->end_flag = 0;   //Added by Omar
-    thread->tick_count = 0; //Added by Omar
+    thread->end_flag = 0;           //Added by Omar
+    thread->tick_count = 0;         //Added by Omar
+    thread->preemptableFlag = 1;    //Added by Omar
 
     RT_OBJECT_HOOK_CALL(rt_thread_inited_hook, (thread));
 
@@ -1027,6 +1028,7 @@ void set_tick_count(rt_thread_t thread, rt_uint16_t cnt){
 RTM_EXPORT(set_tick_count);
 
 rt_uint16_t get_tick_count(rt_thread_t thread){
+/*
 #ifdef DEBUG_SCH
     if(thread->tick_count == 0){
         printf("\tEnd of %s\n", thread->name);
@@ -1034,6 +1036,7 @@ rt_uint16_t get_tick_count(rt_thread_t thread){
         printf("\n\t\tTicks %d for thread %s\n", thread->tick_count, thread->name);
     }
 #endif
+    */
     return thread->tick_count;
 }
 RTM_EXPORT(get_tick_count);
@@ -1053,3 +1056,8 @@ int set_task_ended(rt_thread_t thread){
 }
 RTM_EXPORT(set_task_ended);
 
+void set_task_as_not_preemptable(rt_thread_t thread){
+    thread->preemptableFlag=0;
+    return;
+}
+RTM_EXPORT(set_task_as_not_preemptable);

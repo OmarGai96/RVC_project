@@ -680,7 +680,8 @@ struct rt_thread
 
     rt_ubase_t user_data;                             /**< private user data beyond this thread */
     rt_uint8_t end_flag;                            //added by Omar
-    rt_uint16_t tick_count;
+    rt_uint16_t tick_count;                         //added by Omar
+    rt_uint8_t preemptableFlag;                     //added by Omar
 };
 typedef struct rt_thread *rt_thread_t;
 
