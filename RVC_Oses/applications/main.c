@@ -10,6 +10,7 @@
 //#include "cpu_usage.h"
 
 int startingTime =0;
+int turnOffFlag = 0;
 
 static void hook_of_scheduler(struct rt_thread* from, struct rt_thread* to)
 {
@@ -132,8 +133,6 @@ int main(void){
                    OBSTACLE_CONTROL_PRIORITY,
                    THREAD_TIMESLICE);
 
-    set_task_as_not_preemptable(&obstacle_control);
-
     // initializing movement_stop thread
     rt_thread_init(&movement_stop,
                    "TaskS",
@@ -214,6 +213,7 @@ int main(void){
     //rt_hw_us_delay(150);
 
     rt_timer_start (&timer_brushes_speed_activation);
+    printf("\n\n---------------System is TURNED ON--------------------\n\n");
 
     return 0;
 }

@@ -443,8 +443,10 @@ void rt_schedule(void)
             /* need_insert_from_thread: need to insert from_thread to ready queue */
             int need_insert_from_thread = 0;
 
+            if(rt_current_thread->preemptableFlag != 1){
+
             to_thread = _scheduler_get_highest_priority_thread(&highest_ready_priority);
-            //assign to thread the highest priority thread and to highest_ready_priority the highest priority value
+            //assign to "to_thread" the highest priority thread and to highest_ready_priority the highest priority value
 
 
             //CHECK priorities
@@ -554,6 +556,9 @@ void rt_schedule(void)
                 rt_schedule_remove_thread(rt_current_thread);
                 rt_current_thread->stat = RT_THREAD_RUNNING | (rt_current_thread->stat & ~RT_THREAD_STAT_MASK);
             }
+
+        }//Added
+
         }
     }
 

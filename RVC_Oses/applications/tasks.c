@@ -18,6 +18,7 @@ static char mb_str4[] = "Come back home";
 static char mb_str5[] = "Turn on brushes";
 
 extern startingTime;
+extern turnOffFlag;
 
 
 // EXTRA FUNCTIONS *********************************************************************************************
@@ -113,66 +114,134 @@ void movement_control_obstacle_handler(int sig)
 
 }
 
+rt_err_t closeTask(rt_thread_t thread){
+
+    if (rt_thread_get_status(thread)!= RT_THREAD_CLOSE){
+        return rt_thread_detach(thread);
+    }
+
+    return RT_EOK;
+}
+
+rt_err_t closeAllTasks(){
+
+    int cnt=0;
+
+    //stop timers
+    rt_timer_stop(&timer_obstacle_control_activation);
+    rt_timer_stop(&timer_movement_control_activation);
+    rt_timer_stop(&timer_check_resources_activation);
+    rt_timer_stop(&timer_brushes_speed_activation);
+
+    if (closeTask(&movement_stop) == RT_EOK){
+        cnt++;
+    }else{
+#ifdef DEB_INTERNAL
+        printf("\n\tTaskS detach error");
+#endif
+    }
+
+    if (closeTask(&obstacle_control) == RT_EOK){
+        cnt++;
+    }else{
+#ifdef DEB_INTERNAL
+        printf("\n\t\t\tTask1 detach error");
+#endif
+    }
+
+    if (closeTask(&movement_control) == RT_EOK){
+        cnt++;
+    }else{
+#ifdef DEB_INTERNAL
+        printf("\n\t\t\tTask2 detach error");
+#endif
+    }
+
+    if (closeTask(&check_resources) == RT_EOK){
+        cnt++;
+    }else{
+#ifdef DEB_INTERNAL
+        printf("\n\t\t\tTask3 detach error");
+#endif
+    }
+
+    if (closeTask(&acoustic_signals) == RT_EOK){
+        cnt++;
+    }else{
+#ifdef DEB_INTERNAL
+        printf("\n\t\t\tTask4 detach error");
+#endif
+    }
+
+    if (closeTask(&brushes_speed) == RT_EOK){
+        cnt++;
+    }else{
+#ifdef DEB_INTERNAL
+        printf("\n\t\t\tTask5 detach error");
+#endif
+    }
+
+    if (cnt == 6){
+#ifdef DEB_DISPLAY
+        printf("\n\nAll tasks turned OFF correctly\n");
+#endif
+    }
+
+    cnt = 0;
+
+    if(rt_timer_detach(&timer_obstacle_control_activation)==RT_EOK){
+            cnt++;
+    }else{
+#ifdef DEB_INTERNAL
+        printf("\n\t\t\tTimer detach error");
+#endif
+    }
+    if(rt_timer_detach(&timer_movement_control_activation)==RT_EOK){
+        cnt++;
+}else{
+#ifdef DEB_INTERNAL
+    printf("\n\t\t\tTimer detach error");
+#endif
+}
+    if(rt_timer_detach(&timer_check_resources_activation)==RT_EOK){
+        cnt++;
+}else{
+#ifdef DEB_INTERNAL
+    printf("\n\t\t\tTimer detach error");
+#endif
+}
+    if(rt_timer_detach(&timer_brushes_speed_activation)==RT_EOK){
+        cnt++;
+}else{
+#ifdef DEB_INTERNAL
+    printf("\n\t\t\tTimer detach error");
+#endif
+}
+
+    if (cnt == 4){
+#ifdef DISPLAY
+        printf("All timers turned OFF correctly\n");
+        printf("\n\n");
+#endif
+    }
+
+    return RT_EOK;
+
+}
+
+
+
 /* Function to turn off the system (detach all the tasks)
  * usecases: - battery is totally LOW
  *           - robot is in re-charging station (after cleaning)
  *
  */
 void turnOffSystem(void){
+    rt_signal_mask(SIGUSR1);
+    rt_signal_mask(SIGUSR2);
 
-#ifdef DEB_INTERNAL
-    printf("\t SIGNAL received: TURN OFF THE SYSTEM\n");
-#endif
-
-    if (rt_thread_detach(&obstacle_control) == RT_EOK){
-#ifdef DEB_INTERNAL
-        printf("\n\tTask1 detached correctly");
-#endif
-    }else{
-#ifdef DEB_INTERNAL
-        printf("\n\tTask1 detach error");
-#endif
-    }
-
-    if (rt_thread_detach(&movement_control) == RT_EOK){
-#ifdef DEB_INTERNAL
-        printf("\n\tTask2 detached correctly");
-#endif
-    }else{
-#ifdef DEB_INTERNAL
-        printf("\n\tTask2 detach error");
-#endif
-    }
-
-    if (rt_thread_detach(&check_resources) == RT_EOK){
-#ifdef DEB_INTERNAL
-        printf("\n\tTask3 detached correctly");
-#endif
-    }else{
-#ifdef DEB_INTERNAL
-        printf("\n\tTask3 detach error");
-#endif
-    }
-
-    if (rt_thread_detach(&acoustic_signals) == RT_EOK){
-#ifdef DEB_INTERNAL
-        printf("\n\tTask4 detached correctly");
-#endif
-    }else{
-#ifdef DEB_INTERNAL
-        printf("\n\tTask4 detach error");
-#endif
-    }
-
-    if (rt_thread_detach(&brushes_speed) == RT_EOK){
-#ifdef DEB_INTERNAL
-        printf("\n\tTask5 detached correctly");
-#endif
-    }else{
-#ifdef DEB_INTERNAL
-        printf("\n\tTask5 detach error");
-#endif
-    }
+    set_task_as_not_preemptable(&Tsystem);
+    turnOffFlag = 1;
 }
 
 
@@ -290,6 +359,7 @@ void movement_control_entry(void *param)
 #endif
                 direction = RETURN;
                 rt_signal_mask(SIGUSR1);
+                //rt_mb_send(&mb2_5, (rt_uint32_t)&mb_str4);      //notify task 5 with an email
             }
 
             // if the previous tile is not an obstacle signal it as cleaned
@@ -338,6 +408,8 @@ void movement_control_entry(void *param)
 #ifdef DEB_DISPLAY
                 rt_kprintf("\tThe robot is back at charging station!\n");
 #endif
+
+                rt_thread_kill(&Tsystem, SIGUSR2);
 
                 break;
             }
@@ -486,7 +558,7 @@ void acoustic_signals_entry(void *param){
             time_end= tick_end*10-startingTime;
 
 #ifdef BENCHMARK_TIME
-        printf("\t\tTASK_4: Stop at time %d ms\t APERIODIC task", time_end);
+        printf("\t\tTASK_4: Stop at time %d ms\t APERIODIC task\n", time_end);
         printf("\t\tTASK_4: TOTAL EXECUTION TIME: %d (%d ms)\n", tick_end-tick_start,time_end-time_start);
 #endif
         }
@@ -595,19 +667,32 @@ void brushes_speed_entry(void *param)
 }
 
 void Tsystem_task_entry(void *param){
-    int ticks;
+    int curr_time;
 
     rt_signal_install(SIGUSR2, turnOffSystem);
     rt_signal_unmask(SIGUSR2);
 
+    set_task_started(&Tsystem, 10);
+
     while(1){
-            ticks=rt_tick_get_millisecond()-startingTime;
-            if(ticks%350 == 0 && startingTime != 0){
-                batteryStatus--;
+            if(turnOffFlag==1){
+                if(closeAllTasks()==RT_EOK){
+                    set_task_as_preemptable(&Tsystem, TSYSTEM_PRIORITY);
+                    break;
+                }
+            }else{
+                curr_time=rt_tick_get_millisecond()-startingTime;
+                if(curr_time%350 == 0 && startingTime != 0){
+                    batteryStatus--;
 #ifdef DEB_INTERNAL
-                printf("batteryStatus %d%%, decremented by TSystem at time %d ms]\n", batteryStatus, ticks);
+                    printf("batteryStatus %d%%, decremented by TSystem at time %d ms]\n", batteryStatus, curr_time);
 #endif
+                }
             }
 
     }
+
+     printf("\n---------------System is TURNED OFF--------------------\n");
+
+
 }

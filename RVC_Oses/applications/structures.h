@@ -29,8 +29,6 @@ struct rt_timer timer_obstacle_control_activation;
 struct rt_timer timer_movement_control_activation;
 /* TIMER used to activate periodically the check resources task */
 struct rt_timer timer_check_resources_activation;
-/* TIMER used to activate periodically the acoustic signals task */
-struct rt_timer timer_acoustic_signals_activation;
 /* TIMER used to activate periodically the brushes speed task */
 struct rt_timer timer_brushes_speed_activation;
 
