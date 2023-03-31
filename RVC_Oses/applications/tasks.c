@@ -359,7 +359,7 @@ void movement_control_entry(void *param)
 #endif
                 direction = RETURN;
                 rt_signal_mask(SIGUSR1);
-                //rt_mb_send(&mb2_5, (rt_uint32_t)&mb_str4);      //notify task 5 with an email
+                rt_mb_send(&mb2_5, (rt_uint32_t)&mb_str4);      //notify task 5 with an email
             }
 
             // if the previous tile is not an obstacle signal it as cleaned
@@ -619,7 +619,7 @@ void brushes_speed_entry(void *param)
                 }
 
                 /* Executing the mailbox object detachment */
-                rt_mb_detach(&mb2_5);
+                //rt_mb_detach(&mb2_5);
             }
 
             brushes_speed_v[0] =  rt_pin_read(BRUSHES_SPEED_PIN_NUMBER);
@@ -693,6 +693,8 @@ void Tsystem_task_entry(void *param){
     }
 
      printf("\n---------------System is TURNED OFF--------------------\n");
+
+     batteryStatus++;
 
 
 }
