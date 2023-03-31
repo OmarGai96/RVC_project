@@ -56,14 +56,6 @@ static void (*rt_scheduler_switch_hook)(struct rt_thread *tid);
 int currentThread;
 extern int startingTime;
 
-static int isRunning(struct rt_thread *thread){
-    if ((thread->stat & RT_THREAD_STAT_MASK) == RT_THREAD_RUNNING){
-        return 1;
-    }else{
-        return 0;
-    }
-}
-
 /**
  * @addtogroup Hook
  */
@@ -439,7 +431,6 @@ void rt_schedule(void)
     rt_base_t level;
     struct rt_thread *to_thread;
     struct rt_thread *from_thread;
-    int actualTime;
 
     /* disable interrupt */
     level = rt_hw_interrupt_disable();
@@ -452,13 +443,14 @@ void rt_schedule(void)
             /* need_insert_from_thread: need to insert from_thread to ready queue */
             int need_insert_from_thread = 0;
 
+            if(rt_current_thread->preemptableFlag != 1){
+
             to_thread = _scheduler_get_highest_priority_thread(&highest_ready_priority);
-            //assign to thread the highest priority thread and to highest_ready_priority the highest priority value
+            //assign to "to_thread" the highest priority thread and to highest_ready_priority the highest priority value
 
 
             //CHECK priorities
             if ((rt_current_thread->stat & RT_THREAD_STAT_MASK) == RT_THREAD_RUNNING){
-            //if(isRunning(rt_current_thread)){
                 if (rt_current_thread->current_priority < highest_ready_priority){
                     to_thread = rt_current_thread;
                 }
@@ -497,6 +489,14 @@ void rt_schedule(void)
                          rt_interrupt_nest, highest_ready_priority,
                          RT_NAME_MAX, to_thread->name, to_thread->sp,
                          RT_NAME_MAX, from_thread->name, from_thread->sp));
+
+#ifdef DEBUG_SCH
+                    if(from_thread->end_flag == 0){
+                        rt_kprintf("\n\tPREEMPTION of %s OCCURRED, to %s at [%d]ms\n", rt_thread_get_name(from_thread), rt_thread_get_name(to_thread),rt_tick_get_millisecond()-startingTime);
+                    }
+                    //rt_kprintf("\n\tFrom thread %s to thread: %s \tTime: %d ms\n", rt_thread_get_name(from_thread) ,rt_thread_get_name(to_thread),rt_tick_get_millisecond()-startingTime);
+#endif
+
 /*
 #ifdef DEBUG_SCH
                 rt_uint8_t major, minor;
@@ -514,14 +514,6 @@ void rt_schedule(void)
                     extern void rt_thread_handle_sig(rt_bool_t clean_state);
 
                     RT_OBJECT_HOOK_CALL(rt_scheduler_switch_hook, (from_thread));
-
-#ifdef DEBUG_SCH
-                    if(from_thread->end_flag == 0){
-                        rt_kprintf("\n\tPREEMPTION of %s OCCURRED\n", rt_thread_get_name(from_thread));
-                    }
-                    rt_kprintf("\n\tFrom thread %s to thread: %s \tTime: %d ms\n", rt_thread_get_name(from_thread) ,rt_thread_get_name(to_thread),rt_tick_get_millisecond()-startingTime);
-#endif
-
 
                     //CONTEXT SWITCH
                     rt_hw_context_switch((rt_ubase_t)&from_thread->sp,
@@ -564,6 +556,9 @@ void rt_schedule(void)
                 rt_schedule_remove_thread(rt_current_thread);
                 rt_current_thread->stat = RT_THREAD_RUNNING | (rt_current_thread->stat & ~RT_THREAD_STAT_MASK);
             }
+
+        }//Added
+
         }
     }
 
@@ -1029,5 +1024,3 @@ rt_uint16_t rt_critical_level(void)
 RTM_EXPORT(rt_critical_level);
 
 /**@}*/
-
-

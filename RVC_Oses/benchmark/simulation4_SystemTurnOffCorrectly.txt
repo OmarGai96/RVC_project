@@ -1,0 +1,1000 @@
+0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0
+
+
+                TASK_3:  Started at time 1210 ms
+                TASK_3: Stop at time 1270 ms    Deadline was: 1460 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_3:  Started at time 1280 ms
+                TASK_3: Stop at time 1340 ms    Deadline was: 1530 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+                TASK_5: Stop at time 1360 ms    Deadline was: 1190 ms
+                TASK_5: TOTAL EXECUTION TIME: 42 (420 ms)
+
+                TASK_5:  Started at time 1370 ms
+                TASK_5: Stop at time 1440 ms    Deadline was: 1620 ms
+                TASK_5: TOTAL EXECUTION TIME: 7 (70 ms)
+
+                TASK_5:  Started at time 1450 ms
+
+                TASK_1:  Started at time 1500 ms
+                TASK_1: Stop at time 1550 ms    Deadline was: 2000 ms
+                TASK_1: TOTAL EXECUTION TIME: 5 ticks (50 ms)
+
+                TASK_2:  Started at time 1570 ms
+
+        ENGINE: started!
+
+        Robot in position 0,1
+                TASK_2: Stop at time 1630 ms    Deadline was: 2070 ms
+                TASK_2: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_3:  Started at time 1640 ms
+                TASK_3: Stop at time 1700 ms    Deadline was: 1890 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+                TASK_5: Stop at time 1730 ms    Deadline was: 1700 ms
+                TASK_5: TOTAL EXECUTION TIME: 28 (280 ms)
+
+                TASK_3:  Started at time 1750 ms
+                TASK_3: Stop at time 1810 ms    Deadline was: 2000 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+                        TASK_5:  Started at time 1740 ms
+                TASK_5: Stop at time 1880 ms    Deadline was: 1990 ms
+                TASK_5: TOTAL EXECUTION TIME: 14 (140 ms)
+
+                TASK_5:  Started at time 1920 ms
+                TASK_5: Stop at time 1990 ms    Deadline was: 2170 ms
+
+                TASK_1:  Started at time 2000 ms
+                TASK_1: Stop at time 2050 ms    Deadline was: 2500 ms
+                TASK_1: TOTAL EXECUTION TIME: 5 ticks (50 ms)
+
+                TASK_2:  Started at time 2070 ms
+
+        Robot in position 0,2
+                TASK_2: Stop at time 2130 ms    Deadline was: 2570 ms
+                TASK_2: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_3:  Started at time 2150 ms
+                TASK_3: Stop at time 2210 ms    Deadline was: 2400 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+        TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_5:  Started at time 2230 ms
+
+                TASK_3:  Started at time 2250 ms
+                TASK_3: Stop at time 2310 ms    Deadline was: 2500 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+                TASK_5: Stop at time 2370 ms    Deadline was: 2480 ms
+                TASK_5: TOTAL EXECUTION TIME: 14 (140 ms)
+
+                TASK_5:  Started at time 2420 ms
+                TASK_5: Stop at time
+                TASK_1:  Started at time 2500 ms
+                TASK_1: Stop at time 2550 ms    Deadline was: 3000 ms
+                TASK_1: TOTAL EXECUTION TIME: 5 ticks (50 ms)
+
+                TASK_2:  Started at time 2560 ms
+
+        Robot in position 0,3
+                TASK_2: Stop at time 2620 ms    Deadline was: 3060 ms
+                TASK_2: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_3:  Started at time 2630 ms
+                TASK_3: Stop at time 2690 ms    Deadline was: 2880 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+ION TIME: 6 (60 ms)
+s: 2880 ms
+                TASK_5: TOTAL EXECUTION TIME: 7 (70 ms)
+
+                TASK_5:  Started at time 2700 ms
+
+                TASK_3:  Started at time 2750 ms
+                TASK_3: Stop at time 2810 ms    Deadline was: 3000 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+                TASK_5: Stop at time 2830 ms    Deadline was: 2950 ms
+                TASK_5: TOTAL EXECUTION TIME: 13 (130 ms)
+
+                TASK_5:  Started at time 2920 ms
+                TASK_5: Stop at time 2990 ms    Deadline was: 3170 ms
+                TASK_5: TOTAL EXECUTION TIME: 7 (70 ms)
+
+                TASK_1:  Started at time 3000 ms
+                TASK_1: Stop at time 3050 ms    Deadline was: 3500 ms
+                TASK_1: TOTAL EXECUTION TIME: 5 ticks (50 ms)
+
+                TASK_2:  Started at time 3050 ms
+
+        Robot in position 0,4
+                TASK_2: Stop at time 3110 ms    Deadline was: 3550 ms
+                TASK_2: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_3:  Started at time 3130 ms
+                TASK_3: Stop at time 3200 ms    Deadline was: 3380 ms
+                TASK_3: TOTAL EXECUTION TIME: 7 (70 ms)
+
+                TASK_5:  Started at time 3210 ms
+
+                TASK_3:  Started at time 3250 ms
+                TASK_3: Stop at time 3310 ms    Deadline was: 3500 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+                TASK_5: Stop at time 3340 ms    Deadline was: 3460 ms
+                TASK_5: TOTAL EXECUTION TIME: 13 (130 ms)
+
+                TASK_5:  Started at time 3420 ms
+                TASK_5: Stop at time 3490 ms    Deadline was: 3670 ms
+
+                TASK_1:  Started at time 3500 ms
+                TASK_1: Stop at time 3550 ms    Deadline was: 4000 ms
+                TASK_1: TOTAL EXECUTION TIME: 5 ticks (50 ms)
+
+                TASK_2:  Started at time 3570 ms
+
+        Robot in position 0,5
+                TASK_2: Stop at time 3630 ms    Deadline was: 4070 ms
+                TASK_2: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_3:  Started at time 3640 ms
+                TASK_3: Stop at time 3700 ms    Deadline was: 3890 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+        TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_5:  Started at time 3720 ms
+
+                TASK_3:  Started at time 3750 ms
+                TASK_3: Stop at time 3810 ms    Deadline was: 4000 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+                TASK_5: Stop at time 3860 ms    Deadline was: 3970 ms
+                TASK_5: TOTAL EXECUTION TIME: 14 (140 ms)
+
+                TASK_5:  Started at time 3920 ms
+                TASK_5: Stop at time 3990 ms    Deadline was: 4170 ms
+
+                TASK_1:  Started at time 4000 ms
+                TASK_1: Stop at time 4050 ms    Deadline was: 4500 ms
+                TASK_1: TOTAL EXECUTION TIME: 5 ticks (50 ms)
+
+                TASK_2:  Started at time 4070 ms
+
+        Robot in position 0,6
+                TASK_2: Stop at time 4130 ms    Deadline was: 4570 ms
+                TASK_2: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_3:  Started at time 4140 ms
+                TASK_3: Stop at time 4200 ms    Deadline was: 4390 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+        TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_5:  Started at time 4220 ms
+
+                TASK_3:  Started at time 4250 ms
+                TASK_3: Stop at time 4310 ms    Deadline was: 4500 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+                TASK_5: Stop at time 4360 ms    Deadline was: 4470 ms
+                TASK_5: TOTAL EXECUTION TIME: 14 (140 ms)
+
+                TASK_5:  Started at time 4420 ms
+                TASK_5: Stop at time 4490 ms    Deadline was: 4670 ms
+                TASK_5: TOTAL EXEC
+                TASK_1:  Started at time 4500 ms
+                TASK_1: Stop at time 4550 ms    Deadline was: 5000 ms
+                TASK_1: TOTAL EXECUTION TIME: 5 ticks (50 ms)
+
+                TASK_2:  Started at time 4560 ms
+
+        Robot in position 0,7
+                TASK_2: Stop at time 4620 ms    Deadline was: 5060 ms
+                TASK_2: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_3:  Started at time 4630 ms
+                TASK_3: Stop at time 4690 ms    Deadline was: 4880 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+UTION TIME: 6 (60 ms)
+
+                TASK_5:  Started at time 4710 ms
+
+                TASK_3:  Started at time 4750 ms
+                TASK_3: Stop at time 4810 ms    Deadline was: 5000 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+                TASK_5: Stop at time 4850 ms    Deadline was: 4960 ms
+                TASK_5: TOTAL EXECUTION TIME: 14 (140 ms)
+
+                TASK_5:  Started at time 4920 ms
+                TASK_5: Stop at time 4990 ms    Deadline was: 5170 ms
+                TASK_5: TOTAL EXECUTION TIME: 7 (70 ms)
+
+                TASK_1:  Started at time 5000 ms
+                TASK_1: Stop at time 5050 ms    Deadline was: 5500 ms
+                TASK_1: TOTAL EXECUTION TIME: 5 ticks (50 ms)
+
+                TASK_2:  Started at time 5070 ms
+
+        Robot in position 0,8
+                TASK_2: Stop at time 5130 ms    Deadline was: 5570 ms
+                TASK_2: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_3:  Started at time 5150 ms
+                TASK_3: Stop at time 5210 ms    Deadline was: 5400 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_5:  Started at time 5230 ms
+
+                TASK_3:  Started at time 5250 ms
+                TASK_3: Stop at time 5310 ms    Deadline was: 5500 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+                TASK_5: Stop at time 5360 ms    Deadline was: 5480 ms
+                TASK_5: TOTAL EXECUTION TIME: 13 (130 ms)
+
+                TASK_5:  Started at time 5420 ms
+                TASK_5: Stop at time 5490 ms    Deadline was: 5670 ms
+
+                TASK_1:  Started at time 5500 ms
+                TASK_1: Stop at time 5550 ms    Deadline was: 6000 ms
+                TASK_1: TOTAL EXECUTION TIME: 5 ticks (50 ms)
+
+                TASK_2:  Started at time 5570 ms
+
+        Robot in position 0,9
+                TASK_2: Stop at time 5630 ms    Deadline was: 6070 ms
+                TASK_2: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_3:  Started at time 5640 ms
+                TASK_3: Stop at time 5700 ms    Deadline was: 5890 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+        TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_5:  Started at time 5720 ms
+
+                TASK_3:  Started at time 5750 ms
+                TASK_3: Stop at time 5810 ms    Deadline was: 6000 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+                TASK_5: Stop at time 5850 ms    Deadline was: 5970 ms
+                TASK_5: TOTAL EXECUTION TIME: 13 (130 ms)
+
+                TASK_5:  Started at time 5920 ms
+                TASK_5: Stop at time 5990 ms    Deadline was: 6170 ms
+
+                TASK_1:  Started at time 6010 ms
+                TASK_1: Stop at time 6060 ms    Deadline was: 6510 ms
+                TASK_1: TOTAL EXECUTION TIME: 5 ticks (50 ms)
+
+                TASK_2:  Started at time 6110 ms
+
+        Robot in position 1,9
+                TASK_2: Stop at time 6170 ms    Deadline was: 6610 ms
+                TASK_2: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_3:  Started at time 6190 ms
+                TASK_3: Stop at time 6250 ms    Deadline was: 6440 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_3:  Started at time 6260 ms
+                TASK_3: Stop at time 6320 ms    Deadline was: 6510 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+        TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_5:  Started at time 6340 ms
+                TASK_5: Stop at time 6410 ms    Deadline was: 6590 ms
+                TASK_5: TOTAL EXECUTION TIME: 7 (70 ms)
+
+                TASK_5:  Started at time 6420 ms
+                TASK_5: Stop at time 6490 ms    Deadline was: 6670 ms
+
+                TASK_1:  Started at time 6500 ms
+                TASK_1: Stop at time 6550 ms    Deadline was: 7000 ms
+                TASK_1: TOTAL EXECUTION TIME: 5 ticks (50 ms)
+
+                TASK_2:  Started at time 6570 ms
+
+        Robot in position 2,9
+                TASK_2: Stop at time 6630 ms    Deadline was: 7070 ms
+                TASK_2: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_3:  Started at time 6650 ms
+                TASK_3: Stop at time 6710 ms    Deadline was: 6900 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+        TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_5:  Started at time 6720 ms
+
+                TASK_3:  Started at time 6750 ms
+                TASK_3: Stop at time 6810 ms    Deadline was: 7000 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+                TASK_5: Stop at time 6880 ms    Deadline was: 6970 ms
+                TASK_5: TOTAL EXECUTION TIME: 16 (160 ms)
+
+                TASK_5:  Started at time 6920 ms
+                TASK_5: Stop at time 6990 ms    Deadline was: 7170 ms
+
+                TASK_1:  Started at time 7000 ms
+                TASK_1: Stop at time 7050 ms    Deadline was: 7500 ms
+                TASK_1: TOTAL EXECUTION TIME: 5 ticks (50 ms)
+
+                TASK_2:  Started at time 7070 ms
+
+        Robot in position 3,9
+                TASK_2: Stop at time 7130 ms    Deadline was: 7570 ms
+                TASK_2: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_3:  Started at time 7140 ms
+                TASK_3: Stop at time 7200 ms    Deadline was: 7390 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+        TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_5:  Started at time 7230 ms
+
+                TASK_3:  Started at time 7250 ms
+                TASK_3: Stop at time 7310 ms    Deadline was: 7500 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+                TASK_5: Stop at time 7370 ms    Deadline was: 7480 ms
+                TASK_5: TOTAL EXECUTION TIME: 14 (140 ms)
+
+                TASK_5:  Started at time 7420 ms
+                TASK_5: Stop at time 7490 ms    Deadline was: 7670 ms
+                TASK_5: TOTAL EXECUTION TIME: 7 (70 ms)
+
+                TASK_1:  Started at time 7500 ms
+                TASK_1: Stop at time 7550 ms    Deadline was: 8000 ms
+                TASK_1: TOTAL EXECUTION TIME: 5 ticks (50 ms)
+
+                TASK_2:  Started at time 7570 ms
+
+        Robot in position 4,9
+                TASK_2: Stop at time 7630 ms    Deadline was: 8070 ms
+                TASK_2: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_3:  Started at time 7650 ms
+                TASK_3: Stop at time 7710 ms    Deadline was: 7900 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_5:  Started at time 7740 ms
+
+                TASK_3:  Started at time 7750 ms
+                TASK_3: Stop at time 7810 ms    Deadline was: 8000 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+                TASK_5: Stop at time 7890 ms    Deadline was: 7990 ms
+                TASK_5: TOTAL EXECUTION TIME: 15 (150 ms)
+
+                TASK_5:  Started at time 7920 ms
+                TASK_5: Stop at time 7990 ms    Deadline was: 8170 ms
+                TASK_5: TOTAL EXECUTION TIME: 7 (70 ms)
+
+                TASK_1:  Started at time 8000 ms
+                TASK_1: Stop at time 8050 ms    Deadline was: 8500 ms
+                TASK_1: TOTAL EXECUTION TIME: 5 ticks (50 ms)
+
+                TASK_2:  Started at time 8080 ms
+
+        Robot in position 5,9
+                TASK_2: Stop at time 8140 ms    Deadline was: 8580 ms
+                TASK_2: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_3:  Started at time 8160 ms
+                TASK_3: Stop at time 8220 ms    Deadline was: 8410 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_5:  Started at time 8240 ms
+
+                TASK_3:  Started at time 8250 ms
+                TASK_3: Stop at time 8310 ms    Deadline was: 8500 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+                TASK_5: Stop at time 8380 ms    Deadline was: 8490 ms
+                TASK_5: TOTAL EXECUTION TIME: 14 (140 ms)
+batteryStatus 97%, decremented by TSystem at time 8400 ms]
+
+                TASK_5:  Started at time 8420 ms
+                TASK_5: Stop at time 8490 ms    Deadline was: 8670 ms
+
+                TASK_1:  Started at time 8500 ms
+                TASK_1: Stop at time 8550 ms    Deadline was: 9000 ms
+                TASK_1: TOTAL EXECUTION TIME: 5 ticks (50 ms)
+
+                TASK_2:  Started at time 8560 ms
+
+        Robot in position 6,9
+                TASK_2: Stop at time 8630 ms    Deadline was: 9060 ms
+                TASK_2: TOTAL EXECUTION TIME: 7 (70 ms)
+
+                TASK_3:  Started at time 8660 ms
+                TASK_3: Stop at time 8720 ms    Deadline was: 8910 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+        TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_3:  Started at time 8750 ms
+                TASK_3: Stop at time 8810 ms    Deadline was: 9000 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+                        TASK_5:  Started at time 8740 ms
+                TASK_5: Stop at time 8880 ms    Deadline was: 8990 ms
+                TASK_5: TOTAL EXECUTION TIME: 14 (140 ms)
+
+                TASK_5:  Started at time 8920 ms
+                TASK_5: Stop at time 8990 ms    Deadline was: 9170 ms
+
+                TASK_1:  Started at time 9000 ms
+                TASK_1: Stop at time 9050 ms    Deadline was: 9500 ms
+                TASK_1: TOTAL EXECUTION TIME: 5 ticks (50 ms)
+
+                TASK_2:  Started at time 9070 ms
+
+        Robot in position 7,9
+                TASK_2: Stop at time 9130 ms    Deadline was: 9570 ms
+                TASK_2: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_3:  Started at time 9150 ms
+                TASK_3: Stop at time 9210 ms    Deadline was: 9400 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+        TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_5:  Started at time 9230 ms
+
+                TASK_3:  Started at time 9250 ms
+                TASK_3: Stop at time 9310 ms    Deadline was: 9500 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+                TASK_5: Stop at time 9390 ms    Deadline was: 9480 ms
+                TASK_5: TOTAL EXECUTION TIME: 16 (160 ms)
+
+                TASK_5:  Started at time 9420 ms
+                TASK_5: Stop at time 9490 ms    Deadline was: 9670 ms
+
+                TASK_1:  Started at time 9500 ms
+                TASK_1: Stop at time 9550 ms    Deadline was: 10000 ms
+                TASK_1: TOTAL EXECUTION TIME: 5 ticks (50 ms)
+
+                TASK_2:  Started at time 9570 ms
+
+        Robot in position 8,9
+                TASK_2: Stop at time 9630 ms    Deadline was: 10070 ms
+                TASK_2: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_3:  Started at time 9650 ms
+                TASK_3: Stop at time 9710 ms    Deadline was: 9900 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+        TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_5:  Started at time 9730 ms
+
+                TASK_3:  Started at time 9750 ms
+                TASK_3: Stop at time 9810 ms    Deadline was: 10000 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+                TASK_5: Stop at time 9880 ms    Deadline was: 9980 ms
+                TASK_5: TOTAL EXECUTION TIME: 15 (150 ms)
+
+                TASK_5:  Started at time 9920 ms
+                TASK_5: Stop at time 9990 ms    Deadline was: 10170 ms
+
+                TASK_1:  Started at time 10000 ms
+                TASK_1: Stop at time 10050 ms   Deadline was: 10500 ms
+                TASK_1: TOTAL EXECUTION TIME: 5 ticks (50 ms)
+
+                TASK_2:  Started at time 10070 ms
+
+        Robot in position 9,9
+                TASK_2: Stop at time 10130 ms   Deadline was: 10570 ms
+                TASK_2: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_3:  Started at time 10150 ms
+                TASK_3: Stop at time 10210 ms   Deadline was: 10400 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+        TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_5:  Started at time 10230 ms
+
+                TASK_3:  Started at time 10250 ms
+                TASK_3: Stop at time 10310 ms   Deadline was: 10500 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+                TASK_5: Stop at time 10370 ms   Deadline was: 10480 ms
+                TASK_5: TOTAL EXECUTION TIME: 14 (140 ms)
+
+                TASK_5:  Started at time 10420 ms
+                TASK_5: Stop at time 10490 ms   Deadlin
+                TASK_1:  Started at time 10500 ms
+                TASK_1: Stop at time 10550 ms   Deadline was: 11000 ms
+                TASK_1: TOTAL EXECUTION TIME: 5 ticks (50 ms)
+
+                TASK_2:  Started at time 10570 ms
+
+        Robot in position 9,8
+                TASK_2: Stop at time 10630 ms   Deadline was: 11070 ms
+                TASK_2: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_3:  Started at time 10630 ms
+                TASK_3: Stop at time 10690 ms   Deadline was: 10880 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+s)
+as: 10880 ms
+                TASK_5: TOTAL EXECUTION TIME: 7 (70 ms)
+
+                TASK_5:  Started at time 10720 ms
+
+                TASK_3:  Started at time 10750 ms
+                TASK_3: Stop at time 10810 ms   Deadline was: 11000 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+                TASK_5: Stop at time 10870 ms   Deadline was: 10970 ms
+                TASK_5: TOTAL EXECUTION TIME: 15 (150 ms)
+
+                TASK_5:  Started at time 10920 ms
+                TASK_5: Stop at time 10990 ms   Deadline was: 11170 ms
+                TASK_5: TOTAL EXECUTION TIME: 7 (70 ms)
+
+                TASK_1:  Started at time 11000 ms
+                TASK_1: Stop at time 11050 ms   Deadline was: 11500 ms
+                TASK_1: TOTAL EXECUTION TIME: 5 ticks (50 ms)
+
+                TASK_2:  Started at time 11060 ms
+
+        Robot in position 9,7
+                TASK_2: Stop at time 11120 ms   Deadline was: 11560 ms
+                TASK_2: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_3:  Started at time 11150 ms
+        Garbage bag FULL
+
+                Mail sent Garbage bag full               because Garbage bag is FULL
+                TASK_3: Stop at time 11210 ms   Deadline was: 11400 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_5:  Started at time 11230 ms
+
+                TASK_3:  Started at time 11250 ms
+        Garbage bag FULL
+
+                Mail sent Garbage bag full               because Garbage bag is FULL
+                TASK_3: Stop at time 11310 ms   Deadline was: 11500 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+                TASK_5: Stop at time 11390 ms   Deadline was: 11480 ms
+                TASK_5: TOTAL EXECUTION TIME: 16 (160 ms)
+
+                TASK_4:  Started at time 11400 ms
+                GARBAGE BAG FULL ALARM
+
+                TASK_5:  Started at time 11420 ms
+
+                TASK_1:  Started at time 11500 ms
+                TASK_1: Stop at time 11550 ms   Deadline was: 12000 ms
+                TASK_1: TOTAL EXECUTION TIME: 5 ticks (50 ms)
+
+                TASK_2:  Started at time 11550 ms
+        get a mail from mailbox, the content: Garbage bag full
+
+        Robot in position 8,7
+                TASK_2: Stop at time 11610 ms   Deadline was: 12050 ms
+                TASK_2: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_3:  Started at time 11620 ms
+                TASK_3: Stop at time 11680 ms   Deadline was: 11870 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+                TASK_5: Stop at time 11680 ms   Deadline was: 11670 ms
+                TASK_5: TOTAL EXECUTION TIME: 26 (260 ms)
+
+                TASK_5:  Started at time 11700 ms
+
+                TASK_3:  Started at time 11750 ms
+                TASK_3: Stop at time 11810 ms   Deadline was: 12000 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+                TASK_5: Stop at time 11830 ms   Deadline was: 11950 ms
+                TASK_5: TOTAL EXECUTION TIME: 13 (130 ms)
+                TASK_4: Stop at time 11840 ms    APERIODIC task         TASK_4: TOTAL EXECUTION TIME: 44 (440 ms)
+
+                TASK_4:  Started at time 11850 ms
+                GARBAGE BAG FULL ALARM
+                TASK_4: Stop at time 11870 ms    APERIODIC task         TASK_4: TOTAL EXECUTION TIME: 2 (20 ms)
+batteryStatus 96%, decremented by TSystem at time 11900 ms]
+batteryStatus 95%, decremented by TSystem at time 11900 ms]
+
+                TASK_5:  Started at time 11920 ms
+                TASK_5: Stop at time 11990 ms   Deadline was: 12170 ms
+                TASK_5: TOTAL EXECUTION TIME: 7 (70 ms)
+
+                TASK_1:  Started at time 12000 ms
+                TASK_1: Stop at time 12050 ms   Deadline was: 12500 ms
+                TASK_1: TOTAL EXECUTION TIME: 5 ticks (50 ms)
+
+                TASK_2:  Started at time 12070 ms
+        get a mail from mailbox, the content: Garbage bag full
+
+        Robot in position 7,7
+                TASK_2: Stop at time 12130 ms   Deadline was: 12570 ms
+                TASK_2: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_3:  Started at time 12140 ms
+                TASK_3: Stop at time 12200 ms   Deadline was: 12390 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_5:  Started at time 12230 ms
+
+                TASK_3:  Started at time 12250 ms
+                TASK_3: Stop at time 12310 ms   Deadline was: 12500 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+                TASK_5: Stop at time 12360 ms   Deadline was: 12480 ms
+                TASK_5: TOTAL EXECUTION TIME: 13 (130 ms)
+
+                TASK_5:  Started at time 12420 ms
+                TASK_5: Stop a
+                TASK_1:  Started at time 12500 ms
+                TASK_1: Stop at time 12550 ms   Deadline was: 13000 ms
+                TASK_1: TOTAL EXECUTION TIME: 5 ticks (50 ms)
+
+                TASK_2:  Started at time 12560 ms
+
+        Robot in position 6,7
+                TASK_2: Stop at time 12620 ms   Deadline was: 13060 ms
+                TASK_2: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_3:  Started at time 12650 ms
+                TASK_3: Stop at time 12710 ms   Deadline was: 12900 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+EXECUTION TIME: 6 (60 ms)
+as: 12900 ms
+
+                TASK_3:  Started at time 12760 ms
+                TASK_3: Stop at time 12820 ms   Deadline was: 13010 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+        TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_5:  Started at time 12840 ms
+                TASK_5: Stop at time 12910 ms   Deadline was: 13090 ms
+                TASK_5: TOTAL EXECUTION TIME: 7 (70 ms)
+
+                TASK_5:  Started at time 12940 ms
+
+                TASK_1:  Started at time 13000 ms
+                TASK_1: Stop at time 13050 ms   Deadline was: 13500 ms
+                TASK_1: TOTAL EXECUTION TIME: 5 ticks (50 ms)
+
+                TASK_2:  Started at time 13060 ms
+
+        Robot in position 5,7
+                TASK_2: Stop at time 13120 ms   Deadline was: 13560 ms
+                TASK_2: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_3:  Started at time 13130 ms
+                TASK_3: Stop at time 13190 ms   Deadline was: 13380 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+                TASK_5: Stop at time 13200 ms   Deadline was: 13190 ms
+                TASK_5: TOTAL EXECUTION TIME: 26 (260 ms)
+
+                TASK_5:  Started at time 13200 ms
+
+                TASK_3:  Started at time 13250 ms
+                TASK_3: Stop at time 13310 ms   Deadline was: 13500 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+                TASK_5: Stop at time 13340 ms   Deadline was: 13450 ms
+                TASK_5: TOTAL EXECUTION TIME: 14 (140 ms)
+
+                TASK_5:  Started at time 13420 ms
+                TASK_5: Stop at time 13490 ms   Deadline was: 13670 ms
+                TASK_5: TOTAL EXECUTION TIME: 7 (70 ms)
+
+                TASK_1:  Started at time 13500 ms
+                TASK_1: Stop at time 13550 ms   Deadline was: 14000 ms
+                TASK_1: TOTAL EXECUTION TIME: 5 ticks (50 ms)
+
+                TASK_2:  Started at time 13560 ms
+
+        Robot in position 4,7
+                TASK_2: Stop at time 13620 ms   Deadline was: 14060 ms
+                TASK_2: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_3:  Started at time 13640 ms
+                TASK_3: Stop at time 13700 ms   Deadline was: 13890 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_5:  Started at time 13710 ms
+
+                TASK_3:  Started at time 13750 ms
+                TASK_3: Stop at time 13810 ms   Deadline was: 14000 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+                TASK_5: Stop at time 13840 ms   Deadline was: 13960 ms
+                TASK_5: TOTAL EXECUTION TIME: 13 (130 ms)
+
+                TASK_5:  Started at time 13920 ms
+
+                TASK_1:  Started at time 14000 ms
+                TASK_1: Stop at time 14050 ms   Deadline was: 14500 ms
+                TASK_1: TOTAL EXECUTION TIME: 5 ticks (50 ms)
+
+                TASK_2:  Started at time 14060 ms
+
+        Robot in position 3,7
+                TASK_2: Stop at time 14120 ms   Deadline was: 14560 ms
+                TASK_2: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_3:  Started at time 14120 ms
+                TASK_3: Stop at time 14180 ms   Deadline was: 14370 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+                TASK_5: Stop at time 14180 ms   Deadline was: 14170 ms
+                TASK_5: TOTAL EXECUTION TIME: 26 (260 ms)
+
+                TASK_5:  Started at time 14190 ms
+
+                TASK_3:  Started at time 14250 ms
+                TASK_3: Stop at time 14310 ms   Deadline was: 14500 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+                TASK_5: Stop at time 14330 ms   Deadline was: 14440 ms
+                TASK_5: TOTAL EXECUTION TIME: 14 (140 ms)
+batteryStatus 94%, decremented by TSystem at time 14350 ms]
+batteryStatus 93%, decremented by TSystem at time 14350 ms]
+
+                TASK_5:  Started at time 14420 ms
+                TASK_5: Stop at time 14490 ms   Deadline was: 14670 ms
+
+                TASK_1:  Started at time 14500 ms
+                TASK_1: Stop at time 14550 ms   Deadline was: 15000 ms
+                TASK_1: TOTAL EXECUTION TIME: 5 ticks (50 ms)
+
+                TASK_2:  Started at time 14570 ms
+
+        Robot in position 2,7
+                TASK_2: Stop at time 14630 ms   Deadline was: 15070 ms
+                TASK_2: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_3:  Started at time 14640 ms
+                TASK_3: Stop at time 14700 ms   Deadline was: 14890 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+        TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_5:  S
+                TASK_3:  Started at time 14760 ms
+                TASK_3: Stop at time 14820 ms   Deadline was: 15010 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+TAL EXECUTION TIME: 6 (6                TASK_5: Stop at time 14880 ms   Deadline was: 14980 ms
+                TASK_5: TOTAL EXECUTION TIME: 15 (150 ms)
+
+                TASK_5:  Started at time 14920 ms
+                TASK_5: Stop at time 14990 ms   Deadline was: 15170 ms
+                TASK_5: TOTAL EXECUTION TIME: 7
+                TASK_1:  Started at time 15010 ms
+                TASK_1: Stop at time 15060 ms   Deadline was: 15510 ms
+                TASK_1: TOTAL EXECUTION TIME: 5 ticks (50 ms)
+
+                TASK_2:  Started at time 15070 ms
+
+        Robot in position 1,7
+                TASK_2: Stop at time 15130 ms   Deadline was: 15570 ms
+                TASK_2: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_3:  Started at time 15150 ms
+                TASK_3: Stop at time 15210 ms   Deadline was: 15400 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+(60 ms)
+
+                TASK_5:  Started at time 15220 ms
+
+                TASK_3:  Started at time 15250 ms
+                TASK_3: Stop at time 15310 ms   Deadline was: 15500 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+                TASK_5: Stop at time 15360 ms   Deadline was: 15470 ms
+                TASK_5: TOTAL EXECUTION TIME: 14 (140 ms)
+batteryStatus 92%, decremented by TSystem at time 15400 ms]
+batteryStatus 91%, decremented by TSystem at time 15400 ms]
+
+                TASK_5:  Started at time 15420 ms
+                TASK_5: Stop at time 15490 ms   Deadline was: 15670 ms
+                TASK_5: TOTAL EXECUTION TIME: 7 (70 ms)
+
+                TASK_1:  Started at time 15500 ms
+                TASK_1: Stop at time 15550 ms   Deadline was: 16000 ms
+                TASK_1: TOTAL EXECUTION TIME: 5 ticks (50 ms)
+
+                TASK_2:  Started at time 15570 ms
+
+        Robot in position 0,7
+                TASK_2: Stop at time 15630 ms   Deadline was: 16070 ms
+                TASK_2: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_3:  Started at time 15650 ms
+                TASK_3: Stop at time 15710 ms   Deadline was: 15900 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_5:  Started at time 15720 ms
+
+                TASK_3:  Started at time 15750 ms
+                TASK_3: Stop at time 15810 ms   Deadline was: 16000 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+                TASK_5: Stop at time 15850 ms   Deadline was: 15970 ms
+                TASK_5: TOTAL EXECUTION TIME: 13 (130 ms)
+
+                TASK_5:  Started at time 15920 ms
+                TASK_5: Stop at time 15990 ms   Deadline was: 16170 ms
+                TASK_5: TOTAL EXECUTION TIME: 7 (70 ms)
+
+                TASK_1:  Started at time 16000 ms
+                TASK_1: Stop at time 16050 ms   Deadline was: 16500 ms
+                TASK_1: TOTAL EXECUTION TIME: 5 ticks (50 ms)
+
+                TASK_2:  Started at time 16070 ms
+
+        Robot in position 0,6
+                TASK_2: Stop at time 16130 ms   Deadline was: 16570 ms
+                TASK_2: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_3:  Started at time 16130 ms
+                TASK_3: Stop at time 16190 ms   Deadline was: 16380 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_5:  Started at time 16200 ms
+
+                TASK_3:  Started at time 16250 ms
+                TASK_3: Stop at time 16310 ms   Deadline was: 16500 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+                TASK_5: Stop at time 16350 ms   Deadline was: 16450 ms
+                TASK_5: TOTAL EXECUTION TIME: 15 (150 ms)
+
+                TASK_5:  Started at time 16420 ms
+                TASK_5: Stop at time 16490 ms   Deadline was: 16670 ms
+                TASK_5: TOTAL EXECUTION TIME: 7 (70 ms)
+
+                TASK_1:  Started at time 16500 ms
+
+        ENGINE: stopped!
+                TASK_1: Stop at time 16550 ms   Deadline was: 17000 ms
+                TASK_1: TOTAL EXECUTION TIME: 5 ticks (50 ms)
+
+                TASK_2:  Started at time 16560 ms
+
+        ENGINE: started!
+
+        Robot in position 0,5
+                TASK_2: Stop at time 16620 ms   Deadline was: 17060 ms
+                TASK_2: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_3:  Started at time 16640 ms
+                TASK_3: Stop at time 16700 ms   Deadline was: 16890 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_5:  Started at time 16710 ms
+
+                TASK_3:  Started at time 16750 ms
+                TASK_3: Stop at time 16810 ms   Deadline was: 17000 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+                TASK_5: Stop at time 16840 ms   Deadline was: 16960 ms
+                TASK_5: TOTAL EXECUTION TIME: 13 (130 ms)
+
+                TASK_5:  Started at time 16920 ms
+                TASK_5: Stop at time 16990 ms   Deadline was: 17170 ms
+                TASK_5: TOTAL EXECUTION TIME: 7 (70 ms)
+
+                TASK_1:  Started at time 17010 ms
+                TASK_1: Stop at time 17060 ms   Deadline was: 17510 ms
+                TASK_1: TOTAL EXECUTION TIME: 5 ticks (50 ms)
+
+                TASK_2:  Started at time 17070 ms
+
+        Robot in position 0,4
+                TASK_2: Stop at time 17130 ms   Deadline was: 17570 ms
+                TASK_2: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_3:  Started at time 17160 ms
+                TASK_3: Stop at time 17220 ms   Deadline was: 17410 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_5:  Started at time 17230 ms
+
+                TASK_3:  Started at time 17250 ms
+                TASK_3: Stop at time 17320 ms   Deadline was: 17500 ms
+                TASK_3: TOTAL EXECUTION TIME: 7 (70 ms)
+                TASK_5: Stop at time 17370 ms   Deadline was: 17480 ms
+                TASK_5: TOTAL EXECUTION TIME: 14 (140 ms)
+
+                TASK_5:  Started at time 17420 ms
+                TASK_5: Stop at time 17490 ms   Deadline was: 17670 ms
+                TASK_5: TOTAL EXECUTION TIME: 7 (70 ms)
+
+                TASK_1:  Started at time 17500 ms
+                TASK_1: Stop at time 17550 ms   Deadline was: 18000 ms
+                TASK_1: TOTAL EXECUTION TIME: 5 ticks (50 ms)
+
+                TASK_2:  Started at time 17560 ms
+
+        Robot in position 0,3
+                TASK_2: Stop at time 17620 ms   Deadline was: 18060 ms
+                TASK_2: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_3:  Started at time 17640 ms
+                TASK_3: Stop at time 17700 ms   Deadline was: 17890 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_5:  Started at time 17700 ms
+
+                TASK_3:  Started at time 17750 ms
+                TASK_3: Stop at time 17810 ms   Deadline was: 18000 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+                TASK_5: Stop at time 17830 ms   Deadline was: 17950 ms
+                TASK_5: TOTAL EXECUTION TIME: 13 (130 ms)
+
+                TASK_5:  Started at time 17920 ms
+                TASK_5: Stop at time 17990 ms   Deadline was: 18170 ms
+                TASK
+                TASK_1:  Started at time 18000 ms
+                TASK_1: Stop at time 18050 ms   Deadline was: 18500 ms
+                TASK_1: TOTAL EXECUTION TIME: 5 ticks (50 ms)
+
+                TASK_2:  Started at time 18080 ms
+
+        Robot in position 0,2
+                TASK_2: Stop at time 18140 ms   Deadline was: 18580 ms
+                TASK_2: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_3:  Started at time 18160 ms
+                TASK_3: Stop at time 18220 ms   Deadline was: 18410 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+_3: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_3:  Started at time 18250 ms
+                TASK_3: Stop at time 18310 ms   Deadline was: 18500 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+                        TASK_5:  Started at time 18230 ms
+                TASK_5: Stop at time 18360 ms   Deadline was: 18480 ms
+                TASK_5: TOTAL EXECUTION TIME: 13 (130 ms)
+
+                TASK_5:  Started at time 18420 ms
+                TASK_5: Stop at time 18490 m
+                TASK_1:  Started at time 18510 ms
+                TASK_1: Stop at time 18560 ms   Deadline was: 19010 ms
+                TASK_1: TOTAL EXECUTION TIME: 5 ticks (50 ms)
+
+                TASK_2:  Started at time 18570 ms
+
+        Robot in position 0,1
+                TASK_2: Stop at time 18630 ms   Deadline was: 19070 ms
+                TASK_2: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_3:  Started at time 18640 ms
+                TASK_3: Stop at time 18700 ms   Deadline was: 18890 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+: 6 (60 ms)
+as: 18890 ms
+                TASK_5: TOTAL EXECUTION TIME: 7 (70 ms)
+
+                TASK_5:  Started at time 18710 ms
+
+                TASK_3:  Started at time 18750 ms
+                TASK_3: Stop at time 18810 ms   Deadline was: 19000 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+                TASK_5: Stop at time 18840 ms   Deadline was: 18960 ms
+                TASK_5: TOTAL EXECUTION TIME: 13 (130 ms)
+batteryStatus 90%, decremented by TSystem at time 18900 ms]
+batteryStatus 89%, decremented by TSystem at time 18900 ms]
+
+                TASK_5:  Started at time 18920 ms
+                TASK_5: Stop at time 18990 ms   Deadline was: 19170 ms
+                TASK_5: TOTAL EXECUTION TIME: 7 (70 ms)
+
+                TASK_1:  Started at time 19000 ms
+                TASK_1: Stop at time 19050 ms   Deadline was: 19500 ms
+                TASK_1: TOTAL EXECUTION TIME: 5 ticks (50 ms)
+
+                TASK_2:  Started at time 19070 ms
+        The robot is back at charging station!
+
+                TASK_3:  Started at time 19100 ms
+                TASK_3: Stop at time 19160 ms   Deadline was: 19350 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_5:  Started at time 19180 ms
+
+                TASK_3:  Started at time 19260 ms
+                TASK_3: Stop at time 19320 ms   Deadline was: 19510 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+                TASK_5: Stop at time 19350 ms   Deadline was: 19430 ms
+                TASK_5: TOTAL EXECUTION TIME: 17 (170 ms)
+                Thread TaskS status is: SUSPEND
+                Thread Task1 status is: SUSPEND
+                Thread Task2 status is: CLOSE
+                Thread Task3 status is: SUSPEND
+                Thread Task4 status is: SUSPEND
+                Thread Task5 status is: SUSPEND
+
+
+All tasks turned OFF correctly
+All timers turned OFF correctly
+
+
+
+---------------System is TURNED OFF--------------------
+msh />

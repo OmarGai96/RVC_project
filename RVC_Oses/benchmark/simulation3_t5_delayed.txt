@@ -1,0 +1,305 @@
+
+ \ | /
+- RT -     Thread Operating System
+ / | \     4.1.0 build Mar 28 2023 17:24:19
+ 2006 - 2021 Copyright by rt-thread team
+                STARTUP OF main, with priority: 10
+                STARTUP OF tidle0, with priority: 31
+                STARTUP OF tshell, with priority: 20
+                STARTUP OF TSystem, with priority: 10
+
+        PREEMPTION of Task1 OCCURRED, to TSystem at [210]ms
+
+        PREEMPTION of TSystem OCCURRED, to main at [260]ms
+                STARTUP OF Task1, with priority: 2
+
+        PREEMPTION of TaskS OCCURRED, to TSystem at [280]ms
+
+        PREEMPTION of TSystem OCCURRED, to main at [330]ms
+                STARTUP OF TaskS, with priority: 1
+
+        PREEMPTION of Task2 OCCURRED, to TSystem at [350]ms
+
+        PREEMPTION of TSystem OCCURRED, to main at [400]ms
+                STARTUP OF Task2, with priority: 3
+
+        PREEMPTION of Task3 OCCURRED, to TSystem at [420]ms
+
+        PREEMPTION of TSystem OCCURRED, to main at [470]ms
+                STARTUP OF Task3, with priority: 4
+
+        PREEMPTION of Task4 OCCURRED, to TSystem at [490]ms
+
+        PREEMPTION of TSystem OCCURRED, to main at [540]ms
+                STARTUP OF Task4, with priority: 6
+
+        PREEMPTION of Task5 OCCURRED, to TSystem at [550]ms
+
+        PREEMPTION of TSystem OCCURRED, to main at [600]ms
+                STARTUP OF Task5, with priority: 5
+
+        PREEMPTION of TSystem OCCURRED, to main at [70]ms
+
+------------------------------------------------------------------------
+
+        PREEMPTION of TSystem OCCURRED, to Task3 at [260]ms
+
+                TASK_3:  Started at time 270 ms
+                TASK_3: Stop at time 330 ms     Deadline was: 520 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+
+        PREEMPTION of TSystem OCCURRED, to Task5 at [400]ms
+
+                TASK_5:  Started at time 410 ms
+                TASK_5: Stop at time 480 ms     Deadline was: 660 ms
+                TASK_5: TOTAL EXECUTION TIME: 7 (70 ms)
+
+        PREEMPTION of TSystem OCCURRED, to Task1 at [500]ms
+
+                TASK_1:  Started at time 500 ms
+                TASK_1: Stop at time 550 ms     Deadline was: 1000 ms
+                TASK_1: TOTAL EXECUTION TIME: 5 ticks (50 ms)
+
+                TASK_2:  Started at time 570 ms
+
+        ENGINE: started!
+                TASK_2: Stop at time 630 ms     Deadline was: 1070 ms
+                TASK_2: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_3:  Started at time 640 ms
+                TASK_3: Stop at time 700 ms     Deadline was: 890 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_5:  Started at time 710 ms
+
+        PREEMPTION of Task5 OCCURRED, to Task3 at [760]ms
+
+                TASK_3:  Started at time 770 ms
+                TASK_3: Stop at time 830 ms     Deadline was: 1020 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+                TASK_5: Stop at time 860 ms     Deadline was: 960 ms
+                TASK_5: TOTAL EXECUTION TIME: 15 (150 ms)
+
+        PREEMPTION of TSystem OCCURRED, to Task5 at [900]ms
+
+                TASK_5:  Started at time 910 ms
+                TASK_5: Stop at time 980 ms     Deadline was: 1160 ms
+                TASK_5: TOTAL EXECUTION TIME: 7 (70 ms)
+
+        PREEMPTION of TSystem OCCURRED, to Task1 at [1000]ms
+
+                TASK_1:  Started at time 1010 ms
+                TASK_1: Stop at time 1060 ms    Deadline was: 1510 ms
+                TASK_1: TOTAL EXECUTION TIME: 5 ticks (50 ms)
+
+                TASK_2:  Started at time 1070 ms
+                TASK_2: Stop at time 1130 ms    Deadline was: 1570 ms
+                TASK_2: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_3:  Started at time 1150 ms
+                TASK_3: Stop at time 1210 ms    Deadline was: 1400 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_5:  Started at time 1220 ms
+
+        PREEMPTION of Task5 OCCURRED, to Task3 at [1260]ms
+
+                TASK_3:  Started at time 1270 ms
+                TASK_3: Stop at time 1330 ms    Deadline was: 1520 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+                TASK_5: Stop at time 1370 ms    Deadline was: 1470 ms
+                TASK_5: TOTAL EXECUTION TIME: 15 (150 ms)
+
+        PREEMPTION of TSystem OCCURRED, to Task5 at [1400]ms
+
+                TASK_5:  Started at time 1410 ms
+                TASK_5: Stop at time 1480 ms    Deadline was: 1660 ms
+                TASK_5: TOTAL EXECUTION TIME: 7 (70 ms)
+
+        PREEMPTION of TSystem OCCURRED, to Task1 at [1500]ms
+
+                TASK_1:  Started at time 1510 ms
+                TASK_1: Stop at time 1560 ms    Deadline was: 2010 ms
+                TASK_1: TOTAL EXECUTION TIME: 5 ticks (50 ms)
+
+                TASK_2:  Started at time 1580 ms
+                TASK_2: Stop at time 1640 ms    Deadline was: 2080 ms
+                TASK_2: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_3:  Started at time 1660 ms
+                TASK_3: Stop at time 1720 ms    Deadline was: 1910 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_5:  Started at time 1740 ms
+
+        PREEMPTION of Task5 OCCURRED, to Task3 at [1760]ms
+
+                TASK_3:  Started at time 1770 ms
+                TASK_3: Stop at time 1830 ms    Deadline was: 2020 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+                TASK_5: Stop at time 1890 ms    Deadline was: 1990 ms
+                TASK_5: TOTAL EXECUTION TIME: 15 (150 ms)
+
+                TASK_5:  Started at time 1910 ms
+                TASK_5: Stop at time 1980 ms    Deadline was: 2160 ms
+                TASK_5: TOTAL EXECUTION TIME: 7 (70 ms)
+
+        PREEMPTION of TSystem OCCURRED, to Task1 at [2000]ms
+
+                TASK_1:  Started at time 2010 ms
+                TASK_1: Stop at time 2060 ms    Deadline was: 2510 ms
+                TASK_1: TOTAL EXECUTION TIME: 5 ticks (50 ms)
+
+                TASK_2:  Started at time 2080 ms
+                TASK_2: Stop at time 2140 ms    Deadline was: 2580 ms
+                TASK_2: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_3:  Started at time 2160 ms
+                TASK_3: Stop at time 2220 ms    Deadline was: 2410 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_5:  Started at time 2240 ms
+
+        PREEMPTION of Task5 OCCURRED, to Task3 at [2260]ms
+
+                TASK_3:  Started at time 2260 ms
+                TASK_3: Stop at time 2320 ms    Deadline was: 2510 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+                TASK_5: Stop at time 2390 ms    Deadline was: 2490 ms
+                TASK_5: TOTAL EXECUTION TIME: 15 (150 ms)
+
+                TASK_5:  Started at time 2400 ms
+                TASK_5: Stop at time 2470 ms    Deadline was: 2650 ms
+                TASK_5: TOTAL EXECUTION TIME: 7 (70 ms)
+
+        PREEMPTION of TSystem OCCURRED, to Task1 at [2500]ms
+
+                TASK_1:  Started at time 2500 ms
+                TASK_1: Stop at time 2550 ms    Deadline was: 3000 ms
+                TASK_1: TOTAL EXECUTION TIME: 5 ticks (50 ms)
+
+                TASK_2:  Started at time 2560 ms
+                TASK_2: Stop at time 2620 ms    Deadline was: 3060 ms
+                TASK_2: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_3:  Started at time 2640 ms
+                TASK_3: Stop at time 2700 ms    Deadline was: 2890 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_5:  Started at time 2720 ms
+
+        PREEMPTION of Task5 OCCURRED, to Task3 at [2760]ms
+
+                TASK_3:  Started at time 2770 ms
+                TASK_3: Stop at time 2830 ms    Deadline was: 3020 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+                TASK_5: Stop at time 2880 ms    Deadline was: 2970 ms
+                TASK_5: TOTAL EXECUTION TIME: 16 (160 ms)
+
+        PREEMPTION of TSystem OCCURRED, to Task5 at [2900]ms
+
+                TASK_5:  Started at time 2900 ms
+                TASK_5: Stop at time 2970 ms    Deadline was: 3150 ms
+                TASK_5: TOTAL EXECUTION TIME: 7 (70 ms)
+
+        PREEMPTION of TSystem OCCURRED, to Task1 at [3000]ms
+
+                TASK_1:  Started at time 3000 ms
+                TASK_1: Stop at time 3050 ms    Deadline was: 3500 ms
+                TASK_1: TOTAL EXECUTION TIME: 5 ticks (50 ms)
+
+                TASK_2:  Started at time 3060 ms
+                TASK_2: Stop at time 3120 ms    Deadline was: 3560 ms
+                TASK_2: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_3:  Started at time 3140 ms
+                TASK_3: Stop at time 3200 ms    Deadline was: 3390 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_5:  Started at time 3210 ms
+
+        PREEMPTION of Task5 OCCURRED, to Task3 at [3260]ms
+
+                TASK_3:  Started at time 3270 ms
+                TASK_3: Stop at time 3330 ms    Deadline was: 3520 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+                TASK_5: Stop at time 3360 ms    Deadline was: 3460 ms
+                TASK_5: TOTAL EXECUTION TIME: 15 (150 ms)
+
+        PREEMPTION of TSystem OCCURRED, to Task5 at [3400]ms
+
+                TASK_5:  Started at time 3410 ms
+                TASK_5: Stop at time 3480 ms    Deadline was: 3660 ms
+                TASK_5: TOTAL EXECUTION TIME: 7 (70 ms)
+
+        PREEMPTION of TSystem OCCURRED, to Task1 at [3500]ms
+
+                TASK_1:  Started at time 3500 ms
+                TASK_1: Stop at time 3550 ms    Deadline was: 4000 ms
+                TASK_1: TOTAL EXECUTION TIME: 5 ticks (50 ms)
+
+                TASK_2:  Started at time 3570 ms
+                TASK_2: Stop at time 3630 ms    Deadline was: 4070 ms
+                TASK_2: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_3:  Started at time 3650 ms
+                TASK_3: Stop at time 3710 ms    Deadline was: 3900 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_5:  Started at time 3730 ms
+
+        PREEMPTION of Task5 OCCURRED, to Task3 at [3760]ms
+
+                TASK_3:  Started at time 3770 ms
+                TASK_3: Stop at time 3830 ms    Deadline was: 4020 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+                TASK_5: Stop at time 3880 ms    Deadline was: 3980 ms
+                TASK_5: TOTAL EXECUTION TIME: 15 (150 ms)
+
+        PREEMPTION of TSystem OCCURRED, to Task5 at [3900]ms
+
+                TASK_5:  Started at time 3910 ms
+                TASK_5: Stop at time 3980 ms    Deadline was: 4160 ms
+                TASK_5: TOTAL EXECUTION TIME: 7 (70 ms)
+
+        PREEMPTION of TSystem OCCURRED, to Task1 at [4000]ms
+
+                TASK_1:  Started at time 4010 ms
+                TASK_1: Stop at time 4060 ms    Deadline was: 4510 ms
+                TASK_1: TOTAL EXECUTION TIME: 5 ticks (50 ms)
+
+                TASK_2:  Started at time 4080 ms
+                TASK_2: Stop at time 4140 ms    Deadline was: 4580 ms
+                TASK_2: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_3:  Started at time 4160 ms
+                TASK_3: Stop at time 4220 ms    Deadline was: 4410 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_5:  Started at time 4230 ms
+
+        PREEMPTION of Task5 OCCURRED, to Task3 at [4260]ms
+
+                TASK_3:  Started at time 4270 ms
+                TASK_3: Stop at time 4330 ms    Deadline was: 4520 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)
+                TASK_5: Stop at time 4390 ms    Deadline was: 4480 ms
+                TASK_5: TOTAL EXECUTION TIME: 16 (160 ms)
+
+                TASK_5:  Started at time 4400 ms
+                TASK_5: Stop at time 4470 ms    Deadline was: 4650 ms
+                TASK_5: TOTAL EXECUTION TIME: 7 (70 ms)
+
+        PREEMPTION of TSystem OCCURRED, to Task1 at [4500]ms
+
+                TASK_1:  Started at time 4510 ms
+                TASK_1: Stop at time 4560 ms    Deadline was: 5010 ms
+                TASK_1: TOTAL EXECUTION TIME: 5 ticks (50 ms)
+
+                TASK_2:  Started at time 4580 ms
+                TASK_2: Stop at time 4640 ms    Deadline was: 5080 ms
+                TASK_2: TOTAL EXECUTION TIME: 6 (60 ms)
+
+                TASK_3:  Started at time 4680 ms
+                TASK_3: Stop at time 4740 ms    Deadline was: 4930 ms
+                TASK_3: TOTAL EXECUTION TIME: 6 (60 ms)

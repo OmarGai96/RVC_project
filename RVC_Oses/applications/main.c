@@ -10,6 +10,7 @@
 //#include "cpu_usage.h"
 
 int startingTime =0;
+int turnOffFlag = 0;
 
 static void hook_of_scheduler(struct rt_thread* from, struct rt_thread* to)
 {
@@ -194,13 +195,11 @@ int main(void){
 
     // starting the threads
     rt_thread_startup(&obstacle_control);
-
     rt_thread_startup(&movement_stop);
     rt_thread_startup(&movement_control);
     rt_thread_startup(&check_resources);
     rt_thread_startup(&acoustic_signals);
     rt_thread_startup(&brushes_speed);
-
 
     startingTime = rt_tick_get_millisecond();  //set the current starting time before launching our timers
 
@@ -208,8 +207,13 @@ int main(void){
     rt_timer_start (&timer_obstacle_control_activation);
     rt_timer_start (&timer_movement_control_activation);
     rt_timer_start (&timer_check_resources_activation);
-    rt_timer_start (&timer_brushes_speed_activation);
 
+    //delay t5 of 150 ms
+    while(rt_tick_get_millisecond() < (startingTime+150));
+    //rt_hw_us_delay(150);
+
+    rt_timer_start (&timer_brushes_speed_activation);
+    printf("\n\n---------------System is TURNED ON--------------------\n\n");
 
     return 0;
 }

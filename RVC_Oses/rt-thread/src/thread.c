@@ -242,8 +242,9 @@ static rt_err_t _thread_init(struct rt_thread *thread,
     thread->duration_tick = 0;
 #endif
 
-    thread->end_flag = 0;   //Added by Omar
-    thread->tick_count = 0; //Added by Omar
+    thread->end_flag = 0;           //Added by Omar
+    thread->tick_count = 0;         //Added by Omar
+    thread->preemptableFlag = 0;    //Added by Omar
 
     RT_OBJECT_HOOK_CALL(rt_thread_inited_hook, (thread));
 
@@ -716,7 +717,7 @@ RTM_EXPORT(rt_thread_mdelay);
  * @return  Return the operation status. If the return value is RT_EOK, the function is successfully executed.
  *          If the return value is any other values, it means this operation failed.
  */
-rt_err_t rt_thread_control(rt_thread_t thread, int cmd, void *arg)
+rt_err_t rt_thread_control(rt_thread_t thread, int cmd, int arg)
 {
     register rt_base_t temp;
 
@@ -738,7 +739,7 @@ rt_err_t rt_thread_control(rt_thread_t thread, int cmd, void *arg)
                 rt_schedule_remove_thread(thread);
 
                 /* change thread priority */
-                thread->current_priority = *(rt_uint8_t *)arg;
+                thread->current_priority = arg; //*(rt_uint8_t *)arg;
 
                 /* recalculate priority attribute */
     #if RT_THREAD_PRIORITY_MAX > 32
@@ -754,7 +755,7 @@ rt_err_t rt_thread_control(rt_thread_t thread, int cmd, void *arg)
             }
             else
             {
-                thread->current_priority = *(rt_uint8_t *)arg;
+                thread->current_priority = arg; //*(rt_uint8_t *)arg;
 
                 /* recalculate priority attribute */
     #if RT_THREAD_PRIORITY_MAX > 32
@@ -988,7 +989,8 @@ RTM_EXPORT(rt_thread_get_name);
 
 rt_uint8_t rt_thread_get_status(rt_thread_t thread)
 {
-    rt_kprintf("Thread %s status is: ", rt_thread_get_name(thread));
+#ifdef DEB_INTERNAL //DEBUG_SCH
+    rt_kprintf("\t\tThread %s status is: ", rt_thread_get_name(thread));
     switch(thread->stat){
         case RT_THREAD_READY: rt_kprintf("READY\n");
             break;
@@ -997,10 +999,12 @@ rt_uint8_t rt_thread_get_status(rt_thread_t thread)
         case RT_THREAD_RUNNING: rt_kprintf("RUNNING\n");
             break;
         case RT_THREAD_CLOSE: rt_kprintf("CLOSE\n");
+            break;
         default:
             rt_kprintf("\n");
             break;
     }
+#endif
     return thread->stat;
 }
 RTM_EXPORT(rt_thread_get_status);
@@ -1027,13 +1031,40 @@ void set_tick_count(rt_thread_t thread, rt_uint16_t cnt){
 RTM_EXPORT(set_tick_count);
 
 rt_uint16_t get_tick_count(rt_thread_t thread){
-#ifdef DEBUG_SCH
-    if(thread->tick_count == 0){
-        printf("\tEnd of %s\n", thread->name);
-    }else{
-        printf("\n\t\tTicks %d for thread %s\n", thread->tick_count, thread->name);
-    }
-#endif
     return thread->tick_count;
 }
 RTM_EXPORT(get_tick_count);
+
+int set_task_started(rt_thread_t thread, rt_uint16_t duration){
+    int tick_start = rt_tick_get();
+    set_tick_count(thread, duration);
+    reset_end_flag(thread);
+    return tick_start;
+}
+RTM_EXPORT(set_task_started);
+
+int set_task_ended(rt_thread_t thread){
+    int tick_end = rt_tick_get();
+    set_end_flag(thread);
+    return tick_end;
+}
+RTM_EXPORT(set_task_ended);
+
+void set_task_as_not_preemptable(rt_thread_t thread){
+    rt_thread_control(thread, RT_THREAD_CTRL_CHANGE_PRIORITY, 0x0);
+    thread->preemptableFlag=1;
+    return;
+}
+RTM_EXPORT(set_task_as_not_preemptable);
+
+void set_task_as_preemptable(rt_thread_t thread, int priority){
+    rt_thread_control(thread, RT_THREAD_CTRL_CHANGE_PRIORITY, priority);
+    thread->preemptableFlag=0;
+    return;
+}
+RTM_EXPORT(set_task_as_not_preemptable);
+
+int rt_thread_get_priority(rt_thread_t thread){
+    return thread->current_priority;
+}
+RTM_EXPORT(rt_thread_get_priority);
