@@ -1,4 +1,3 @@
-
 #include <rtthread.h>
 #include <rtdevice.h>
 #include <stdio.h>
@@ -13,7 +12,7 @@ enum directions direction;
 
 static char mb_str1[] = "Garbage bag full";
 static char mb_str2[] = "Battery discharge";
-static char mb_str3[] = "Battery totally discharged";
+static char mb_str3[] = "Battery status is critical";
 static char mb_str4[] = "Come back home";
 static char mb_str5[] = "Turn on brushes";
 
@@ -38,6 +37,9 @@ void mock_devices_init() {
 
     garbage_bag = rt_device_find(GARBAGE_BAG);
     rt_device_init(garbage_bag);
+
+    speaker = rt_device_find(SPEAKER);
+    rt_device_init(speaker);
 
 }
 
@@ -136,54 +138,54 @@ rt_err_t closeAllTasks(){
     if (closeTask(&movement_stop) == RT_EOK){
         cnt++;
     }else{
-#ifdef DEB_INTERNAL
-        printf("\n\tTaskS detach error");
+#ifdef DEBUG
+        rt_kprintf("\n\tTaskS detach error");
 #endif
     }
 
     if (closeTask(&obstacle_control) == RT_EOK){
         cnt++;
     }else{
-#ifdef DEB_INTERNAL
-        printf("\n\t\t\tTask1 detach error");
+#ifdef DEBUG
+        rt_kprintf("\n\t\t\tTask1 detach error");
 #endif
     }
 
     if (closeTask(&movement_control) == RT_EOK){
         cnt++;
     }else{
-#ifdef DEB_INTERNAL
-        printf("\n\t\t\tTask2 detach error");
+#ifdef DEBUG
+        rt_kprintf("\n\t\t\tTask2 detach error");
 #endif
     }
 
     if (closeTask(&check_resources) == RT_EOK){
         cnt++;
     }else{
-#ifdef DEB_INTERNAL
-        printf("\n\t\t\tTask3 detach error");
+#ifdef DEBUG
+        rt_kprintf("\n\t\t\tTask3 detach error");
 #endif
     }
 
     if (closeTask(&acoustic_signals) == RT_EOK){
         cnt++;
     }else{
-#ifdef DEB_INTERNAL
-        printf("\n\t\t\tTask4 detach error");
+#ifdef DEBUG
+        rt_kprintf("\n\t\t\tTask4 detach error");
 #endif
     }
 
     if (closeTask(&brushes_speed) == RT_EOK){
         cnt++;
     }else{
-#ifdef DEB_INTERNAL
-        printf("\n\t\t\tTask5 detach error");
+#ifdef DEBUG
+        rt_kprintf("\n\t\t\tTask5 detach error");
 #endif
     }
 
     if (cnt == 6){
-#ifdef DEB_DISPLAY
-        printf("\n\nAll tasks turned OFF correctly\n");
+#ifdef DEB_INTERNAL
+        rt_kprintf("\n\nAll tasks turned OFF correctly\n");
 #endif
     }
 
@@ -192,36 +194,36 @@ rt_err_t closeAllTasks(){
     if(rt_timer_detach(&timer_obstacle_control_activation)==RT_EOK){
             cnt++;
     }else{
-#ifdef DEB_INTERNAL
-        printf("\n\t\t\tTimer detach error");
+#ifdef DEBUG
+        rt_kprintf("\n\t\t\tTimer detach error");
 #endif
     }
     if(rt_timer_detach(&timer_movement_control_activation)==RT_EOK){
         cnt++;
 }else{
-#ifdef DEB_INTERNAL
-    printf("\n\t\t\tTimer detach error");
+#ifdef DEBUG
+    rt_kprintf("\n\t\t\tTimer detach error");
 #endif
 }
     if(rt_timer_detach(&timer_check_resources_activation)==RT_EOK){
         cnt++;
 }else{
-#ifdef DEB_INTERNAL
-    printf("\n\t\t\tTimer detach error");
+#ifdef DEBUG
+    rt_kprintf("\n\t\t\tTimer detach error");
 #endif
 }
     if(rt_timer_detach(&timer_brushes_speed_activation)==RT_EOK){
         cnt++;
 }else{
-#ifdef DEB_INTERNAL
-    printf("\n\t\t\tTimer detach error");
+#ifdef DEBUG
+    rt_kprintf("\n\t\t\tTimer detach error");
 #endif
 }
 
     if (cnt == 4){
-#ifdef DISPLAY
-        printf("All timers turned OFF correctly\n");
-        printf("\n\n");
+#ifdef DEB_INTERNAL
+        rt_kprintf("All timers turned OFF correctly\n");
+        rt_kprintf("\n\n");
 #endif
     }
 
@@ -230,13 +232,15 @@ rt_err_t closeAllTasks(){
 }
 
 
-
 /* Function to turn off the system (detach all the tasks)
  * usecases: - battery is totally LOW
  *           - robot is in re-charging station (after cleaning)
  *
  */
 void turnOffSystem(void){
+#ifdef DEB_INTERNAL
+    rt_kprintf("\t\t--> Signal received: turn off system\n\n"); //ITA: la batteria è completamente scarica
+#endif
     rt_signal_mask(SIGUSR1);
     rt_signal_mask(SIGUSR2);
 
@@ -244,10 +248,7 @@ void turnOffSystem(void){
     turnOffFlag = 1;
 }
 
-
 // THREADS ENTRIES *********************************************************************************************
-
-
 
 /* Entry for the task obstacle control */
 void obstacle_control_entry(void *param)
@@ -262,17 +263,21 @@ void obstacle_control_entry(void *param)
         if (rt_event_recv(&event_tasks_activation, EVENT_OBSTACLE_CONTROL_ACTIVATION,
                           RT_EVENT_FLAG_AND | RT_EVENT_FLAG_CLEAR,
                           RT_WAITING_FOREVER, RT_NULL) == RT_EOK){
+
             tick_start=set_task_started(&obstacle_control, TICK_DELAY_T1); //set Task1 minimum duration and as effectively started
             time_start=tick_start*10-startingTime;
 
 #ifdef BENCHMARK_TIME
-            printf("\n\t\tTASK_1:\t Started at time %d ms\n", time_start);
+            rt_kprintf("\n\t\tTASK_1:\t Started at time %d ms\n", time_start);
 #endif
 
             // check if there's an obstacle, if yes activates movements threads
             rt_device_read(proximity_sensor, 0, &obstacle, 1);
             if (obstacle == 'y')
             {
+#ifdef DEB_INTERNAL
+            rt_kprintf("\t\tTHERE's an obstacle --> send a signal\n\n"); //ITA: la batteria è completamente scarica
+#endif
                 rt_thread_kill(&movement_control, SIGUSR1);
                 rt_event_send(&event_obstacle, EVENT_OBSTACLE_FOUND);
 
@@ -286,8 +291,8 @@ void obstacle_control_entry(void *param)
 
 #ifdef BENCHMARK_TIME
 
-        printf("\t\tTASK_1: Stop at time %d ms\tDeadline was: %d ms\n", time_end, (PERIOD_TASK1)*10+time_start);
-        printf("\t\tTASK_1: TOTAL EXECUTION TIME: %d ticks (%d ms)\n", tick_end-tick_start,time_end-time_start);
+        rt_kprintf("\t\tTASK_1: Stop at time %d ms\tDeadline was: %d ms\n", time_end, (PERIOD_TASK1)*10+time_start);
+        rt_kprintf("\t\tTASK_1: TOTAL EXECUTION TIME: %d ticks (%d ms)\n", tick_end-tick_start,time_end-time_start);
 #endif
         }
 
@@ -340,7 +345,7 @@ void movement_control_entry(void *param)
 
     // infinite loop
     while (1){
-        // waits for the aperiodic event that signals an obstacle have been found
+        // waits for the timer activation
         if (rt_event_recv(&event_tasks_activation, EVENT_MOVEMENT_CONTROL_ACTIVATION,
                           RT_EVENT_FLAG_AND | RT_EVENT_FLAG_CLEAR,
                           RT_WAITING_FOREVER, RT_NULL) == RT_EOK){
@@ -348,14 +353,15 @@ void movement_control_entry(void *param)
             tick_start=set_task_started(&movement_control, TICK_DELAY_T2); //set Task2 minimum duration and as effectively started
             time_start=tick_start*10-startingTime;
 
+
 #ifdef BENCHMARK_TIME
-            printf("\n\t\tTASK_2:\t Started at time %d ms\n", time_start);
+            rt_kprintf("\n\t\tTASK_2:\t Started at time %d ms\n", time_start);
 #endif
             //mailbox receive
             if (rt_mb_recv(&mb2_3, (rt_uint32_t *)&str, 0) == RT_EOK){
 
 #ifdef DEB_INTERNAL
-                rt_kprintf("\tget a mail from mailbox, the content: %s\n", str);
+                rt_kprintf("\n\tget a mail from mailbox, the content: %s\n", str);
 #endif
                 direction = RETURN;
                 rt_signal_mask(SIGUSR1);
@@ -365,7 +371,7 @@ void movement_control_entry(void *param)
             // if the previous tile is not an obstacle signal it as cleaned
             if (map[ position[0] ][ position[1] ] == 0) {
                 map[ position[0] ][ position[1] ] = 2;
-                garbageBagStatus++;
+                rt_device_write(garbage_bag, 0, NULL, 0);
             }
             // decide where to go next
             switch (direction)
@@ -406,9 +412,11 @@ void movement_control_entry(void *param)
             if (direction==RETURN && position[0]==0 && position[1]==0) {
 
 #ifdef DEB_DISPLAY
-                rt_kprintf("\tThe robot is back at charging station!\n");
+                rt_kprintf("\nThe robot is back at charging station!\n");
 #endif
-
+#ifdef DEB_INTERNAL
+            rt_kprintf("\t\tThe robot is back at charging station --> send a signal\n\n"); //ITA: la batteria è completamente scarica
+#endif
                 rt_thread_kill(&Tsystem, SIGUSR2);
 
                 break;
@@ -426,8 +434,8 @@ void movement_control_entry(void *param)
             time_end= tick_end*10-startingTime;
 
 #ifdef BENCHMARK_TIME
-        printf("\t\tTASK_2: Stop at time %d ms\tDeadline was: %d ms\n", time_end, (PERIOD_TASK2)*10+time_start);
-        printf("\t\tTASK_2: TOTAL EXECUTION TIME: %d (%d ms)\n", tick_end-tick_start,time_end-time_start);
+        rt_kprintf("\t\tTASK_2: Stop at time %d ms\tDeadline was: %d ms\n", time_end, (PERIOD_TASK2)*10+time_start);
+        rt_kprintf("\t\tTASK_2: TOTAL EXECUTION TIME: %d (%d ms)\n", tick_end-tick_start,time_end-time_start);
 #endif
         }
 
@@ -439,72 +447,78 @@ void movement_control_entry(void *param)
 void check_resources_entry(void *param){
 
     int tick_start, tick_end, time_start, time_end;
+    int battery_value;
+    int garbage_bag_value;
 
-    // used for debug
-    uint32_t previousBatteryStatus = CHARGE;
 
     while(1){
 
         // waiting the periodic activation
         if (rt_event_recv(&event_tasks_activation, EVENT_CHECK_RESOURCES_ACTIVATION,
                                   RT_EVENT_FLAG_AND | RT_EVENT_FLAG_CLEAR,
-                                  RT_WAITING_FOREVER, RT_NULL) == RT_EOK){
+                                  RT_WAITING_FOREVER, RT_NULL) == RT_EOK) {
 
             tick_start=set_task_started(&check_resources, TICK_DELAY_T3); //set Task3 minimum duration and as effectively started
             time_start=tick_start*10-startingTime;
 
+
 #ifdef BENCHMARK_TIME
-        printf("\n\t\tTASK_3:\t Started at time %d ms\n", time_start);
+        rt_kprintf("\n\t\tTASK_3:\t Started at time %d ms\n", time_start);
 #endif
+
 
 #ifdef DEB_DISPLAY
         /**display only if the status is a multiple of 5, useful to limit the number of prints**/
         if(batteryStatus%10==0){
-            printf("\n\tBattery status %d %% \n", batteryStatus);
+            rt_kprintf("\n\tBattery status %d %% \n", batteryStatus);
         }
 #endif
 
         /**Check BATTERY status**/
         if(batteryStatus <= TOTALLY_DISCHARGE){
-
 #ifdef DEB_DISPLAY
-            printf("\t\tBATTERY TOTALLY LOW --> TURN OFF THE SYSTEM\n\n"); //ITA: la batteria è completamente scarica
+            rt_kprintf("\t\tBATTERY TOTALLY LOW --> TURN OFF THE SYSTEM\n\n"); //ITA: la batteria è completamente scarica
+#endif
+#ifdef DEB_INTERNAL
+            rt_kprintf("\t\tBATTERY TOTALLY LOW --> send a signal\n\n"); //ITA: la batteria è completamente scarica
 #endif
             rt_thread_kill(&Tsystem, SIGUSR2); //notify TSystem to TURN OFF the system
 
         }else if(batteryStatus <= DISCHARGE && batteryStatus > TOTALLY_DISCHARGE) {
             rt_mb_send(&mb2_3, (rt_uint32_t)&mb_str3);      //notify task 2 BATTERY is LOW
-
+#ifdef DEB_INTERNAL
+            rt_kprintf("\n\t\tMail sent %s\t\t because battery LOW\n", mb_str3);
+#endif
 #ifdef DEB_DISPLAY
-            printf("\t\tBATTERY is LOW\n\n"); //ITA: la batteria è scarica
+                rt_kprintf("\t\tBATTERY is LOW\n\n"); //ITA: la batteria è scarica
 #endif
 
         }else if(batteryStatus <= DISCHARGE_THRESHOLD && batteryStatus > DISCHARGE) {
             rt_event_send(&event_resources, EVENT_FLAG1);   //notify task 4 with an event
-            rt_mb_send(&mb2_3, (rt_uint32_t)&mb_str2);      //notify task 2 with an email
+            rt_mb_send(&mb2_3, (rt_uint32_t)&mb_str2);      //notify task 2 BATTERY is LOW
 
 #ifdef DEB_DISPLAY
-            printf("\t\tBATTERY is running LOW\n\n");  //ITA: la batteria si sta scaricando
+            rt_kprintf("\t\tBATTERY is running LOW\n\n");  //ITA: la batteria si sta scaricando
 #endif
 #ifdef DEB_INTERNAL
-            printf("\t\tMail sent %s\t\t because battery LOW\n", mb_str2);
+            rt_kprintf("\n\t\tMail sent %s\t\t because battery LOW\n", mb_str2);
 #endif
-                }
+         }
 
         /**Check GARBAGE BAG status **/
 
-        if(garbageBagStatus == FULL){
-            rt_event_send(&event_resources, EVENT_FLAG2);   //notify task 4 with an event
-            rt_mb_send(&mb2_3, (rt_uint32_t)&mb_str1);      //notify task 2 with an email
+            rt_device_read(garbage_bag, 0, &garbage_bag_value, sizeof(int));
+            if(garbage_bag_value == FULL){
+                rt_event_send(&event_resources, EVENT_FLAG2);   //notify task 4 with an event
+                rt_mb_send(&mb2_3, (rt_uint32_t)&mb_str1);      //notify task 2 with an email
 
 #ifdef DEB_DISPLAY
-            printf("\tGarbage bag FULL\n\n");
+                rt_kprintf("\n\tGarbage bag FULL\n\n");
 #endif
 #ifdef DEB_INTERNAL
-            printf("\t\tMail sent %s\t\t because Garbage bag is FULL\n", mb_str1);
+                rt_kprintf("\n\t\tMail sent %s\t\t because Garbage bag is FULL\n", mb_str1);
 #endif
-
-        }
+            }
 
         while(get_tick_count(&check_resources)!=0){ }
 
@@ -512,13 +526,14 @@ void check_resources_entry(void *param){
         time_end= tick_end*10-startingTime;
 
 #ifdef BENCHMARK_TIME
-        printf("\t\tTASK_3: Stop at time %d ms\tDeadline was: %d ms\n", time_end, (PERIOD_TASK3)*10+time_start);
-        printf("\t\tTASK_3: TOTAL EXECUTION TIME: %d (%d ms)\n", tick_end-tick_start,time_end-time_start);
+            rt_kprintf("\t\tTASK_3: Stop at time %d ms\tDeadline was: %d ms\n", time_end, (PERIOD_TASK3)*10+time_start);
+            rt_kprintf("\t\tTASK_3: TOTAL EXECUTION TIME: %d (%d ms)\n", tick_end-tick_start,time_end-time_start);
 #endif
+
       }
+
     }
 }
-
 
 /* Entry for the ACOUSTIC SIGNAL */
 void acoustic_signals_entry(void *param){
@@ -535,20 +550,20 @@ void acoustic_signals_entry(void *param){
             time_start=tick_start*10-startingTime;
 
 #ifdef BENCHMARK_TIME
-        printf("\n\t\tTASK_4:\t Started at time %d ms\n", time_start);
+        rt_kprintf("\n\t\tTASK_4:\t Started at time %d ms\n", time_start);
 #endif
             if (e == 0x2){
             // EVENT_FLAG_1 is set
                 rt_device_write(speaker, 0, low_battery, 100);
 #ifdef DEB_DISPLAY
-                printf("\t\tLOW BATTERY ALARM\n");
+                rt_kprintf("\t\tLOW BATTERY ALARM\n");
 #endif
 
             }else if (e == 0x4){
             // EVENT_FLAG_2 is set
                 rt_device_write(speaker, 0, garbage_bag_full, 100);
 #ifdef DEB_DISPLAY
-                printf("\t\tGARBAGE BAG FULL ALARM\n");
+                rt_kprintf("\t\tGARBAGE BAG FULL ALARM\n");
 #endif
             }
 
@@ -558,8 +573,8 @@ void acoustic_signals_entry(void *param){
             time_end= tick_end*10-startingTime;
 
 #ifdef BENCHMARK_TIME
-        printf("\t\tTASK_4: Stop at time %d ms\t APERIODIC task\n", time_end);
-        printf("\t\tTASK_4: TOTAL EXECUTION TIME: %d (%d ms)\n", tick_end-tick_start,time_end-time_start);
+        rt_kprintf("\t\tTASK_4: Stop at time %d ms\t APERIODIC task\n", time_end);
+        rt_kprintf("\t\tTASK_4: TOTAL EXECUTION TIME: %d (%d ms)\n", tick_end-tick_start,time_end-time_start);
 #endif
         }
     }
@@ -587,7 +602,7 @@ void brushes_speed_entry(void *param)
             time_start=tick_start*10-startingTime;
 
 #ifdef BENCHMARK_TIME
-            printf("\n\t\tTASK_5:\t Started at time %d ms\n", time_start);
+            rt_kprintf("\n\t\tTASK_5:\t Started at time %d ms\n", time_start);
 #endif
 
             rt_pin_mode(BRUSHES_SPEED_PIN_NUMBER, PIN_MODE_INPUT);
@@ -596,14 +611,12 @@ void brushes_speed_entry(void *param)
 /*
             //If the robot is starting on, turn on the brushes
             if (rt_mb_recv(&mb2_5, (rt_uint32_t *)&str, RT_WAITING_NO) == RT_EOK){
-                // TODO:WHO SENDS AT TURN ON OF THE ROBOT?
-
-                if (!rt_strcmp(str,mb_str5)){
+                // TODO:WHO SENDS AT TURN ON OF THE ROBOT? -> Tsystem
+                if (rt_strcmp(str,mb_str5)==0){
                     rt_pin_write(BRUSHES_POWER_PIN_NUMBER, MEDIUM);
                     brushes_power[0]=0;
                     brushes_power[1]=0;
                 }
-
                 // Executing the mailbox object detachment /
                 rt_mb_detach(&mb2_5);
             }
@@ -612,7 +625,7 @@ void brushes_speed_entry(void *param)
             //Reads from mail box in case the robot is coming back. In this case stop the brushes
             if (rt_mb_recv(&mb2_5, (rt_uint32_t *)&str, RT_WAITING_NO) == RT_EOK){
 
-                if (!rt_strcmp(str,mb_str4)){
+                if (rt_strcmp(str,mb_str4)==0){
                     rt_pin_write(BRUSHES_POWER_PIN_NUMBER, STOP_BRUSHES);
                     brushes_power[0]=1;
                     brushes_power[1]=1;
@@ -659,42 +672,9 @@ void brushes_speed_entry(void *param)
             time_end= tick_end*10-startingTime;
 
 #ifdef BENCHMARK_TIME
-        printf("\t\tTASK_5: Stop at time %d ms\tDeadline was: %d ms\n", time_end, (PERIOD_TASK5)*10+time_start);
-        printf("\t\tTASK_5: TOTAL EXECUTION TIME: %d (%d ms)\n", tick_end-tick_start,time_end-time_start);
+        rt_kprintf("\t\tTASK_5: Stop at time %d ms\tDeadline was: %d ms\n", time_end, (PERIOD_TASK5)*10+time_start);
+        rt_kprintf("\t\tTASK_5: TOTAL EXECUTION TIME: %d (%d ms)\n", tick_end-tick_start,time_end-time_start);
 #endif
         }
     }
-}
-
-void Tsystem_task_entry(void *param){
-    int curr_time;
-
-    rt_signal_install(SIGUSR2, turnOffSystem);
-    rt_signal_unmask(SIGUSR2);
-
-    set_task_started(&Tsystem, 10);
-
-    while(1){
-            if(turnOffFlag==1){
-                if(closeAllTasks()==RT_EOK){
-                    set_task_as_preemptable(&Tsystem, TSYSTEM_PRIORITY);
-                    break;
-                }
-            }else{
-                curr_time=rt_tick_get_millisecond()-startingTime;
-                if(curr_time%350 == 0 && startingTime != 0){
-                    batteryStatus--;
-#ifdef DEB_INTERNAL
-                    printf("batteryStatus %d%%, decremented by TSystem at time %d ms]\n", batteryStatus, curr_time);
-#endif
-                }
-            }
-
-    }
-
-     printf("\n---------------System is TURNED OFF--------------------\n");
-
-     batteryStatus++;
-
-
 }

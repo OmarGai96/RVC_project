@@ -5,7 +5,6 @@
 
 // ************************************** DEFINITIONS **********************************************************
 
-
 #define EVENT_OBSTACLE_CONTROL_ACTIVATION (1 << 1)
 #define EVENT_MOVEMENT_CONTROL_ACTIVATION (1 << 2)
 #define EVENT_CHECK_RESOURCES_ACTIVATION  (1 << 3)

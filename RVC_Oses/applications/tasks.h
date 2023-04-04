@@ -1,4 +1,3 @@
-
 #ifndef APPLICATIONS_TASKS_H_
 #define APPLICATIONS_TASKS_H_
 
@@ -10,7 +9,6 @@
 /*see rtconfig.h file, user define section*/
 
 // ************************************** DEFINITIONS **********************************************************
-
 
 #define OBSTACLE_CONTROL_PRIORITY      2
 #define MOVEMENT_STOP_PRIORITY         1
@@ -36,6 +34,7 @@
 
 enum directions {UP, DOWN, LEFT, RIGHT, RETURN};
 
+//*********************************** TIME DURATIONS **********************************************************
 
 #define PERIOD_TASK1    50 //500 ms, Task1 starts periodically
 #define PERIOD_TASK2    50 //500 ms, Task2 starts periodically
@@ -76,13 +75,8 @@ ALIGN(RT_ALIGN_SIZE)
 char brushes_speed_stack[1024];
 struct rt_thread brushes_speed;
 
-ALIGN(RT_ALIGN_SIZE)
-char Tsystem_stack[1024];
-struct rt_thread Tsystem;
-
 
 // *********************************** DEVICES **************************************************************
-
 
 rt_device_t proximity_sensor;
 rt_device_t engine;
@@ -100,6 +94,7 @@ void movement_control_entry(void *param);
 void check_resources_entry(void *param);
 void acoustic_signals_entry(void *param);
 void brushes_speed_entry(void *param);
-void Tsystem_task_entry(void *param);
+
+void turnOffSystem(void);
 
 #endif /* APPLICATIONS_TASKS_H_ */

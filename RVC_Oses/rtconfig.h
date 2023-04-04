@@ -27,10 +27,13 @@
 
 /* user define */
 
-#define BENCHMARK_TIME  //uncomment to print timing information
-#define DEB_DISPLAY     //uncomment to print SIMULATION info
-//#define DEB_INTERNAL   //uncomment to print INTERNAL STATUS information
+//#define BENCHMARK_TIME  //uncomment to print timing information
+//#define DEB_DISPLAY     //uncomment to print SIMULATION info
+#define DEB_INTERNAL   //uncomment to print INTERNAL STATUS information
 //#define DEBUG_SCH      //uncomment to print scheduler info
+
+//#define FAST_SIMULATION_BATTERY
+//#define FAST_SIMULATION_GARBAGE
 
 /* end of user define */
 
