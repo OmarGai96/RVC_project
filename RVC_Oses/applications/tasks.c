@@ -1,11 +1,10 @@
-
 #include <rtthread.h>
 #include <rtdevice.h>
 #include <stdio.h>
+#include <rtthread.h>
 
 #include "tasks.h"
 #include "structures.h"
-
 
 static int map[MAP_SIDE][MAP_SIDE];
 static int position[2];
@@ -17,8 +16,8 @@ static char mb_str3[] = "Battery status is critical";
 static char mb_str4[] = "Come back home";
 static char mb_str5[] = "Turn on brushes";
 
-extern startingTime;
-extern turnOffFlag;
+extern int startingTime;
+extern int turnOffFlag;
 
 
 // EXTRA FUNCTIONS *********************************************************************************************
@@ -240,7 +239,7 @@ rt_err_t closeAllTasks(){
  */
 void turnOffSystem(void){
 #ifdef DEB_INTERNAL
-    rt_kprintf("\t\tSignal received: turn off system\n\n"); //ITA: la batteria è completamente scarica
+    rt_kprintf("\t\t--> Signal received: turn off system\n\n"); //ITA: la batteria è completamente scarica
 #endif
     rt_signal_mask(SIGUSR1);
     rt_signal_mask(SIGUSR2);
@@ -619,8 +618,6 @@ void brushes_speed_entry(void *param)
                     brushes_power[0]=0;
                     brushes_power[1]=0;
                 }
-
-
                 // Executing the mailbox object detachment /
 
                 rt_mb_detach(&mb2_5);
@@ -683,4 +680,3 @@ void brushes_speed_entry(void *param)
         }
     }
 }
-

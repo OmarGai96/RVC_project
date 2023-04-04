@@ -1,4 +1,3 @@
-
 #ifndef APPLICATIONS_TASKS_H_
 #define APPLICATIONS_TASKS_H_
 

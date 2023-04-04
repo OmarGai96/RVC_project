@@ -41,7 +41,6 @@ rt_err_t initSystem(void){
     return RT_EOK;
 }
 
-
 void Tsystem_task_entry(void *param){
 
     int curr_time;
@@ -59,15 +58,20 @@ void Tsystem_task_entry(void *param){
                 }
             }else{
                 curr_time=rt_tick_get_millisecond()-startingTime;
+#ifdef FAST_SIMULATION_BATTERY
+                if(curr_time%100 == 0 && startingTime != 0){
+                    batteryStatus-=10;
+                }
+#else
                 if(curr_time%350 == 0 && startingTime != 0){
                     batteryStatus--;
                 }
+#endif
+
             }
 
     }
 
      rt_kprintf("\n---------------System is TURNED OFF--------------------\n");
 
-
 }
-
