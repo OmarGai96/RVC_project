@@ -989,7 +989,7 @@ RTM_EXPORT(rt_thread_get_name);
 
 rt_uint8_t rt_thread_get_status(rt_thread_t thread)
 {
-#ifdef DEB_INTERNAL //DEBUG_SCH
+#ifdef DEBUG_SCH
     rt_kprintf("\t\tThread %s status is: ", rt_thread_get_name(thread));
     switch(thread->stat){
         case RT_THREAD_READY: rt_kprintf("READY\n");

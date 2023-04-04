@@ -11,7 +11,6 @@
 
 // ************************************** DEFINITIONS **********************************************************
 
-
 #define OBSTACLE_CONTROL_PRIORITY      2
 #define MOVEMENT_STOP_PRIORITY         1
 #define MOVEMENT_CONTROL_PRIORITY      3
@@ -77,13 +76,8 @@ ALIGN(RT_ALIGN_SIZE)
 char brushes_speed_stack[1024];
 struct rt_thread brushes_speed;
 
-ALIGN(RT_ALIGN_SIZE)
-char Tsystem_stack[1024];
-struct rt_thread Tsystem;
-
 
 // *********************************** DEVICES **************************************************************
-
 
 rt_device_t proximity_sensor;
 rt_device_t engine;
@@ -101,6 +95,7 @@ void movement_control_entry(void *param);
 void check_resources_entry(void *param);
 void acoustic_signals_entry(void *param);
 void brushes_speed_entry(void *param);
-void Tsystem_task_entry(void *param);
+
+void turnOffSystem(void);
 
 #endif /* APPLICATIONS_TASKS_H_ */

@@ -13,13 +13,13 @@
 /* BATTERY STATUS THRESHOLDS*/
 #define CHARGE 100
 #define HALFCHARGE 50
-#define DISCHARGE_THRESHOLD 10
-#define DISCHARGE 5
+#define DISCHARGE_THRESHOLD 20
+#define DISCHARGE 10
 #define TOTALLY_DISCHARGE 0
 
 /* GARBAGE BAG STATUS*/
 #define EMPTY 0
-#define FULL 15
+#define FULL 100 //30
 
 /* MOVEMENTS SIGNALS*/
 #define STOP_ENGINE 0
@@ -35,10 +35,14 @@ uint32_t garbageBagStatus;
 
 /** This function initializes the batteryStatus and garbageBagStatus (global) variables
  * @param: none
- * @return: none
+ * @return: RT_EOK if everything is OK, RT_ERROR otherwise
  *
 **/
-void initSystem(void);
+rt_err_t initSystem(void);
 
+ALIGN(RT_ALIGN_SIZE)
+char Tsystem_stack[1024];
+struct rt_thread Tsystem;
+void Tsystem_task_entry(void *param);
 
 #endif /* APPLICATIONS_SYSTEM_H_ */

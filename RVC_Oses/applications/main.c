@@ -22,9 +22,15 @@ int main(void){
 
     rt_err_t result;
 
-    // This function initializes global flags used by the application
-    initSystem();
-
+    // This function initializes global flags and other structures used by the application
+    result = initSystem();
+    if (result != RT_EOK)
+    {
+#ifdef DEBUG
+        rt_kprintf("Initialization of System failed.\n");
+#endif
+        return -1;
+    }
     // initialize the timer management system
     //rt_system_timer_init();
 
@@ -58,7 +64,7 @@ int main(void){
     result = rt_event_init(&event_resources, "event_resources", RT_IPC_FLAG_FIFO);
     if (result != RT_EOK){
 #ifdef DEBUG
-        printf("Initialization of resources event failed.\n");
+        rt_kprintf("Initialization of resources event failed.\n");
 #endif
         return -1;
     }
@@ -92,11 +98,11 @@ int main(void){
 
 
     // Initializing a mailbox for communication between T3 and T2
-        result = rt_mb_init(&mb2_3,
-                            "mb_res",
-                            &mb_pool[0],
-                            sizeof(mb_pool) / 4,
-                            RT_IPC_FLAG_FIFO);
+    result = rt_mb_init(&mb2_3,
+                          "mb_res",
+                          &mb_pool[0],
+                          sizeof(mb_pool) / 4,
+                          RT_IPC_FLAG_FIFO);
         if (result != RT_EOK)
         {
 #ifdef DEBUG
@@ -124,7 +130,7 @@ int main(void){
 
 
     // initializing obstacle_control thread
-    rt_thread_init(&obstacle_control,
+    result = rt_thread_init(&obstacle_control,
                    "Task1",
                    obstacle_control_entry,
                    RT_NULL,
@@ -133,8 +139,15 @@ int main(void){
                    OBSTACLE_CONTROL_PRIORITY,
                    THREAD_TIMESLICE);
 
+    if (result != RT_EOK){
+#ifdef DEBUG
+         rt_kprintf("init thread Task1 failed.\n");
+#endif
+         return -1;
+    }
+
     // initializing movement_stop thread
-    rt_thread_init(&movement_stop,
+    result = rt_thread_init(&movement_stop,
                    "TaskS",
                    movement_stop_entry,
                    RT_NULL,
@@ -143,8 +156,15 @@ int main(void){
                    MOVEMENT_STOP_PRIORITY,
                    THREAD_TIMESLICE);
 
+    if (result != RT_EOK){
+#ifdef DEBUG
+         rt_kprintf("init thread TaskS failed.\n");
+#endif
+         return -1;
+    }
+
     // initializing movement_control thread
-    rt_thread_init(&movement_control,
+    result = rt_thread_init(&movement_control,
                    "Task2",
                    movement_control_entry,
                    RT_NULL,
@@ -153,8 +173,15 @@ int main(void){
                    MOVEMENT_CONTROL_PRIORITY,
                    THREAD_TIMESLICE);
 
+    if (result != RT_EOK){
+#ifdef DEBUG
+         rt_kprintf("init thread Task2 failed.\n");
+#endif
+         return -1;
+    }
+
     // initializing check_resources thread
-    rt_thread_init(&check_resources,
+    result = rt_thread_init(&check_resources,
                    "Task3",
                    check_resources_entry,
                    RT_NULL,
@@ -164,8 +191,15 @@ int main(void){
                    CHECK_RESOURCES_PRIORITY,
                    THREAD_TIMESLICE);
 
+    if (result != RT_EOK){
+#ifdef DEBUG
+         rt_kprintf("init thread Task3 failed.\n");
+#endif
+         return -1;
+    }
+
     // initializing acoustic_signals thread
-    rt_thread_init(&acoustic_signals,
+    result = rt_thread_init(&acoustic_signals,
                    "Task4",
                    acoustic_signals_entry,
                    RT_NULL,
@@ -174,8 +208,15 @@ int main(void){
                    ACOUSTIC_SIGNALS_PRIORITY,
                    THREAD_TIMESLICE);
 
+    if (result != RT_EOK){
+#ifdef DEBUG
+         rt_kprintf("init thread Task4 failed.\n");
+#endif
+         return -1;
+    }
+
     // initializing brushes speed thread
-    rt_thread_init(&brushes_speed,
+    result = rt_thread_init(&brushes_speed,
                    "Task5",
                    brushes_speed_entry,
                    RT_NULL,
@@ -183,6 +224,13 @@ int main(void){
                    sizeof(brushes_speed_stack),
                    BRUSHES_SPEED_PRIORITY,
                    THREAD_TIMESLICE);
+
+    if (result != RT_EOK){
+#ifdef DEBUG
+         rt_kprintf("init thread Task5 failed.\n");
+#endif
+         return -1;
+    }
 
     // initializing the devices that will be used
     mock_devices_init();
@@ -210,9 +258,9 @@ int main(void){
 
     //delay t5 of 150 ms
     while(rt_tick_get_millisecond() < (startingTime+150));
-    //rt_hw_us_delay(150);
 
     rt_timer_start (&timer_brushes_speed_activation);
+
     printf("\n\n---------------System is TURNED ON--------------------\n\n");
 
     return 0;

@@ -3,7 +3,6 @@
 #include "structures.h"
 
 
-
 /* Timeout function for the timer that activates obstacle control periodically */
 void timeout_obstacle_control(void* parameter)
 {
