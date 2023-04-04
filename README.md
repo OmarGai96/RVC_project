@@ -17,6 +17,12 @@ The system offers the following functionalities: <br>
 
 ## Target hardware
 STM32F429I-DISCOVERY <br>
-see ![documentation](RVC_Oses/README.md) for more information. <br>
+see next for more information. <br>
 ![STM32F4](doc/figures/board_image.PNG)
+
+**Useful files**
+
+- [RT-Thread Documentation](doc/README.md)
+- [Board Documentation](RVC_Oses/README.md)
+- [Project Implementation](RVC_Oses/implementation.md)
 
