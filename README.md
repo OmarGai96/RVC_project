@@ -16,6 +16,7 @@ The system offers the following functionalities: <br>
   - check the presence of obstacles (using proximity sensors)
 
 ## Target hardware
-STM32F429I-DISCOVERY
-![STM32F4](doc/figures/board_image.png)
+STM32F429I-DISCOVERY <br>
+see ![documentation](RVC_Oses/README.md) for more information. <br>
+![STM32F4](doc/figures/board_image.PNG)
 
