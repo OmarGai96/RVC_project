@@ -17,4 +17,5 @@ The system offers the following functionalities: <br>
 
 ## Target hardware
 STM32F429I-DISCOVERY
+![STM32F4](doc/figures/board_image.png)
 
