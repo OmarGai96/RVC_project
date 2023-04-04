@@ -239,6 +239,9 @@ rt_err_t closeAllTasks(){
  *
  */
 void turnOffSystem(void){
+#ifdef DEB_INTERNAL
+    rt_kprintf("\t\tSignal received: turn off system\n\n"); //ITA: la batteria è completamente scarica
+#endif
     rt_signal_mask(SIGUSR1);
     rt_signal_mask(SIGUSR2);
 
@@ -273,6 +276,9 @@ void obstacle_control_entry(void *param)
             rt_device_read(proximity_sensor, 0, &obstacle, 1);
             if (obstacle == 'y')
             {
+#ifdef DEB_INTERNAL
+            rt_kprintf("\t\tTHERE's an obstacle --> send a signal\n\n"); //ITA: la batteria è completamente scarica
+#endif
                 rt_thread_kill(&movement_control, SIGUSR1);
                 rt_event_send(&event_obstacle, EVENT_OBSTACLE_FOUND);
 
@@ -409,7 +415,9 @@ void movement_control_entry(void *param)
 #ifdef DEB_DISPLAY
                 rt_kprintf("\nThe robot is back at charging station!\n");
 #endif
-
+#ifdef DEB_INTERNAL
+            rt_kprintf("\t\tThe robot is back at charging station --> send a signal\n\n"); //ITA: la batteria è completamente scarica
+#endif
                 rt_thread_kill(&Tsystem, SIGUSR2);
 
                 break;
@@ -470,7 +478,10 @@ void check_resources_entry(void *param){
         /**Check BATTERY status**/
         if(batteryStatus <= TOTALLY_DISCHARGE){
 #ifdef DEB_DISPLAY
-                rt_kprintf("\t\tBATTERY TOTALLY LOW --> TURN OFF THE SYSTEM\n\n"); //ITA: la batteria è completamente scarica
+            rt_kprintf("\t\tBATTERY TOTALLY LOW --> TURN OFF THE SYSTEM\n\n"); //ITA: la batteria è completamente scarica
+#endif
+#ifdef DEB_INTERNAL
+            rt_kprintf("\t\tBATTERY TOTALLY LOW --> send a signal\n\n"); //ITA: la batteria è completamente scarica
 #endif
             rt_thread_kill(&Tsystem, SIGUSR2); //notify TSystem to TURN OFF the system
 
