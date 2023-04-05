@@ -31,6 +31,6 @@ Brushes’ speed changes based on characteristics of the surface. An increase in
 |Task1 |Max |500 |Low |Hard R.T. |no  |100 |
 |Task2 |Med |500 |Med |Hard R.T. |yes |100 |
 |Task3 |Med |250 |Med |Soft R.T. |yes |200 |
-|Task4 |Low |- | |Low |Soft R.T. |yes |- |
+|Task4 |Low |-   |Low |Soft R.T. |yes |-   |
 |Task5 |Med |250 |Med |Soft R.T. |yes |200 |
-|Tsystem |Low |- |- |- |yes |- |
+|Tsystem |Low |- |-   |-         |yes |-   |
