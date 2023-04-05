@@ -29,10 +29,10 @@
 /* GARBAGE BAG STATUS*/
 #ifdef FAST_SIMULATION_GARBAGE
 #define EMPTY 0
-#define FULL 30
+#define FULL 15
 #else
 #define EMPTY 0
-#define FULL 100
+#define FULL 30
 #endif
 /* MOVEMENTS SIGNALS*/
 #define STOP_ENGINE 0

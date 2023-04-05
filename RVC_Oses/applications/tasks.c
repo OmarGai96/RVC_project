@@ -11,7 +11,7 @@ static int position[2];
 enum directions direction;
 
 static char mb_str1[] = "Garbage bag full";
-static char mb_str2[] = "Battery discharge";
+static char mb_str2[] = "Battery Low";
 static char mb_str3[] = "Battery status is critical";
 static char mb_str4[] = "Come back home";
 static char mb_str5[] = "Turn on brushes";
@@ -276,10 +276,11 @@ void obstacle_control_entry(void *param)
             if (obstacle == 'y')
             {
 #ifdef DEB_INTERNAL
-            rt_kprintf("\t\tTHERE's an obstacle --> send a signal\n\n"); //ITA: la batteria è completamente scarica
+            rt_kprintf("\t\tThere's an obstacle --> send a signal\n\n");
+            rt_kprintf("\t\tEvent set: EVENT_OBSTACLE_FOUND\n\n");
 #endif
-                rt_thread_kill(&movement_control, SIGUSR1);
-                rt_event_send(&event_obstacle, EVENT_OBSTACLE_FOUND);
+                rt_thread_kill(&movement_control, SIGUSR1);             //sends a signal to movement_control
+                rt_event_send(&event_obstacle, EVENT_OBSTACLE_FOUND);   //sends an event to movement_stop
 
             }
 
@@ -312,7 +313,9 @@ void movement_stop_entry(void *param)
         if (rt_event_recv(&event_obstacle, EVENT_OBSTACLE_FOUND,
                           RT_EVENT_FLAG_AND | RT_EVENT_FLAG_CLEAR,
                           RT_WAITING_FOREVER, RT_NULL) == RT_EOK){
-
+#ifdef DEB_INTERNAL
+            rt_kprintf("\t\tEvent received EVENT_OBSTACLE_FOUND\n\n");
+#endif
             rt_device_write(engine, 0, stop, stop_size);
 
         }
@@ -366,6 +369,9 @@ void movement_control_entry(void *param)
                 direction = RETURN;
                 rt_signal_mask(SIGUSR1);
                 rt_mb_send(&mb2_5, (rt_uint32_t)&mb_str4);      //notify task 5 with an email
+#ifdef DEB_INTERNAL
+            rt_kprintf("\n\t\tMail sent %s\n", &mb_str4);
+#endif
             }
 
             // if the previous tile is not an obstacle signal it as cleaned
@@ -415,7 +421,7 @@ void movement_control_entry(void *param)
                 rt_kprintf("\nThe robot is back at charging station!\n");
 #endif
 #ifdef DEB_INTERNAL
-            rt_kprintf("\t\tThe robot is back at charging station --> send a signal\n\n"); //ITA: la batteria è completamente scarica
+            rt_kprintf("\tThe robot is back at charging station --> send a signal\n\n");
 #endif
                 rt_thread_kill(&Tsystem, SIGUSR2);
 
@@ -475,33 +481,45 @@ void check_resources_entry(void *param){
 #endif
 
         /**Check BATTERY status**/
+
+        //CASE A: Battery totally discharged
         if(batteryStatus <= TOTALLY_DISCHARGE){
 #ifdef DEB_DISPLAY
-            rt_kprintf("\t\tBATTERY TOTALLY LOW --> TURN OFF THE SYSTEM\n\n"); //ITA: la batteria è completamente scarica
+            rt_kprintf("\t\tBATTERY TOTALLY LOW --> TURN OFF THE SYSTEM\n\n");
 #endif
 #ifdef DEB_INTERNAL
-            rt_kprintf("\t\tBATTERY TOTALLY LOW --> send a signal\n\n"); //ITA: la batteria è completamente scarica
+            rt_kprintf("\t\tBATTERY TOTALLY LOW --> send a signal\n\n");
 #endif
             rt_thread_kill(&Tsystem, SIGUSR2); //notify TSystem to TURN OFF the system
 
+
+        //CASE B: Battery status is critical
         }else if(batteryStatus <= DISCHARGE && batteryStatus > TOTALLY_DISCHARGE) {
-            rt_mb_send(&mb2_3, (rt_uint32_t)&mb_str3);      //notify task 2 BATTERY is LOW
+
+            rt_event_send(&event_resources, EVENT_FLAG1);   //notify task 4 with an event
+            rt_mb_send(&mb2_3, (rt_uint32_t)&mb_str3);      //notify task 2 BATTERY status is critical
+
 #ifdef DEB_INTERNAL
-            rt_kprintf("\n\t\tMail sent %s\t\t because battery LOW\n", mb_str3);
+            rt_kprintf("\n\t\tMail sent %s\n", mb_str3);
+            rt_kprintf("\t\tEvent set: Battery Low\n\n");
 #endif
 #ifdef DEB_DISPLAY
-                rt_kprintf("\t\tBATTERY is LOW\n\n"); //ITA: la batteria è scarica
+                rt_kprintf("\t\tBATTERY is LOW\n\n");
 #endif
 
+
+
+        //CASE C: Battery is discharging
         }else if(batteryStatus <= DISCHARGE_THRESHOLD && batteryStatus > DISCHARGE) {
             rt_event_send(&event_resources, EVENT_FLAG1);   //notify task 4 with an event
             rt_mb_send(&mb2_3, (rt_uint32_t)&mb_str2);      //notify task 2 BATTERY is LOW
 
 #ifdef DEB_DISPLAY
-            rt_kprintf("\t\tBATTERY is running LOW\n\n");  //ITA: la batteria si sta scaricando
+            rt_kprintf("\t\tBATTERY is running LOW\n\n");
 #endif
 #ifdef DEB_INTERNAL
-            rt_kprintf("\n\t\tMail sent %s\t\t because battery LOW\n", mb_str2);
+            rt_kprintf("\n\t\tMail sent %s\n", mb_str2);
+            rt_kprintf("\t\tEvent set: Battery Low\n\n");
 #endif
          }
 
@@ -516,7 +534,8 @@ void check_resources_entry(void *param){
                 rt_kprintf("\n\tGarbage bag FULL\n\n");
 #endif
 #ifdef DEB_INTERNAL
-                rt_kprintf("\n\t\tMail sent %s\t\t because Garbage bag is FULL\n", mb_str1);
+                rt_kprintf("\n\t\tMail sent %s\n", mb_str1);
+                rt_kprintf("\t\tEvent set: Garbage bag is FULL\n\n");
 #endif
             }
 
@@ -558,12 +577,18 @@ void acoustic_signals_entry(void *param){
 #ifdef DEB_DISPLAY
                 rt_kprintf("\t\tLOW BATTERY ALARM\n");
 #endif
+#ifdef DEB_INTERNAL
+            rt_kprintf("\tEvent received: Battery Low\n\n");
+#endif
 
             }else if (e == 0x4){
             // EVENT_FLAG_2 is set
                 rt_device_write(speaker, 0, garbage_bag_full, 100);
 #ifdef DEB_DISPLAY
                 rt_kprintf("\t\tGARBAGE BAG FULL ALARM\n");
+#endif
+#ifdef DEB_INTERNAL
+            rt_kprintf("\tEvent received: Garbage Bag Full\n\n");
 #endif
             }
 
@@ -629,6 +654,9 @@ void brushes_speed_entry(void *param)
                     rt_pin_write(BRUSHES_POWER_PIN_NUMBER, STOP_BRUSHES);
                     brushes_power[0]=1;
                     brushes_power[1]=1;
+#ifdef DEB_INTERNAL
+                    rt_kprintf("\tEvent received: Come back home\n\n");
+#endif
                 }
 
                 /* Executing the mailbox object detachment */
