@@ -4,9 +4,6 @@
 #include "structures.h"
 #include "tasks.h"
 
-extern int turnOffFlag;
-extern int startingTime;
-
 /** initialize global variables **/
 rt_err_t initSystem(void){
 
@@ -44,7 +41,7 @@ rt_err_t initSystem(void){
 
 void Tsystem_task_entry(void *param){
 
-    int curr_time;
+    int curr_time = 0;
 
     rt_signal_install(SIGUSR2, turnOffSystem);
     rt_signal_unmask(SIGUSR2);
@@ -64,8 +61,11 @@ void Tsystem_task_entry(void *param){
                     batteryStatus-=10;
                 }
 #else
-                if(curr_time%350 == 0 && startingTime != 0){
-                    batteryStatus--;
+                if((curr_time%350) == 0 && startingTime != 0){
+                    set_task_as_not_preemptable(&Tsystem);
+                    batteryStatus-=2;
+                    printf("\n");
+                    set_task_as_preemptable(&Tsystem, TSYSTEM_PRIORITY);
                 }
 #endif
 

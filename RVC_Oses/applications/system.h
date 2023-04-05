@@ -46,6 +46,9 @@
 uint32_t batteryStatus;
 uint32_t garbageBagStatus;
 
+extern int turnOffFlag;
+extern int startingTime;
+
 /** This function initializes the batteryStatus and garbageBagStatus (global) variables
  * @param: none
  * @return: RT_EOK if everything is OK, RT_ERROR otherwise

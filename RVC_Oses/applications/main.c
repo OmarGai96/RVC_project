@@ -8,8 +8,8 @@
 #include "structures.h"
 //#include "cpu_usage.h"
 
-int startingTime =0;
-int turnOffFlag = 0;
+int startingTime;
+int turnOffFlag;
 
 static void hook_of_scheduler(struct rt_thread* from, struct rt_thread* to)
 {
@@ -20,6 +20,9 @@ static void hook_of_scheduler(struct rt_thread* from, struct rt_thread* to)
 int main(void){
 
     rt_err_t result;
+
+    startingTime = 0;
+    turnOffFlag = 0;
 
     // This function initializes global flags and other structures used by the application
     result = initSystem();

@@ -131,7 +131,7 @@ void rt_mock_devices_init()
     engine->ops = &engine_ops;
     rt_device_register(engine, "engine", RT_DEVICE_FLAG_RDWR);
 
-    /* creating and registering engine */
+    /* creating and registering garbage_bag */
     garbage_bag = rt_device_create(RT_Device_Class_Mock, SIZE);
     garbage_bag->ops = &garbage_bag_ops;
     rt_device_register(garbage_bag, "garbage_bag", RT_DEVICE_FLAG_RDWR);

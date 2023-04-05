@@ -1,6 +1,7 @@
+
  \ | /
 - RT -     Thread Operating System
- / | \     4.1.0 build Apr  4 2023 12:25:31
+ / | \     4.1.0 build Apr  5 2023 23:40:05
  2006 - 2021 Copyright by rt-thread team
 
 
@@ -9,75 +10,185 @@
 
         Battery status 100 %
 
+
         ENGINE: started!
 
         Robot in position 1,0
 
-batteryStatus 90%, decremented by TSystem 
-batteryStatus 80%, decremented by TSystem
+        Battery status 86 %
 
-        Battery status 80 %
-
-        Battery status 80 %
+        Battery status 86 %
 
         Robot in position 2,0
 
-        Battery status 80 %
+        Battery status 86 %
 
-        Battery status 80 %
+        Battery status 86 %
 
         Robot in position 3,0
 
-        Battery status 80 %
+        Battery status 86 %
 
-        Battery status 80 %
+        Battery status 86 %
 
         Robot in position 4,0
 
-        Battery status 80 %
+        Battery status 86 %
 
-        Battery status 80 %
+        Battery status 86 %
 
         Robot in position 5,0
 
-        Battery status 80 %
+        Battery status 86 %
 
-        Battery status 80 %
+        Battery status 86 %
 
-        Robot in position 6,0
+        ENGINE: stopped!
 
-        Battery status 80 %
+2 0 0 0 0 0 0 0 0 0
+2 0 0 0 0 0 0 0 0 0
+2 0 0 0 0 0 0 0 0 0
+2 0 0 0 0 0 0 0 0 0
+2 0 0 0 0 0 0 0 0 0
+1 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0
 
-        Battery status 80 %
 
-        Robot in position 7,0
+        Battery status 86 %
 
-        Battery status 80 %
+        Battery status 86 %
 
-        Battery status 80 %
+        ENGINE: started!
 
-batteryStatus 70%, decremented by TSystem 
-batteryStatus 60%, decremented by TSystem 
+        Robot in position 4,1
 
-        Robot in position 8,0
+        Battery status 86 %
+
+        Battery status 86 %
+
+
+
+        Robot in position 4,2
+
+        Battery status 82 %
+
+        Battery status 82 %
+
+        Robot in position 4,3
+
+        Battery status 82 %
+
+        Battery status 82 %
+
+        Robot in position 4,4
+
+        Battery status 82 %
+
+        Battery status 82 %
+
+        Robot in position 4,5
+
+        Battery status 82 %
+
+        Battery status 82 %
+
+        Robot in position 4,6
+
+        Battery status 82 %
+
+        Battery status 82 %
+
+        Robot in position 4,7
+
+        Battery status 82 %
+
+        Battery status 82 %
+
+        Robot in position 4,8
+
+        Battery status 82 %
+
+        Battery status 82 %
+
+
+        Robot in position 4,9
+
+        Battery status 64 %
+
+        Battery status 64 %
+
+        Robot in position 3,9
+
+        Battery status 64 %
+
+        Battery status 64 %
+
+        Robot in position 2,9
+
+        Battery status 64 %
+
+        Battery status 64 %
+
+        Robot in position 1,9
+
+        Battery status 64 %
+
+        Battery status 64 %
+
+        Robot in position 0,9
+
+        Battery status 64 %
+
+        Battery status 64 %
+
+        Robot in position 0,8
+
+        Battery status 64 %
+
+        Battery status 64 %
+
+        Robot in position 0,7
+
+        Battery status 64 %
+
+        Battery status 64 %
+
+
+
+        Robot in position 0,6
 
         Battery status 60 %
 
         Battery status 60 %
 
-        Robot in position 9,0
+        Robot in position 0,5
 
         Battery status 60 %
 
         Battery status 60 %
 
-        Robot in position 9,1
+        Robot in position 0,4
 
         Battery status 60 %
 
         Battery status 60 %
 
-        Robot in position 9,2
+        Robot in position 0,3
+
+        Battery status 60 %
+
+        Battery status 60 %
+
+        Robot in position 0,2
+
+        Battery status 60 %
+
+        Battery status 60 %
+
+        Robot in position 0,1
 
         Battery status 60 %
 
@@ -85,77 +196,125 @@ batteryStatus 60%, decremented by TSystem
 
         ENGINE: stopped!
 
------------------- printMap ------------------------
+2 1 2 2 2 2 2 2 2 2
+2 0 0 0 0 0 0 0 0 2
+2 0 0 0 0 0 0 0 0 2
+2 0 0 0 0 0 0 0 0 2
+2 2 2 2 2 2 2 2 2 2
+1 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0
 
-2 0 0 0 0 0 0 0 0 0
-2 0 0 0 0 0 0 0 0 0
-2 0 0 0 0 0 0 0 0 0
-2 0 0 0 0 0 0 0 0 0
-2 0 0 0 0 0 0 0 0 0
-2 0 0 0 0 0 0 0 0 0
-2 0 0 0 0 0 0 0 0 0
-2 0 0 0 0 0 0 0 0 0
-2 0 0 0 0 0 0 0 0 0
-2 2 1 0 0 0 0 0 0 0
-
-----------------------------------------------------
 
         Battery status 60 %
 
         Battery status 60 %
+
+
+
+
+
+
+
+
 
         ENGINE: started!
 
-        Robot in position 8,1
+        Robot in position 1,2
 
-        Battery status 60 %
+        Battery status 44 %
 
-        Battery status 60 %
+        Battery status 44 %
 
-        Robot in position 7,1
+        Robot in position 2,2
 
-        Battery status 60 %
+        Battery status 44 %
 
-        Battery status 60 %
+        Battery status 44 %
 
-batteryStatus 50%, decremented by TSystem 
-batteryStatus 40%, decremented by TSystem
+        Robot in position 3,2
 
-        Robot in position 6,1
+        Battery status 44 %
 
-        Battery status 40 %
+        Battery status 44 %
 
-        Battery status 40 %
+        Robot in position 4,2
 
-        Robot in position 5,1
+        Battery status 44 %
 
-        Battery status 40 %
+        Battery status 44 %
 
-        Battery status 40 %
+        Robot in position 5,2
 
-        Robot in position 4,1
+        Battery status 44 %
 
-        Battery status 40 %
+        Battery status 44 %
 
-        Battery status 40 %
+        Robot in position 6,2
 
-        Robot in position 3,1
+        Battery status 44 %
 
-        Battery status 40 %
+        Battery status 44 %
 
-        Battery status 40 %
+        Robot in position 7,2
 
-        Robot in position 2,1
+        Battery status 44 %
 
-        Battery status 40 %
+        Garbage bag FULL
 
-        Battery status 40 %
 
-        Robot in position 1,1
+        SPEAKER: GARBAGE BAG FULL               GARBAGE BAG FULL ALARM
 
-        Battery status 40 %
+        Battery status 44 %
 
-        Battery status 40 %
+        Garbage bag FULL
+
+        SPEAKER: GARBAGE BAG FULL               GARBAGE BAG FULL ALARM
+
+        Robot in position 6,2
+
+        Battery status 44 %
+
+        Battery status 44 %
+
+        Robot in position 5,2
+
+        Battery status 44 %
+
+        Battery status 44 %
+
+        Robot in position 4,2
+
+        Battery status 44 %
+
+        Battery status 44 %
+
+        Robot in position 3,2
+
+        Battery status 44 %
+
+        Battery status 44 %
+
+        Robot in position 2,2
+
+        Battery status 44 %
+
+        Battery status 44 %
+
+        Robot in position 1,2
+
+        Battery status 44 %
+
+        Battery status 44 %
+
+        Robot in position 0,2
+
+        Battery status 44 %
+
+        Battery status 44 %
+
 
         Robot in position 0,1
 
@@ -163,68 +322,9 @@ batteryStatus 40%, decremented by TSystem
 
         Battery status 40 %
 
-batteryStatus 30%, decremented by TSystem 
-batteryStatus 20%, decremented by TSystem 
+The robot is back at charging station!
 
-        Robot in position 0,0
-
-        Battery status 20 %
-
-        Battery status 20 %
-
-        Robot in position 1,0
-
-        Battery status 20 %
-
-        Battery status 20 %
-
-        Robot in position 2,0
-
-        Battery status 20 %
-
-        Battery status 20 %
-
-        Robot in position 3,0
-
-        Battery status 20 %
-
-        Battery status 20 %
-
-        Robot in position 4,0
-
-        Battery status 20 %
-
-        Battery status 20 %
-
-        Robot in position 5,0
-
-        Battery status 20 %
-
-        Battery status 20 %
-
-        Robot in position 6,0
-
-        Battery status 20 %
-
-        Battery status 20 %
-
-batteryStatus 10%, decremented by TSystem
-batteryStatus 0%, decremented by TSystem 
-
-        Robot in position 7,0
-
-        Battery status 0 %
-
-                BATTERY TOTALLY LOW --> TURN OFF THE SYSTEM
-
-                Thread TaskS status is: SUSPEND
-                Thread Task1 status is: SUSPEND
-                Thread Task2 status is: SUSPEND
-                Thread Task3 status is: SUSPEND
-                Thread Task4 status is: SUSPEND
-                Thread Task5 status is: SUSPEND 
-
-All tasks turned OFF correctly
+        Battery status 40 %
 
 ---------------System is TURNED OFF--------------------
 msh />

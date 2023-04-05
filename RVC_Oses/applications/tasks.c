@@ -16,9 +16,6 @@ static char mb_str3[] = "Battery status is critical";
 static char mb_str4[] = "Come back home";
 static char mb_str5[] = "Turn on brushes";
 
-extern startingTime;
-extern turnOffFlag;
-
 
 // EXTRA FUNCTIONS *********************************************************************************************
 
@@ -464,18 +461,17 @@ void check_resources_entry(void *param){
             tick_start=set_task_started(&check_resources, TICK_DELAY_T3); //set Task3 minimum duration and as effectively started
             time_start=tick_start*10-startingTime;
 
-
 #ifdef BENCHMARK_TIME
         rt_kprintf("\n\t\tTASK_3:\t Started at time %d ms\n", time_start);
 #endif
 
-/*
+
 #ifdef DEB_DISPLAY
-        /**display only if the status is a multiple of 10, useful to limit the number of prints
-        if(batteryStatus%10==0){
+        /**display only if the status is a multiple of 2, useful to limit the number of prints**/
+        if(batteryStatus%2==0 && batteryStatus >= 0){
             rt_kprintf("\n\tBattery status %d %% \n", batteryStatus);
         }
-#endif */
+#endif
 
         /**Check BATTERY status**/
 
@@ -488,7 +484,6 @@ void check_resources_entry(void *param){
             rt_kprintf("\t\tBATTERY TOTALLY LOW --> send a signal\n\n");
 #endif
             rt_thread_kill(&Tsystem, SIGUSR2); //notify TSystem to TURN OFF the system
-
 
         //CASE B: Battery status is critical
         }else if(batteryStatus <= DISCHARGE && batteryStatus > TOTALLY_DISCHARGE) {
@@ -527,6 +522,9 @@ void check_resources_entry(void *param){
                 rt_event_send(&event_resources, EVENT_FLAG2);   //notify task 4 with an event
                 rt_mb_send(&mb2_3, (rt_uint32_t)&mb_str1);      //notify task 2 with an email
 
+#ifdef DEB_DISPLAY
+                rt_kprintf("\n\tGarbage bag FULL\n\n");
+#endif
 #ifdef DEB_INTERNAL
                 rt_kprintf("\n\t\tMail sent %s\n", mb_str1);
                 rt_kprintf("\t\tEvent set: Garbage bag is FULL\n\n");
@@ -567,14 +565,18 @@ void acoustic_signals_entry(void *param){
 #endif
             if (e == 0x2){
             // EVENT_FLAG_1 is set
+//#ifdef DEB_DISPLAY
                 rt_device_write(speaker, 0, low_battery, 100);
+//#endif
 #ifdef DEB_INTERNAL
             rt_kprintf("\tEvent received: Battery Low\n\n");
 #endif
 
             }else if (e == 0x4){
             // EVENT_FLAG_2 is set
+//#ifdef DEB_DISPLAY
                 rt_device_write(speaker, 0, garbage_bag_full, 100);
+//#endif
 #ifdef DEB_INTERNAL
             rt_kprintf("\tEvent received: Garbage Bag Full\n\n");
 #endif
