@@ -32,9 +32,6 @@ void mock_devices_init() {
     engine = rt_device_find(ENGINE);
     rt_device_init(engine);
 
-    battery = rt_device_find(BATTERY);
-    rt_device_init(battery);
-
     garbage_bag = rt_device_find(GARBAGE_BAG);
     rt_device_init(garbage_bag);
 
@@ -472,13 +469,13 @@ void check_resources_entry(void *param){
         rt_kprintf("\n\t\tTASK_3:\t Started at time %d ms\n", time_start);
 #endif
 
-
+/*
 #ifdef DEB_DISPLAY
-        /**display only if the status is a multiple of 10, useful to limit the number of prints**/
+        /**display only if the status is a multiple of 10, useful to limit the number of prints
         if(batteryStatus%10==0){
             rt_kprintf("\n\tBattery status %d %% \n", batteryStatus);
         }
-#endif
+#endif */
 
         /**Check BATTERY status**/
 
@@ -530,9 +527,6 @@ void check_resources_entry(void *param){
                 rt_event_send(&event_resources, EVENT_FLAG2);   //notify task 4 with an event
                 rt_mb_send(&mb2_3, (rt_uint32_t)&mb_str1);      //notify task 2 with an email
 
-#ifdef DEB_DISPLAY
-                rt_kprintf("\n\tGarbage bag FULL\n\n");
-#endif
 #ifdef DEB_INTERNAL
                 rt_kprintf("\n\t\tMail sent %s\n", mb_str1);
                 rt_kprintf("\t\tEvent set: Garbage bag is FULL\n\n");
@@ -574,9 +568,6 @@ void acoustic_signals_entry(void *param){
             if (e == 0x2){
             // EVENT_FLAG_1 is set
                 rt_device_write(speaker, 0, low_battery, 100);
-#ifdef DEB_DISPLAY
-                rt_kprintf("\t\tLOW BATTERY ALARM\n");
-#endif
 #ifdef DEB_INTERNAL
             rt_kprintf("\tEvent received: Battery Low\n\n");
 #endif
@@ -584,9 +575,6 @@ void acoustic_signals_entry(void *param){
             }else if (e == 0x4){
             // EVENT_FLAG_2 is set
                 rt_device_write(speaker, 0, garbage_bag_full, 100);
-#ifdef DEB_DISPLAY
-                rt_kprintf("\t\tGARBAGE BAG FULL ALARM\n");
-#endif
 #ifdef DEB_INTERNAL
             rt_kprintf("\tEvent received: Garbage Bag Full\n\n");
 #endif

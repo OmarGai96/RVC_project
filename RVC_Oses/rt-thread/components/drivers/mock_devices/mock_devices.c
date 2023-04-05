@@ -69,31 +69,6 @@ const static struct rt_device_ops engine_ops =
 };
 
 
-/* DRIVERS for battery */
-static int battery_value = 100;
-static int battery_init(rt_device_t dev) {
-    dev->ref_count++;
-    return RT_EOK;
-}
-static int battery_write(rt_device_t dev, rt_off_t pos, const void* buffer, rt_size_t size) {
-    battery_value--;
-    return RT_EOK;
-}
-static int battery_read(rt_device_t dev, rt_off_t pos, const void* buffer, rt_size_t size) {
-    *((int*)buffer) = battery_value;
-    return RT_EOK;
-}
-const static struct rt_device_ops battery_ops =
-{
-    battery_init,
-    RT_NULL,
-    RT_NULL,
-    battery_read,
-    battery_write,
-    RT_NULL,
-};
-
-
 /* DRIVERS for garbage_bag */
 static int garbage_bag_value = 0;
 static int garbage_bag_init(rt_device_t dev) {
@@ -126,7 +101,7 @@ static int speaker_init(rt_device_t dev) {
 }
 static int speaker_write(rt_device_t dev, rt_off_t pos, const void* buffer, rt_size_t size) {
 
-    rt_kprintf("\n\tSPEAKER: %s", (char*) buffer);
+    rt_kprintf("\n\tSPEAKER: %s\n", (char*) buffer);
 
     return RT_EOK;
 }
@@ -155,11 +130,6 @@ void rt_mock_devices_init()
     engine = rt_device_create(RT_Device_Class_Mock, SIZE);
     engine->ops = &engine_ops;
     rt_device_register(engine, "engine", RT_DEVICE_FLAG_RDWR);
-
-    /* creating and registering engine */
-    battery = rt_device_create(RT_Device_Class_Mock, SIZE);
-    battery->ops = &battery_ops;
-    rt_device_register(battery, "battery", RT_DEVICE_FLAG_RDWR);
 
     /* creating and registering engine */
     garbage_bag = rt_device_create(RT_Device_Class_Mock, SIZE);
