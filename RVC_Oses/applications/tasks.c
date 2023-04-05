@@ -474,7 +474,7 @@ void check_resources_entry(void *param){
 
 
 #ifdef DEB_DISPLAY
-        /**display only if the status is a multiple of 5, useful to limit the number of prints**/
+        /**display only if the status is a multiple of 10, useful to limit the number of prints**/
         if(batteryStatus%10==0){
             rt_kprintf("\n\tBattery status %d %% \n", batteryStatus);
         }
@@ -655,7 +655,7 @@ void brushes_speed_entry(void *param)
                     brushes_power[0]=1;
                     brushes_power[1]=1;
 #ifdef DEB_INTERNAL
-                    rt_kprintf("\tEvent received: Come back home\n\n");
+                    rt_kprintf("\tMail received: Come back home\n\n");
 #endif
                 }
 

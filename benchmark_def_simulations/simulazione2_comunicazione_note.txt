@@ -1,0 +1,86 @@
+ \ | /
+- RT -     Thread Operating System
+ / | \     4.1.0 build Apr  4 2023 12:42:40
+ 2006 - 2021 Copyright by rt-thread team
+
+
+---------------System is TURNED ON--------------------
+
+
+        ENGINE: started!  				TASK2
+
+    		There's an obstacle --> send a signal  	TASK1
+                Event set: EVENT_OBSTACLE_FOUND		TASK1
+
+                
+	Event received EVENT_OBSTACLE_FOUND		TASK2	
+        ENGINE: stopped!				TASK2
+
+
+        ENGINE: started!  				TASK2
+
+                There's an obstacle --> send a signal  	TASK1
+                Event set: EVENT_OBSTACLE_FOUND		TASK1
+
+
+        Event received EVENT_OBSTACLE_FOUND		TASK2
+        ENGINE: stopped!				TASK2
+
+
+        ENGINE: started!				TASK2
+
+
+                Mail sent Garbage bag full		TASK3
+                Event set: Garbage bag is FULL		TASK3
+
+
+        SPEAKER: GARBAGE BAG FULL			TASK4
+
+
+                Mail sent Garbage bag full		TASK3
+                Event set: Garbage bag is FULL		TASK3
+
+        Event received: Garbage Bag Full		TASK4
+
+
+        SPEAKER: GARBAGE BAG FULL               	TASK4
+	Event received: Garbage Bag Full		TASK4
+
+        get a mail from mailbox, the content: Garbage bag full TASK4
+
+
+                Mail sent Come back home		TASK2
+                
+
+	Mail received: Come back home			TASK5
+
+
+        get a mail from mailbox, the content: Garbage bag full
+
+                Mail sent Come back home		TASK2
+         
+	Mail received: Come back home			TASK5
+
+        The robot is back at charging station --> send a signal	TASK2
+
+                --> Signal received: turn off system		TASK Tsystem
+
+                Thread TaskS status is: SUSPEND
+                Thread Task1 status is: SUSPEND
+                Thread Task2 status is: CLOSE
+                Thread Task3 status is: SUSPEND
+                Thread Task4 status is: SUSPEND
+                Thread Task5 status is: SUSPEND
+
+
+All tasks turned OFF correctly
+All timers turned OFF correctly
+
+
+
+---------------System is TURNED OFF--------------------
+msh />
+
+
+
+

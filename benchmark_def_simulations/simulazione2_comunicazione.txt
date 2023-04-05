@@ -50,14 +50,14 @@
                 Mail sent Come back home
                 
 
-	Event received: Come back home
+	Mail received: Come back home
 
 
         get a mail from mailbox, the content: Garbage bag full
 
                 Mail sent Come back home
          
-	Event received: Come back home
+	Mail received: Come back home
 
         The robot is back at charging station --> send a signal
 
