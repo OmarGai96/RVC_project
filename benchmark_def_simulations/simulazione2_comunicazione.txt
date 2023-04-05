@@ -1,15 +1,3 @@
-/* BATTERY STATUS THRESHOLDS*/
-#define CHARGE 100
-#define HALFCHARGE 50
-#define DISCHARGE_THRESHOLD 20
-#define DISCHARGE 10
-#define TOTALLY_DISCHARGE 0
-
-/* GARBAGE BAG STATUS*/
-#define EMPTY 0
-#define FULL 30 //for a speed simulation
-
-
  \ | /
 - RT -     Thread Operating System
  / | \     4.1.0 build Apr  4 2023 12:42:40
