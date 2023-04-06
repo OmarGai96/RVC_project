@@ -56,3 +56,19 @@ On the following figure you can see the predicted and actual behavior of the tas
 
 ![Timing_tasks](/doc/figures/timing_tasks.png)
 
+## Tasks communication and synchronization
+
+The tasks communicate each other in different ways. In particular mails and signals are used. <br>
+Signals are asynchronous software interrupts and are used when in the system there are criticalities.<br>
+Mails are characterized by low overhead and high efficiency, for this reasons are used as normal inter-thread communication strategy. <br>
+<br>
+Events are used for synchronization, in particular exploiting the blocking mechanisms for some tasks. <br>
+For example they are used to correctly active tasks with timers, waiting an event set. <br>
+<br>
+In the following figure you can see the full communication/synchronization flow.<br>
+Note that red arrows represent signals.
+
+![Thread communication](/doc/figures/thread_communication.png)
+
+
+
