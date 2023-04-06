@@ -48,6 +48,12 @@ enum directions {UP, DOWN, LEFT, RIGHT, RETURN};
 #define TICK_DELAY_T4 2 //20 ms, is the duration of Task4 as ticks
 #define TICK_DELAY_T5 7 //70 ms, is the duration of Task5 as ticks
 
+extern int startingTime;
+extern int turnOffFlag;
+
+extern uint32_t batteryStatus;
+extern uint32_t garbageBagStatus;
+
 // ************************************ STRUCTURES *************************************************************
 
 
@@ -80,7 +86,6 @@ struct rt_thread brushes_speed;
 
 rt_device_t proximity_sensor;
 rt_device_t engine;
-rt_device_t battery;
 rt_device_t garbage_bag;
 rt_device_t speaker;
 

@@ -29,10 +29,10 @@
 /* GARBAGE BAG STATUS*/
 #ifdef FAST_SIMULATION_GARBAGE
 #define EMPTY 0
-#define FULL 30
+#define FULL 15
 #else
 #define EMPTY 0
-#define FULL 100
+#define FULL 30
 #endif
 
 /* MOVEMENTS SIGNALS*/
@@ -46,6 +46,9 @@
 /*SYSTEM RESOURCES DECLARATION*/
 uint32_t batteryStatus;
 uint32_t garbageBagStatus;
+
+extern int turnOffFlag;
+extern int startingTime;
 
 /** This function initializes the batteryStatus and garbageBagStatus (global) variables
  * @param: none
