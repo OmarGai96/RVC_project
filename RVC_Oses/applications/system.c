@@ -54,19 +54,14 @@ void Tsystem_task_entry(void *param){
                     break;
                 }
             }else{
-                curr_time=rt_tick_get_millisecond()-startingTime;
-#ifdef FAST_SIMULATION_BATTERY
-                if(curr_time%100 == 0 && startingTime != 0){
-                    batteryStatus-=10;
-                }
-#else
-                if((curr_time%350) == 0 && startingTime != 0){
+                curr_time=rt_tick_get_millisecond();
+                if((curr_time%900) == 0 && startingTime != 0){
                     rt_mutex_take(&battMutex, RT_WAITING_FOREVER);
-                    batteryStatus--;
+                    batteryStatus-=DEC_VALUE;
                     printf("\n");
                     rt_mutex_release(&battMutex);
                 }
-#endif
+
 
             }
 
