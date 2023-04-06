@@ -5,8 +5,7 @@ This project aims to implement a real time software for a Robot Vacuum Cleaner (
 The robot is able to move into a room and automatically do some actions. <br>
 The system offers the following functionalities: <br>
   - check the presence of obstacles (using proximity sensors)
-  - moves into a room (following a map of the area)
-  - adjust speed and direction of movements 
+  - moves into a room adjusting direction of movements (based on obstacles)
   - clean the floor (actioning brushes)
   - check status of internal resources (battery and garbage bag) 
   - notify to the extern some events (battery low or garbage bag full) 
