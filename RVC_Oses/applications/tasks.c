@@ -475,6 +475,8 @@ void check_resources_entry(void *param){
 
         /**Check BATTERY status**/
 
+        rt_mutex_take(&battMutex, RT_WAITING_FOREVER);
+
         //CASE A: Battery totally discharged
         if(batteryStatus <= TOTALLY_DISCHARGE){
 #ifdef DEB_DISPLAY
@@ -514,6 +516,8 @@ void check_resources_entry(void *param){
             rt_kprintf("\t\tEvent set: Battery Low\n\n");
 #endif
          }
+
+        rt_mutex_release(&battMutex);
 
         /**Check GARBAGE BAG status **/
 

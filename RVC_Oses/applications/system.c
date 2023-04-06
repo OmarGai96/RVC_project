@@ -61,10 +61,10 @@ void Tsystem_task_entry(void *param){
                 }
 #else
                 if((curr_time%350) == 0 && startingTime != 0){
-                    set_task_as_not_preemptable(&Tsystem);
-                    batteryStatus-=2;
+                    rt_mutex_take(&battMutex, RT_WAITING_FOREVER);
+                    batteryStatus--;
                     printf("\n");
-                    set_task_as_preemptable(&Tsystem, TSYSTEM_PRIORITY);
+                    rt_mutex_release(&battMutex);
                 }
 #endif
 

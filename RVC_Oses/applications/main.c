@@ -72,6 +72,15 @@ int main(void){
     }
 
 
+    //Initialiazing MUTEX
+    result = rt_mutex_init(&battMutex, "battery", RT_IPC_FLAG_FIFO);
+    if (result != RT_EOK){
+#ifdef DEBUG
+        rt_kprintf("Initialization of mutex failed.\n");
+#endif
+        return -1;
+    }
+
     // initializing the TIMER for obstacle_control
     rt_timer_init(&timer_obstacle_control_activation, "timer_obstacle_control_activation",
                     timeout_obstacle_control,
