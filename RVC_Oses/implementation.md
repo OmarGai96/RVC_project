@@ -56,6 +56,8 @@ On the following figure you can see the predicted and actual behavior of the tas
 
 ![Timing_tasks](/doc/figures/timing_tasks.png)
 
+Source code is available in the file [tasks_clean_copy](/RVC_Oses/applications/tasks_clean_copy.md)
+
 ## Tasks communication and synchronization
 
 The tasks communicate each other in different ways. In particular mails and signals are used. <br>
