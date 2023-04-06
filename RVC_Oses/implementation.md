@@ -35,6 +35,9 @@ This task continuously checks if some events are set (information arriving from 
 Brushes’ speed changes based on characteristics of the surface. An increase in speed may be caused by a dirtier floor or a different kind of surface (i.e. a rug). This demands more power to reach a more efficient cleaning. On the other hand, when there is a decrease in speed, we need less energy, or we can set a medium value. <br>
 If this task receives a mail from Task2 (the robot is going back to charging station), it turns off the brushes, because not needed.
 
+## Additional task: TSystem
+This task simulates the behavior of the internal system for example battery discharge simulation. It is responsible of turn off the system (detach all the other tasks) when battery is totally low or the robot is back to the charging station. 
+
 ## Tasks properties
 
 In the following table are reported the main properties of the tasks. Note that Hard R.T. means that the task is Hard Real Time, so missing its
